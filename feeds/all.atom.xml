@@ -98,30 +98,37 @@ There are many other attributes you can use with this geoip data. Checkout more 
 &lt;p&gt;&lt;strong&gt;data&lt;/strong&gt; is a dictionary. 
 And I called the &lt;strong&gt;'latitude'&lt;/strong&gt; and &lt;strong&gt;'longitude'&lt;/strong&gt; keys of &lt;strong&gt;data&lt;/strong&gt; to find the values of lat and lng.&lt;/p&gt;
 &lt;p&gt;With the lat and lng, I will be able to get the weather for those coordinates. Using the &lt;strong&gt;forecast_io&lt;/strong&gt;. More on that next time.&lt;/p&gt;</summary><category term="pelican"></category><category term="publishing"></category></entry><entry><title>Get the public IP of user's computer</title><link href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="alternate"></link><updated>2014-12-11T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-11:get-the-public-ip-of-users-computer.html</id><summary type="html">&lt;p&gt;For a &lt;a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"&gt;recent project&lt;/a&gt;, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.&lt;/p&gt;
-&lt;p&gt;To do that, I'd find her local IP and then later use  &lt;strong&gt; pygeoip.GeoIP&lt;/strong&gt; to find the coordinates of that IP. (That's another post)&lt;/p&gt;
+&lt;p&gt;To do that, I'd find her local IP and then later use  &lt;strong&gt;pygeoip.GeoIP&lt;/strong&gt; to find the coordinates of that IP. (That's another post)&lt;/p&gt;
 &lt;p&gt;First, I used:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ip = request.remote_addr
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remote_addr&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Then a fellow HackerSchooler pointed out that sometimes that might get me my local host (127.0.0.1) and not the IP as I thought I might get. &lt;/p&gt;
-&lt;p&gt;The suggestion was:
-- First attempt to get the IP that way, since it is more 'resources efficient'. 
-- Also have an if statement to check if it did indeed get me that local host. 
-- And if it is the localhost, then use icanhazip.com to get the IP. *&lt;/p&gt;
+&lt;p&gt;Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. &lt;/p&gt;
+&lt;p&gt;The suggestion was:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First attempt to get the IP that way, since it is more 'resources efficient'.&lt;/li&gt;
+&lt;li&gt;Also have an if statement to check if it did indeed get me that local host.&lt;/li&gt;
+&lt;li&gt;And if it is the localhost, then use icanhazip.com to get the IP.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;So here is the code:&lt;/p&gt;
-&lt;p&gt;import requests  #&lt;a href="http://docs.python-requests.org/en/latest/"&gt;import the request module&lt;/a&gt; &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;def get_ip():
-    ip = request.remote_addr
-    if ip == &amp;#39;127.0.0.1&amp;#39;:
-        ip = requests.get(&amp;quot;http://icanhazip.com/&amp;quot;).content
-    return ip
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;  &lt;span class="c"&gt;#import the request module&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_ip&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remote_addr&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;127.0.0.1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://icanhazip.com/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In the request.get statement, the &lt;strong&gt;ip&lt;/strong&gt; is the response. It is the &lt;strong&gt;content&lt;/strong&gt; from the &lt;strong&gt;'get'&lt;/strong&gt; request to &lt;strong&gt;"http://icanhazip.com/"&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Read more about the different attributes for&lt;/em&gt;  request.get(some_url).attributes
-http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request&lt;/p&gt;</summary><category term="pelican"></category><category term="publishing"></category></entry><entry><title>My first forage into blogging</title><link href="http://www.deekras.com/my-first-forage-into-blogging.html" rel="alternate"></link><updated>2014-12-10T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-10:my-first-forage-into-blogging.html</id><summary type="html">&lt;h1&gt;This is a header&lt;/h1&gt;
+&lt;p&gt;In the requests.get statement:&lt;br&gt;
+    the &lt;strong&gt;ip&lt;/strong&gt; is the response. It is the &lt;strong&gt;content&lt;/strong&gt; from the &lt;strong&gt;'get'&lt;/strong&gt; request to &lt;strong&gt;"http://icanhazip.com/"&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Read more about the different attributes for&lt;/em&gt;  requests.get(some_url).attributes
+&lt;a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request"&gt;http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request&lt;/a&gt;&lt;/p&gt;
+&lt;h5&gt;---MORE ABOUT REQUESTS---&lt;/h5&gt;
+&lt;p&gt;requests is a more reliable library than the old urllib2&lt;br&gt;
+&lt;a href="http://docs.python-requests.org/en/latest/"&gt;http://docs.python-requests.org/en/latest/ &lt;/a&gt; &lt;/p&gt;</summary><category term="pelican"></category><category term="publishing"></category></entry><entry><title>My first forage into blogging</title><link href="http://www.deekras.com/my-first-forage-into-blogging.html" rel="alternate"></link><updated>2014-12-10T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-10:my-first-forage-into-blogging.html</id><summary type="html">&lt;h1&gt;This is a header&lt;/h1&gt;
 &lt;h1&gt;This is also a header&lt;/h1&gt;
 &lt;h2&gt;Second level header&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;

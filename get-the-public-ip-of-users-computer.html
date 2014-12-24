@@ -48,30 +48,37 @@
 				title="Permalink to Get the public IP of user's computer">Get the public IP of user's computer</a>
 		</h1>
 		<p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
-<p>To do that, I'd find her local IP and then later use  <strong> pygeoip.GeoIP</strong> to find the coordinates of that IP. (That's another post)</p>
+<p>To do that, I'd find her local IP and then later use  <strong>pygeoip.GeoIP</strong> to find the coordinates of that IP. (That's another post)</p>
 <p>First, I used:</p>
-<div class="highlight"><pre>ip = request.remote_addr
+<div class="highlight"><pre><span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span>
 </pre></div>
 
 
-<p>Then a fellow HackerSchooler pointed out that sometimes that might get me my local host (127.0.0.1) and not the IP as I thought I might get. </p>
-<p>The suggestion was:
-- First attempt to get the IP that way, since it is more 'resources efficient'. 
-- Also have an if statement to check if it did indeed get me that local host. 
-- And if it is the localhost, then use icanhazip.com to get the IP. *</p>
+<p>Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. </p>
+<p>The suggestion was:</p>
+<ul>
+<li>First attempt to get the IP that way, since it is more 'resources efficient'.</li>
+<li>Also have an if statement to check if it did indeed get me that local host.</li>
+<li>And if it is the localhost, then use icanhazip.com to get the IP.</li>
+</ul>
 <p>So here is the code:</p>
-<p>import requests  #<a href="http://docs.python-requests.org/en/latest/">import the request module</a> </p>
-<div class="highlight"><pre>def get_ip():
-    ip = request.remote_addr
-    if ip == &#39;127.0.0.1&#39;:
-        ip = requests.get(&quot;http://icanhazip.com/&quot;).content
-    return ip
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>  <span class="c">#import the request module</span>
+
+<span class="k">def</span> <span class="nf">get_ip</span><span class="p">():</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span>
+    <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="s">&#39;127.0.0.1&#39;</span><span class="p">:</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;http://icanhazip.com/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">return</span> <span class="n">ip</span>
 </pre></div>
 
 
-<p>In the request.get statement, the <strong>ip</strong> is the response. It is the <strong>content</strong> from the <strong>'get'</strong> request to <strong>"http://icanhazip.com/"</strong></p>
-<p><em>Read more about the different attributes for</em>  request.get(some_url).attributes
-http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</p>
+<p>In the requests.get statement:<br>
+    the <strong>ip</strong> is the response. It is the <strong>content</strong> from the <strong>'get'</strong> request to <strong>"http://icanhazip.com/"</strong></p>
+<p><em>Read more about the different attributes for</em>  requests.get(some_url).attributes
+<a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request">http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</a></p>
+<h5>---MORE ABOUT REQUESTS---</h5>
+<p>requests is a more reliable library than the old urllib2<br>
+<a href="http://docs.python-requests.org/en/latest/">http://docs.python-requests.org/en/latest/ </a> </p>
 
 		<div id="article_meta">
 				Category:
