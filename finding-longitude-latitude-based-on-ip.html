@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/style.css">
+	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
+	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
+	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/pygments.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+
+	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
+
+
+		<title>DeeKras.com</title>
+		<meta charset="utf-8" />
+</head>
+<body>
+	<section id="sidebar">
+		<figure id="user_logo">
+            <a href="http://www.deekras.com"><div class="logo">&nbsp;</div></a>
+		</figure>
+
+		<div class="user_meta">
+            <h1 id="user"><a href="http://www.deekras.com" class="">Dee Kras</a></h1>
+			<h2></h2>
+			<ul>
+					<li><a href="http://getpelican.com/">Pelican</a></li>
+					<li><a href="http://python.org/">Python.org</a></li>
+					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+					<li><a href="#">You can modify those links in your config file</a></li>
+			</ul>
+		</div>
+		<footer>
+			<address>
+				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
+		                theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
+			</address>
+		</footer>
+	</section>
+
+	<section id="posts">
+	<header>
+		<h1>Dee Kras's blog</h1>
+		<h3>Posted Fri 12 December 2014</h3>
+	</header>
+	<article>
+		<h1 id="title">
+			<a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark"
+				title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a>
+		</h1>
+		<p>On that <a href="link">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="link to post">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
+<p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server.</p>
+<p>I also had to <code>pip install pygeoip</code>.</p>
+<p>Here's the code:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygeoip</span>    <span class="c"># import the pygeoip module</span>
+
+<span class="n">geoip_data</span> <span class="o">=</span> <span class="n">pygeoip</span><span class="o">.</span><span class="n">GeoIP</span><span class="p">(</span><span class="s">&#39;/path/GeoLiteCity.dat&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">find_lat_lng</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">geoip_data</span><span class="o">.</span><span class="n">record_by_addr</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;latitude&#39;</span><span class="p">]</span>
+        <span class="n">lng</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;longitude&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+</pre></div>
+
+
+<p>In this case, I used the <strong>record_by_addr(addr)</strong> attribute since I had the addr, the IP. And I want the full record.<br />
+There are many other attributes you can use with this geoip data. Checkout more at: <a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html">http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html</a></p>
+<p><strong>data</strong> is a dictionary. 
+And I called the <strong>'latitude'</strong> and <strong>'longitude'</strong> keys of <strong>data</strong> to find the values of lat and lng.</p>
+<p>With the lat and lng, I will be able to get the weather for those coordinates. Using the <strong>forecast_io</strong>. More on that next time.</p>
+
+		<div id="article_meta">
+				Category:
+					<a href="http://www.deekras.com/category/python.html">Python</a>
+				<br />Tags:
+					<a href="http://www.deekras.com/tag/pelican.html">pelican</a>
+					<a href="http://www.deekras.com/tag/publishing.html">publishing</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
+
+
+	</section>
+
+</body>
+</html>

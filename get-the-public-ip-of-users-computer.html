@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/style.css">
+	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
+	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
+	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/pygments.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+
+	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
+
+
+		<title>DeeKras.com</title>
+		<meta charset="utf-8" />
+</head>
+<body>
+	<section id="sidebar">
+		<figure id="user_logo">
+            <a href="http://www.deekras.com"><div class="logo">&nbsp;</div></a>
+		</figure>
+
+		<div class="user_meta">
+            <h1 id="user"><a href="http://www.deekras.com" class="">Dee Kras</a></h1>
+			<h2></h2>
+			<ul>
+					<li><a href="http://getpelican.com/">Pelican</a></li>
+					<li><a href="http://python.org/">Python.org</a></li>
+					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+					<li><a href="#">You can modify those links in your config file</a></li>
+			</ul>
+		</div>
+		<footer>
+			<address>
+				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
+		                theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
+			</address>
+		</footer>
+	</section>
+
+	<section id="posts">
+	<header>
+		<h1>Dee Kras's blog</h1>
+		<h3>Posted Thu 11 December 2014</h3>
+	</header>
+	<article>
+		<h1 id="title">
+			<a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="bookmark"
+				title="Permalink to Get the public IP of user's computer">Get the public IP of user's computer</a>
+		</h1>
+		<p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
+<p>To do that, I'd find her local IP and then later use  <strong> pygeoip.GeoIP</strong> to find the coordinates of that IP. (That's another post)</p>
+<p>First, I used:</p>
+<div class="highlight"><pre>ip = request.remote_addr
+</pre></div>
+
+
+<p>Then a fellow HackerSchooler pointed out that sometimes that might get me my local host (127.0.0.1) and not the IP as I thought I might get. </p>
+<p>The suggestion was:
+- First attempt to get the IP that way, since it is more 'resources efficient'. 
+- Also have an if statement to check if it did indeed get me that local host. 
+- And if it is the localhost, then use icanhazip.com to get the IP. *</p>
+<p>So here is the code:</p>
+<p>import requests  #<a href="http://docs.python-requests.org/en/latest/">import the request module</a> </p>
+<div class="highlight"><pre>def get_ip():
+    ip = request.remote_addr
+    if ip == &#39;127.0.0.1&#39;:
+        ip = requests.get(&quot;http://icanhazip.com/&quot;).content
+    return ip
+</pre></div>
+
+
+<p>In the request.get statement, the <strong>ip</strong> is the response. It is the <strong>content</strong> from the <strong>'get'</strong> request to <strong>"http://icanhazip.com/"</strong></p>
+<p><em>Read more about the different attributes for</em>  request.get(some_url).attributes
+http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</p>
+
+		<div id="article_meta">
+				Category:
+					<a href="http://www.deekras.com/category/python.html">Python</a>
+				<br />Tags:
+					<a href="http://www.deekras.com/tag/pelican.html">pelican</a>
+					<a href="http://www.deekras.com/tag/publishing.html">publishing</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
+
+
+	</section>
+
+</body>
+</html>
