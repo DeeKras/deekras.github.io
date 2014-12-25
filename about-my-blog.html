@@ -1,70 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="utf-8">
-    <title>About my Blog - DeeKras.com</title>
-    <meta name="description" content="">
-    <meta name="author" content="Dee Kras">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="http://www.deekras.com/theme/html5.js"></script>
-    <![endif]-->
+		<title>DeeKras.com</title>
+		<meta name="description" content="">
+		<meta name="author" content="Dee Kras">
+
+		<link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.css" />
+		<link rel="stylesheet" href="http://www.deekras.com/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="http://www.deekras.com/theme/css/custom.css" />
 
 
-    <!-- Le styles -->
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+		<script src="http://www.deekras.com/theme/js/modernizr.js"></script>
 
-</head>
+		<!-- Feeds -->
+		<link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Atom Feed" />
 
-<body>
-<header class="blog-header">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span9">
-	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
-      </div>
 
-      <div class="span3" id="blog-nav">
-	<ul class="nav nav-pills pull-right">
-	    <li  class="active" >
-	      <a href="http://www.deekras.com/category/misc.html ">misc</a>
-	</ul>
-      </div>
-    </div> <!-- End of fluid row-->
-  </div>   <!-- End of Container-->
-</header>
-    
-<div class="container">
-    <div class="content">
-    <div class="row-fluid">
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
 
-        <div class="span10">
-    <div class='article'>
-      <div class="row-fluid">
-           <div class="content-title span9">
-             <h1>About my Blog</h1>
-           </div>
-      </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>Tue 09 December 2014 </p>
+					<section class="middle tab-bar-section">
+						<h1 class="title">DeeKras.com</h1>
+					</section>
+				</nav>
 
-<p style="text-align: left;">
-Filed under <a href="http://www.deekras.com/category/misc.html">misc</a>
-</p>
-<p style="text-align: left;">
-</p>
-<p>
-</p>
-      </div>
-      
-      <div class="span8">
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="http://www.deekras.com">Home</a></li>
+						<li><label>Categories</label></li>
+							<li class="active"><a href="http://www.deekras.com/category/misc.html">misc</a></li>
+
+						<li><label>Places</label></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+
+
+
+						<li><label>Links</label></li>
+							<li><a href="#">Another social link</a></li>
+							<li><a href="#">You can add links in your config file</a></li>
+					</ul>	
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="http://www.deekras.com/">DeeKras.com</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li class="active"><a href="http://www.deekras.com/category/misc.html">misc</a></li>
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>About my Blog</h2>
 	<h4>So here's a little about me and this blog.</h4>
 <p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I found a great mentor and was advised to start with Python. </p>
 <p>I got a few books and was directed to some awesome websites and of course the Python docs. And then got started.</p>
@@ -74,79 +100,59 @@ Filed under <a href="http://www.deekras.com/category/misc.html">misc</a>
 <p>I'm always learning, so your comments are helpful.</p>
 <p>Dee Kras</p>
 <p><em>early winter 2014</em></p>
-	<hr />
-      </div>
-    </div>
-    <div class="span10">
-      <h3>Comments</h3>
-    
-    </div>  
-    </div>
-        </div>
-        
-        
-    </div>     </div> </div>
+	<hr/>
+	<h6>Written by <a href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a> in <a href="http://www.deekras.com/category/misc.html">misc</a> on Tue 09 December 2014.</h6>
+</article>
 
-<!--footer-->
-<div class="container">
-  <div class="well" style="background-color: #E9EFF6">
-    <div id="blog-footer">
-      <div class="row-fluid">
-	<div class="social span2" align="center" id="socialist">
-	  <ul class="nav nav-list">
-	    <li class="nav-header">
-	      Social
-	    </li>
-	    <li><a href="#"><i class="icon-You can add links in your config file" style="color: #1f334b"></i>You can add links in your config file</a></li>
-	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+<hr/>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Places</h5>
+								<ul class="side-nav">
+									<li><a href="http://python.org/">Python.org</a></li>
+									<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+									<li><a href="#">You can modify those links in your config file</a></li>
+								</ul>
+							</div>
 
-	  </ul>
-	</div>
-        <div class="links span2" align="center">
-          <ul class="nav nav-list">
-            <li class="nav-header"> 
-              Links
-            </li>
-            
-            <li><a href="http://python.org/">Python.org</a></li>
-            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            <li><a href="#">You can modify those links in your config file</a></li>
-          </ul>
-        </div>
-	<div class="site-nav span2" align="center">
-          <ul class="nav nav-list" id="site-links">
-            <li class="nav-header"> 
-              Site
-            </li>
-            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
-                </i>Home</a></li>
-            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
-                </i>Archives</a></li>
-	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
-                </i>Tags</a></li>
-	    
-	  </ul>
-
-        </div>
-
-      </div> <!--end of fluid row-->
-    </div> <!--end of blog-footer-->
-    <hr />
-    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
-      &copy; Dee Kras
-    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
-        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
-        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
-        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
-
-  </div> <!--end of well -->
-</div> <!--end of container -->
-
-<!--/footer-->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
 
 
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="#">Another social link</a></li>
+									<li><a href="#">You can add links in your config file</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
 
-</body>
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="http://www.deekras.com/theme/js/jquery.js"></script>
+		<script src="http://www.deekras.com/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>
