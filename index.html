@@ -1,22 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
     <title>DeeKras.com</title>
-    <meta name="description" content="">
-    <meta name="author" content="Dee Kras">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="http://www.deekras.com/theme/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    <link href="http://www.deekras.com/theme/bootstrap.min.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/pygments.css" />	
+    <script src="http://www.deekras.com/theme/js/custom.modernizr.js"></script>
 
     <!-- So Firefox can bookmark->"abo this site" -->
         <link href="feeds/all.atom.xml" rel="alternate" title="DeeKras.com" type="application/atom+xml">
@@ -25,51 +19,43 @@
 
 <body>
 
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
-
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
-
-        <a class="brand" href="http://www.deekras.com">DeeKras.com</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-        </ul>
-        </div>
-        
-    </div>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://www.deekras.com">DeeKras.com</a></h1>
     </div>
 </div>
+</div>
 
-<div class="container">
-    <div class="content">
-    <div class="row">
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
 
-        <div class="span9">
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
         
 
-        
+            <article>
+                <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"><h3 class="article-title">Using a weather api (forecast.io)</h3></a>
+<h6 class="subheader" title="2014-12-13T00:00:00+00:00">Sat 13 December 2014
+</h6>
 
 
-    <div class='article'>
-        <div class="content-title">
-            <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"><h1>Using a weather api (forecast.io)</h1></a>
-Sat 13 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
-
-
- 
-        </div>
-        
-        <div><h4>Kinda cool to get the weather jsut the way I need it</h4>
+<h4>Kinda cool to get the weather jsut the way I need it</h4>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
 <p>The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is <a href="https://developer.forecast.io/"><strong>forecast.io</strong></a>. And it gave me the opportunity to work with json files.</p>
@@ -150,169 +136,149 @@ And import the <code>requests</code> module so I get the response from looking u
 <p><strong>--about the TIME FORMAT-- </strong>
 <a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
 <p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
-<a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p></div>
-        <hr />
-    </div>
-		
+<a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p><p class="subheader">Category: <a href="http://www.deekras.com/category/python.html">Python</a>
 
- 
+</p>
+
+
+
+            </article>
+
+
+                <hr  class="gradient"/>
+
+
         
 
- 
 
-    <div class='article'>
-        <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"><h2>Finding Longitude & Latitude based on IP</h2></a>
-        <div class= "well small"> Fri 12 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+            <article>
+                <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"><h3 class="article-title">Finding Longitude & Latitude based on IP</h3></a>
+<h6 class="subheader" title="2014-12-12T00:00:00+00:00">Fri 12 December 2014
+</h6>
 
 
- </div>
-        <div class="summary"><h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
-<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">read more</a></div>
-    </div>	
-				
+<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/python.html">Python</a>
 
- 
+</p>
+
+
+
+                <a class="button radius secondary small right" href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
         
 
- 
 
-    <div class='article'>
-        <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"><h2>Get the public IP of user's computer</h2></a>
-        <div class= "well small"> Thu 11 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+            <article>
+                <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"><h3 class="article-title">Get the public IP of user's computer</h3></a>
+<h6 class="subheader" title="2014-12-11T00:00:00+00:00">Thu 11 December 2014
+</h6>
 
 
- </div>
-        <div class="summary"><h4>Here's how to get the IP</h4>
+<h4>Here's how to get the IP</h4>
 <p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
-<p>To do that, I'd find her local IP and then later use ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">read more</a></div>
-    </div>	
-				
+<p>To do that, I'd find her local IP and then later use ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/python.html">Python</a>
 
- 
+</p>
+
+
+
+                <a class="button radius secondary small right" href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
         
 
- 
 
-    <div class='article'>
-        <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"><h2>My first Python project … and what I learned</h2></a>
-        <div class= "well small"> Wed 10 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+            <article>
+                <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"><h3 class="article-title">My first Python project … and what I learned</h3></a>
+<h6 class="subheader" title="2014-12-10T00:00:00+00:00">Wed 10 December 2014
+</h6>
 
 
- </div>
-        <div class="summary"><h4>My first project. And I learned tons.</h4>
-<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">read more</a></div>
-    </div>	
-				
+<h4>My first project. And I learned tons.</h4>
+<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/about-python.html">About; Python</a>
 
- 
+</p>
+
+
+
+                <a class="button radius secondary small right" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
         
 
- 
 
-    <div class='article'>
-        <a href="http://www.deekras.com/about-my-blog.html"><h2>About my Blog</h2></a>
-        <div class= "well small"> Tue 09 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+            <article>
+                <a href="http://www.deekras.com/about-my-blog.html"><h3 class="article-title">About my Blog</h3></a>
+<h6 class="subheader" title="2014-12-09T00:00:00+00:00">Tue 09 December 2014
+</h6>
 
 
- </div>
-        <div class="summary"><h4>So here's a little about me and this blog.</h4>
-<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/about-my-blog.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+<h4>So here's a little about me and this blog.</h4>
+<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/about.html">About</a>
 
-    <li class="active"><a href="http://www.deekras.com/index.html">1</a></li>
+</p>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
-</ul>
-</div>
- 
-  
-        </div>
-        
-        <div class="span3">
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="http://www.deekras.com/">Archives</a>
-                <li><a href="http://www.deekras.com/tags.html">Tags</a>
+                <a class="button radius secondary small right" href="http://www.deekras.com/about-my-blog.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
 
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/archives.html">Archives</a>
+            <li><a href="http://www.deekras.com/tags.html">Tags</a>
 
 
                 <li><a href="http://www.deekras.com/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
+        </ul>
 
-            </ul>
-            </div>
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/category/about.html">About</a></li>
+            <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
+            <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
+   
+        </ul>
 
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="deekras">github</a></li>
+            <li><a href="#">Another social link</a></li>
+        </ul>
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="http://www.deekras.com/category/about.html">About</a></li>
-                <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
-                <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
-                   
-            </ul>
-            </div>
+    </aside> <!-- End Sidebar -->
 
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Links
-                </li>
-            
-                <li><a href="http://python.org/">Python.org</a></li>
-                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            </ul>
-            </div>
+</div> <!-- End Main Content and Sidebar -->
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="deekras">github</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>DeeKras.com by Dee Kras</p>
             </div>
             </div>
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="http://www.deekras.com">DeeKras.com</a> &copy; Dee Kras 2012</p>
+    </div>
 </footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
- 
-</body>
-</html>

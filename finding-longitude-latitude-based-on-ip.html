@@ -1,22 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>DeeKras.com</title>
-    <meta name="description" content="">
-    <meta name="author" content="Dee Kras">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="http://www.deekras.com/theme/html5.js"></script>
-    <![endif]-->
+    <title>Finding Longitude & Latitude based on IP</title>
 
-    <!-- Le styles -->
-    <link href="http://www.deekras.com/theme/bootstrap.min.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/pygments.css" />	
+    <script src="http://www.deekras.com/theme/js/custom.modernizr.js"></script>
 
     <!-- So Firefox can bookmark->"abo this site" -->
         <link href="feeds/all.atom.xml" rel="alternate" title="DeeKras.com" type="application/atom+xml">
@@ -25,45 +19,44 @@
 
 <body>
 
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
-
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
-
-        <a class="brand" href="http://www.deekras.com">DeeKras.com</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-        </ul>
-        </div>
-        
-    </div>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://www.deekras.com">DeeKras.com</a></h1>
     </div>
 </div>
+</div>
 
-<div class="container">
-    <div class="content">
-    <div class="row">
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
 
-        <div class="span9">
-    <div class='article'>
-        <div class="content-title">
-            <h1>Finding Longitude & Latitude based on IP</h1>
-Fri 12 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
 
-        </div>
-	
-        <div><h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark"
+        title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a></h3>
+    </header>
+
+<h6 class="subheader" title="2014-12-12T00:00:00+00:00">Fri 12 December 2014
+</h6>
+
+
+    <h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
 <p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
 <p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server. <code>'/path/GeoLiteCity.dat'</code>.</p>
 <p>I also had to <code>pip install pygeoip</code>.</p>
@@ -83,81 +76,63 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><code>data</code>:  In this case, I used the <strong>record_by_addr(addr)</strong> attribute since I had the addr, the IP. And I want the full record.<br />
 There are many other attributes you can use with this geoip data. Checkout more at: <a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html">http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html</a></p>
 <p><code>data</code> is a dictionary. And I called the <code>latitude</code> and <code>longitude</code> keys of <code>data</code> to find the values of <code>lat</code> and <code>lng</code>.</p>
-<p>With the <code>lat</code> and <code>lng</code>, I will be able to get the weather for those coordinates. Using <strong>forecast_io</strong>. More on that next time.</p></div>
-	
-        <hr>
+<p>With the <code>lat</code> and <code>lng</code>, I will be able to get the weather for those coordinates. Using <strong>forecast_io</strong>. More on that next time.</p>
+<p class="subheader">Category: <a href="http://www.deekras.com/category/python.html">Python</a>
 
+</p>
+
+
+
+
+</article>
     </div>
-        </div>
-        
-        <div class="span3">
+    <!-- End Main Content -->
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="http://www.deekras.com/">Archives</a>
-                <li><a href="http://www.deekras.com/tags.html">Tags</a>
-
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/archives.html">Archives</a>
+            <li><a href="http://www.deekras.com/tags.html">Tags</a>
 
 
                 <li><a href="http://www.deekras.com/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
+        </ul>
 
-            </ul>
-            </div>
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/category/about.html">About</a></li>
+            <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
+            <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
+   
+        </ul>
 
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="deekras">github</a></li>
+            <li><a href="#">Another social link</a></li>
+        </ul>
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="http://www.deekras.com/category/about.html">About</a></li>
-                <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
-                <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
-                   
-            </ul>
-            </div>
+    </aside> <!-- End Sidebar -->
 
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Links
-                </li>
-            
-                <li><a href="http://python.org/">Python.org</a></li>
-                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            </ul>
-            </div>
+</div> <!-- End Main Content and Sidebar -->
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="deekras">github</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>DeeKras.com by Dee Kras</p>
             </div>
             </div>
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="http://www.deekras.com">DeeKras.com</a> &copy; Dee Kras 2012</p>
+    </div>
 </footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
- 
-</body>
-</html>

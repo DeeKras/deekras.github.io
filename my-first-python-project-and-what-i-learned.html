@@ -1,22 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>DeeKras.com</title>
-    <meta name="description" content="">
-    <meta name="author" content="Dee Kras">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="http://www.deekras.com/theme/html5.js"></script>
-    <![endif]-->
+    <title>My first Python project … and what I learned</title>
 
-    <!-- Le styles -->
-    <link href="http://www.deekras.com/theme/bootstrap.min.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
-    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/pygments.css" />	
+    <script src="http://www.deekras.com/theme/js/custom.modernizr.js"></script>
 
     <!-- So Firefox can bookmark->"abo this site" -->
         <link href="feeds/all.atom.xml" rel="alternate" title="DeeKras.com" type="application/atom+xml">
@@ -25,45 +19,44 @@
 
 <body>
 
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
-
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
-
-        <a class="brand" href="http://www.deekras.com">DeeKras.com</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-        </ul>
-        </div>
-        
-    </div>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://www.deekras.com">DeeKras.com</a></h1>
     </div>
 </div>
+</div>
 
-<div class="container">
-    <div class="content">
-    <div class="row">
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
 
-        <div class="span9">
-    <div class='article'>
-        <div class="content-title">
-            <h1>My first Python project … and what I learned</h1>
-Wed 10 December 2014
-
-by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
- 
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
 
-        </div>
-	
-        <div><h4>My first project. And I learned tons.</h4>
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark"
+        title="Permalink to My first Python project … and what I learned">My first Python project … and what I learned</a></h3>
+    </header>
+
+<h6 class="subheader" title="2014-12-10T00:00:00+00:00">Wed 10 December 2014
+</h6>
+
+
+    <h4>My first project. And I learned tons.</h4>
 <p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I get past the tutorials.</p>
 <p>But there's nothing like working on real life problems. With peers. And being able to tap into the experience and knowledge of mentors. That is what I got during my stint at <a href="https://www.hackerschool.com/">Hacker School</a> during fall 2014.</p>
 <p>In previous jobs, I had worked side by side with the programmers on solutions to our company's needs. So I had an idea of the magic of what computer programmers can do.  And finally, I decided to learn it for myself. And I love it.</p>
@@ -72,81 +65,63 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p>Maybe an ambitious project for just starting out. But that is the best part of Hacker School. Tapping into the experiences and help from peers and the facilitators.  Lots of people showed me little tricks and tips to use to build this little application.  And it gave me lots of practice with peer programming and review. I am so grateful to all who helped me muster through the project.</p>
 <p>Once it was working well, I added some extra features to make it even more useful. Like finding the weather based on zip code. For that I used the <code>zippopotamus</code> API (api.zippopotam.us).  I even set it up to send daily emails (using <code>mailgun</code>) and/ or texts (using <code>twilio</code>) to the teachers using the data stored in a <code>SQL</code> database.</p>
 <p>In the end, from this one project, I got to work with <code>JSON</code> files, <code>html</code>, HTTP <code>GET</code> and <code>POST</code>, APIs, lots of the Flask commands. Later, I refactored it to work with <code>SQLAlchemy</code> and <code>WTForms</code>. </p>
-<p>Not bad for my first foray into programming.</p></div>
-	
-        <hr>
+<p>Not bad for my first foray into programming.</p>
+<p class="subheader">Category: <a href="http://www.deekras.com/category/about-python.html">About; Python</a>
 
+</p>
+
+
+
+
+</article>
     </div>
-        </div>
-        
-        <div class="span3">
+    <!-- End Main Content -->
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="http://www.deekras.com/">Archives</a>
-                <li><a href="http://www.deekras.com/tags.html">Tags</a>
-
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/archives.html">Archives</a>
+            <li><a href="http://www.deekras.com/tags.html">Tags</a>
 
 
                 <li><a href="http://www.deekras.com/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
+        </ul>
 
-            </ul>
-            </div>
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/category/about.html">About</a></li>
+            <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
+            <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
+   
+        </ul>
 
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="deekras">github</a></li>
+            <li><a href="#">Another social link</a></li>
+        </ul>
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="http://www.deekras.com/category/about.html">About</a></li>
-                <li><a href="http://www.deekras.com/category/about-python.html">About; Python</a></li>
-                <li><a href="http://www.deekras.com/category/python.html">Python</a></li>
-                   
-            </ul>
-            </div>
+    </aside> <!-- End Sidebar -->
 
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Links
-                </li>
-            
-                <li><a href="http://python.org/">Python.org</a></li>
-                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            </ul>
-            </div>
+</div> <!-- End Main Content and Sidebar -->
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="deekras">github</a></li>
-                <li><a href="#">Another social link</a></li>
-            </ul>
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>DeeKras.com by Dee Kras</p>
             </div>
             </div>
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="http://www.deekras.com">DeeKras.com</a> &copy; Dee Kras 2012</p>
+    </div>
 </footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
- 
-</body>
-</html>
