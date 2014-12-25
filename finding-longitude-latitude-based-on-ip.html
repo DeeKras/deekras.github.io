@@ -47,11 +47,11 @@
 			<a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark"
 				title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a>
 		</h1>
-		<p>On that <a href="link">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="link to post">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
-<p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server.</p>
+		<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
+<p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server. <code>'/path/GeoLiteCity.dat'</code>.</p>
 <p>I also had to <code>pip install pygeoip</code>.</p>
 <p>Here's the code:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygeoip</span>    <span class="c"># import the pygeoip module</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygeoip</span>   
 
 <span class="n">geoip_data</span> <span class="o">=</span> <span class="n">pygeoip</span><span class="o">.</span><span class="n">GeoIP</span><span class="p">(</span><span class="s">&#39;/path/GeoLiteCity.dat&#39;</span><span class="p">)</span>
 
@@ -63,11 +63,10 @@
 </pre></div>
 
 
-<p>In this case, I used the <strong>record_by_addr(addr)</strong> attribute since I had the addr, the IP. And I want the full record.<br />
+<p><code>data</code>:  In this case, I used the <strong>record_by_addr(addr)</strong> attribute since I had the addr, the IP. And I want the full record.<br />
 There are many other attributes you can use with this geoip data. Checkout more at: <a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html">http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html</a></p>
-<p><strong>data</strong> is a dictionary. 
-And I called the <strong>'latitude'</strong> and <strong>'longitude'</strong> keys of <strong>data</strong> to find the values of lat and lng.</p>
-<p>With the lat and lng, I will be able to get the weather for those coordinates. Using the <strong>forecast_io</strong>. More on that next time.</p>
+<p><code>data</code> is a dictionary. And I called the <code>latitude</code> and <code>longitude</code> keys of <code>data</code> to find the values of <code>lat</code> and <code>lng</code>.</p>
+<p>With the <code>lat</code> and <code>lng</code>, I will be able to get the weather for those coordinates. Using <strong>forecast_io</strong>. More on that next time.</p>
 
 		<div id="article_meta">
 				Category:
