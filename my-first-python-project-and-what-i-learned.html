@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
-	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
-	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
-
-	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
-
-		<title>DeeKras.com</title>
-		<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<title>My first Python project … and what I learned — DeeKras.com</title>
+	<meta name="description" content="Title: My first Python project … and what I learned; Date: 2014-12-10; Author: Dee Kras">
+	<meta name="author" content="Dee Kras">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="http://www.deekras.com/theme/html5.js"></script>
+		<![endif]-->
+	<link href="http://www.deekras.com/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/local.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/pygments.css" rel="stylesheet">
 </head>
 <body>
-	<section id="sidebar">
-		<figure id="user_logo">
-			<a href="/"><div class="logo">&nbsp;</div></a>
-		</figure>
-
-		<div class="user_meta">
-			<h1 id="user"><a href="/" class="">Dee Kras</a></h1>
-			<h2></h2>
-			<ul>
-					<li><a href="http://python.org/">Python.org</a></li>
-					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-					<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-		</div>
-		<footer>
-			<address>
-				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
-				theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
-			</address>
-		</footer>
-	</section>
-
-	<section id="posts">
-	<header>
-		<h1>Dee Kras's blog</h1>
-		<h3>Posted Wed 10 December 2014</h3>
-	</header>
-	<article>
-		<h1 id="title">
-			<a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark"
-				title="Permalink to My first Python project … and what I learned">My first Python project … and what I learned</a>
-		</h1>
-		<h4>My first project. And I learned tons.</h4>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="http://www.deekras.com/">DeeKras.com</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">My first Python project … and what I learned</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Dee Kras</h4>
+		</span>
+		<time datetime="2014-12-10T00:00:00+00:00" itemprop="datePublished">Wed 10 December 2014</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><h4>My first project. And I learned tons.</h4>
 <p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I get past the tutorials.</p>
 <p>But there's nothing like working on real life problems. With peers. And being able to tap into the experience and knowledge of mentors. That is what I got during my stint at <a href="https://www.hackerschool.com/">Hacker School</a> during fall 2014.</p>
 <p>In previous jobs, I had worked side by side with the programmers on solutions to our company's needs. So I had an idea of the magic of what computer programmers can do.  And finally, I decided to learn it for myself. And I love it.</p>
@@ -54,20 +47,74 @@
 <p>Maybe an ambitious project for just starting out. But that is the best part of Hacker School. Tapping into the experiences and help from peers and the facilitators.  Lots of people showed me little tricks and tips to use to build this little application.  And it gave me lots of practice with peer programming and review. I am so grateful to all who helped me muster through the project.</p>
 <p>Once it was working well, I added some extra features to make it even more useful. Like finding the weather based on zip code. For that I used the <code>zippopotamus</code> API (api.zippopotam.us).  I even set it up to send daily emails (using <code>mailgun</code>) and/ or texts (using <code>twilio</code>) to the teachers using the data stored in a <code>SQL</code> database.</p>
 <p>In the end, from this one project, I got to work with <code>JSON</code> files, <code>html</code>, HTTP <code>GET</code> and <code>POST</code>, APIs, lots of the Flask commands. Later, I refactored it to work with <code>SQLAlchemy</code> and <code>WTForms</code>. </p>
-<p>Not bad for my first foray into programming.</p>
-
-		<div id="article_meta">
-				Category:
-					<a href="http://www.deekras.com/category/misc.html">misc</a>
+<p>Not bad for my first foray into programming.</p></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
 		</div>
-	</article>
-
-	<footer>
-		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
-	</footer>
-
-
-	</section>
-
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com">DeeKras.com</a></li>
+							<li><a href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com/category/misc.html">misc (5)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Dee Kras 2014</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
 </body>
 </html>

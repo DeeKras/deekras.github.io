@@ -1,104 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
-	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
-	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
-
-	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
-
-		<title>DeeKras.com</title>
-		<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<title>DeeKras.com</title>
+	<meta name="description" content="Coding, scientific development, finance, data analysis, visualization, statistics, and machine learning">
+	<meta name="author" content="Dee Kras">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="http://www.deekras.com/theme/html5.js"></script>
+		<![endif]-->
+	<link href="http://www.deekras.com/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/local.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/pygments.css" rel="stylesheet">
 </head>
 <body>
-	<section id="sidebar">
-		<figure id="user_logo">
-			<a href="/"><div class="logo">&nbsp;</div></a>
-		</figure>
-
-		<div class="user_meta">
-			<h1 id="user"><a href="/" class="">Dee Kras</a></h1>
-			<h2></h2>
-			<ul>
-					<li><a href="http://python.org/">Python.org</a></li>
-					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-					<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-		</div>
-		<footer>
-			<address>
-				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
-				theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
-			</address>
-		</footer>
-	</section>
-
-	<section id="posts">
-	<header>
-		<h1>Dee Kras's blog</h1>
-		<h3>
-			<script type="text/javascript">
-				var currentDate = new Date();
-				var day = currentDate.getDate();
-				var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-				var month = monthNames[currentDate.getMonth()].toUpperCase();
-				var year = currentDate.getFullYear();
-				document.write(month + " " + day + ", " + year);
-			</script>
-		</h3>
-	</header>
-
-	<dl>
-		<ol>
-				<li>
-					<h1 class="title">
-						<a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark" title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a>
-					</h1>
-					<abbr class="published" title="2014-12-13T00:00:00+00:00">Sat 13 December 2014</abbr>
-				<div class="entry-content"> <h4>Kinda cool to get the weather jsut the way I need it</h4>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="http://www.deekras.com/">DeeKras.com</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+        
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="http://www.deekras.com/using-a-weather-api-forecastio.html">
+		<h2 itemprop="name headline">Using a weather api (forecast.io)</h2>
+	</a>
+	<time datetime="2014-12-13T00:00:00+00:00" itemprop="datePublished">Sat 13 December 2014</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">Dee Kras</span>
+	</span>
+	<div class="summary"><h4>Kinda cool to get the weather jsut the way I need it</h4>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
-<p>The next step is to find the local ...</p> </div>
-				</li>
-				<li>
-					<h1 class="title">
-						<a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark" title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a>
-					</h1>
-					<abbr class="published" title="2014-12-12T00:00:00+00:00">Fri 12 December 2014</abbr>
-				<div class="entry-content"> <h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
-<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p> </div>
-				</li>
-				<li>
-					<h1 class="title">
-						<a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="bookmark" title="Permalink to Get the public IP of user's computer">Get the public IP of user's computer</a>
-					</h1>
-					<abbr class="published" title="2014-12-11T00:00:00+00:00">Thu 11 December 2014</abbr>
-				<div class="entry-content"> <h4>Here's how to get the IP</h4>
+<p>The next step is to find the local ...</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">
+		<h2 itemprop="name headline">Finding Longitude & Latitude based on IP</h2>
+	</a>
+	<time datetime="2014-12-12T00:00:00+00:00" itemprop="datePublished">Fri 12 December 2014</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">Dee Kras</span>
+	</span>
+	<div class="summary"><h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">
+		<h2 itemprop="name headline">Get the public IP of user's computer</h2>
+	</a>
+	<time datetime="2014-12-11T00:00:00+00:00" itemprop="datePublished">Thu 11 December 2014</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">Dee Kras</span>
+	</span>
+	<div class="summary"><h4>Here's how to get the IP</h4>
 <p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
-<p>To do that, I'd find her local IP and then later use ...</p> </div>
-				</li>
-				<li>
-					<h1 class="title">
-						<a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark" title="Permalink to My first Python project … and what I learned">My first Python project … and what I learned</a>
-					</h1>
-					<abbr class="published" title="2014-12-10T00:00:00+00:00">Wed 10 December 2014</abbr>
-				<div class="entry-content"> <h4>My first project. And I learned tons.</h4>
-<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p> </div>
-				</li>
-				<li>
-					<h1 class="title">
-						<a href="http://www.deekras.com/about-my-blog.html" rel="bookmark" title="Permalink to About my Blog">About my Blog</a>
-					</h1>
-					<abbr class="published" title="2014-12-09T00:00:00+00:00">Tue 09 December 2014</abbr>
-				<div class="entry-content"> <h4>So here's a little about me and this blog.</h4>
-<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p> </div>
-				</li>
-		</ol>
-	</dl>
+<p>To do that, I'd find her local IP and then later use ...</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">
+		<h2 itemprop="name headline">My first Python project … and what I learned</h2>
+	</a>
+	<time datetime="2014-12-10T00:00:00+00:00" itemprop="datePublished">Wed 10 December 2014</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">Dee Kras</span>
+	</span>
+	<div class="summary"><h4>My first project. And I learned tons.</h4>
+<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="http://www.deekras.com/about-my-blog.html">
+		<h2 itemprop="name headline">About my Blog</h2>
+	</a>
+	<time datetime="2014-12-09T00:00:00+00:00" itemprop="datePublished">Tue 09 December 2014</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">Dee Kras</span>
+	</span>
+	<div class="summary"><h4>So here's a little about me and this blog.</h4>
+<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+	</span>
+	Tags:
+</div>
+<hr>
+ <div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-	</section>
+    <li class="active"><a href="http://www.deekras.com/index.html">1</a></li>
 
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div> 		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com">DeeKras.com</a></li>
+							<li><a href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com/category/misc.html">misc (5)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Dee Kras 2014</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
 </body>
 </html>

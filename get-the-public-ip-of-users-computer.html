@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
-	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
-	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
-
-	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
-
-		<title>DeeKras.com</title>
-		<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<title>Get the public IP of user's computer — DeeKras.com</title>
+	<meta name="description" content="Title: Get the public IP of user's computer; Date: 2014-12-11; Author: Dee Kras">
+	<meta name="author" content="Dee Kras">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="http://www.deekras.com/theme/html5.js"></script>
+		<![endif]-->
+	<link href="http://www.deekras.com/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/local.css" rel="stylesheet">
+	<link href="http://www.deekras.com/theme/css/pygments.css" rel="stylesheet">
 </head>
 <body>
-	<section id="sidebar">
-		<figure id="user_logo">
-			<a href="/"><div class="logo">&nbsp;</div></a>
-		</figure>
-
-		<div class="user_meta">
-			<h1 id="user"><a href="/" class="">Dee Kras</a></h1>
-			<h2></h2>
-			<ul>
-					<li><a href="http://python.org/">Python.org</a></li>
-					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-					<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-		</div>
-		<footer>
-			<address>
-				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
-				theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
-			</address>
-		</footer>
-	</section>
-
-	<section id="posts">
-	<header>
-		<h1>Dee Kras's blog</h1>
-		<h3>Posted Thu 11 December 2014</h3>
-	</header>
-	<article>
-		<h1 id="title">
-			<a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="bookmark"
-				title="Permalink to Get the public IP of user's computer">Get the public IP of user's computer</a>
-		</h1>
-		<h4>Here's how to get the IP</h4>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="http://www.deekras.com/">DeeKras.com</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Get the public IP of user's computer</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Dee Kras</h4>
+		</span>
+		<time datetime="2014-12-11T00:00:00+00:00" itemprop="datePublished">Thu 11 December 2014</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="http://www.deekras.com/category/misc.html" rel="category">misc</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><h4>Here's how to get the IP</h4>
 <p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
 <p>To do that, I'd find her local IP and then later use  <strong>pygeoip.GeoIP</strong> to find the coordinates of that IP. (That's another post)</p>
 <p>First, I used:</p>
@@ -77,20 +70,74 @@
 <a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request">http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</a></p>
 <h5>---MORE ABOUT REQUESTS---</h5>
 <p>requests is a more reliable library than the old urllib2<br>
-<a href="http://docs.python-requests.org/en/latest/">http://docs.python-requests.org/en/latest/ </a> </p>
-
-		<div id="article_meta">
-				Category:
-					<a href="http://www.deekras.com/category/misc.html">misc</a>
+<a href="http://docs.python-requests.org/en/latest/">http://docs.python-requests.org/en/latest/ </a> </p></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
 		</div>
-	</article>
-
-	<footer>
-		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
-	</footer>
-
-
-	</section>
-
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com">DeeKras.com</a></li>
+							<li><a href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.deekras.com/category/misc.html">misc (5)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Dee Kras 2014</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
 </body>
 </html>
