@@ -1,278 +1,233 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
 
-    <title>DeeKras.com</title>
+        <title>DeeKras.com</title>
+        <meta charset="utf-8" />
+        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Full Atom Feed" />
 
-    <link rel="stylesheet" href="http://www.deekras.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://www.deekras.com/theme/css/pygments.css" />	
-    <script src="http://www.deekras.com/theme/js/modernizr.js"></script>
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/pygment.css" />
+
+        <script src="http://www.deekras.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
 </head>
 
-<body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://www.deekras.com">DeeKras.com</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
-    </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+<body id="index" class="home">
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
+    <div class="container">
 
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        
-        
+        <div class="row">
 
-            <article>
-                <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"><h3 class="article-title">Using a weather api (forecast.io)</h3></a>
-<h6 class="subheader" title="2014-12-13T00:00:00+00:00">Sat 13 December 2014
-</h6>
+          <header id="banner" class="body">
+                  <h1><a href="http://www.deekras.com/">DeeKras.com <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="http://www.deekras.com/">Home</a></li>
 
 
-<h4>Kinda cool to get the weather jsut the way I need it</h4>
+              </ul>
+            </div>
+
+<section id="content">
+
+
+
+   <div class="row">
+
+
+        <div class="eleven columns">
+                 <ol id="post-list">
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark" title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2014-12-13T00:00:00+00:00"> Sat 13 December 2014 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <h4>Kinda cool to get the weather jsut the way I need it</h4>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
-<p>The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is <a href="https://developer.forecast.io/"><strong>forecast.io</strong></a>. And it gave me the opportunity to work with json files.</p>
-<p>First, I got myself a key from <a href="https://developer.forecast.io/">https://developer.forecast.io/</a>. It's free.</p>
-<p>And I also  did <code>pip install python-forecastio</code>.</p>
-<p>I already had my <code>lat</code> and <code>lng</code> so I passed those into the <code>get_weather</code> function as parameters.</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<p>The next step is to find the local ...</p> </div><!-- /.entry-content -->
 
-<span class="n">forecast_io_key</span> <span class="o">=</span> <span class="s">&#39;get your own key&#39;</span>
-<span class="n">api_forecast_io</span> <span class="o">=</span> <span class="s">&#39;https://api.forecast.io/forecast/{}/{},{},{}&#39;</span>
-
-<span class="k">def</span> <span class="nf">get_weather</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">):</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="s">&#39;{}T12:00:00-0400&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span> 
-    <span class="n">lookup_url</span> <span class="o">=</span> <span class="n">api_forecast_io</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">forecast_io_key</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
-    <span class="n">json_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lookup_url</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-    <span class="n">hourly_data</span> <span class="o">=</span> <span class="n">json_response</span><span class="p">[</span><span class="s">u&#39;hourly&#39;</span><span class="p">][</span><span class="s">u&#39;data&#39;</span><span class="p">]</span>
-</pre></div>
-
-
-<p><code>date</code>:    The api has optional parameter of time/date. This can be a datetime object. So first I import the <code>datetime</code> module.
-And import the <code>requests</code> module so I get the response from looking up a specific url. <em>Read more about <a href="http://docs.python-requests.org/en/latest/">requests library</a>.</em></p>
-<p>The date/time must be either UNIX time or a string in this format. <a href="#time">See comment below</a>.   I like to use the <code>.format</code> method to fill the string with variables. <em>Read more about <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>.</em></p>
-<p><code>lookup_url</code>:   This is the url with the values filled in. </p>
-<p><code>json_response</code>:     The response from the 'GET' request is a json file, which essentially is a list of dictionaries.  In this case,  a list of  dictionaries of dictionaries.  Seems like a threw myself right into a deep json file. Really had to sit on this file to understand it. Eventually I got it. <em>See  the json file below.</em></p>
-<p><code>hourly_data</code>:   This is the <code>json_response</code>, using the <code>hourly</code> key to get the values of the <code>data</code> key.   The value of the <code>hourly</code> key is several dictionaries – one for every hour.</p>
-<p>Here's what just some of that json_response looks like. Look for the <code>hourly</code> key (about 5 lines in) and then for the <code>data</code> key (not far after the hourly key). <em>NOTE: I put in the line breaks; before the data was running as one long line.</em></p>
-<div class="highlight"><pre><span class="p">{</span><span class="s2">&quot;latitude&quot;</span><span class="s-Atom">:</span><span class="mf">42.8964</span><span class="p">,</span><span class="s2">&quot;longitude&quot;</span><span class="p">:-</span><span class="mf">78.8852</span><span class="p">,</span><span class="s2">&quot;timezone&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;America/New_York&quot;</span><span class="p">,</span><span class="s2">&quot;offset&quot;</span><span class="p">:-</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;currently&quot;</span><span class="s-Atom">:</span>
-<span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="s-Atom">:</span><span class="mi">1419436800</span><span class="p">,</span><span class="s2">&quot;summary&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;Overcast&quot;</span><span class="p">,</span><span class="s2">&quot;icon&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;cloudy&quot;</span><span class="p">,</span><span class="s2">&quot;precipIntensity&quot;</span><span class="s-Atom">:</span><span class="mf">0.45</span><span class="p">,</span><span class="s2">&quot;precipProbability&quot;</span>
-<span class="s-Atom">:</span><span class="mf">0.09</span><span class="p">,</span><span class="s2">&quot;precipType&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;temperature&quot;</span><span class="s-Atom">:</span><span class="mf">48.29</span><span class="p">,</span><span class="s2">&quot;apparentTemperature&quot;</span><span class="s-Atom">:</span><span class="mf">43.71</span><span class="p">,</span><span class="s2">&quot;dewPoint&quot;</span><span class="s-Atom">:</span><span class="mf">45.09</span><span class="p">,</span>
-<span class="s2">&quot;humidity&quot;</span><span class="s-Atom">:</span><span class="mf">0.89</span><span class="p">,</span><span class="s2">&quot;windSpeed&quot;</span><span class="s-Atom">:</span><span class="mf">10.58</span><span class="p">,</span><span class="s2">&quot;windBearing&quot;</span><span class="s-Atom">:</span><span class="mi">155</span><span class="p">,</span><span class="s2">&quot;visibility&quot;</span><span class="s-Atom">:</span><span class="mf">6.33</span><span class="p">,</span><span class="s2">&quot;cloudCover&quot;</span><span class="s-Atom">:</span><span class="mi">1</span><span class="p">,</span>
-<span class="s2">&quot;pressure&quot;</span><span class="s-Atom">:</span><span class="mf">1003.35</span><span class="p">,</span><span class="s2">&quot;ozone&quot;</span><span class="s-Atom">:</span><span class="mf">294.97</span><span class="p">},</span><span class="s2">&quot;hourly&quot;</span><span class="s-Atom">:</span><span class="p">{</span><span class="s2">&quot;summary&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;Light rain starting overnight.&quot;</span><span class="p">,</span><span class="s2">&quot;icon&quot;</span><span class="s-Atom">:</span>
-<span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="s-Atom">:</span><span class="p">[{</span><span class="s2">&quot;time&quot;</span><span class="s-Atom">:</span><span class="mi">1419397200</span><span class="p">,</span><span class="s2">&quot;summary&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;Overcast&quot;</span><span class="p">,</span><span class="s2">&quot;icon&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;cloudy&quot;</span><span class="p">,</span><span class="s2">&quot;precipIntensity&quot;</span><span class="s-Atom">:</span><span class="mi">0</span><span class="p">,</span>
-<span class="s2">&quot;precipProbability&quot;</span><span class="s-Atom">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;temperature&quot;</span><span class="s-Atom">:</span><span class="mf">44.44</span><span class="p">,</span><span class="s2">&quot;apparentTemperature&quot;</span><span class="s-Atom">:</span><span class="mf">40.14</span><span class="p">,</span><span class="s2">&quot;dewPoint&quot;</span><span class="s-Atom">:</span><span class="mf">40.71</span><span class="p">,</span>
-<span class="s2">&quot;humidity&quot;</span><span class="s-Atom">:</span><span class="mf">0.87</span><span class="p">,</span><span class="s2">&quot;windSpeed&quot;</span><span class="s-Atom">:</span><span class="mf">7.67</span><span class="p">,</span><span class="s2">&quot;windBearing&quot;</span><span class="s-Atom">:</span><span class="mi">146</span><span class="p">,</span><span class="s2">&quot;visibility&quot;</span><span class="s-Atom">:</span><span class="mf">8.47</span><span class="p">,</span><span class="s2">&quot;cloudCover&quot;</span><span class="s-Atom">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pressure&quot;</span><span class="s-Atom">:</span>
-<span class="mf">1011.78</span><span class="p">,</span><span class="s2">&quot;ozone&quot;</span><span class="s-Atom">:</span><span class="mf">300.77</span><span class="p">},{</span><span class="s2">&quot;time&quot;</span><span class="s-Atom">:</span><span class="mi">1419400800</span><span class="p">,</span><span class="s2">&quot;summary&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;Drizzle&quot;</span><span class="p">,</span><span class="s2">&quot;icon&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;precipIntensity&quot;</span><span class="s-Atom">:</span>
-<span class="mf">0.0081</span><span class="p">,</span><span class="s2">&quot;precipProbability&quot;</span><span class="s-Atom">:</span><span class="mf">0.39</span><span class="p">,</span><span class="s2">&quot;precipType&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;temperature&quot;</span><span class="s-Atom">:</span><span class="mf">44.19</span><span class="p">,</span><span class="s2">&quot;apparentTemperature&quot;</span><span class="s-Atom">:</span>
-<span class="mf">39.28</span><span class="p">,</span><span class="s2">&quot;dewPoint&quot;</span><span class="s-Atom">:</span><span class="mf">40.92</span><span class="p">,</span><span class="s2">&quot;humidity&quot;</span><span class="s-Atom">:</span><span class="mf">0.88</span><span class="p">,</span><span class="s2">&quot;windSpeed&quot;</span><span class="s-Atom">:</span><span class="mf">8.92</span><span class="p">,</span><span class="s2">&quot;windBearing&quot;</span><span class="s-Atom">:</span><span class="mi">152</span><span class="p">,</span><span class="s2">&quot;visibility&quot;</span><span class="s-Atom">:</span><span class="mf">8.14</span><span class="p">,</span>
-<span class="s2">&quot;cloudCover&quot;</span><span class="s-Atom">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pressure&quot;</span><span class="s-Atom">:</span><span class="mf">1011.55</span><span class="p">,</span><span class="s2">&quot;ozone&quot;</span><span class="s-Atom">:</span><span class="mf">300.83</span><span class="p">},{</span><span class="s2">&quot;time&quot;</span><span class="s-Atom">:</span><span class="mi">1419404400</span><span class="p">,</span><span class="s2">&quot;summary&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;Drizzle&quot;</span><span class="p">,</span><span class="s2">&quot;icon&quot;</span><span class="s-Atom">:</span>
-<span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;precipIntensity&quot;</span><span class="s-Atom">:</span><span class="mf">0.0056</span><span class="p">,</span><span class="s2">&quot;precipProbability&quot;</span><span class="s-Atom">:</span><span class="mf">0.11</span><span class="p">,</span><span class="s2">&quot;precipType&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;rain&quot;</span><span class="p">,</span><span class="s2">&quot;temperature&quot;</span><span class="s-Atom">:</span>
-<span class="mf">44.24</span><span class="p">,</span><span class="s2">&quot;apparentTemperature&quot;</span><span class="s-Atom">:</span><span class="mf">38.87</span><span class="p">,</span><span class="s2">&quot;dewPoint&quot;</span><span class="s-Atom">:</span><span class="mf">41.4</span><span class="p">,</span><span class="s2">&quot;humidity&quot;</span><span class="s-Atom">:</span><span class="mf">0.9</span><span class="p">,</span><span class="s2">&quot;windSpeed&quot;</span><span class="s-Atom">:</span><span class="mf">10.07</span><span class="p">,</span>
-<span class="s2">&quot;windBearing&quot;</span><span class="s-Atom">:</span><span class="mi">147</span><span class="p">,</span><span class="s2">&quot;visibility&quot;</span><span class="s-Atom">:</span><span class="mf">7.96</span><span class="p">,</span><span class="s2">&quot;cloudCover&quot;</span><span class="s-Atom">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;pressure&quot;</span><span class="s-Atom">:</span><span class="mf">1010.87</span><span class="p">,</span><span class="s2">&quot;ozone&quot;</span><span class="s-Atom">:</span><span class="mf">300.48</span><span class="p">},</span>
-
-<span class="c1"># and there is much more in that json file.</span>
-</pre></div>
-
-
-<p>Lastly, I created a list of dictionaries of just the data I needed: for each hour, I need the temperature and windspeed and windchill. Using the temperature and windspeed, I could figure out the windchill.  I found the windchill formula online. </p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>  <span class="c"># used in the windchill formula</span>
-
-<span class="c">## continues from function above</span>
-<span class="n">hourly</span> <span class="o">=</span> <span class="p">[]</span>  
-
-<span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">hourly_data</span><span class="p">:</span>
-    <span class="c">#find the windchill</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;temperature&#39;</span><span class="p">]</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;windSpeed&#39;</span><span class="p">]</span>
-    <span class="n">windchill</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">35.74</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.6215</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mf">35.75</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.4275</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">)))</span>
-
-    <span class="n">hour_dict</span><span class="o">=</span> <span class="p">{</span>
-                <span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;time&#39;</span><span class="p">],</span>
-                <span class="s">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;temperature&#39;</span><span class="p">],</span>
-                <span class="s">&#39;windspeed&#39;</span><span class="p">:</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;windSpeed&#39;</span><span class="p">],</span>
-                <span class="s">&#39;windchill&#39;</span><span class="p">:</span> <span class="n">windchill</span><span class="p">}</span>
-    <span class="n">hourly_weather</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hour_dict</span><span class="p">)</span>
-
-<span class="k">return</span> <span class="n">hourly</span>
-</pre></div>
-
-
-<p><code>hourly</code>:    I created a blank list <code>hourly</code> to which I will append a new dictionary for each hour.</p>
-<p>Using a for loop -  for each hour, I evaluate the windchill and create a new dictionary <code>hour_dict</code> and add keys/ values for <code>time</code>, <code>temperature</code>, <code>windSpeed</code> and <code>windchill</code>.</p>
-<p><code>windchill</code>: I found the windchill formula online. I get <code>T</code> and <code>V</code> for the temperature and windspeed. Those one letters are much shorter than the full name of the variable, much easier to type. (BTW, <code>math.ceil(x)</code> returns the smallest integer value greater than or equal to x. In other words, it always rounds up.)</p>
-<p>Lastly, I append the new dictionary to the <code>hourly</code> list.</p>
-<p>And walla! I have my list of dictionaries of weather info for each hour of the day.  Next step would be to display it in a useful way. Maybe a different color based on the windchill. According to that <a href="https://www.idph.state.ia.us/hcci/common/pdf/weatherwatch.pdf">chart</a>, a windchill above 32F is comfortable for outdoor play and thus can be presented in GREEN. YELLOW is for temps between 13F and 32F. Anything lower than that is RED. And I'd probably also provide the data in celsius.</p>
-<p>Done!</p>
-<p><strong>--about the TIME FORMAT-- </strong>
-<a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
-<p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
-<a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p><p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
-
-</p>
+                                <div class="medium primary btn"><a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark" title="Permalink to Using a weather api (forecast.io)">Read more <i class="icon-arrow-right"></i></a></div>
 
 
 
-            </article>
-
-
-                <hr  class="gradient"/>
-
-
-        
-
-
-            <article>
-                <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"><h3 class="article-title">Finding Longitude & Latitude based on IP</h3></a>
-<h6 class="subheader" title="2014-12-12T00:00:00+00:00">Fri 12 December 2014
-</h6>
-
-
-<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
-<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
-
-</p>
+                                <div class="row tag-row">
+                                </div>
 
 
 
-                <a class="button radius secondary small right" href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark" title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2014-12-12T00:00:00+00:00"> Fri 12 December 2014 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p> </div><!-- /.entry-content -->
 
-        
+                                <div class="medium primary btn"><a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark" title="Permalink to Finding Longitude & Latitude based on IP">Read more <i class="icon-arrow-right"></i></a></div>
 
 
-            <article>
-                <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"><h3 class="article-title">Get the public IP of user's computer</h3></a>
-<h6 class="subheader" title="2014-12-11T00:00:00+00:00">Thu 11 December 2014
-</h6>
+
+                                <div class="row tag-row">
+                                </div>
 
 
-<h4>Here's how to get the IP</h4>
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="bookmark" title="Permalink to Get the public IP of user's computer">Get the public IP of user's computer</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2014-12-11T00:00:00+00:00"> Thu 11 December 2014 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <h4>Here's how to get the IP</h4>
 <p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
-<p>To do that, I'd find her local IP and then later use ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
+<p>To do that, I'd find her local IP and then later use ...</p> </div><!-- /.entry-content -->
 
-</p>
+                                <div class="medium primary btn"><a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="bookmark" title="Permalink to Get the public IP of user's computer">Read more <i class="icon-arrow-right"></i></a></div>
 
 
 
-                <a class="button radius secondary small right" href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
+                                <div class="row tag-row">
+                                </div>
 
+
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark" title="Permalink to My first Python project … and what I learned">My first Python project … and what I learned</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2014-12-10T00:00:00+00:00"> Wed 10 December 2014 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <h4>My first project. And I learned tons.</h4>
+<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark" title="Permalink to My first Python project … and what I learned">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                </div>
+
+
+
+                        </article></li>
+                        <li><article class="hentry">
+                                <header> <h2 class="entry-title"><a href="http://www.deekras.com/about-my-blog.html" rel="bookmark" title="Permalink to About my Blog">About my Blog</a></h2> </header>
+                                <footer class="post-info">
+                                    <abbr class="published" title="2014-12-09T00:00:00+00:00"> Tue 09 December 2014 </abbr>
+                                    <address class="vcard author">By 
+                                    <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
+                                    </address>
+                                </footer><!-- /.post-info -->
+                                <div class="entry-content"> <h4>So here's a little about me and this blog.</h4>
+<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p> </div><!-- /.entry-content -->
+
+                                <div class="medium primary btn"><a href="http://www.deekras.com/about-my-blog.html" rel="bookmark" title="Permalink to About my Blog">Read more <i class="icon-arrow-right"></i></a></div>
+
+
+
+                                <div class="row tag-row">
+                                </div>
+
+
+
+                        </article></li>
+                </ol><!-- /#posts-list -->
+
+        </div><!-- /.eleven.columns -->
         
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+  </ul>
+
+<h4>Categories</h4>
+<ul>
+		<li><a href="http://www.deekras.com/category/misc.html">misc</a></li>
+</ul>
 
 
-            <article>
-                <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"><h3 class="article-title">My first Python project … and what I learned</h3></a>
-<h6 class="subheader" title="2014-12-10T00:00:00+00:00">Wed 10 December 2014
-</h6>
+<h4>Tags</h4>
 
 
-<h4>My first project. And I learned tons.</h4>
-<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
+<nav class="widget">
+  <h4>Social</h4>
+  <ul>
+    <li><a href="#">You can add links in your config file</a></li>
+    <li><a href="#">Another social link</a></li>
+  </ul>
+</nav>
 
-</p>
+</div> </div><!-- /.row -->
 
+</section><!-- /#content -->
 
-
-                <a class="button radius secondary small right" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-        
-
-
-            <article>
-                <a href="http://www.deekras.com/about-my-blog.html"><h3 class="article-title">About my Blog</h3></a>
-<h6 class="subheader" title="2014-12-09T00:00:00+00:00">Tue 09 December 2014
-</h6>
+       </div><!-- /.row -->
+    </div><!-- /.container -->
 
 
-<h4>So here's a little about me and this blog.</h4>
-<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p><p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
+       <div class="container.nopad bg">
 
-</p>
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
 
 
 
-                <a class="button radius secondary small right" href="http://www.deekras.com/about-my-blog.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
 
-            <!-- /#posts-list -->
+
+              </ul>
+            </div>
+          </div>
+        </footer>
 
     </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://www.deekras.com/archives.html">Archives</a>
-            <li><a href="http://www.deekras.com/tags.html">Tags</a>
-        </ul>
-
-		
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://www.deekras.com/category/misc.html">misc</a></li>
-   
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://python.org/">Python.org</a></li>
-            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            <li><a href="#">You can modify those links in your config file</a></li>
-        </ul>
-		
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="#">You can add links in your config file</a></li>
-            <li><a href="#">Another social link</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
 
 
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>DeeKras.com by Dee Kras</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
+  <script src="http://www.deekras.com/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="http://www.deekras.com/theme/js/libs/gumby.min.js"></script>
+  <script src="http://www.deekras.com/theme/js/plugins.js"></script>
 </body>
 </html>
