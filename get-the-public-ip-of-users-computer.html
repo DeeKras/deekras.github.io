@@ -54,12 +54,13 @@
 </pre></div>
 
 
+<p><code>request.remote_addr</code>: <code>request</code> is part of the <a href="http://flask.pocoo.org/docs/0.10/api/">Flask module</a> that i was using to create this web application. In very short, the <code>request</code> <em>remembers</em> the value of what we were requesting. Check out the <a href="http://flask.pocoo.org/docs/0.10/api/">request class of Flask</a>.</p>
 <p>Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. </p>
 <p>The suggestion was:</p>
 <ul>
 <li>First attempt to get the IP that way, since it is more 'resources efficient'.</li>
-<li>Also have an if statement to check if it did indeed get me that local host.</li>
-<li>And if it is the localhost, then use icanhazip.com to get the IP.</li>
+<li>Also have an <code>if</code> statement to check if it did indeed get me that local host.</li>
+<li>And if it is the localhost, then use <code>icanhazip.com</code> to get the IP.</li>
 </ul>
 <p>So here is the code:</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">requests</span>  <span class="c">#import the request module</span>
@@ -72,8 +73,7 @@
 </pre></div>
 
 
-<p>In the requests.get statement:<br>
-    the <strong>ip</strong> is the response. It is the <strong>content</strong> from the <strong>'get'</strong> request to <strong>"http://icanhazip.com/"</strong></p>
+<p><code>request.get</code>:  the <code>ip</code> is the response. It is the <code>content</code> from the <code>get</code> request to <code>"http://icanhazip.com/"</code>.</p>
 <p><em>Read more about the different attributes for</em>  requests.get(some_url).attributes
 <a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request">http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</a></p>
 <h5>---MORE ABOUT REQUESTS---</h5>

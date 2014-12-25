@@ -98,19 +98,20 @@ And import the &lt;code&gt;requests&lt;/code&gt; module so I get the response fr
 &lt;p&gt;&lt;code&gt;data&lt;/code&gt;:  In this case, I used the &lt;strong&gt;record_by_addr(addr)&lt;/strong&gt; attribute since I had the addr, the IP. And I want the full record.&lt;br /&gt;
 There are many other attributes you can use with this geoip data. Checkout more at: &lt;a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html"&gt;http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;data&lt;/code&gt; is a dictionary. And I called the &lt;code&gt;latitude&lt;/code&gt; and &lt;code&gt;longitude&lt;/code&gt; keys of &lt;code&gt;data&lt;/code&gt; to find the values of &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;lng&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;With the &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;lng&lt;/code&gt;, I will be able to get the weather for those coordinates. Using &lt;strong&gt;forecast_io&lt;/strong&gt;. More on that next time.&lt;/p&gt;</summary><category term="pelican"></category><category term="publishing"></category></entry><entry><title>Get the public IP of user's computer</title><link href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="alternate"></link><updated>2014-12-11T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-11:get-the-public-ip-of-users-computer.html</id><summary type="html">&lt;p&gt;For a &lt;a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"&gt;recent project&lt;/a&gt;, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.&lt;/p&gt;
+&lt;p&gt;With the &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;lng&lt;/code&gt;, I will be able to get the weather for those coordinates. Using &lt;strong&gt;forecast_io&lt;/strong&gt;. More on that next time.&lt;/p&gt;</summary></entry><entry><title>Get the public IP of user's computer</title><link href="http://www.deekras.com/get-the-public-ip-of-users-computer.html" rel="alternate"></link><updated>2014-12-11T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-11:get-the-public-ip-of-users-computer.html</id><summary type="html">&lt;p&gt;For a &lt;a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"&gt;recent project&lt;/a&gt;, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.&lt;/p&gt;
 &lt;p&gt;To do that, I'd find her local IP and then later use  &lt;strong&gt;pygeoip.GeoIP&lt;/strong&gt; to find the coordinates of that IP. (That's another post)&lt;/p&gt;
 &lt;p&gt;First, I used:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remote_addr&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;&lt;code&gt;request.remote_addr&lt;/code&gt;: &lt;code&gt;request&lt;/code&gt; is part of the &lt;a href="http://flask.pocoo.org/docs/0.10/api/"&gt;Flask module&lt;/a&gt; that i was using to create this web application. In very short, the &lt;code&gt;request&lt;/code&gt; &lt;em&gt;remembers&lt;/em&gt; the value of what we were requesting. Check out the &lt;a href="http://flask.pocoo.org/docs/0.10/api/"&gt;request class of Flask&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. &lt;/p&gt;
 &lt;p&gt;The suggestion was:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;First attempt to get the IP that way, since it is more 'resources efficient'.&lt;/li&gt;
-&lt;li&gt;Also have an if statement to check if it did indeed get me that local host.&lt;/li&gt;
-&lt;li&gt;And if it is the localhost, then use icanhazip.com to get the IP.&lt;/li&gt;
+&lt;li&gt;Also have an &lt;code&gt;if&lt;/code&gt; statement to check if it did indeed get me that local host.&lt;/li&gt;
+&lt;li&gt;And if it is the localhost, then use &lt;code&gt;icanhazip.com&lt;/code&gt; to get the IP.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So here is the code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;  &lt;span class="c"&gt;#import the request module&lt;/span&gt;
@@ -123,8 +124,7 @@ There are many other attributes you can use with this geoip data. Checkout more 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In the requests.get statement:&lt;br&gt;
-    the &lt;strong&gt;ip&lt;/strong&gt; is the response. It is the &lt;strong&gt;content&lt;/strong&gt; from the &lt;strong&gt;'get'&lt;/strong&gt; request to &lt;strong&gt;"http://icanhazip.com/"&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;request.get&lt;/code&gt;:  the &lt;code&gt;ip&lt;/code&gt; is the response. It is the &lt;code&gt;content&lt;/code&gt; from the &lt;code&gt;get&lt;/code&gt; request to &lt;code&gt;"http://icanhazip.com/"&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Read more about the different attributes for&lt;/em&gt;  requests.get(some_url).attributes
 &lt;a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request"&gt;http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request&lt;/a&gt;&lt;/p&gt;
 &lt;h5&gt;---MORE ABOUT REQUESTS---&lt;/h5&gt;
