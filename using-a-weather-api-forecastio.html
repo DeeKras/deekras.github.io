@@ -48,7 +48,7 @@
 				title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a>
 		</h1>
 		<p>Moving along in discussing some of features of the little application I wrote.  </p>
-<p>I already <a href="link">got the IP</a> and then <a href="link">found the longitude and latitude coordinates based on that IP</a>.</p>
+<p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
 <p>The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is <a href="https://developer.forecast.io/"><strong>forecast.io</strong></a>. And it gave me the opportunity to work with json files.</p>
 <p>First, I got myself a key from <a href="https://developer.forecast.io/">https://developer.forecast.io/</a>. It's free.</p>
 <p>And I also  did <code>pip install python-forecastio</code>.</p>
@@ -69,10 +69,10 @@
 
 
 <p><code>date</code>:    The api has optional parameter of time/date. This can be a datetime object. So first I import the <code>datetime</code> module.
-And import the <code>requests</code> module so I get the response from looking up a specific url.</p>
-<p>The date/time must be either UNIX time or a string in this format. <a href="#time">See comment below</a>.   I like to use the <code>.format</code> method to fill the string with variables. </p>
+And import the <code>requests</code> module so I get the response from looking up a specific url. <em>Read more about <a href="http://docs.python-requests.org/en/latest/">requests library</a>.</em></p>
+<p>The date/time must be either UNIX time or a string in this format. <a href="#time">See comment below</a>.   I like to use the <code>.format</code> method to fill the string with variables. <em>Read more about <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>.</em></p>
 <p><code>lookup_url</code>:   This is the url with the values filled in. </p>
-<p><code>json_response</code>:     The response from the 'get' request is a json file, which essentially is a list of dictionaries.  In this case,  a list of  dictionaries of dictionaries.  Seems like a threw myself right into a deep json file. Really had to sit on this file to understand it. Eventually I got it. </p>
+<p><code>json_response</code>:     The response from the 'GET' request is a json file, which essentially is a list of dictionaries.  In this case,  a list of  dictionaries of dictionaries.  Seems like a threw myself right into a deep json file. Really had to sit on this file to understand it. Eventually I got it. <em>See  the json file below.</em></p>
 <p><code>hourly_data</code>:   This is the <code>json_response</code>, using the <code>hourly</code> key to get the values of the <code>data</code> key.   The value of the <code>hourly</code> key is several dictionaries – one for every hour.</p>
 <p>Here's what just some of that json_response looks like. Look for the <code>hourly</code> key (about 5 lines in) and then for the <code>data</code> key (not far after the hourly key). <em>NOTE: I put in the line breaks; before the data was running as one long line.</em></p>
 <div class="highlight"><pre><span class="p">{</span><span class="s2">&quot;latitude&quot;</span><span class="s-Atom">:</span><span class="mf">42.8964</span><span class="p">,</span><span class="s2">&quot;longitude&quot;</span><span class="p">:-</span><span class="mf">78.8852</span><span class="p">,</span><span class="s2">&quot;timezone&quot;</span><span class="s-Atom">:</span><span class="s2">&quot;America/New_York&quot;</span><span class="p">,</span><span class="s2">&quot;offset&quot;</span><span class="p">:-</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;currently&quot;</span><span class="s-Atom">:</span>
@@ -99,31 +99,33 @@ And import the <code>requests</code> module so I get the response from looking u
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>  <span class="c"># used in the windchill formula</span>
 
 <span class="c">## continues from function above</span>
-<span class="n">hourly</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c">#a new list for all the hour dictionaries (created below in the for loop)</span>
-<span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">hourly_data</span><span class="p">:</span>
-    <span class="n">hour_dict</span><span class="o">=</span> <span class="p">{}</span> <span class="c"># start a new dictionary for each hour</span>
-    <span class="n">hour_dict</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;time&#39;</span><span class="p">]</span>
-    <span class="n">hour_dict</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;temperature&#39;</span><span class="p">]</span>
-    <span class="n">hour_dict</span><span class="p">[</span><span class="s">&#39;windspeed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;windSpeed&#39;</span><span class="p">]</span>
+<span class="n">hourly</span> <span class="o">=</span> <span class="p">[]</span>  
 
+<span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="n">hourly_data</span><span class="p">:</span>
     <span class="c">#find the windchill</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;temperature&#39;</span><span class="p">]</span>
     <span class="n">V</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;windSpeed&#39;</span><span class="p">]</span>
-    <span class="n">hour_dict</span><span class="p">[</span><span class="s">&#39;windchill&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">35.74</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.6215</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mf">35.75</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.4275</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">)))</span>
+    <span class="n">windchill</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">35.74</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.6215</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mf">35.75</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.4275</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">**</span><span class="mf">0.16</span><span class="p">)))</span>
 
+    <span class="n">hour_dict</span><span class="o">=</span> <span class="p">{</span>
+                <span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;time&#39;</span><span class="p">],</span>
+                <span class="s">&#39;temperature&#39;</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;temperature&#39;</span><span class="p">],</span>
+                <span class="s">&#39;windspeed&#39;</span> <span class="o">=</span> <span class="n">hour</span><span class="p">[</span><span class="s">u&#39;windSpeed&#39;</span><span class="p">],</span>
+                <span class="s">&#39;windchill&#39;</span> <span class="o">=</span> <span class="n">windchill</span><span class="p">}</span>
     <span class="n">hourly_weather</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hour_dict</span><span class="p">)</span>
+
 <span class="k">return</span> <span class="n">hourly</span>
 </pre></div>
 
 
 <p><code>hourly</code>:    I created a blank list <code>hourly</code> to which I will append a new dictionary for each hour.</p>
-<p>Using a for loop -  for each hour, I create a new dictionary <code>hour_dict</code> and add keys/ values for <code>time</code>, <code>temperature</code>, <code>windSpeed</code>.</p>
-<p>I also want to include the windchill in the dictionary. So I use the windchill formula. I get <code>T</code> and <code>V</code> for the temperature and windspeed; those one letters are much shorter than the full name of the variable. Much easier to type. And then I create a dictionary key for <code>windchill</code> and its value is the result of the formula.  (BTW, <code>math.ceil(x)</code> returns the smallest integer value greater than or equal to x. In other words, it always rounds up.)</p>
+<p>Using a for loop -  for each hour, I evaluate the windchill and create a new dictionary <code>hour_dict</code> and add keys/ values for <code>time</code>, <code>temperature</code>, <code>windSpeed</code> and <code>windchill</code>.</p>
+<p><code>windchill</code>: I found the windchill formula online. I get <code>T</code> and <code>V</code> for the temperature and windspeed. Those one letters are much shorter than the full name of the variable, much easier to type. (BTW, <code>math.ceil(x)</code> returns the smallest integer value greater than or equal to x. In other words, it always rounds up.)</p>
 <p>Lastly, I append the new dictionary to the <code>hourly</code> list.</p>
-<p>And walla! I have my list of dictionaries of weather info for each hour of the day.  Next step would be to display it in a useful way. Maybe a different color based on the windchill. According to that <a href="chart">chart</a>, a windchill above 32F is comfortable for outdoor play and thus can be presented in GREEN. YELLOW is for temps between 13F and 32F. Anything lower than that is RED. And I'd probably also provide the data in celsius.</p>
+<p>And walla! I have my list of dictionaries of weather info for each hour of the day.  Next step would be to display it in a useful way. Maybe a different color based on the windchill. According to that <a href="https://www.idph.state.ia.us/hcci/common/pdf/weatherwatch.pdf">chart</a>, a windchill above 32F is comfortable for outdoor play and thus can be presented in GREEN. YELLOW is for temps between 13F and 32F. Anything lower than that is RED. And I'd probably also provide the data in celsius.</p>
 <p>Done!</p>
 <p><strong>--about the TIME FORMAT-- </strong>
-<a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS] (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, 2013-05-06T12:00:00-0400.)</p>
+<a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
 <p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
 <a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p>
 
