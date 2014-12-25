@@ -54,7 +54,7 @@
 </pre></div>
 
 
-<p><code>request.remote_addr</code>: <code>request</code> is part of the <a href="http://flask.pocoo.org/docs/0.10/api/">Flask module</a> that i was using to create this web application. In very short, the <code>request</code> <em>remembers</em> the value of what we were requesting. Check out the <a href="http://flask.pocoo.org/docs/0.10/api/">request class of Flask</a>.</p>
+<p><code>request.remote_addr</code>: <code>request</code> is part of the <a href="http://flask.pocoo.org/docs/0.10/api/">Flask module</a> that i was using to create this web application. In very short, the <code>request</code> 'remembers' the value of what we were requesting. Check out the <a href="http://flask.pocoo.org/docs/0.10/api/#incoming-request-data">request class of Flask</a>.</p>
 <p>Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. </p>
 <p>The suggestion was:</p>
 <ul>
@@ -73,7 +73,7 @@
 </pre></div>
 
 
-<p><code>request.get</code>:  the <code>ip</code> is the response. It is the <code>content</code> from the <code>get</code> request to <code>"http://icanhazip.com/"</code>.</p>
+<p><code>requests.get</code>:  the <code>ip</code> is the response. It is the <code>content</code> from the <code>get</code> request to <code>"http://icanhazip.com/"</code>.</p>
 <p><em>Read more about the different attributes for</em>  requests.get(some_url).attributes
 <a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request">http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request</a></p>
 <h5>---MORE ABOUT REQUESTS---</h5>

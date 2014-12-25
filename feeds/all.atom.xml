@@ -105,7 +105,7 @@ There are many other attributes you can use with this geoip data. Checkout more 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;code&gt;request.remote_addr&lt;/code&gt;: &lt;code&gt;request&lt;/code&gt; is part of the &lt;a href="http://flask.pocoo.org/docs/0.10/api/"&gt;Flask module&lt;/a&gt; that i was using to create this web application. In very short, the &lt;code&gt;request&lt;/code&gt; &lt;em&gt;remembers&lt;/em&gt; the value of what we were requesting. Check out the &lt;a href="http://flask.pocoo.org/docs/0.10/api/"&gt;request class of Flask&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;request.remote_addr&lt;/code&gt;: &lt;code&gt;request&lt;/code&gt; is part of the &lt;a href="http://flask.pocoo.org/docs/0.10/api/"&gt;Flask module&lt;/a&gt; that i was using to create this web application. In very short, the &lt;code&gt;request&lt;/code&gt; 'remembers' the value of what we were requesting. Check out the &lt;a href="http://flask.pocoo.org/docs/0.10/api/#incoming-request-data"&gt;request class of Flask&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Then a fellow HackerSchooler pointed out that sometimes that might get my local host (127.0.0.1) and not the IP as I thought I might get. &lt;/p&gt;
 &lt;p&gt;The suggestion was:&lt;/p&gt;
 &lt;ul&gt;
@@ -124,7 +124,7 @@ There are many other attributes you can use with this geoip data. Checkout more 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;code&gt;request.get&lt;/code&gt;:  the &lt;code&gt;ip&lt;/code&gt; is the response. It is the &lt;code&gt;content&lt;/code&gt; from the &lt;code&gt;get&lt;/code&gt; request to &lt;code&gt;"http://icanhazip.com/"&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;requests.get&lt;/code&gt;:  the &lt;code&gt;ip&lt;/code&gt; is the response. It is the &lt;code&gt;content&lt;/code&gt; from the &lt;code&gt;get&lt;/code&gt; request to &lt;code&gt;"http://icanhazip.com/"&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Read more about the different attributes for&lt;/em&gt;  requests.get(some_url).attributes
 &lt;a href="http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request"&gt;http://docs.python-requests.org/en/latest/user/quickstart/#make-a-request&lt;/a&gt;&lt;/p&gt;
 &lt;h5&gt;---MORE ABOUT REQUESTS---&lt;/h5&gt;
