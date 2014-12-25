@@ -1,81 +1,165 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"
+>
 <head>
-  <meta charset="utf-8">
-  <!-- Site Meta Data -->
-  <title>DeeKras.com</title>
-  <meta name="description" content="">
-  <meta name="author" content="Dee Kras">
+    <title>Archives - DeeKras.com</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Style Meta Data -->
-  <link rel="stylesheet" href="http://www.deekras.com/theme/css/notebook.css" type="text/css" />
-  <link rel="shortcut icon" href="http://www.deekras.com/">
 
-  <!-- Feed Meta Data -->
-  <link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
 
-  <!-- Twitter Feed -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="">
-  <meta name="twitter:image" content="http://www.deekras.com/">
 
-<meta name="twitter:creator" content="">
-<meta name="twitter:url" content="http://www.deekras.com/archives.html">
-<meta name="twitter:title" content="DeeKras.com ~ Archives">
-<meta name="twitter:description" content="DeeKras.com ~ Archives du site">
+        <meta name="author" content="Dee Kras" />
 
-<!-- Facebook Meta Data -->
-<meta property="og:title" content="DeeKras.com ~ Archives" />
-<meta property="og:description" content="DeeKras.com ~ Archives" />
-<meta property="og:image" content="" />
+    <!-- Enable latex plugin -->
+
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="DeeKras.com" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="DeeKras.com"/>
+        <meta property="og:url" content="http://www.deekras.com"/>
+        <meta property="og:description" content="DeeKras.com"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.deekras.com/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://www.deekras.com/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.deekras.com/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" type="text/css"/>
+
+        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="DeeKras.com ATOM Feed"/>
+
+
+
 </head>
-
 <body>
-  <!-- Sidebar -->
-  <aside>
-    <p><a href="http://www.deekras.com"><img id="avatar" src="http://www.deekras.com/"></a></p>
-    <h1>DeeKras.com</h1>
-    <p></p>
-    <hr>
-    <h2>Social</h2>
-    <ul class="social">
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/you can add links in your config file.png);"><a href="#">You can add links in your config file</a></li>
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/another social link.png);"><a href="#">Another social link</a></li>
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/rss.png);"><a href="http://www.deekras.com/" rel="alternate"><i class="icon-bookmark icon-large"></i>Atom feed</a></li>
-    </ul>
-    <h2>Categories</h2>
-    <ul class="navbar">
-      <li><a href="http://www.deekras.com/category/misc.html">misc</a></li>
-    </ul> 
-  </aside>
 
-  <!-- Content -->
-  <article>
-<h1>Archives</h1>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.deekras.com/" class="navbar-brand">
+DeeKras.com            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.deekras.com/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.deekras.com/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-<dl>
-    <dt>Sat 13 December 2014</dt>
-    <dd><a href="http://www.deekras.com/using-a-weather-api-forecastio.html">Using a weather api (forecast.io)</a></dd>
-    <dt>Fri 12 December 2014</dt>
-    <dd><a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">Finding Longitude & Latitude based on IP</a></dd>
-    <dt>Thu 11 December 2014</dt>
-    <dd><a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">Get the public IP of user's computer</a></dd>
-    <dt>Wed 10 December 2014</dt>
-    <dd><a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">My first Python project … and what I learned</a></dd>
-    <dt>Tue 09 December 2014</dt>
-    <dd><a href="http://www.deekras.com/about-my-blog.html">About my Blog</a></dd>
-</dl>
-  </article>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-  <!-- Footer -->
-  <footer>
-    <address id="about" class="vcard body">
-      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
-      which takes great advantage of <a href="http://python.org">Python</a>.
-      Theme <a href="https://github.com/quack1/notebook/">Notebook</a> by <a href="https://twitter.com/_Quack1">@Quack1</a>.
-    </address>
-  </footer>
+    <section id="content">
+        <h1>Archives for DeeKras.com</h1>
+        <div id="archives">
+                <p>
+                    <span class="categories-timestamp"><time datetime="2014-12-13T00:00:00+00:00">Sat 13 December 2014</time></span>
+                    <a href="http://www.deekras.com/using-a-weather-api-forecastio.html">Using a weather api (forecast.io)</a>
+                </p>
+                <p>
+                    <span class="categories-timestamp"><time datetime="2014-12-12T00:00:00+00:00">Fri 12 December 2014</time></span>
+                    <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">Finding Longitude & Latitude based on IP</a>
+                </p>
+                <p>
+                    <span class="categories-timestamp"><time datetime="2014-12-11T00:00:00+00:00">Thu 11 December 2014</time></span>
+                    <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">Get the public IP of user's computer</a>
+                </p>
+                <p>
+                    <span class="categories-timestamp"><time datetime="2014-12-10T00:00:00+00:00">Wed 10 December 2014</time></span>
+                    <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">My first Python project … and what I learned</a>
+                </p>
+                <p>
+                    <span class="categories-timestamp"><time datetime="2014-12-09T00:00:00+00:00">Tue 09 December 2014</time></span>
+                    <a href="http://www.deekras.com/about-my-blog.html">About my Blog</a>
+                </p>
+        </div>
+    </section>
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
 
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                    <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="http://www.deekras.com/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group " id="tags">
+                    </ul>
+                </li>    
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Dee Kras
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.deekras.com/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.deekras.com/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.deekras.com/theme/js/respond.min.js"></script>
 
 </body>
 </html>

@@ -1,85 +1,101 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"
+>
 <head>
-  <meta charset="utf-8">
-  <!-- Site Meta Data -->
-  <title>My first Python project … and what I learned</title>
-  <meta name="description" content="">
-  <meta name="author" content="Dee Kras">
+    <title>My first Python project … and what I learned - DeeKras.com</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Style Meta Data -->
-  <link rel="stylesheet" href="http://www.deekras.com/theme/css/notebook.css" type="text/css" />
-  <link rel="shortcut icon" href="http://www.deekras.com/">
 
-  <!-- Feed Meta Data -->
-  <link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
 
-  <!-- Twitter Feed -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="">
-  <meta name="twitter:image" content="http://www.deekras.com/">
+<link rel="canonical" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">
 
-<meta name="twitter:creator" content="">
-<meta name="twitter:url" content="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">
-<meta name="twitter:title" content="DeeKras.com ~ My first Python project … and what I learned">
-<meta name="twitter:description" content="<h4>My first project. And I learned tons.</h4>
-<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p>">
+        <meta name="author" content="Dee Kras" />
+        <meta name="description" content="My first project. And I learned tons. Been working my way through Core Python Programming. And having lots of fun. Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries. What cool stuff I could do. When I ..." />
 
-<!-- Facebook Meta Data -->
-<meta property="og:title" content="DeeKras.com ~ My first Python project … and what I learned" />
-<meta property="og:description" content="<h4>My first project. And I learned tons.</h4>
-<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p>" />
-<meta property="og:image" content="" />
+    <!-- Enable latex plugin -->
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.deekras.com/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://www.deekras.com/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.deekras.com/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" type="text/css"/>
+
+        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="DeeKras.com ATOM Feed"/>
+
+
+        <link href="http://www.deekras.com/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate"
+              title="DeeKras.com misc ATOM Feed"/>
+
 </head>
-
 <body>
-  <!-- Sidebar -->
-  <aside>
-    <p><a href="http://www.deekras.com"><img id="avatar" src="http://www.deekras.com/"></a></p>
-    <h1>DeeKras.com</h1>
-    <p></p>
-    <hr>
-    <h2>Social</h2>
-    <ul class="social">
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/you can add links in your config file.png);"><a href="#">You can add links in your config file</a></li>
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/another social link.png);"><a href="#">Another social link</a></li>
-      <li style="list-style-image : url(http://www.deekras.com/theme/images/icons/rss.png);"><a href="http://www.deekras.com/" rel="alternate"><i class="icon-bookmark icon-large"></i>Atom feed</a></li>
-    </ul>
-    <h2>Categories</h2>
-    <ul class="navbar">
-      <li class="active"><a href="http://www.deekras.com/category/misc.html">misc</a></li>
-    </ul> 
-  </aside>
 
-  <!-- Content -->
-  <article>
-<section id="content">
-    <article>
-        <header class="post_list">
-            <h2 class="post_title"><a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html" rel="bookmark" title="Permalink to My first Python project … and what I learned">My first Python project … and what I learned</a></h2>
-            <span>Par </span>
-            <a href="http://www.deekras.com/author/dee-kras.html">@Dee Kras</a>
-            <span> dans </span>
-            <span class="post_category"><a href="http://www.deekras.com/category/misc.html" rel="bookmark" title="Permalink to misc">[ misc ]</a></span>
-            <span> le </span>
-            <span class="post_date">Wed 10 December 2014</span>
-            <div><span>Tags : </span>
-            </div>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.deekras.com/" class="navbar-brand">
+DeeKras.com            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://www.deekras.com/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.deekras.com/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-            <div class="entry-social">
-                <span class="twitter"><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=http://www.deekras.com/my-first-python-project-and-what-i-learned.html&text=My first Python project … and what I learned&via=">Twitter</a></span>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-                <span class="gplus"><a target="_blank" title="Google +" href="https://plus.google.com/share?url=http://www.deekras.com/my-first-python-project-and-what-i-learned.html&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;">Google+</a></span>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"
+                       rel="bookmark"
+                       title="Permalink to My first Python project … and what I learned">
+                        My first Python project … and what I learned
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-12-10T00:00:00+00:00"> Wed 10 December 2014</time>
+    </span>
 
-                <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=http://www.deekras.com/my-first-python-project-and-what-i-learned.html&t=My first Python project … and what I learned">Facebook</a></span>
 
-                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<http://www.deekras.com/my-first-python-project-and-what-i-learned.html&title=My first Python project … and what I learned" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;">Linkedin</a>
 
-                <span class="mail"><a href="mailto:?subject=My first Python project … and what I learned&amp;body=Viens découvrir un article à propos de [My first Python project … and what I learned] sur le site de Dee Kras. http://www.deekras.com/my-first-python-project-and-what-i-learned.html" title="Share by Email" target="_blank">Mail</a></span>
-            </div>
-        </header>
-        <div class="entry-content">
-            <h4>My first project. And I learned tons.</h4>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h4>My first project. And I learned tons.</h4>
 <p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I get past the tutorials.</p>
 <p>But there's nothing like working on real life problems. With peers. And being able to tap into the experience and knowledge of mentors. That is what I got during my stint at <a href="https://www.hackerschool.com/">Hacker School</a> during fall 2014.</p>
 <p>In previous jobs, I had worked side by side with the programmers on solutions to our company's needs. So I had an idea of the magic of what computer programmers can do.  And finally, I decided to learn it for myself. And I love it.</p>
@@ -89,20 +105,77 @@
 <p>Once it was working well, I added some extra features to make it even more useful. Like finding the weather based on zip code. For that I used the <code>zippopotamus</code> API (api.zippopotam.us).  I even set it up to send daily emails (using <code>mailgun</code>) and/ or texts (using <code>twilio</code>) to the teachers using the data stored in a <code>SQL</code> database.</p>
 <p>In the end, from this one project, I got to work with <code>JSON</code> files, <code>html</code>, HTTP <code>GET</code> and <code>POST</code>, APIs, lots of the Flask commands. Later, I refactored it to work with <code>SQLAlchemy</code> and <code>WTForms</code>. </p>
 <p>Not bad for my first foray into programming.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
         </div>
-    </article>
-</section>
-  </article>
+        <div class="col-sm-3 well well-sm" id="sidebar">
 
-  <!-- Footer -->
-  <footer>
-    <address id="about" class="vcard body">
-      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
-      which takes great advantage of <a href="http://python.org">Python</a>.
-      Theme <a href="https://github.com/quack1/notebook/">Notebook</a> by <a href="https://twitter.com/_Quack1">@Quack1</a>.
-    </address>
-  </footer>
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                    <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+                  </ul>
+                </li>
 
+
+
+                <li class="list-group-item"><a href="http://www.deekras.com/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group " id="tags">
+                    </ul>
+                </li>    
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Dee Kras
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.deekras.com/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.deekras.com/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.deekras.com/theme/js/respond.min.js"></script>
 
 </body>
 </html>
