@@ -1,70 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
+	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
+	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
+	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
 
-        <title>Using a weather api (forecast.io)</title>
-        <meta charset="utf-8" />
-        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Full Atom Feed" />
-        <link href="http://www.deekras.com/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Categories Atom Feed" />
+	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
 
-
-        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
-
-        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/gumby.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/style.css" />
-        <link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/pygment.css" />
-
-        <script src="http://www.deekras.com/theme/js/libs/modernizr-2.6.2.min.js"></script>
-
-
-
-
+		<title>DeeKras.com</title>
+		<meta charset="utf-8" />
 </head>
+<body>
+	<section id="sidebar">
+		<figure id="user_logo">
+			<a href="/"><div class="logo">&nbsp;</div></a>
+		</figure>
 
-<body id="index" class="home">
+		<div class="user_meta">
+			<h1 id="user"><a href="/" class="">Dee Kras</a></h1>
+			<h2></h2>
+			<ul>
+					<li><a href="http://python.org/">Python.org</a></li>
+					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+					<li><a href="#">You can modify those links in your config file</a></li>
+			</ul>
+		</div>
+		<footer>
+			<address>
+				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
+				theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
+			</address>
+		</footer>
+	</section>
 
-
-    <div class="container">
-
-        <div class="row">
-
-          <header id="banner" class="body">
-                  <h1><a href="http://www.deekras.com/">DeeKras.com <strong></strong></a></h1>
-          </header><!-- /#banner -->
-
-            <div id="navigation" class="navbar row">
-              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
-             
-              <ul class="columns">
-                <li><a href="http://www.deekras.com/">Home</a></li>
-
-
-              </ul>
-            </div>
-
-<section id="content" class="body">
-
-   <div class="row">
-        <div class="eleven columns">
-
-
-            <header>
-              <h2 class="entry-title">
-                <a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark"
-                   title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a></h2>
-           
-            </header>
-            <footer class="post-info">
-              <abbr class="published" title="2014-12-13T00:00:00+00:00">
-                Sat 13 December 2014
-              </abbr>
-              <address class="vcard author">By 
-                <a class="url fn" href="http://www.deekras.com/author/dee-kras.html"> Dee Kras</a>
-              </address>
-            </footer><!-- /.post-info -->
-            <div class="entry-content">
-              <h4>Kinda cool to get the weather jsut the way I need it</h4>
+	<section id="posts">
+	<header>
+		<h1>Dee Kras's blog</h1>
+		<h3>Posted Sat 13 December 2014</h3>
+	</header>
+	<article>
+		<h1 id="title">
+			<a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark"
+				title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a>
+		</h1>
+		<h4>Kinda cool to get the weather jsut the way I need it</h4>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
 <p>The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is <a href="https://developer.forecast.io/"><strong>forecast.io</strong></a>. And it gave me the opportunity to work with json files.</p>
@@ -146,77 +127,19 @@ And import the <code>requests</code> module so I get the response from looking u
 <a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
 <p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
 <a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p>
-            </div><!-- /.entry-content -->
+
+		<div id="article_meta">
+				Category:
+					<a href="http://www.deekras.com/category/misc.html">misc</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
 
 
-        </div><!-- /.eleven.columns -->
+	</section>
 
-<div class="three columns">
-
-<h4>Pages</h4>
-
- <ul>
-  </ul>
-
-<h4>Categories</h4>
-<ul>
-		<li><a href="http://www.deekras.com/category/misc.html">misc</a></li>
-</ul>
-
-
-<h4>Tags</h4>
-
-
-<nav class="widget">
-  <h4>Social</h4>
-  <ul>
-    <li><a href="#">You can add links in your config file</a></li>
-    <li><a href="#">Another social link</a></li>
-  </ul>
-</nav>
-
-</div> </div><!-- /.row -->
-
-
-</section>
-
-       </div><!-- /.row -->
-    </div><!-- /.container -->
-
-
-       <div class="container.nopad bg">
-
-    
-        <footer id="credits" class="row">
-          <div class="seven columns left-center">
-
-                   <address id="about" class="vcard body">
-                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a href="http://python.org">Python</a>.
-                    <br />
-                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
-                    </address>
-          </div>
-
-
-          <div class="seven columns">
-            <div class="row">
-              <ul class="socbtns">
-
-
-
-
-
-              </ul>
-            </div>
-          </div>
-        </footer>
-
-    </div>
-
-
-  <script src="http://www.deekras.com/theme/js/libs/jquery-1.9.1.min.js"></script>
-  <script src="http://www.deekras.com/theme/js/libs/gumby.min.js"></script>
-  <script src="http://www.deekras.com/theme/js/plugins.js"></script>
 </body>
 </html>
