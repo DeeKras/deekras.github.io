@@ -1,101 +1,36 @@
 <!DOCTYPE html>
-<html lang="en"
->
-<head>
-    <title>Using a weather api (forecast.io) - DeeKras.com</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+    <head>
+        <title>Using a weather api (forecast.io) - DeeKras.com</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://www.deekras.com/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Full Atom Feed" />
+        <link href="http://www.deekras.com/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="DeeKras.com Categories Atom Feed" />
+    </head>
 
-
-
-<link rel="canonical" href="http://www.deekras.com/using-a-weather-api-forecastio.html">
-
-        <meta name="author" content="Dee Kras" />
-        <meta name="description" content="Kinda cool to get the weather jsut the way I need it Moving along in discussing some of features of the little application I wrote. I already got the IP and then found the longitude and latitude coordinates based on that IP. The next step is to find the local ..." />
-
-    <!-- Enable latex plugin -->
-
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://www.deekras.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="http://www.deekras.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="http://www.deekras.com/theme/css/pygments/native.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" type="text/css"/>
-
-        <link href="http://www.deekras.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="DeeKras.com ATOM Feed"/>
-
-
-        <link href="http://www.deekras.com/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate"
-              title="DeeKras.com misc ATOM Feed"/>
-
-</head>
-<body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="http://www.deekras.com/" class="navbar-brand">
-DeeKras.com            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="http://www.deekras.com/category/misc.html">Misc</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://www.deekras.com/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"
-                       rel="bookmark"
-                       title="Permalink to Using a weather api (forecast.io)">
-                        Using a weather api (forecast.io)
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-12-13T00:00:00+00:00"> Sat 13 December 2014</time>
-    </span>
-
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h4>Kinda cool to get the weather jsut the way I need it</h4>
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://www.deekras.com">Home</a></li>
+                    <li><a href="http://www.deekras.com/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://www.deekras.com">DeeKras.com</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="bookmark"
+         title="Permalink to Using a weather api (forecast.io)">Using a weather api (forecast.io)</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h4>Kinda cool to get the weather jsut the way I need it</h4>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
 <p>The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is <a href="https://developer.forecast.io/"><strong>forecast.io</strong></a>. And it gave me the opportunity to work with json files.</p>
@@ -177,77 +112,23 @@ And import the <code>requests</code> module so I get the response from looking u
 <a name=“time”></a> TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
 <p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
 <a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3 well well-sm" id="sidebar">
-
-<aside>
-    <section>
-        <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-                  <ul class="list-group" id="social">
-                    <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                    <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-                  </ul>
-                </li>
-
-
-
-                <li class="list-group-item"><a href="http://www.deekras.com/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-                    <ul class="list-group " id="tags">
-                    </ul>
-                </li>    
-
-
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-
-        </ul>
-    </section>
-
-</aside>        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2014 Dee Kras
-            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="http://www.deekras.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="http://www.deekras.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="http://www.deekras.com/theme/js/respond.min.js"></script>
-
-</body>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-12-13T00:00:00+00:00">
+      Sat 13 December 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+    </address> in <a href="http://www.deekras.com/category/misc.html">misc</a> Tagged   </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://www.deekras.com/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://www.deekras.com">DeeKras.com</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
 </html>
