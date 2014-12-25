@@ -87,7 +87,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 <p><code>date</code>:    The api has optional parameter of time/date. This can be a datetime object. So first I import the <code>datetime</code> module.
 And import the <code>requests</code> module so I get the response from looking up a specific url. <em>Read more about <a href="http://docs.python-requests.org/en/latest/">requests library</a>.</em></p>
-<p>The date/time must be either UNIX time or a string in this format. <a href="#time">See comment below</a>.   I like to use the <code>.format</code> method to fill the string with variables. <em>Read more about <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>.</em></p>
+<p>The date/time must be either UNIX time or a string in this format. <a href="#about-the-TIME-FORMAT">See comment below</a>.   I like to use the <code>.format</code> method to fill the string with variables. <em>Read more about <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>.</em></p>
 <p><code>lookup_url</code>:   This is the url with the values filled in. </p>
 <p><code>json_response</code>:     The response from the 'GET' request is a json file, which essentially is a list of dictionaries.  In this case,  a list of  dictionaries of dictionaries.  Seems like a threw myself right into a deep json file. Really had to sit on this file to understand it. Eventually I got it. <em>See  the json file below.</em></p>
 <p><code>hourly_data</code>:   This is the <code>json_response</code>, using the <code>hourly</code> key to get the values of the <code>data</code> key.   The value of the <code>hourly</code> key is several dictionaries – one for every hour.</p>
@@ -141,7 +141,7 @@ And import the <code>requests</code> module so I get the response from looking u
 <p>Lastly, I append the new dictionary to the <code>hourly</code> list.</p>
 <p>And walla! I have my list of dictionaries of weather info for each hour of the day.  Next step would be to display it in a useful way. Maybe a different color based on the windchill. According to that <a href="https://www.idph.state.ia.us/hcci/common/pdf/weatherwatch.pdf">chart</a>, a windchill above 32F is comfortable for outdoor play and thus can be presented in GREEN. YELLOW is for temps between 13F and 32F. Anything lower than that is RED. And I'd probably also provide the data in celsius.</p>
 <p>Done!</p>
-<h2>about the TIME FORMAT [time]</h2>
+<h2>about the TIME FORMAT</h2>
 <p>TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
 <h2>MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO</h2>
 <p><a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p></div>
