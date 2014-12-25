@@ -147,10 +147,10 @@ And import the <code>requests</code> module so I get the response from looking u
 <p>Lastly, I append the new dictionary to the <code>hourly</code> list.</p>
 <p>And walla! I have my list of dictionaries of weather info for each hour of the day.  Next step would be to display it in a useful way. Maybe a different color based on the windchill. According to that <a href="https://www.idph.state.ia.us/hcci/common/pdf/weatherwatch.pdf">chart</a>, a windchill above 32F is comfortable for outdoor play and thus can be presented in GREEN. YELLOW is for temps between 13F and 32F. Anything lower than that is RED. And I'd probably also provide the data in celsius.</p>
 <p>Done!</p>
-<h4>about the TIME FORMAT [time]</h4>
+<h2>about the TIME FORMAT [time]</h2>
 <p>TIME should either be a UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) or a string formatted as follows: <code>[YYYY]-[MM]-[DD]T[HH]:[MM]:[SS]</code> (with an optional time zone formatted as Z for GMT time or {+,-}[HH][MM] for an offset in minutes or seconds). For the latter format, if no timezone is present, local time (at the provided latitude and longitude) is assumed. (This string format is a subset of ISO 8601 time. An as example, <code>2013-05-06T12:00:00-0400</code>.)</p>
-<p><strong>--MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO--</strong>
-<a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p></div>
+<h2>MORE ABOUT THE PYTHON WRAPPER for FORECAST.IO</h2>
+<p><a href="https://github.com/ZeevG/python-forecast.io">https://github.com/ZeevG/python-forecast.io</a></p></div>
         <hr />
     </div>
 		
