@@ -1,53 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/style.css">
-	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
-	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="http://www.deekras.com/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
 
-	<link href="http://www.deekras.com/" type="application/atom+xml" rel="alternate" title="DeeKras.com ATOM Feed" />
+    <title>Finding Longitude & Latitude based on IP</title>
 
-
-		<title>DeeKras.com</title>
-		<meta charset="utf-8" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://www.deekras.com/theme/css/pygments.css" />	
+    <script src="http://www.deekras.com/theme/js/modernizr.js"></script>
 </head>
+
 <body>
-	<section id="sidebar">
-		<figure id="user_logo">
-            <a href="http://www.deekras.com"><div class="logo">&nbsp;</div></a>
-		</figure>
 
-		<div class="user_meta">
-            <h1 id="user"><a href="http://www.deekras.com" class="">Dee Kras</a></h1>
-			<h2></h2>
-			<ul>
-					<li><a href="http://getpelican.com/">Pelican</a></li>
-					<li><a href="http://python.org/">Python.org</a></li>
-					<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-					<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-		</div>
-		<footer>
-			<address>
-				Powered by <a href="http://pelican.notmyidea.org/">Pelican</a>,
-		                theme by <a href="https://github.com/wting/pelican-svbtle">wting</a>.
-			</address>
-		</footer>
-	</section>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://www.deekras.com">DeeKras.com</a></h1>
+    </div>
+</div>
+</div>
 
-	<section id="posts">
-	<header>
-		<h1>Dee Kras's blog</h1>
-		<h3>Posted Fri 12 December 2014</h3>
-	</header>
-	<article>
-		<h1 id="title">
-			<a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark"
-				title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a>
-		</h1>
-		<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html" rel="bookmark"
+        title="Permalink to Finding Longitude & Latitude based on IP">Finding Longitude & Latitude based on IP</a></h3>
+    </header>
+
+<h6 class="subheader" title="2014-12-12T00:00:00+00:00">Fri 12 December 2014
+</h6>
+
+
+    <h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
 <p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
 <p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server. <code>'/path/GeoLiteCity.dat'</code>.</p>
 <p>I also had to <code>pip install pygeoip</code>.</p>
@@ -68,19 +73,60 @@
 There are many other attributes you can use with this geoip data. Checkout more at: <a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html">http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html</a></p>
 <p><code>data</code> is a dictionary. And I called the <code>latitude</code> and <code>longitude</code> keys of <code>data</code> to find the values of <code>lat</code> and <code>lng</code>.</p>
 <p>With the <code>lat</code> and <code>lng</code>, I will be able to get the weather for those coordinates. Using <strong>forecast_io</strong>. More on that next time.</p>
+<p class="subheader">Category: <a href="http://www.deekras.com/category/misc.html">misc</a>
 
-		<div id="article_meta">
-				Category:
-					<a href="http://www.deekras.com/category/misc.html">misc</a>
-		</div>
-	</article>
-
-	<footer>
-		<a href="http://www.deekras.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
-	</footer>
+</p>
 
 
-	</section>
 
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/archives.html">Archives</a>
+            <li><a href="http://www.deekras.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://www.deekras.com/category/misc.html">misc</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+            <li><a href="#">You can modify those links in your config file</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="#">You can add links in your config file</a></li>
+            <li><a href="#">Another social link</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>DeeKras.com by Dee Kras</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
 </body>
 </html>
