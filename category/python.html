@@ -100,8 +100,11 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p>OK, so that makes it seem so simple. And it is - once you undertand how to write the decorator function.</p>
 <h3>Some pseudo code of the decorator function.</h3>
 <p><strong>The decorator function</strong> (outer function)</p>
-<p>1.define the decorator function  <code>def decorator(func):</code>
-    -  include the decorat<strong>ed</strong> function as the argument in the parentheses.</p>
+<p>1.define the decorator function  <code>def decorator(func):</code></p>
+<div class="highlight"><pre><span class="o">-</span>  <span class="nx">include</span> <span class="nx">the</span> <span class="nx">decorat</span><span class="o">**</span><span class="nx">ed</span><span class="o">**</span> <span class="kd">function</span> <span class="nx">as</span> <span class="nx">the</span> <span class="nx">argument</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">parentheses</span><span class="p">.</span>
+</pre></div>
+
+
 <p><strong>The wrapper function</strong> (inner function)</p>
 <p>2.define the wrapper function. This function is created on the fly; it wraps around the original function.</p>
 <ul>
