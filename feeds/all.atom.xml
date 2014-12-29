@@ -121,7 +121,7 @@ The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You can then call the wrapped functions &lt;/p&gt;
+&lt;p&gt;You can then call the wrapped functions:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;get_today&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;get_tomorrow&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;get_yesterday&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
