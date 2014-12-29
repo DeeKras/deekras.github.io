@@ -180,12 +180,11 @@ Then, the url that we'll use to find the time. Notice the curly braces <code>{}<
 </li>
 </ol>
 <p><code>@register
-def _atexit():</code>: <code>@register</code> is a decorator for the <code>_atexit()</code> function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.</p>
-<div class="highlight"><pre><span class="o">-</span> <span class="k">in</span> <span class="nx">way</span> <span class="nx">too</span> <span class="kr">short</span><span class="p">,</span> <span class="err">`</span><span class="nx">decorators</span><span class="err">`</span> <span class="nx">are</span> <span class="nx">a</span> <span class="kd">function</span> <span class="nx">that</span> <span class="nx">decorate</span><span class="p">,</span> <span class="nx">or</span> <span class="nx">wrap</span><span class="p">,</span>  <span class="nx">another</span> <span class="kd">function</span><span class="p">.</span> <span class="nx">The</span> <span class="nx">decorator</span> <span class="kd">function</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">defined</span> <span class="nx">first</span><span class="p">,</span> <span class="nx">before</span> <span class="nx">it</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">decorator</span><span class="p">.</span> <span class="nx">The</span> <span class="nx">inner</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">processed</span> <span class="nx">first</span><span class="p">,</span> <span class="nx">then</span> <span class="nx">the</span> <span class="nx">outer</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">decorator</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">run</span><span class="p">.</span> <span class="cp">[</span><span class="nx">Lots</span> <span class="nx">more</span> <span class="nx">about</span> <span class="nx">decorators</span><span class="cp">]</span><span class="p">(</span><span class="nx">http</span><span class="o">:</span><span class="c1">//www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/)</span>
-</pre></div>
-
-
-<p>So there, a very simple threading process.  Of course, there is much more to threading. Check out:
+def _atexit():</code>: <code>@register</code> is a decorator for the <code>_atexit()</code> function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.
+    - in way too short, <code>decorators</code> are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. <a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/">Lots more about decorators</a></p>
+<p>So there, a very simple threading process.  </p>
+<hr />
+<p>Of course, there is much more to threading. A very clear, easy to understand resource. <a href="http://pymotw.com/2/threading/">http://pymotw.com/2/threading/</a>
 http://pymotw.com/2/threading/</p></div>
 	
         <hr>
