@@ -31,10 +31,9 @@
 &lt;h3&gt;Some pseudo code of the decorator function.&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;The decorator function&lt;/strong&gt; (outer function)&lt;/p&gt;
 &lt;p&gt;1.define the decorator function  &lt;code&gt;def decorator(func):&lt;/code&gt;. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt;  &lt;span class="nx"&gt;include&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;decorat&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nx"&gt;ed&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;argument&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;parentheses&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;ul&gt;
+&lt;li&gt;include the decorat&lt;strong&gt;ed&lt;/strong&gt; function as the argument in the parentheses.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;The wrapper function&lt;/strong&gt; (inner function)&lt;/p&gt;
 &lt;p&gt;2.define the wrapper function. This function is created on the fly; it wraps around the original function.&lt;/p&gt;
 &lt;ul&gt;
