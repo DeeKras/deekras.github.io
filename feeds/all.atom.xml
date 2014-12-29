@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/all.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-15T00:00:00+00:00</updated><entry><title>Working with Decorators</title><link href="http://www.deekras.com/working-with-decorators.html" rel="alternate"></link><updated>2014-12-15T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-15:working-with-decorators.html</id><summary type="html">&lt;h2&gt;Decorators: a function within a function&lt;/h2&gt;
 &lt;p&gt;Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them &lt;strike&gt;easy&lt;/strike&gt; easier to understand.&lt;/p&gt;
-&lt;h3&gt;First, why are decorators so useful?&lt;/h3&gt;
+&lt;h3&gt;First, when might decorators be used?&lt;/h3&gt;
+&lt;p&gt;Decorators are used to extend a function. To give it more functionality. You might want to time how long a function takes. Or, you might want to print a message to the user. Or, you might want to log some data about the function. &lt;/p&gt;
+&lt;p&gt;Sometimes, you get a function that cannot be changed for whatever reason. Maybe you are geting from a library or another module. You can use a decorator to extend the function. Maybe you want to change the formatting. Or something else.&lt;/p&gt;
+&lt;p&gt;Or, you don't want to change the original function, but you do want to extend it temporarily. You might do this when debugging. &lt;/p&gt;
+&lt;p&gt;Also, decorators are used in Flask.&lt;/p&gt;
+&lt;h3&gt;So, in very short, what are decorators?&lt;/h3&gt;
+&lt;p&gt;Say, you have a function that returns a date. But you want the date in a different format.  You can call that date function and then call another function to format the date that you just got.  Or you can extend the original date function - by wrapping it with a decorator function. The decorator builds on the original function.  &lt;/p&gt;
 &lt;h3&gt;What's happening under the hood of decorators?&lt;/h3&gt;
+&lt;p&gt;In very short, the decorator function (the outer function) is called. It seeks the original function (the one it is wrapping, the inner function) and the original function is run. Then, the decorator (outer) function is run on the return of the original (inner) function.&lt;/p&gt;
+&lt;p&gt;It is just like saying: 
+&lt;code&gt;original_func = outer_func(original_func)&lt;/code&gt;. Functions can call other functions. In other words, the outer function is being run on the return of the original / inner function.&lt;/p&gt;
+&lt;p&gt;That might not have explained it all, but after this whole blog and you see examples, it might make more sense. I'll attempt to break it down - dot by dot, so all dots are connected.  So hopefully all will be clear.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;OK, with that intro...&lt;/p&gt;
 &lt;h3&gt;Now for the pseudo code:&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -16,7 +28,6 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;OK, so that makes it seem so simple. And it is - once you undertand how to write the decorator function.&lt;/p&gt;
-&lt;p&gt;I'll attempt to break it down - dot by dot, so all dots are connected.  So hopefully all will be clear.&lt;/p&gt;
 &lt;h3&gt;Some pseudo code of the decorator function.&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;The decorator function&lt;/strong&gt; (outer function)&lt;/p&gt;
 &lt;p&gt;1.define the decorator function  &lt;code&gt;def decorator(func):&lt;/code&gt;&lt;/p&gt;
@@ -25,13 +36,12 @@
 
 
 &lt;p&gt;&lt;strong&gt;The wrapper function&lt;/strong&gt; (inner function)&lt;/p&gt;
-&lt;p&gt;2.define the wrapper function. # need to define this wrapper function &lt;code&gt;def wrapper()&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;-  usually doesn&amp;#39;t have any arguments
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;2.define the wrapper function. This function is created on the fly; it wraps around the original function.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This can also have args that will be used in the wrapper function. These are pulled from the arguments of the 'decorated function'. For another discussion.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;3.&lt;em&gt;(optional)&lt;/em&gt; some code - of the wrapper function&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;-  this can be any code. Maybe, print a message, collect a start time.  Or you may not have any code here at all.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt;  &lt;span class="k"&gt;this&lt;/span&gt; &lt;span class="nx"&gt;can&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;any&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="nx"&gt;to&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;done&lt;/span&gt; &lt;span class="nx"&gt;BEFORE&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nx"&gt;Maybe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;print&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;collect&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;start&lt;/span&gt; &lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="nx"&gt;Or&lt;/span&gt; &lt;span class="nx"&gt;you&lt;/span&gt; &lt;span class="nx"&gt;may&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="nx"&gt;have&lt;/span&gt; &lt;span class="nx"&gt;any&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="nx"&gt;here&lt;/span&gt; &lt;span class="nx"&gt;at&lt;/span&gt; &lt;span class="nx"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -39,7 +49,7 @@
     -  it can be called on its own. ex: &lt;code&gt;func()&lt;/code&gt;
     -  or called as part of a statement.  ex: &lt;code&gt;return '&amp;lt;em&amp;gt;{}&amp;lt;/em&amp;gt;'.format(func())&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;5.&lt;em&gt;(optional)&lt;/em&gt; some code - of the wrapper function&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;-  this can be any code. Maybe, print a message, collect an end time.  Or you may not have any code here at all.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt;  &lt;span class="k"&gt;this&lt;/span&gt; &lt;span class="nx"&gt;can&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;any&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="nx"&gt;to&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;done&lt;/span&gt; &lt;span class="nx"&gt;AFTER&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nx"&gt;Maybe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;print&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;collect&lt;/span&gt; &lt;span class="nx"&gt;an&lt;/span&gt; &lt;span class="nx"&gt;end&lt;/span&gt; &lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;  &lt;span class="nx"&gt;Or&lt;/span&gt; &lt;span class="nx"&gt;you&lt;/span&gt; &lt;span class="nx"&gt;may&lt;/span&gt; &lt;span class="nx"&gt;not&lt;/span&gt; &lt;span class="nx"&gt;have&lt;/span&gt; &lt;span class="nx"&gt;any&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="nx"&gt;here&lt;/span&gt; &lt;span class="nx"&gt;at&lt;/span&gt; &lt;span class="nx"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -50,20 +60,24 @@
 &lt;p&gt;This decorator will format any date in the YYYY_MM_DD format. (It uses &lt;code&gt;.format&lt;/code&gt; and &lt;code&gt;strftime&lt;/code&gt; directives.  &lt;a href="http://strftime.org/"&gt;See more about strftime directives&lt;/a&gt; )&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pretty_date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{0:%Y}_{0:%m}_{0:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt;}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;getting the date from function: {}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;got the date: {} (before it was formatted)&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{0:%Y}_{0:%m}_{0:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s"&gt;}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;1.&lt;code&gt;def pretty_date(func):&lt;/code&gt; : we define the function and include the &lt;code&gt;func&lt;/code&gt; as the argument.&lt;/p&gt;
 &lt;p&gt;2.&lt;code&gt;def wrapper():&lt;/code&gt; : this is a function within a function, thus indented.&lt;/p&gt;
-&lt;p&gt;3.We could have had some code here.  But we didn't need to.&lt;/p&gt;
-&lt;p&gt;4.&lt;code&gt;return '{0:%Y}_{0:%m}_{0:%d}'.format(func())&lt;/code&gt; : this line returns the &lt;code&gt;func&lt;/code&gt;; in this case, in a specific format.&lt;/p&gt;
-&lt;p&gt;5.And we could have had some code here.  But we didn't need any.&lt;/p&gt;
-&lt;p&gt;6.Here we might have had the return. But we combined the call to the &lt;code&gt;func&lt;/code&gt; and the &lt;code&gt;return&lt;/code&gt; in the same line of code - above in 4.&lt;/p&gt;
+&lt;p&gt;3.&lt;code&gt;print 'getting the date from function: {}'.format(func.__name__)&lt;/code&gt; : We don't really need to put code before the function. This is just to show.
+    - &lt;code&gt;func.__name__&lt;/code&gt; gives the name of &lt;code&gt;func&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;4.&lt;code&gt;date = func()&lt;/code&gt; : calls the function and assigns it to &lt;code&gt;date&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;5.&lt;code&gt;print 'got the date: {} (before it was formatted)'.format(date)&lt;/code&gt;. We don't really need to put code after the function. This is just to show.&lt;/p&gt;
+&lt;p&gt;6.&lt;code&gt;return '{0:%Y}_{0:%m}_{0:%d}'.format(date)&lt;/code&gt; : Here's the return for the inner/ wrapper function.   ---Really, we could have put this line in for line 4. But then, we couldn't have the code to do AFTER the function. (You can't have anything after the &lt;code&gt;return&lt;/code&gt;.)&lt;/p&gt;
 &lt;p&gt;7.&lt;code&gt;return wrapper&lt;/code&gt; : returns what the wrapper returned.&lt;/p&gt;
 &lt;p&gt;Whew! So, the decorator function has been created. That's the hard part.  Now just have to create the functions that will be decorated (or wrapped) with the decorator.&lt;/p&gt;
-&lt;p&gt;In this case, we will create 3 separate functions - &lt;code&gt;get_today()&lt;/code&gt;, &lt;code&gt;get_tomorrrow()&lt;/code&gt;, &lt;code&gt;get_yesterday()&lt;/code&gt; to show how the same decorator can be used for several functions.  For more about working with dates and datetime and datedelta, &lt;a href="http://pymotw.com/2/datetime/"&gt;check out pymotw&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this case, we will create 3 separate functions - &lt;code&gt;get_today()&lt;/code&gt;, &lt;code&gt;get_tomorrrow()&lt;/code&gt;, &lt;code&gt;get_yesterday()&lt;/code&gt; to show how the same decorator can be used for several functions. (For more about working with dates and datetime and datedelta, &lt;a href="http://pymotw.com/2/datetime/"&gt;check out pymotw&lt;/a&gt;.)&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_today&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -86,7 +100,7 @@
 
 &lt;p&gt;Remember, the &lt;code&gt;pretty_date&lt;/code&gt; decorator will 'prettify' the date in the format we specified.
 The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return &lt;code&gt;get_today()&lt;/code&gt; function and run the &lt;code&gt;wrapper&lt;/code&gt; function on it. And return the 'prettified' date.&lt;/p&gt;
-&lt;p&gt;Here goes the decorated functions.  Instead of the above functions stnading on their own, we wrap them in the &lt;code&gt;pretty_date&lt;/code&gt; decorator.   Notice the &lt;code&gt;@&lt;/code&gt; before the decorator &lt;code&gt;pretty_date&lt;/code&gt;. Like so:&lt;/p&gt;
+&lt;p&gt;Here goes the decorated functions.  Instead of the above functions standing on their own, we wrap them in the &lt;code&gt;pretty_date&lt;/code&gt; decorator.   Notice the &lt;code&gt;@&lt;/code&gt; before the decorator &lt;code&gt;pretty_date&lt;/code&gt;. Like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt;
 
 &lt;span class="nd"&gt;@pretty_date&lt;/span&gt;
@@ -112,22 +126,23 @@ The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return
 
 
 &lt;p&gt;And that's decorators. In short.&lt;/p&gt;
+&lt;p&gt;Oh, and a caveat: Those functions that are now wrapped - are always wrapped. That means that &lt;code&gt;get_today()&lt;/code&gt; can't be used to call for the full date &lt;code&gt;2014-12-15 15:47:28.199614&lt;/code&gt;. Whenever, we call &lt;code&gt;get_today()&lt;/code&gt;, it will return &lt;code&gt;2014_12_15&lt;/code&gt;. You will have to create another function to get the unformatted date. &lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;But that's not all. You can have several decorators wrap a function.&lt;/p&gt;
 &lt;p&gt;Here, we'll define a few more decorators.  These create html tags around the string.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;html_strong&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;lt;strong&amp;gt;{}&amp;lt;/strong&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;html_em&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;html_em&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;lt;em&amp;gt;{}&amp;lt;/em&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;html_strong&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&amp;lt;strong&amp;gt;{}&amp;lt;/strong&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;And here's how we wrap the function with these wrappers too. The order matters!&lt;/p&gt;
+&lt;p&gt;And here's how we wrap the function with these wrappers too. &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@html_em&lt;/span&gt;
 &lt;span class="nd"&gt;@html_strong&lt;/span&gt;
 &lt;span class="nd"&gt;@pretty_date&lt;/span&gt;
@@ -136,9 +151,23 @@ The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;The order matters!  It goes from top to bottom.  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;First, it  will do &lt;code&gt;html_em&lt;/code&gt; - the &lt;code&gt;func&lt;/code&gt; in &lt;code&gt;format(func())&lt;/code&gt; of that function will call &lt;code&gt;html_strong&lt;/code&gt; and wait for the &lt;code&gt;return&lt;/code&gt; from that call to do its job of adding the &lt;code&gt;&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;&lt;/code&gt;.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;func&lt;/code&gt; of the &lt;code&gt;html_strong&lt;/code&gt;'s &lt;code&gt;format(func())&lt;/code&gt; will call the &lt;code&gt;get_today()&lt;/code&gt; function.  And wait for the &lt;code&gt;return&lt;/code&gt; to do its job of adding the &lt;strong&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So in essence, the first thing that is being returned is the &lt;code&gt;datetime.datetime.today()&lt;/code&gt;, then it is returning the &lt;code&gt;&amp;lt;strong&amp;gt;&amp;lt;/strong&amp;gt;&lt;/code&gt; and last it is returning the &lt;code&gt;&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The results:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;em&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;2014_12_15&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&amp;lt;/em&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Working with Threads</title><link href="http://www.deekras.com/working-with-threads.html" rel="alternate"></link><updated>2014-12-14T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-14:working-with-threads.html</id><summary type="html">&lt;h4&gt;Working with Threads&lt;/h4&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;for much more on decorators&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python"&gt;from stackoverflow - check out the answer 'Decorator Basics'&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Working with Threads</title><link href="http://www.deekras.com/working-with-threads.html" rel="alternate"></link><updated>2014-12-14T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-14:working-with-threads.html</id><summary type="html">&lt;h4&gt;Working with Threads&lt;/h4&gt;
 &lt;p&gt;I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me. So I share - in case it makes learning about threads easier for someone.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;First, a scenario where threading can be useful:&lt;/strong&gt; You're using one of those websites that check several airlines for best fares.  Finally the trip to Barcelona!  It would take a long time to search each airline separately.  It woud be so much faster if the computer would search several airlines concurrently.  Thankfully, that is what they do - saving us much time.&lt;/p&gt;
 &lt;p&gt;That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done. And then you can choose the best flight to Barcelona.&lt;/p&gt;
