@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-14T00:00:00+00:00</updated><entry><title>Working with Threads</title><link href="http://www.deekras.com/working-with-threads.html" rel="alternate"></link><updated>2014-12-14T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-14:working-with-threads.html</id><summary type="html">&lt;h4&gt;Working with Threads&lt;/h4&gt;
-&lt;p&gt;I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would ahve worked for me. So I share - in case it makes learning about threads easier for someone.&lt;/p&gt;
+&lt;p&gt;I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me. So I share - in case it makes learning about threads easier for someone.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;First, a scenario where threading can be useful:&lt;/strong&gt; You're using one of those websites that check several airlines for best fares.  Finally the trip to Barcelona!  It would take a long time to search each airline separately.  It woud be so much faster if the computer would search several airlines concurrently.  Thankfully, that is what they do - saving us much time.&lt;/p&gt;
-&lt;p&gt;That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done.&lt;/p&gt;
-&lt;p&gt;So that's what threading does. Sure, that's oversimplified.  OK, I'm not sure how those flight aggregator programs really work, but that is a scenario where we'd see the benefits of threads.&lt;/p&gt;
+&lt;p&gt;That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done. And then you can choose the best flight to Barcelona.&lt;/p&gt;
+&lt;p&gt;So that's what threading does. Sure, that's oversimplified.  And, I'm not sure how those flight aggregator programs really work, but that is a scenario where we'd see the benefits of threads.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;What's happening under the hood of threads?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;First some basic things to know:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Threads have a beginning, the execution and an end.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;locks&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)&lt;/li&gt;
+&lt;li&gt;Threads have a beginning, the execution and an end.&lt;/li&gt;
+&lt;li&gt;locks. &lt;em&gt;Gotto add more here.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;And here's how it all works - the pseudo code.&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -26,14 +20,14 @@
 &lt;p&gt;So in the case of the search for &lt;strike&gt; best tickets to Barcelona&lt;/strike&gt;. Nah, that would be too much code; here is a much simpler scenario. Trying to find the local time in several places in the world. (Of course, there is no real need to thread for these queries, since they are super quick. But this will give an idea about how threading works.)&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Get the search query - what places we are looking for (country, city)&lt;/p&gt;
+&lt;p&gt;Get the search query - what places we are looking for.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;these are hardcoded in a dictionary called &lt;code&gt;places&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;we'll use &lt;code&gt;www.timeapi.org&lt;/code&gt; to find the local time for those places.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create a thread instance for each airline&lt;/p&gt;
+&lt;p&gt;Create a thread instance for each place&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;in a &lt;code&gt;for loop&lt;/code&gt;, we will create a thread for each query.&lt;/li&gt;
 &lt;/ul&gt;
@@ -57,7 +51,7 @@
             &lt;span class="s"&gt;&amp;#39;Moscow&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;msk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
             &lt;span class="s"&gt;&amp;#39;Kuwait&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="s"&gt;&amp;#39;ast&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
             &lt;span class="s"&gt;&amp;#39;New York&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;est&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s"&gt;&amp;#39;Copenhagen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;cet&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;#39;Copenhagen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;cet&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;  &lt;span class="c"&gt;#place: time_zone code&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_display_time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;time_zone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;places&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -82,16 +76,18 @@
 
 &lt;p&gt;First the imports.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;url_lookup = 'http://www.timeapi.org/{}/now'&lt;/code&gt;:
-Then, the url that we'll use to find the time. Notice the curly braces &lt;code&gt;{}&lt;/code&gt;. We'll use that later to insert the time_zone.&lt;/p&gt;
+Then, the url that we'll use to find the time. Notice the curly braces &lt;code&gt;{}&lt;/code&gt;. We'll use that later to insert the time_zone., with &lt;code&gt;.format&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;places&lt;/code&gt;: This is a dictionary of places and time zones codes (as this API likes it). &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;def _display_time(place):&lt;/code&gt;  This function 
-1. gets the time zone (the value of the key &lt;code&gt;place&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;def _display_time(place):&lt;/code&gt;  This function&lt;/p&gt;
 &lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;gets the time zone (the value of the key &lt;code&gt;place&lt;/code&gt;).&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;gets the current time - using the url with the time_zone inserted&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;uses the &lt;code&gt;requests&lt;/code&gt; method. And gets the &lt;code&gt;.content&lt;/code&gt; of the response of the &lt;code&gt;request.get&lt;/code&gt;. See more about &lt;code&gt;requests&lt;/code&gt; in my &lt;a href="http://www.deekras.com/using-a-weather-api-forecastio.html#requests"&gt;previous post&lt;/a&gt; and in the &lt;a href="http://docs.python-requests.org/en/latest/"&gt;docs&lt;/a&gt;.*&lt;/li&gt;
-&lt;li&gt;uses the &lt;code&gt;.format&lt;/code&gt; method to insert the string data. Read more about &lt;a href="https://docs.python.org/2/library/string.html#formatstrings"&gt;&lt;code&gt;.format&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;uses the &lt;code&gt;requests&lt;/code&gt; method. Sends a 'GET' request to the url; the response will be the &lt;code&gt;.content&lt;/code&gt; of the &lt;code&gt;requests.get&lt;/code&gt;. See more about &lt;code&gt;requests&lt;/code&gt; in my &lt;a href="http://www.deekras.com/using-a-weather-api-forecastio.html#requests"&gt;previous post&lt;/a&gt; and in the &lt;a href="http://docs.python-requests.org/en/latest/"&gt;docs&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;uses the &lt;code&gt;.format&lt;/code&gt; method to insert the string data. &lt;a href="https://docs.python.org/2/library/string.html#formatstrings"&gt;Read more about &lt;code&gt;.format&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -104,26 +100,31 @@ Then, the url that we'll use to find the time. Notice the curly braces &lt;code&
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;code&gt;def main():&lt;/code&gt;  This is where the threading happens!
-1. print the current time. Just to see how long the process takes.  To compare to the time we print at the very end of this whole script.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;def main():&lt;/code&gt;  This is where the threading happens!&lt;/p&gt;
 &lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;print the current time. Just to see how long the process takes.  To compare to the time we print at the very end of this whole script.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;a &lt;code&gt;for loop&lt;/code&gt; for each &lt;code&gt;place&lt;/code&gt; in the &lt;code&gt;places&lt;/code&gt; dictionary.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;threading.Thread(target=_display_time, args=(place,)).start()&lt;/code&gt;: - OK, a lot going on here. This is where all the threading happens.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;threading.Thread(target=_display_time, args=(place,)).start()&lt;/code&gt;: OK, a lot going on here. This is where all the threading happens.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;threading.Thread&lt;/code&gt;: A &lt;code&gt;Thread&lt;/code&gt; is an object that represents a single thread for execution.  We're in a loop here, So we'll be creating several instances of Thread.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;Thread&lt;/code&gt; class has these arguments &lt;code&gt;threading.Thread(group=None, target=None, name=None, args=(), kwargs={})&lt;/code&gt; &lt;a href="https://docs.python.org/2/library/threading.html#thread-objects"&gt;see more at&lt;/a&gt;  We don't need all those in our case.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threading.Thread&lt;/code&gt;: A &lt;code&gt;Thread&lt;/code&gt; is an object that represents a single thread for execution.  We're in a loop here, so we'll be creating several instances of Thread.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;Thread&lt;/code&gt; class has these arguments &lt;code&gt;threading.Thread(group=None, target=None, name=None, args=(), kwargs={})&lt;/code&gt;  We don't need all those in our case. &lt;a href="https://docs.python.org/2/library/threading.html#thread-objects"&gt;see more about Thread&lt;/a&gt; &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;target=_display_time&lt;/code&gt;: the target is the function that will be called (&lt;code&gt;run&lt;/code&gt;) when the Thread is created.  In this case it is the &lt;code&gt;_display_time&lt;/code&gt; function.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;args=(place,)&lt;/code&gt;: these are the args for the &lt;code&gt;target&lt;/code&gt;. In this case, the &lt;code&gt;place&lt;/code&gt; parameter for the &lt;code&gt;_display_time&lt;/code&gt; function.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.start()&lt;/code&gt;: gets the thread started. The &lt;code&gt;start&lt;/code&gt; is what actually gets the &lt;code&gt;target&lt;/code&gt; function started.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.start()&lt;/code&gt;: gets the thread started. The &lt;code&gt;start&lt;/code&gt; is what actually gets the &lt;code&gt;target&lt;/code&gt;/ _display_time function started.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;code&gt;@register
-def _atexit():&lt;/code&gt;: &lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.
-    - in way too short, &lt;code&gt;decorators&lt;/code&gt; are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/p&gt;
+def _atexit():&lt;/code&gt;: &lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;way&lt;/span&gt; &lt;span class="nx"&gt;too&lt;/span&gt; &lt;span class="kr"&gt;short&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="nx"&gt;decorators&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt; &lt;span class="nx"&gt;are&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;that&lt;/span&gt; &lt;span class="nx"&gt;decorate&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;or&lt;/span&gt; &lt;span class="nx"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="nx"&gt;another&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;decorator&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;must&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;defined&lt;/span&gt; &lt;span class="nx"&gt;first&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;before&lt;/span&gt; &lt;span class="nx"&gt;it&lt;/span&gt; &lt;span class="nx"&gt;can&lt;/span&gt; &lt;span class="nx"&gt;be&lt;/span&gt; &lt;span class="nx"&gt;used&lt;/span&gt; &lt;span class="nx"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;inner&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;processed&lt;/span&gt; &lt;span class="nx"&gt;first&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;then&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;outer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;decorator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;Lots&lt;/span&gt; &lt;span class="nx"&gt;more&lt;/span&gt; &lt;span class="nx"&gt;about&lt;/span&gt; &lt;span class="nx"&gt;decorators&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;So there, a very simple threading process.  Of course, there is much more to threading. Check out:
 http://pymotw.com/2/threading/&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
 &lt;p&gt;Moving along in discussing some of features of the little application I wrote.  &lt;/p&gt;
