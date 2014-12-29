@@ -155,9 +155,47 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 Then, the url that we'll use to find the time. Notice the curly braces <code>{}</code>. We'll use that later to insert the time_zone.</p>
 <p><code>places</code>: This is a dictionary of places and time zones codes (as this API likes it). </p>
 <p><code>def _display_time(place):</code>  This function 
-1. gets the time zone (the value of the key <code>place</code>).
-2. gets the current time - using the url with the time_zone inserted
-    - uses the requests method. See more about <code>requests</code> in my ]previous post] and in the [docs]   (http://docs.python-requests.org/en/latest/).*</p></div>
+1. gets the time zone (the value of the key <code>place</code>).</p>
+<ol>
+<li>
+<p>gets the current time - using the url with the time_zone inserted</p>
+<ul>
+<li>uses the <code>requests</code> method. And gets the <code>.content</code> of the response of the <code>request.get</code>. See more about <code>requests</code> in my <a href="http://www.deekras.com/using-a-weather-api-forecastio.html#requests">previous post</a> and in the <a href="http://docs.python-requests.org/en/latest/">docs</a>.*</li>
+<li>uses the <code>.format</code> method to insert the string data. Read more about <a href="https://docs.python.org/2/library/string.html#formatstrings"><code>.format</code></a></li>
+</ul>
+</li>
+<li>
+<p>prints/ displays the <code>place</code> and <code>current_time</code>. </p>
+<ul>
+<li><code>{:&gt;10}</code> is the formatting - right aligned - 10 width.</li>
+<li><code>{:&lt;15}</code> - left aligned - 15 width</li>
+<li>Read more about formatting with <a href="https://docs.python.org/2/library/string.html#formatstrings"><code>.format</code></a></li>
+<li><code>current_time[11:19]</code> - the time comes back as a long string <code>2014-12-14T01:47:46+00:00</code>. I just sliced it to get the data I need. More about <a href="https://docs.python.org/2/tutorial/introduction.html#strings">slicing</a></li>
+</ul>
+</li>
+</ol>
+<p><code>def main():</code>  This is where the threading happens!
+1. print the current time. Just to see how long the process takes.  To compare to the time we print at the very end of this whole script.</p>
+<ol>
+<li>
+<p>a <code>for loop</code> for each <code>place</code> in the <code>places</code> dictionary.</p>
+</li>
+<li>
+<p><code>threading.Thread(target=_display_time, args=(place,)).start()</code>: - OK, a lot going on here. This is where all the threading happens.</p>
+<ul>
+<li><code>threading.Thread</code>: A <code>Thread</code> is an object that represents a single thread for execution.  We're in a loop here, So we'll be creating several instances of Thread.</li>
+<li>The <code>Thread</code> class has these arguments <code>threading.Thread(group=None, target=None, name=None, args=(), kwargs={})</code> <a href="https://docs.python.org/2/library/threading.html#thread-objects">see more at</a>  We don't need all those in our case.</li>
+<li><code>target=_display_time</code>: the target is the function that will be called (<code>run</code>) when the Thread is created.  In this case it is the <code>_display_time</code> function.</li>
+<li><code>args=(place,)</code>: these are the args for the <code>target</code>. In this case, the <code>place</code> parameter for the <code>_display_time</code> function.</li>
+<li><code>.start()</code>: gets the thread started. The <code>start</code> is what actually gets the <code>target</code> function started.</li>
+</ul>
+</li>
+</ol>
+<p><code>@register
+def _atexit():</code>: <code>@register</code> is a decorator for the <code>_atexit()</code> function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.
+    - in way too short, <code>decorators</code> are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. <a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/">Lots more about decorators</a></p>
+<p>So there, a very simple threading process.  Of course, there is much more to threading. Check out:
+http://pymotw.com/2/threading/</p></div>
         <hr />
     </div>
 		

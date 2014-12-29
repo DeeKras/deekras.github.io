@@ -85,9 +85,47 @@
 Then, the url that we'll use to find the time. Notice the curly braces &lt;code&gt;{}&lt;/code&gt;. We'll use that later to insert the time_zone.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;places&lt;/code&gt;: This is a dictionary of places and time zones codes (as this API likes it). &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;def _display_time(place):&lt;/code&gt;  This function 
-1. gets the time zone (the value of the key &lt;code&gt;place&lt;/code&gt;).
-2. gets the current time - using the url with the time_zone inserted
-    - uses the requests method. See more about &lt;code&gt;requests&lt;/code&gt; in my ]previous post] and in the [docs]   (http://docs.python-requests.org/en/latest/).*&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
+1. gets the time zone (the value of the key &lt;code&gt;place&lt;/code&gt;).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;gets the current time - using the url with the time_zone inserted&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;uses the &lt;code&gt;requests&lt;/code&gt; method. And gets the &lt;code&gt;.content&lt;/code&gt; of the response of the &lt;code&gt;request.get&lt;/code&gt;. See more about &lt;code&gt;requests&lt;/code&gt; in my &lt;a href="http://www.deekras.com/using-a-weather-api-forecastio.html#requests"&gt;previous post&lt;/a&gt; and in the &lt;a href="http://docs.python-requests.org/en/latest/"&gt;docs&lt;/a&gt;.*&lt;/li&gt;
+&lt;li&gt;uses the &lt;code&gt;.format&lt;/code&gt; method to insert the string data. Read more about &lt;a href="https://docs.python.org/2/library/string.html#formatstrings"&gt;&lt;code&gt;.format&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;prints/ displays the &lt;code&gt;place&lt;/code&gt; and &lt;code&gt;current_time&lt;/code&gt;. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;{:&amp;gt;10}&lt;/code&gt; is the formatting - right aligned - 10 width.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{:&amp;lt;15}&lt;/code&gt; - left aligned - 15 width&lt;/li&gt;
+&lt;li&gt;Read more about formatting with &lt;a href="https://docs.python.org/2/library/string.html#formatstrings"&gt;&lt;code&gt;.format&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;current_time[11:19]&lt;/code&gt; - the time comes back as a long string &lt;code&gt;2014-12-14T01:47:46+00:00&lt;/code&gt;. I just sliced it to get the data I need. More about &lt;a href="https://docs.python.org/2/tutorial/introduction.html#strings"&gt;slicing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;def main():&lt;/code&gt;  This is where the threading happens!
+1. print the current time. Just to see how long the process takes.  To compare to the time we print at the very end of this whole script.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;a &lt;code&gt;for loop&lt;/code&gt; for each &lt;code&gt;place&lt;/code&gt; in the &lt;code&gt;places&lt;/code&gt; dictionary.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;threading.Thread(target=_display_time, args=(place,)).start()&lt;/code&gt;: - OK, a lot going on here. This is where all the threading happens.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;threading.Thread&lt;/code&gt;: A &lt;code&gt;Thread&lt;/code&gt; is an object that represents a single thread for execution.  We're in a loop here, So we'll be creating several instances of Thread.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;Thread&lt;/code&gt; class has these arguments &lt;code&gt;threading.Thread(group=None, target=None, name=None, args=(), kwargs={})&lt;/code&gt; &lt;a href="https://docs.python.org/2/library/threading.html#thread-objects"&gt;see more at&lt;/a&gt;  We don't need all those in our case.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;target=_display_time&lt;/code&gt;: the target is the function that will be called (&lt;code&gt;run&lt;/code&gt;) when the Thread is created.  In this case it is the &lt;code&gt;_display_time&lt;/code&gt; function.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;args=(place,)&lt;/code&gt;: these are the args for the &lt;code&gt;target&lt;/code&gt;. In this case, the &lt;code&gt;place&lt;/code&gt; parameter for the &lt;code&gt;_display_time&lt;/code&gt; function.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.start()&lt;/code&gt;: gets the thread started. The &lt;code&gt;start&lt;/code&gt; is what actually gets the &lt;code&gt;target&lt;/code&gt; function started.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;@register
+def _atexit():&lt;/code&gt;: &lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.
+    - in way too short, &lt;code&gt;decorators&lt;/code&gt; are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So there, a very simple threading process.  Of course, there is much more to threading. Check out:
+http://pymotw.com/2/threading/&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
 &lt;p&gt;Moving along in discussing some of features of the little application I wrote.  &lt;/p&gt;
 &lt;p&gt;I already &lt;a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"&gt;got the IP&lt;/a&gt; and then &lt;a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"&gt;found the longitude and latitude coordinates based on that IP&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is &lt;a href="https://developer.forecast.io/"&gt;&lt;strong&gt;forecast.io&lt;/strong&gt;&lt;/a&gt;. And it gave me the opportunity to work with json files.&lt;/p&gt;
