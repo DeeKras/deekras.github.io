@@ -5,18 +5,14 @@
 &lt;p&gt;That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done. And then you can choose the best flight to Barcelona.&lt;/p&gt;
 &lt;p&gt;So that's what threading does. Sure, that's oversimplified.  And, I'm not sure how those flight aggregator programs really work, but that is a scenario where we'd see the benefits of threads.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;What's happening under the hood of threads?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;First some basic things to know:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)&lt;/li&gt;
-&lt;li&gt;Threads have a beginning, the execution and an end.&lt;/li&gt;
-&lt;li&gt;locks. &lt;em&gt;Gotto add more here.&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;And here's how it all works - the pseudo code.&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;create the thread instances&lt;/li&gt;
-&lt;li&gt;execute the code&lt;/li&gt;
-&lt;li&gt;exit the thread and do whatever &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;First some basic things to know:
+- Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)
+- Threads have a beginning, the execution and an end.
+- locks. &lt;em&gt;Gotto add more here.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;And here's how it all works - the pseudo code.&lt;/strong&gt;
+ 1. create the thread instances
+ 2. execute the code
+ 3. exit the thread and do whatever &lt;/p&gt;
 &lt;p&gt;So in the case of the search for &lt;strike&gt; best tickets to Barcelona&lt;/strike&gt;. Nah, that would be too much code; here is a much simpler scenario. Trying to find the local time in several places in the world. (Of course, there is no real need to thread for these queries, since they are super quick. But this will give an idea about how threading works.)&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;

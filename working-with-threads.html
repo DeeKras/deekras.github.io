@@ -69,18 +69,14 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p>That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done. And then you can choose the best flight to Barcelona.</p>
 <p>So that's what threading does. Sure, that's oversimplified.  And, I'm not sure how those flight aggregator programs really work, but that is a scenario where we'd see the benefits of threads.</p>
 <p><strong>What's happening under the hood of threads?</strong></p>
-<p>First some basic things to know:</p>
-<ul>
-<li>Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)</li>
-<li>Threads have a beginning, the execution and an end.</li>
-<li>locks. <em>Gotto add more here.</em></li>
-</ul>
-<p><strong>And here's how it all works - the pseudo code.</strong></p>
-<ol>
-<li>create the thread instances</li>
-<li>execute the code</li>
-<li>exit the thread and do whatever </li>
-</ol>
+<p>First some basic things to know:
+- Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)
+- Threads have a beginning, the execution and an end.
+- locks. <em>Gotto add more here.</em></p>
+<p><strong>And here's how it all works - the pseudo code.</strong>
+ 1. create the thread instances
+ 2. execute the code
+ 3. exit the thread and do whatever </p>
 <p>So in the case of the search for <strike> best tickets to Barcelona</strike>. Nah, that would be too much code; here is a much simpler scenario. Trying to find the local time in several places in the world. (Of course, there is no real need to thread for these queries, since they are super quick. But this will give an idea about how threading works.)</p>
 <ol>
 <li>
