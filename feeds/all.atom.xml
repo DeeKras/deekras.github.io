@@ -115,19 +115,13 @@ Then, the url that we'll use to find the time. Notice the curly braces &lt;code&
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;@register
-def _atexit():
-&lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;&lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;in way too short, &lt;code&gt;decorators&lt;/code&gt; are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;in way too short, &lt;code&gt;decorators&lt;/code&gt; #need more about decorators &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So there, a very simple threading process.  &lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;Of course, there is much more to threading. A very clear, easy to understand resource. &lt;a href="http://pymotw.com/2/threading/"&gt;http://pymotw.com/2/threading/&lt;/a&gt;
-http://pymotw.com/2/threading/&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
+&lt;p&gt;Of course, there is much more to threading. A very clear, easy to understand resource. &lt;a href="http://pymotw.com/2/threading/"&gt;http://pymotw.com/2/threading/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
 &lt;p&gt;Moving along in discussing some of features of the little application I wrote.  &lt;/p&gt;
 &lt;p&gt;I already &lt;a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"&gt;got the IP&lt;/a&gt; and then &lt;a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"&gt;found the longitude and latitude coordinates based on that IP&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is &lt;a href="https://developer.forecast.io/"&gt;&lt;strong&gt;forecast.io&lt;/strong&gt;&lt;/a&gt;. And it gave me the opportunity to work with json files.&lt;/p&gt;
