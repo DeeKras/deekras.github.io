@@ -3,25 +3,25 @@
 &lt;p&gt;Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them &lt;strike&gt;easy&lt;/strike&gt; easier to understand.&lt;/p&gt;
 &lt;h3&gt;First, when might decorators be used?&lt;/h3&gt;
 &lt;p&gt;Decorators are used to extend a function. To give it more functionality. You might want to time how long a function takes. Or, you might want to print a message to the user. Or, you might want to log some data about the function. &lt;/p&gt;
-&lt;p&gt;Sometimes, you get a function that cannot be changed for whatever reason. Maybe you are geting from a library or another module. You can use a decorator to extend the function. Maybe you want to change the formatting. Or something else.&lt;/p&gt;
+&lt;p&gt;Sometimes, you need to use a function that cannot be changed for whatever reason. Maybe you are getting from a library or another module. You can use a decorator to extend the function. Maybe you want to change the formatting. Or something else.&lt;/p&gt;
 &lt;p&gt;Or, you don't want to change the original function, but you do want to extend it temporarily. You might do this when debugging. &lt;/p&gt;
 &lt;p&gt;Also, decorators are used in Flask.&lt;/p&gt;
 &lt;h3&gt;So, in very short, what are decorators?&lt;/h3&gt;
-&lt;p&gt;Say, you have a function that returns a date. But you want the date in a different format.  You can call that date function and then call another function to format the date that you just got.  Or you can extend the original date function - by wrapping it with a decorator function. The decorator builds on the original function.  &lt;/p&gt;
+&lt;p&gt;Say, you have a function that returns a date. But you want the date in a different format.  You can call that date function and then call another function to format the date that you just got.  Or you can extend the original date function - by wrapping it with a decorator function. In very, very short, the decorator builds on the original function.  &lt;/p&gt;
 &lt;h3&gt;What's happening under the hood of decorators?&lt;/h3&gt;
-&lt;p&gt;In very short, the decorator function (the outer function) is called. It seeks the original function (the one it is wrapping, the inner function) and the original function is run. Then, the decorator (outer) function is run on the return of the original (inner) function.&lt;/p&gt;
+&lt;p&gt;The decorator function (the outer function) is called. It seeks the original function (the one it is wrapping, the inner function) and the original function is run. Then, the decorator (outer) function is run on the return of the original (inner) function.&lt;/p&gt;
 &lt;p&gt;It is just like saying: 
-&lt;code&gt;original_func = outer_func(original_func)&lt;/code&gt;. Functions can call other functions. In other words, the outer function is being run on the return of the original / inner function.&lt;/p&gt;
+&lt;code&gt;original_func = outer_func(original_func)&lt;/code&gt;. In other words, the outer function is being run on the return of the original / inner function.  Oh, btw, functions can call other functions.&lt;/p&gt;
 &lt;p&gt;That might not have explained it all, but after this whole blog and you see examples, it might make more sense. I'll attempt to break it down - dot by dot, so all dots are connected.  So hopefully all will be clear.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;OK, with that intro...&lt;/p&gt;
-&lt;h3&gt;Now for the pseudo code:&lt;/h3&gt;
+&lt;h3&gt;So how are decorators designed?&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;create the function that will be the 'decorator'&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;create the functions that the decorator function will decorate.&lt;/p&gt;
+&lt;p&gt;create the functions that the decorator function will decorate&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;wrap the decorat&lt;strong&gt;ed&lt;/strong&gt; function with the decorat&lt;strong&gt;or&lt;/strong&gt;&lt;/p&gt;
@@ -30,11 +30,8 @@
 &lt;p&gt;OK, so that makes it seem so simple. And it is - once you undertand how to write the decorator function.&lt;/p&gt;
 &lt;h3&gt;Some pseudo code of the decorator function.&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;The decorator function&lt;/strong&gt; (outer function)&lt;/p&gt;
-&lt;p&gt;1.define the decorator function  &lt;code&gt;def decorator(func):&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt;  &lt;span class="nx"&gt;include&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;decorat&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nx"&gt;ed&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;argument&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;parentheses&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;1.define the decorator function  &lt;code&gt;def decorator(func):&lt;/code&gt;
+    -  include the decorat&lt;strong&gt;ed&lt;/strong&gt; function as the argument in the parentheses.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The wrapper function&lt;/strong&gt; (inner function)&lt;/p&gt;
 &lt;p&gt;2.define the wrapper function. This function is created on the fly; it wraps around the original function.&lt;/p&gt;
 &lt;ul&gt;
