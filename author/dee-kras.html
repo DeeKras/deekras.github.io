@@ -246,16 +246,16 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 <p>Then the <code>@html_strong</code> decorator function will begin.</p>
 </li>
 <li>
-<p>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date)</code> decorator function. </p>
+<p>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date</code> decorator function. </p>
 </li>
 <li>
 <p>And wait for the <code>return</code> to do its job of adding the <code>&lt;strong&gt;&lt;/strong&gt;</code>.</p>
 </li>
 <li>
-<p>Then, the <code>pretty_date()</code> decorator function will call the <code>get_today()</code> function.</p>
+<p>Then, the <code>@pretty_date</code> decorator function will call the <code>get_today()</code> function.</p>
 </li>
 <li>
-<p>And wait for the return to do its job of formatting the date.</p>
+<p>And wait for the <code>return</code> to do its job of formatting the date.</p>
 </li>
 <li>
 <p>The <code>get_today()</code> function will get today's date.</p>
@@ -264,7 +264,7 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 <p>Then it goes back up the ladder. <code>@pretty_date</code> does its work. <code>@html_strong</code> add <strong></strong><code>and</code>@html_em<code>adds</code><em></em>`. </p>
 </li>
 </ol>
-<p>And finally, the final return is done.  The newly formatted, 'html'ed date!</p>
+<p>And finally, the final <code>return</code> is done.  The newly formatted, 'html'ed date!</p>
 <p>So in essence, the first thing that is being returned is the <code>datetime.datetime.today()</code>, then it is returning the <code>&lt;strong&gt;&lt;/strong&gt;</code> and last it is returning the <code>&lt;em&gt;&lt;/em&gt;</code></p>
 <p>The results:</p>
 <div class="highlight"><pre><span class="nt">&lt;em&gt;&lt;strong&gt;</span>2014_12_15<span class="nt">&lt;/strong&gt;&lt;/em&gt;</span>

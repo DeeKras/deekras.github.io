@@ -176,16 +176,16 @@ The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return
 &lt;p&gt;Then the &lt;code&gt;@html_strong&lt;/code&gt; decorator function will begin.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The &lt;code&gt;func&lt;/code&gt; of the &lt;code&gt;@html_strong&lt;/code&gt;'s &lt;code&gt;format(func())&lt;/code&gt; will call the &lt;code&gt;@pretty_date)&lt;/code&gt; decorator function. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;func&lt;/code&gt; of the &lt;code&gt;@html_strong&lt;/code&gt;'s &lt;code&gt;format(func())&lt;/code&gt; will call the &lt;code&gt;@pretty_date&lt;/code&gt; decorator function. &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;And wait for the &lt;code&gt;return&lt;/code&gt; to do its job of adding the &lt;code&gt;&amp;lt;strong&amp;gt;&amp;lt;/strong&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Then, the &lt;code&gt;pretty_date()&lt;/code&gt; decorator function will call the &lt;code&gt;get_today()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;Then, the &lt;code&gt;@pretty_date&lt;/code&gt; decorator function will call the &lt;code&gt;get_today()&lt;/code&gt; function.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;And wait for the return to do its job of formatting the date.&lt;/p&gt;
+&lt;p&gt;And wait for the &lt;code&gt;return&lt;/code&gt; to do its job of formatting the date.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The &lt;code&gt;get_today()&lt;/code&gt; function will get today's date.&lt;/p&gt;
@@ -194,7 +194,7 @@ The &lt;code&gt;pretty_date&lt;/code&gt; decorator function will take the return
 &lt;p&gt;Then it goes back up the ladder. &lt;code&gt;@pretty_date&lt;/code&gt; does its work. &lt;code&gt;@html_strong&lt;/code&gt; add &lt;strong&gt;&lt;/strong&gt;&lt;code&gt;and&lt;/code&gt;@html_em&lt;code&gt;adds&lt;/code&gt;&lt;em&gt;&lt;/em&gt;`. &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;And finally, the final return is done.  The newly formatted, 'html'ed date!&lt;/p&gt;
+&lt;p&gt;And finally, the final &lt;code&gt;return&lt;/code&gt; is done.  The newly formatted, 'html'ed date!&lt;/p&gt;
 &lt;p&gt;So in essence, the first thing that is being returned is the &lt;code&gt;datetime.datetime.today()&lt;/code&gt;, then it is returning the &lt;code&gt;&amp;lt;strong&amp;gt;&amp;lt;/strong&amp;gt;&lt;/code&gt; and last it is returning the &lt;code&gt;&amp;lt;em&amp;gt;&amp;lt;/em&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The results:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;em&amp;gt;&amp;lt;strong&amp;gt;&lt;/span&gt;2014_12_15&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&amp;lt;/em&amp;gt;&lt;/span&gt;
