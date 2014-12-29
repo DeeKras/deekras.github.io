@@ -101,26 +101,26 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><strong>The wrapper function</strong> (inner function)</p>
 <p>2.define the wrapper function. This function is created on the fly; it wraps around the original function.</p>
 <ul>
-<li>This can also have args that will be used in the wrapper function. These are pulled from the arguments of the 'decorated function'. For another discussion.</li>
+<li>This can also have args that will be used in the wrapper function. These are pulled from the arguments of the 'decorated function'. <em>For another discussion.</em></li>
 </ul>
 <p>3.<em>(optional)</em> some code - of the wrapper function</p>
-<div class="highlight"><pre><span class="o">-</span>  <span class="k">this</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">code</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">done</span> <span class="nx">BEFORE</span> <span class="nx">the</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">run</span><span class="p">.</span> <span class="nx">Maybe</span><span class="p">,</span> <span class="nx">print</span> <span class="nx">a</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">collect</span> <span class="nx">a</span> <span class="nx">start</span> <span class="nx">time</span><span class="p">.</span>  <span class="nx">Or</span> <span class="nx">you</span> <span class="nx">may</span> <span class="nx">not</span> <span class="nx">have</span> <span class="nx">any</span> <span class="nx">code</span> <span class="nx">here</span> <span class="nx">at</span> <span class="nx">all</span><span class="p">.</span>
-</pre></div>
-
-
-<p>4.include the <code>func</code> (the argument in the decorator function) in the code of the wrapper function
-    -  it can be called on its own. ex: <code>func()</code>
-    -  or called as part of a statement.  ex: <code>return '&lt;em&gt;{}&lt;/em&gt;'.format(func())</code></p>
+<ul>
+<li>this can be any code to be done BEFORE the function is run. Maybe, print a message, collect a start time.  Or you may not have any code here at all.</li>
+</ul>
+<p>4.include the <code>func</code> (the argument in the decorator function) in the code of the wrapper function</p>
+<ul>
+<li>it can be called on its own. ex: <code>func()</code></li>
+<li>or called as part of a statement.  ex: <code>return '&lt;em&gt;{}&lt;/em&gt;'.format(func())</code></li>
+</ul>
 <p>5.<em>(optional)</em> some code - of the wrapper function</p>
-<div class="highlight"><pre><span class="o">-</span>  <span class="k">this</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">code</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">done</span> <span class="nx">AFTER</span> <span class="nx">the</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">run</span><span class="p">.</span> <span class="nx">Maybe</span><span class="p">,</span> <span class="nx">print</span> <span class="nx">a</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">collect</span> <span class="nx">an</span> <span class="nx">end</span> <span class="nx">time</span><span class="p">.</span>  <span class="nx">Or</span> <span class="nx">you</span> <span class="nx">may</span> <span class="nx">not</span> <span class="nx">have</span> <span class="nx">any</span> <span class="nx">code</span> <span class="nx">here</span> <span class="nx">at</span> <span class="nx">all</span><span class="p">.</span>
-</pre></div>
-
-
+<ul>
+<li>this can be any code to be done AFTER the function is run. Maybe, print a message, collect an end time.  Or you may not have any code here at all.</li>
+</ul>
 <p>6.<code>return</code> something in the wrapper function</p>
 <p><em>back to</em> <strong>the decorator function</strong>  (outer function)</p>
 <p>7.<code>return</code> what the <code>wrapper</code> function returned</p>
 <h3>So here is some simple code:</h3>
-<p>This decorator will format any date in the YYYY_MM_DD format. (It uses <code>.format</code> and <code>strftime</code> directives.  <a href="http://strftime.org/">See more about strftime directives</a> )</p>
+<p>This decorator will format any date in the YYYY_MM_DD format. (It uses <code>.format</code> and <code>strftime</code> directives.  See more about <a href="http://strftime.org/">strftime directives</a> and <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>)</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
@@ -133,12 +133,14 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 <p>1.<code>def pretty_date(func):</code> : we define the function and include the <code>func</code> as the argument.</p>
 <p>2.<code>def wrapper():</code> : this is a function within a function, thus indented.</p>
-<p>3.<code>print 'getting the date from function: {}'.format(func.__name__)</code> : We don't really need to put code before the function. This is just to show.
-    - <code>func.__name__</code> gives the name of <code>func</code></p>
+<p>3.<code>print 'getting the date from function: {}'.format(func.__name__)</code> : We don't really need to put code before the function. This is just to show.</p>
+<ul>
+<li><code>func.__name__</code> gives the name of <code>func</code></li>
+</ul>
 <p>4.<code>date = func()</code> : calls the function and assigns it to <code>date</code></p>
 <p>5.<code>print 'got the date: {} (before it was formatted)'.format(date)</code>. We don't really need to put code after the function. This is just to show.</p>
 <p>6.<code>return '{0:%Y}_{0:%m}_{0:%d}'.format(date)</code> : Here's the return for the inner/ wrapper function.   ---Really, we could have put this line in for line 4. But then, we couldn't have the code to do AFTER the function. (You can't have anything after the <code>return</code>.)</p>
-<p>7.<code>return wrapper</code> : returns what the wrapper returned.</p>
+<p>7.<code>return wrapper</code> : returns what the <code>wrapper</code> function returned.</p>
 <p>Whew! So, the decorator function has been created. That's the hard part.  Now just have to create the functions that will be decorated (or wrapped) with the decorator.</p>
 <p>In this case, we will create 3 separate functions - <code>get_today()</code>, <code>get_tomorrrow()</code>, <code>get_yesterday()</code> to show how the same decorator can be used for several functions. (For more about working with dates and datetime and datedelta, <a href="http://pymotw.com/2/datetime/">check out pymotw</a>.)</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">datetime</span>
@@ -180,7 +182,13 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 </pre></div>
 
 
-<p>You can then call the wrapped functions (ie: <code>print get_today()</code>, <code>print get_tomorrow()</code>, <code>print get_yesterday()</code>)</p>
+<p>You can then call the wrapped functions </p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">get_today</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">get_tomorrow</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">get_yesterday</span><span class="p">()</span>
+</pre></div>
+
+
 <p>And now the results are:</p>
 <div class="highlight"><pre>2014_12_15
 2014_12_16
@@ -189,7 +197,7 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 
 
 <p>And that's decorators. In short.</p>
-<p>Oh, and a caveat: Those functions that are now wrapped - are always wrapped. That means that <code>get_today()</code> can't be used to call for the full date <code>2014-12-15 15:47:28.199614</code>. Whenever, we call <code>get_today()</code>, it will return <code>2014_12_15</code>. You will have to create another function to get the unformatted date. </p>
+<p>Oh, and a caveat: Those functions that are now wrapped - are always wrapped. That means that <code>get_today()</code> can't be used to call for the full date <code>2014-12-15 15:47:28.199614</code>. Whenever, we call <code>get_today()</code>, it will return <code>2014_12_15</code> format. You will have to create another function to get the unformatted date. </p>
 <hr />
 <p>But that's not all. You can have several decorators wrap a function.</p>
 <p>Here, we'll define a few more decorators.  These create html tags around the string.</p>
@@ -214,15 +222,40 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 </pre></div>
 
 
-<p>The order matters!  It goes from top to bottom.  </p>
+<p>The order matters!  It goes from top to bottom.  From the top of the ladder down (- and then back up again).</p>
 <ol>
 <li>
-<p>First, it  will do <code>html_em</code> - the <code>func</code> in <code>format(func())</code> of that function will call <code>html_strong</code> and wait for the <code>return</code> from that call to do its job of adding the <code>&lt;em&gt;&lt;/em&gt;</code>.  </p>
+<p>First, it  will do <code>@html_em</code> decorator function. </p>
 </li>
 <li>
-<p>The <code>func</code> of the <code>html_strong</code>'s <code>format(func())</code> will call the <code>get_today()</code> function.  And wait for the <code>return</code> to do its job of adding the <strong></strong>.</p>
+<p>The <code>func</code> in <code>format(func())</code> of that function will call the next decorator function <code>@html_strong</code>. </p>
+</li>
+<li>
+<p>And wait for the <code>return</code> from that call to do its job of adding the <code>&lt;em&gt;&lt;/em&gt;</code>.  </p>
+</li>
+<li>
+<p>Then the <code>@html_strong</code> decorator function will begin.</p>
+</li>
+<li>
+<p>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date)</code> decorator function. </p>
+</li>
+<li>
+<p>And wait for the <code>return</code> to do its job of adding the <code>&lt;strong&gt;&lt;/strong&gt;</code>.</p>
+</li>
+<li>
+<p>Then, the <code>pretty_date()</code> decorator function will call the <code>get_today()</code> function.</p>
+</li>
+<li>
+<p>And wait for the return to do its job of formatting the date.</p>
+</li>
+<li>
+<p>The <code>get_today()</code> function will get today's date.</p>
+</li>
+<li>
+<p>Then it goes back up the ladder. <code>@pretty_date</code> does its work. <code>@html_strong</code> add <strong></strong><code>and</code>@html_em<code>adds</code><em></em>`. </p>
 </li>
 </ol>
+<p>And finally, the final return is done.  The newly formatted, 'html'ed date!</p>
 <p>So in essence, the first thing that is being returned is the <code>datetime.datetime.today()</code>, then it is returning the <code>&lt;strong&gt;&lt;/strong&gt;</code> and last it is returning the <code>&lt;em&gt;&lt;/em&gt;</code></p>
 <p>The results:</p>
 <div class="highlight"><pre><span class="nt">&lt;em&gt;&lt;strong&gt;</span>2014_12_15<span class="nt">&lt;/strong&gt;&lt;/em&gt;</span>
