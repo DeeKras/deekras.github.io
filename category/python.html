@@ -69,10 +69,10 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h4>Decorators: a function within a function</h4>
-<p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at makeing them easy to understand.</p>
-<p>First, why are decorators so useful?</p>
-<p><strong>Now for the pseudo code:</strong></p>
+        <div><h2>Decorators: a function within a function</h2>
+<p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them <strike>easy</strike>easier to understand.</p>
+<h3>First, why are decorators so useful?</h3>
+<h3>Now for the pseudo code:</h3>
 <ol>
 <li>
 <p>create the function that will be the 'decorator'</p>
@@ -84,30 +84,34 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p>wrap the decorat<strong>ed</strong> function with the decorat<strong>or</strong></p>
 </li>
 </ol>
-<p>OK, so that makes it seem so simple. And it is, once you undertand how to write the decorator function.</p>
+<p>OK, so that makes it seem so simple. And it is - once you undertand how to write the decorator function.</p>
 <p>I'll attempt to break it down - dot by dot, so all dots are connected.  So hopefully all will be clear.</p>
-<h4>Some pseudo code of the decorator function.</h4>
-<p><strong>The decorator function</strong> (outer function)
-1.  define the decorator function  <code>def decorator(func):</code></p>
-<div class="highlight"><pre><span class="o">-</span>  <span class="nx">include</span> <span class="nx">the</span> <span class="nx">decorated</span> <span class="kd">function</span> <span class="nx">as</span> <span class="nx">the</span> <span class="nx">argument</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">parentheses</span><span class="p">.</span>
-</pre></div>
-
-
-<p><strong>The wrapper function</strong> (inner function)
-2.  define the wrapper function. # need to define this wrapper function <code>def wrapper()</code></p>
-<div class="highlight"><pre>-  usually doesn&#39;t have any arguments
-</pre></div>
-
-
+<h3>Some pseudo code of the decorator function.</h3>
+<p><strong>The decorator function</strong> (outer function)</p>
 <ol>
 <li>
-<p><em>(optional)</em> some code - of the wrapper function</p>
+<p>define the decorator function  <code>def decorator(func):</code></p>
 <ul>
-<li>this can be any code. Maybe, print a message, collect a start time.  Or you may not have any code here at all</li>
+<li>include the decorated function as the argument in the parentheses.</li>
+</ul>
+</li>
+</ol>
+<p><strong>The wrapper function</strong> (inner function)</p>
+<ol>
+<li>
+<p>define the wrapper function. # need to define this wrapper function <code>def wrapper()</code></p>
+<ul>
+<li>usually doesn't have any arguments</li>
 </ul>
 </li>
 <li>
-<p>as applicable, include the <code>func</code> (the argument in the decorator function) in the code of the wrapper function</p>
+<p><em>(optional)</em> some code - of the wrapper function</p>
+<ul>
+<li>this can be any code. Maybe, print a message, collect a start time.  Or you may not have any code here at all.</li>
+</ul>
+</li>
+<li>
+<p>include the <code>func</code> (the argument in the decorator function) in the code of the wrapper function</p>
 <ul>
 <li>it can be called on its own. ex: <code>func()</code></li>
 <li>or called as part of a statement.  ex: <code>return '&lt;em&gt;{}&lt;/em&gt;'.format(func())</code></li>
@@ -123,9 +127,11 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><code>return</code> something in the wrapper function</p>
 </li>
 </ol>
-<p><em>back to</em> <strong>the decorator function</strong>  (outer function)
-7.  <code>return</code> what the <code>wrapper</code> function returned</p>
-<h4>So here is some simple code:</h4>
+<p><em>back to</em> <strong>the decorator function</strong>  (outer function)</p>
+<ol>
+<li><code>return</code> what the <code>wrapper</code> function returned</li>
+</ol>
+<h3>So here is some simple code:</h3>
 <p>This decorator will format any date in the YYYY_MM_DD format. (It uses <code>.format</code> and <code>strftime</code> directives.  <a href="http://strftime.org/">See more about strftime directives</a> )</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
@@ -142,23 +148,23 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><code>def wrapper():</code> : this is a function within a function, thus indented.</p>
 </li>
 <li>
-<p>We could have had some code here.</p>
+<p>We could have had some code here.  But we didn't need to.</p>
 </li>
 <li>
-<p><code>return '{0:%Y}_{0:%m}_{0:%d}'.format(func())</code> : this line returns the <code>func</code>, in this case in a specific format.</p>
+<p><code>return '{0:%Y}_{0:%m}_{0:%d}'.format(func())</code> : this line returns the <code>func</code>; in this case, in a specific format.</p>
 </li>
 <li>
-<p>And we could have had some code here.</p>
+<p>And we could have had some code here.  But we didn't need any.</p>
 </li>
 <li>
-<p>Here we might have had the return. But we combined the call to the <code>func</code> and the <code>return</code> in the same line of code.</p>
+<p>Here we might have had the return. But we combined the call to the <code>func</code> and the <code>return</code> in the same line of code - above in 4.</p>
 </li>
 <li>
-<p><code>return wrapper</code> : returns what the wrapper returned</p>
+<p><code>return wrapper</code> : returns what the wrapper returned.</p>
 </li>
 </ol>
-<p>So, the decorator function has been created. That's the hard part.  Now just have to create the functions that will be decorated (or wrapped) with the decorator.</p>
-<p>In this case, we will create 3 separate functions - <code>get_today()</code>, <code>get_tomorrrow()</code>, <code>get_yesterday()</code> to show how the same decorator can be used for several functions.  For more about working with dates and datetime and datedelta, <a href="http://pymotw.com/2/datetime/">check out pymotw</a></p>
+<p>Whew! So, the decorator function has been created. That's the hard part.  Now just have to create the functions that will be decorated (or wrapped) with the decorator.</p>
+<p>In this case, we will create 3 separate functions - <code>get_today()</code>, <code>get_tomorrrow()</code>, <code>get_yesterday()</code> to show how the same decorator can be used for several functions.  For more about working with dates and datetime and datedelta, <a href="http://pymotw.com/2/datetime/">check out pymotw</a>.</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="k">def</span> <span class="nf">get_today</span><span class="p">():</span>
@@ -207,8 +213,9 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 
 
 <p>And that's decorators. In short.</p>
+<hr />
 <p>But that's not all. You can have several decorators wrap a function.</p>
-<p>Here I'll define a few more decorators.  These create html tags around the string.</p>
+<p>Here, we'll define a few more decorators.  These create html tags around the string.</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">html_strong</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">return</span> <span class="s">&#39;&lt;strong&gt;{}&lt;/strong&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
@@ -230,9 +237,9 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 </pre></div>
 
 
-<p>The results:
-```
-<em><strong>2014_12_15</strong></em></p></div>
+<p>The results:</p>
+<div class="highlight"><pre><span class="nt">&lt;em&gt;&lt;strong&gt;</span>2014_12_15<span class="nt">&lt;/strong&gt;&lt;/em&gt;</span>
+</pre></div></div>
         <hr />
     </div>
 		
