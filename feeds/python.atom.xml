@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-15T00:00:00+00:00</updated><entry><title>Working with Decorators</title><link href="http://www.deekras.com/working-with-decorators.html" rel="alternate"></link><updated>2014-12-15T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-15:working-with-decorators.html</id><summary type="html">&lt;h2&gt;Decorators: a function within a function&lt;/h2&gt;
-&lt;p&gt;Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them &lt;strike&gt;easy&lt;/strike&gt;easier to understand.&lt;/p&gt;
+&lt;p&gt;Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them &lt;strike&gt;easy&lt;/strike&gt; easier to understand.&lt;/p&gt;
 &lt;h3&gt;First, why are decorators so useful?&lt;/h3&gt;
+&lt;h3&gt;What's happening under the hood of decorators?&lt;/h3&gt;
 &lt;h3&gt;Now for the pseudo code:&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -22,7 +23,7 @@
 &lt;li&gt;
 &lt;p&gt;define the decorator function  &lt;code&gt;def decorator(func):&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;include the decorated function as the argument in the parentheses.&lt;/li&gt;
+&lt;li&gt;include the decorat&lt;strong&gt;ed&lt;/strong&gt; function as the argument in the parentheses.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
