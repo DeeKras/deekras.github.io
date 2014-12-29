@@ -115,9 +115,15 @@ Then, the url that we'll use to find the time. Notice the curly braces &lt;code&
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;code&gt;@register
-def _atexit():&lt;/code&gt;: &lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.
-    - in way too short, &lt;code&gt;decorators&lt;/code&gt; are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;@register
+def _atexit():
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;@register&lt;/code&gt; is a decorator for the &lt;code&gt;_atexit()&lt;/code&gt; function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in way too short, &lt;code&gt;decorators&lt;/code&gt; are a function that decorate, or wrap,  another function. The decorator function must be defined first, before it can be used as a decorator. The inner function is processed first, then the outer, the decorator, function is run. &lt;a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/"&gt;Lots more about decorators&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;So there, a very simple threading process.  &lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Of course, there is much more to threading. A very clear, easy to understand resource. &lt;a href="http://pymotw.com/2/threading/"&gt;http://pymotw.com/2/threading/&lt;/a&gt;
