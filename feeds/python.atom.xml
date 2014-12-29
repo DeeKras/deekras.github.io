@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-13T00:00:00+00:00</updated><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-14T00:00:00+00:00</updated><entry><title>Working with Threads</title><link href="http://www.deekras.com/working-with-threads.html" rel="alternate"></link><updated>2014-12-14T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-14:working-with-threads.html</id><summary type="html">&lt;h4&gt;Working with Threads&lt;/h4&gt;
+&lt;p&gt;I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would ahve worked for me. So I share - in case it makes learning about threads easier for someone.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First, a scenario where threading can be useful:&lt;/strong&gt; You're using one of those websites that check several airlines for best fares.  Finally the trip to Barcelona!  It would take a long time to search each airline separately.  It woud be so much faster if the computer would search several airlines concurrently.  Thankfully, that is what they do - saving us much time.&lt;/p&gt;
+&lt;p&gt;That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done.&lt;/p&gt;
+&lt;p&gt;So that's what threading does. Sure, that's oversimplified.  OK, I'm not sure how those flight aggregator programs really work, but that is a scenario where we'd see the benefits of threads.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What's happening under the hood of threads?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;First some basic things to know:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Threads execute parellel within the same process - and as such, they share all the same context (name space, address, etc.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Threads have a beginning, the execution and an end.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;locks&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;And here's how it all works - the pseudo code.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create the thread instances&lt;/li&gt;
+&lt;li&gt;execute the code&lt;/li&gt;
+&lt;li&gt;exit the thread and do whatever &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So in the case of the search for &lt;strike&gt; best tickets to Barcelona&lt;/strike&gt;. Nah, that would be too much code; here is a much simpler scenario. Trying to find the local time in several places in the world. (Of course, there is no real need to thread for these queries, since they are super quick. But this will give an idea about how threading works.)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get the search query - what places we are looking for (country, city)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;these are hardcoded in a dictionary called &lt;code&gt;places&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;we'll use &lt;code&gt;www.timeapi.org&lt;/code&gt; to find the local time for those places.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a thread instance for each airline&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in a &lt;code&gt;for loop&lt;/code&gt;, we will create a thread for each query.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Execute the concurrent query searches.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When all query results come in, display the places and times on the screen.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here's the code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;threading&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ctime&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;atexit&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;register&lt;/span&gt;
+
+&lt;span class="n"&gt;url_lookup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;http://www.timeapi.org/{}/now&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;places&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Paris&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;cet&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;#39;Moscow&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;msk&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;#39;Kuwait&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="s"&gt;&amp;#39;ast&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;#39;New York&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;est&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s"&gt;&amp;#39;Copenhagen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;cet&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_display_time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;time_zone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;places&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;current_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_lookup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time_zone&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;    
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{:&amp;gt;10} | {:&amp;lt;15}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;current_time&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;starting at:&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ctime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;place&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;places&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;threading&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_display_time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;place&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="nd"&gt;@register&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_atexit&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;all done at:&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ctime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;First the imports.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;url_lookup = 'http://www.timeapi.org/{}/now'&lt;/code&gt;:
+Then, the url that we'll use to find the time. Notice the curly braces &lt;code&gt;{}&lt;/code&gt;. We'll use that later to insert the time_zone.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;places&lt;/code&gt;: This is a dictionary of places and time zones codes (as this API likes it). &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;def _display_time(place):&lt;/code&gt;  This function 
+1. gets the time zone (the value of the key &lt;code&gt;place&lt;/code&gt;).
+2. gets the current time - using the url with the time_zone inserted
+    - uses the requests method. See more about &lt;code&gt;requests&lt;/code&gt; in my ]previous post] and in the [docs]   (http://docs.python-requests.org/en/latest/).*&lt;/p&gt;</summary></entry><entry><title>Using a weather api (forecast.io)</title><link href="http://www.deekras.com/using-a-weather-api-forecastio.html" rel="alternate"></link><updated>2014-12-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-13:using-a-weather-api-forecastio.html</id><summary type="html">&lt;h4&gt;Kinda cool to get the weather jsut the way I need it&lt;/h4&gt;
 &lt;p&gt;Moving along in discussing some of features of the little application I wrote.  &lt;/p&gt;
 &lt;p&gt;I already &lt;a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"&gt;got the IP&lt;/a&gt; and then &lt;a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"&gt;found the longitude and latitude coordinates based on that IP&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The next step is to find the local weather for the current day. I tried several weather apis that were suggested by fellow HackerSchoolers. I found that the best and easiest to use is &lt;a href="https://developer.forecast.io/"&gt;&lt;strong&gt;forecast.io&lt;/strong&gt;&lt;/a&gt;. And it gave me the opportunity to work with json files.&lt;/p&gt;
@@ -22,7 +110,7 @@
 
 
 &lt;p&gt;&lt;code&gt;date&lt;/code&gt;:    The api has optional parameter of time/date. This can be a datetime object. So first I import the &lt;code&gt;datetime&lt;/code&gt; module.
-And import the &lt;code&gt;requests&lt;/code&gt; module so I get the response from looking up a specific url. &lt;em&gt;Read more about &lt;a href="http://docs.python-requests.org/en/latest/"&gt;requests library&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+And import the &lt;a name="requests"&gt;&lt;code&gt;requests&lt;/code&gt; module &lt;/a&gt;  so I get the response from looking up a specific url. &lt;em&gt;Read more about &lt;a href="http://docs.python-requests.org/en/latest/"&gt;requests library&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The date/time must be either UNIX time or a string in this format. &lt;a href="#time"&gt;See comment below&lt;/a&gt;.   I like to use the &lt;code&gt;.format&lt;/code&gt; method to fill the string with variables. &lt;em&gt;Read more about &lt;a href="https://docs.python.org/2/library/string.html#formatstrings"&gt;.format&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;lookup_url&lt;/code&gt;:   This is the url with the values filled in. &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;json_response&lt;/code&gt;:     The response from the 'GET' request is a json file, which essentially is a list of dictionaries.  In this case,  a list of  dictionaries of dictionaries.  Seems like a threw myself right into a deep json file. Really had to sit on this file to understand it. Eventually I got it. &lt;em&gt;See  the json file below.&lt;/em&gt;&lt;/p&gt;
