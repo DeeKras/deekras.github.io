@@ -226,38 +226,22 @@ The <code>pretty_date</code> decorator function will take the return <code>get_t
 
 
 <p>The order matters!  It goes from top to bottom.  From the top of the ladder down (- and then back up again).</p>
-<ol>
-<li>
-<p>First, it  will do <code>@html_em</code> decorator function. </p>
-</li>
-<li>
-<p>The <code>func</code> in <code>format(func())</code> of that function will call the next decorator function <code>@html_strong</code>. </p>
-</li>
-<li>
-<p>And wait for the <code>return</code> from that call to do its job of adding the <code>&lt;em&gt;&lt;/em&gt;</code>.  </p>
-</li>
-<li>
-<p>Then the <code>@html_strong</code> decorator function will begin.</p>
-</li>
-<li>
-<p>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date</code> decorator function. </p>
-</li>
-<li>
-<p>And wait for the <code>return</code> to do its job of adding the <code>&lt;strong&gt;&lt;/strong&gt;</code>.</p>
-</li>
-<li>
-<p>Then, the <code>@pretty_date</code> decorator function will call the <code>get_today()</code> function.</p>
-</li>
-<li>
-<p>And wait for the <code>return</code> to do its job of formatting the date.</p>
-</li>
-<li>
-<p>The <code>get_today()</code> function will get today's date.</p>
-</li>
-<li>
-<p>Then it goes back up the ladder. <code>@pretty_date</code> does its work. <code>@html_strong</code> add <strong></strong><code>and</code>@html_em<code>adds</code><em></em>`. </p>
-</li>
-</ol>
+<p>1.First, it  will do <code>@html_em</code> decorator function. </p>
+<ul>
+<li>The <code>func</code> in <code>format(func())</code> of that function will call the next decorator function <code>@html_strong</code>. </li>
+<li>And wait for the <code>return</code> from that call to do its job of adding the <code>&lt;em&gt;&lt;/em&gt;</code>.  </li>
+</ul>
+<p>2.Then the <code>@html_strong</code> decorator function will begin.</p>
+<ul>
+<li>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date</code> decorator function. </li>
+<li>And wait for the <code>return</code> to do its job of adding the <code>&lt;strong&gt;&lt;/strong&gt;</code>.</li>
+</ul>
+<p>3.Then, the <code>@pretty_date</code> decorator function will call the <code>get_today()</code> function.</p>
+<ul>
+<li>And wait for the <code>return</code> to do its job of formatting the date.</li>
+</ul>
+<p>4.The <code>get_today()</code> function will get today's date.</p>
+<p>5.Then it goes back up the ladder. <code>@pretty_date</code> does its work. <code>@html_strong</code> add <strong></strong><code>and</code>@html_em<code>adds</code><em></em>`. </p>
 <p>And finally, the final <code>return</code> is done.  The newly formatted, 'html'ed date!</p>
 <p>So in essence, the first thing that is being returned is the <code>datetime.datetime.today()</code>, then it is returning the <code>&lt;strong&gt;&lt;/strong&gt;</code> and last it is returning the <code>&lt;em&gt;&lt;/em&gt;</code></p>
 <p>The results:</p>
