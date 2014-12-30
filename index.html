@@ -83,7 +83,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 
 <p>This <code>@pretty_date</code> decorator can be used with <strong>any function</strong> that returns a date, no matter how that date is calculated. As long as it is in a format that the <code>return '{0:%Y}_{0:%m}_{0:%d}'.format(date)</code> can evaluate.</p>
-<p>But what if the original function needs some arguments in order for it to get the date?  Yes, those arguments can be passed through the decorator to the function.  It's rather simple. Just use <em>args and </em>*kwargs.  <a href="http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/">Read more about <em>args and </em>*kwargs</a></p>
+<p>But what if the original function needs some arguments in order for it to get the date?  Yes, those arguments can be passed through the decorator to the function.  It's rather simple. Just use *args and **kwargs.  <a href="http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/">Read more about *args and **kwargs.</a></p>
 <p>Let's say we have this function:</p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
@@ -121,7 +121,29 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 
 <p>Notice the <code>*args</code> and <code>**kwargs</code> in the <code>def wrapper(*args, **kwargs)</code> and again in the <code>date = func(*args, **kwargs)</code>.  They are included in the wrapper and then passed to the original function. Which of course uses those arguments to get the date.</p>
-<p>And that's it!  You can use this decorator with many different functions - whether they do or do not have <code>args</code> or <code>kwargs</code>.</p></div>
+<p>And that's it!  You can use this decorator with many different functions - whether they do or do not have <code>args</code> or <code>kwargs</code>.</p>
+<p>Here's how you might call these 2 functions. ([!!] Remember, once the functions are wrapped with the decorator, they are always wrapped. So when we call the function, they are automatically decorated.)</p>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">date_into_future</span><span class="p">(</span><span class="s">&#39;12/8/2014&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">date_in_past</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">date_in_past</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And the results:</p>
+<div class="highlight"><pre><span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_into_future</span>
+<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">07</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
+<span class="mi">2015</span><span class="n">_01_07</span>
+
+
+<span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_in_past</span>
+<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
+<span class="mi">2013</span><span class="n">_12_11</span>
+
+
+<span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_in_past</span>
+<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">14</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
+<span class="mi">2014</span><span class="n">_01_14</span>
+</pre></div></div>
         <hr />
     </div>
 		
