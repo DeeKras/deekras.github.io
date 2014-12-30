@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://www.deekras.com/working-with-decorators.html"><h1>Working with Decorators</h1></a>
-Mon 15 December 2014
+            <a href="http://www.deekras.com/decorators-with-args-kwargs.html"><h1>Decorators with *args, **kwargs</h1></a>
+Tue 16 December 2014
 
 by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
  
@@ -69,67 +69,9 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h2>Decorators: a function within a function</h2>
-<p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them <strike>easy</strike> easier to understand.</p>
-<h3>First, when might decorators be used?</h3>
-<p>Decorators are used to extend a function. To give it more functionality. You might want to time how long a function takes. Or, you might want to print a message to the user. Or, you might want to log some data about the function. </p>
-<p>Sometimes, you need to use a function that cannot be changed for whatever reason. Maybe you are getting from a library or another module. You can use a decorator to extend the function. Maybe you want to change the formatting. Or something else.</p>
-<p>Or, you don't want to change the original function, but you do want to extend it temporarily. You might do this when debugging. </p>
-<p>Also, decorators are used in Flask.</p>
-<h3>So, in very short, what are decorators?</h3>
-<p>Say, you have a function that returns a date. But you want the date in a different format.  You can call that date function and then call another function to format the date that you just got.  Or, you can extend the original date function - by wrapping it with a decorator function. In very, very short, the decorator builds on the original function.  </p>
-<h3>What's happening under the hood of decorators?</h3>
-<p>The decorator function (the outer function) is called. It seeks the original function (the one it is wrapping, the inner function) and the original function is run. Then, the decorator (outer) function is run on the return of the original (inner) function.</p>
-<p>It is just like saying: 
-<code>original_func = outer_func(original_func)</code>. In other words, the outer function is being run on the return of the original / inner function.  Oh, btw, functions can call other functions.</p>
-<p>That might not have explained it all, but after this whole blog and you see examples, it might make more sense. I'll attempt to break it down - dot by dot, so all dots are connected.  So hopefully all will be clear.</p>
-<hr />
-<p>OK, with that intro...</p>
-<h3>So how are decorators designed?</h3>
-<ol>
-<li>
-<p>create the function that will be the 'decorator'</p>
-</li>
-<li>
-<p>create the functions that the decorator function will decorate</p>
-</li>
-<li>
-<p>wrap the decorat<strong>ed</strong> function with the decorat<strong>or</strong></p>
-</li>
-<li>
-<p>call the <strong>original</strong> function. (It is already wrapped and thus the decorator function will also run!)</p>
-</li>
-</ol>
-<p>OK, so that makes it seem so simple. And it is - once you understand how to write the decorator function.</p>
-<h3>Some pseudo code of the decorator function.</h3>
-<p><strong>The decorator function</strong> (outer function)</p>
-<p>1.define the decorator function  <code>def decorator(func):</code>. </p>
-<ul>
-<li>include the decorat<strong>ed</strong> function as the argument in the parentheses.</li>
-</ul>
-<p><strong>The wrapper function</strong> (inner function)</p>
-<p>2.define the wrapper function. This function is created on the fly; it wraps around the original function.</p>
-<ul>
-<li>This can also have args that will be used in the wrapper function. These are pulled from the arguments of the 'decorated function'. <em>For another discussion.</em></li>
-</ul>
-<p>3.<em>(optional)</em> some code - of the wrapper function</p>
-<ul>
-<li>this can be any code to be done BEFORE the original function is run. Maybe, print a message, collect a start time.  Or, you may not have any code here at all.</li>
-</ul>
-<p>4.include the original function, the <code>func</code> (the argument in the decorator function) in the code of the wrapper function</p>
-<ul>
-<li>it can be called on its own. ex: <code>func()</code></li>
-<li>or called as part of a statement.  ex: <code>return '&lt;em&gt;{}&lt;/em&gt;'.format(func())</code></li>
-</ul>
-<p>5.<em>(optional)</em> some code - of the wrapper function</p>
-<ul>
-<li>this can be any code to be done AFTER the original function is run. Maybe, print a message, collect an end time.  Or, you may not have any code here at all.</li>
-</ul>
-<p>6.<code>return</code> something in the wrapper function</p>
-<p><em>back to</em> <strong>the decorator function</strong>  (outer function)</p>
-<p>7.<code>return</code> what the <code>wrapper</code> function returned</p>
-<h3>So here is some simple code:</h3>
-<p>This decorator will format any date in the YYYY_MM_DD format. (It uses <code>.format</code> and <code>strftime</code> directives.  See more about <a href="http://strftime.org/">strftime directives</a> and <a href="https://docs.python.org/2/library/string.html#formatstrings">.format</a>)</p>
+        <div><h2>Decorators: Decorators - with <em>args and </em>*kwargs</h2>
+<p>This post builds on my previous one about <a href="http://www.deekras.com/working-with-decorators.html">Decorators</a>.</p>
+<p>So we have the decorator that 'prettifies' the date returned from the original function.</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
@@ -140,126 +82,70 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 </pre></div>
 
 
-<p>1.<code>def pretty_date(func):</code> : we define the function and include the <code>func</code> as the argument.</p>
-<p>2.<code>def wrapper():</code> : this is a function within a function, thus indented.</p>
-<p>3.<code>print 'getting the date from function: {}'.format(func.__name__)</code> : We don't really need to put code before the function. This is just to show.</p>
-<ul>
-<li><code>func.__name__</code> gives the name of <code>func</code></li>
-</ul>
-<p>4.<code>date = func()</code> : calls the function and assigns it to <code>date</code></p>
-<p>5.<code>print 'got the date: {} (before it was formatted)'.format(date)</code>. We don't really need to put code after the function. This is just to show.</p>
-<p>6.<code>return '{0:%Y}_{0:%m}_{0:%d}'.format(date)</code> : Here's the return for the inner/ wrapper function.   ---Really, we could have put this line in for line 4. But then, we couldn't have the code to do AFTER the function. (You can't have anything after the <code>return</code>.)</p>
-<p>7.<code>return wrapper</code> : returns what the <code>wrapper</code> function returned.</p>
-<p>Whew! So, the decorator function has been created. That's the hard part.  Now just have to create the functions that will be decorated (or wrapped) with the decorator.</p>
-<p>In this case, we will create 3 separate functions - <code>get_today()</code>, <code>get_tomorrrow()</code>, <code>get_yesterday()</code> to show how the same decorator can be used for several functions. (For more about working with dates and datetime and datedelta, <a href="http://pymotw.com/2/datetime/">check out pymotw</a>.)</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">datetime</span>
+<p>This <code>@pretty_date</code> decorator can be used with <strong>any function</strong> that returns a date, no matter how that date is calculated. As long as it is in a format that the <code>return '{0:%Y}_{0:%m}_{0:%d}'.format(date)</code> can evaluate.</p>
+<p>But what if the original function needs some arguments in order for it to get the date?  Yes, those arguments can be passed through the decorator to the function.  It's rather simple. Just use <em>args and </em>*kwargs.  <a href="http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/">Read more about <em>args and </em>*kwargs</a></p>
+<p>Let's say we have this function:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-<span class="k">def</span> <span class="nf">get_today</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">get_tomorrow</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_yesterday</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">date_into_future</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">days</span><span class="p">):</span>
+    <span class="n">date_format</span> <span class="o">=</span> <span class="s">&quot;%m/</span><span class="si">%d</span><span class="s">/%Y&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
 </pre></div>
 
 
-<p>The results are:</p>
-<div class="highlight"><pre>2014-12-15 15:47:28.199614
-2014-12-16 15:47:28.944899
-2014-12-14 15:47:28.944958
-</pre></div>
-
-
-<p>Remember, the <code>pretty_date</code> decorator will 'prettify' the date in the format we specified.
-The <code>pretty_date</code> decorator function will take the return <code>get_today()</code> function and run the <code>wrapper</code> function on it. And return the 'prettified' date.</p>
-<p>Here goes the decorated functions.  Instead of the above functions standing on their own, we wrap them in the <code>pretty_date</code> decorator.   Notice the <code>@</code> before the decorator <code>pretty_date</code>. Like so:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">datetime</span>
+<p>It has 2 arguments: a <code>date</code> and numbers of <code>days</code> into the future.   All it does is add the number of days to the original date. And then later we want to 'prettify' it with the <code>@pretty_date</code> decorator.</p>
+<p>Or we have this function:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
 <span class="nd">@pretty_date</span>
-<span class="k">def</span> <span class="nf">get_today</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
-
-<span class="nd">@pretty_date</span>
-<span class="k">def</span> <span class="nf">get_tomorrow</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nd">@pretty_date</span>
-<span class="k">def</span> <span class="nf">get_yesterday</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">date_in_past</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">):</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="s">&#39;{}/{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+    <span class="n">date_format</span> <span class="o">=</span> <span class="s">&quot;%m/</span><span class="si">%d</span><span class="s">/%Y&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
 </pre></div>
 
 
-<p>You can then call the wrapped functions:</p>
-<div class="highlight"><pre><span class="k">print</span> <span class="n">get_today</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">get_tomorrow</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">get_yesterday</span><span class="p">()</span>
-</pre></div>
-
-
-<p>And now the results are:</p>
-<div class="highlight"><pre>2014_12_15
-2014_12_16
-2014_12_14
-</pre></div>
-
-
-<p>And that's decorators. In short.</p>
-<p>Oh, and a caveat: Those functions that are now wrapped - are always wrapped. That means that <code>get_today()</code> can't be used to call for the full date <code>2014-12-15 15:47:28.199614</code>. Whenever, we call <code>get_today()</code>, it will return <code>2014_12_15</code> format. You will have to create another function to get the unformatted date. </p>
-<hr />
-<p>But that's not all. You can have several decorators wrap a function.</p>
-<p>Here, we'll define a few more decorators.  These create html tags around the string.</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">html_em</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&#39;&lt;em&gt;{}&lt;/em&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="k">def</span> <span class="nf">html_strong</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s">&#39;&lt;strong&gt;{}&lt;/strong&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
+<p>This function has 4 arguments. The first 3 are positional, the last is a keyword argument. OK, this is just for <strike>argument</strike> learning sake.  This function gets a date and subtracts a number of days from it. And then of course, we want to 'prettify' it.</p>
+<p>These and the other functions from the previous post all can be decorated with the same <code>@pretty_date</code> decorator.  But since they all have different amounts of args and even kwargs, we have to design the decorator to be able to handle all possible functions that might be wrapped by it.</p>
+<p>Here's the revised decorator:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;the date: {} (before it was formatted)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;{0:%Y}_{0:%m}_{0:</span><span class="si">%d</span><span class="s">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrapper</span>
 </pre></div>
 
 
-<p>And here's how we wrap the function with these wrappers too. </p>
-<div class="highlight"><pre><span class="nd">@html_em</span>
-<span class="nd">@html_strong</span>
-<span class="nd">@pretty_date</span>
-<span class="k">def</span> <span class="nf">get_today</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
-</pre></div>
-
-
-<p>The order matters!  It goes from top to bottom.  From the top of the ladder down (- and then back up again).</p>
-<p>1.First, it  will do <code>@html_em</code> decorator function. </p>
-<ul>
-<li>The <code>func</code> in <code>format(func())</code> of that function will call the next decorator function <code>@html_strong</code>. </li>
-<li>And wait for the <code>return</code> from that call to do its job of adding the <code>&lt;em&gt;&lt;/em&gt;</code>.  </li>
-</ul>
-<p>2.Then the <code>@html_strong</code> decorator function will begin.</p>
-<ul>
-<li>The <code>func</code> of the <code>@html_strong</code>'s <code>format(func())</code> will call the <code>@pretty_date</code> decorator function. </li>
-<li>And wait for the <code>return</code> to do its job of adding the <code>&lt;strong&gt;&lt;/strong&gt;</code>.</li>
-</ul>
-<p>3.Then, the <code>@pretty_date</code> decorator function will call the <code>get_today()</code> function.</p>
-<ul>
-<li>And wait for the <code>return</code> to do its job of formatting the date.</li>
-</ul>
-<p>4.The <code>get_today()</code> function will get today's date.</p>
-<p>5.Then it goes back up the ladder. <code>@pretty_date</code> does its work. <code>@html_strong</code> add <strong></strong><code>and</code>@html_em<code>adds</code><em></em>`. </p>
-<p>And finally, the final <code>return</code> is done.  The newly formatted, 'html'ed date!</p>
-<p>So in essence, the first thing that is being returned is the <code>datetime.datetime.today()</code>, then it is returning the <code>&lt;strong&gt;&lt;/strong&gt;</code> and last it is returning the <code>&lt;em&gt;&lt;/em&gt;</code></p>
-<p>The results:</p>
-<div class="highlight"><pre><span class="nt">&lt;em&gt;&lt;strong&gt;</span>2014_12_15<span class="nt">&lt;/strong&gt;&lt;/em&gt;</span>
-</pre></div>
-
-
-<h3>for much more on decorators</h3>
-<p><a href="http://stackoverflow.com/questions/739654/how-can-i-make-a-chain-of-function-decorators-in-python">from stackoverflow - check out the answer 'Decorator Basics'</a></p></div>
+<p>Notice the <code>*args</code> and <code>**kwargs</code> in the <code>def wrapper(*args, **kwargs)</code> and again in the <code>date = func(*args, **kwargs)</code>.  They are included in the wrapper and then passed to the original function. Which of course uses those arguments to get the date.</p>
+<p>And that's it!  You can use this decorator with many different functions - whether they do or do not have <code>args</code> or <code>kwargs</code>.</p></div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.deekras.com/working-with-decorators.html"><h2>Working with Decorators</h2></a>
+        <div class= "well small"> Mon 15 December 2014
+
+by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>Decorators: a function within a function</h2>
+<p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them <strike>easy</strike> easier to understand.</p>
+<h3>First, when might decorators be used?</h3>
+<p>Decorators are used to extend a function. To give it more ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/working-with-decorators.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -275,7 +161,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 
  </div>
-        <div class="summary"><h4>Working with Threads</h4>
+        <div class="summary"><h3>Working with Threads</h3>
 <p>I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/working-with-threads.html">read more</a></div>
     </div>	
 				

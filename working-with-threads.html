@@ -63,7 +63,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
         </div>
 	
-        <div><h4>Working with Threads</h4>
+        <div><h3>Working with Threads</h3>
 <p>I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me. So I share - in case it makes learning about threads easier for someone.</p>
 <p><strong>First, a scenario where threading can be useful:</strong> You're using one of those websites that check several airlines for best fares.  Finally the trip to Barcelona!  It would take a long time to search each airline separately.  It woud be so much faster if the computer would search several airlines concurrently.  Thankfully, that is what they do - saving us much time.</p>
 <p>That's exactly what threading does. The program sets off to do several things at the same time - each function on its own thread.  This is especially useful when the functions don't rely on or get data from each other.  Thread1 searches American Airlines, Thread2 searches Air France and Thread3 searches Iberia. And so on. And they each come back with their results when they are done. And then you can choose the best flight to Barcelona.</p>
@@ -179,9 +179,9 @@ Then, the url that we'll use to find the time. Notice the curly braces <code>{}<
 </ul>
 </li>
 </ol>
-<p><code>@register</code> is a decorator for the <code>_atexit()</code> function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time.</p>
+<p><code>@register</code> is a decorator for the <code>_atexit()</code> function.  Together, they are a function that registers an exit function - to do something just before the script quits. In this case, print the current time to compare it to the start time. <a href="https://docs.python.org/2/library/atexit.html">More about atexit()</a></p>
 <ul>
-<li>in way too short, <code>decorators</code> #need more about decorators <a href="http://www.jeffknupp.com/blog/2013/11/29/improve-your-python-decorators-explained/">Lots more about decorators</a></li>
+<li>in way too short, decorators extend on the original function. <a href="http://www.deekras.com/working-with-decorators.html">See my post about decorators.</a></li>
 </ul>
 <p>So there, a very simple threading process.  </p>
 <hr />
