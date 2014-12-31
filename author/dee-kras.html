@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://www.deekras.com/decorators-with-args-kwargs.html"><h1>Decorators with *args, **kwargs</h1></a>
-Tue 16 December 2014
+            <a href="http://www.deekras.com/some-simple-recursive-functions.html"><h1>Some simple recursive functions</h1></a>
+Wed 17 December 2014
 
 by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
  
@@ -69,84 +69,58 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h2>Decorators: Decorators - with *args and **kwargs</h2>
+        <div><h2>So how do recursions work?</h2>
+<p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
+<p>A recursive function is a function that calls itself. I'll throw in a simple example. The Fibonacci.</p>
+<p>the fibonacci of 5 = 5 x 4 x 3 x 2 x 1
+what is happening here is:
+   - first, 5 is multiplied by 5-1 (in other words 4) = 20
+   - then,  that result is multiplied by 4-1 (3)  = 60 
+   - then,  that result is multiplied by 3-1 (2) = 120
+   - lastly,  that result is multiplied by 2-1 (1) = 120
+   - and it's over. we have the result.</p>
+<p>There's a repetetive pattern here - the number is multiplied by (the number - 1) <code>n * (n-1)</code>. That's where the recursive function comes in.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fibonnaci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fibonnaci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So what is happening here?</p>
+<p>Let's look at the last line. <code>return n * fibonnaci(n-1)</code>. the number is being multiplied by ... the result of the same function.  In other words a loop of the function calling itself.</p>
+<p>Let's look at the construct of the rest of the function and come back to the last line.   We start off with <code>if n &lt;= 1:</code>. Every recursive function <strong>must have an end to the loop</strong>, or it will go on until Python stops it.  So in this case, if the number is less than or equal to 1, stop the function by <code>return 1</code>.</p>
+<p>Check out the flow of this function using <a href="http://pythontutor.com/">pythontutor.com</a>:
+<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+fibonnaci(n)%3A%0A++++if+n+%3C%3D+1%3A%0A++++++++return+1%0A++++else%3A%0A++++++++return+n+*+fibonnaci(n-1)%0A&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&drawParentPointers=false&textReferences=false&showOnlyOutputs=false&py=2&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=350&codeDivHeight=400"> </iframe></p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.deekras.com/decorators-with-args-kwargs.html"><h2>Decorators with *args, **kwargs</h2></a>
+        <div class= "well small"> Tue 16 December 2014
+
+by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>Decorators: Decorators - with *args and **kwargs</h2>
 <p>This post builds on my previous one about <a href="http://www.deekras.com/working-with-decorators.html">Decorators</a>.</p>
 <p>So we have the decorator that 'prettifies' the date returned from the original function.</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="n">date</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&#39;got the date: {} (before it was formatted)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s">&#39;{0:%Y}_{0:%m}_{0:</span><span class="si">%d</span><span class="s">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
-</pre></div>
-
-
-<p>This <code>@pretty_date</code> decorator can be used with <strong>any function</strong> that returns a date, no matter how that date is calculated. As long as it is in a format that the <code>return '{0:%Y}_{0:%m}_{0:%d}'.format(date)</code> can evaluate.</p>
-<p>But what if the original function needs some arguments in order for it to get the date?  Yes, those arguments can be passed through the decorator to the function.  It's rather simple. Just use *args and **kwargs.  <a href="http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/">Read more about *args and **kwargs.</a></p>
-<p>Let's say we have this function:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-
-<span class="k">def</span> <span class="nf">date_into_future</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">days</span><span class="p">):</span>
-    <span class="n">date_format</span> <span class="o">=</span> <span class="s">&quot;%m/</span><span class="si">%d</span><span class="s">/%Y&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
-</pre></div>
-
-
-<p>It has 2 arguments: a <code>date</code> and numbers of <code>days</code> into the future.   All it does is add the number of days to the original date. And then later we want to 'prettify' it with the <code>@pretty_date</code> decorator.</p>
-<p>Or we have this function:</p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-
-<span class="nd">@pretty_date</span>
-<span class="k">def</span> <span class="nf">date_in_past</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">days</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">):</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="s">&#39;{}/{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
-    <span class="n">date_format</span> <span class="o">=</span> <span class="s">&quot;%m/</span><span class="si">%d</span><span class="s">/%Y&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">date_format</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
-</pre></div>
-
-
-<p>This function has 4 arguments. The first 3 are positional, the last is a keyword argument. OK, this is just for <strike>argument</strike> learning sake.  This function gets a date and subtracts a number of days from it. And then of course, we want to 'prettify' it.</p>
-<p>These and the other functions from the previous post all can be decorated with the same <code>@pretty_date</code> decorator.  But since they all have different amounts of args and even kwargs, we have to design the decorator to be able to handle all possible functions that might be wrapped by it.</p>
-<p>Here's the revised decorator:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&#39;the date: {} (before it was formatted)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s">&#39;{0:%Y}_{0:%m}_{0:</span><span class="si">%d</span><span class="s">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
-</pre></div>
-
-
-<p>Notice the <code>*args</code> and <code>**kwargs</code> in the <code>def wrapper(*args, **kwargs)</code> and again in the <code>date = func(*args, **kwargs)</code>.  They are included in the wrapper and then passed to the original function. Which of course uses those arguments to get the date.</p>
-<p>And that's it!  You can use this decorator with many different functions - whether they do or do not have <code>args</code> or <code>kwargs</code>.</p>
-<p>Here's how you might call these 2 functions. ([!!] Remember, once the functions are wrapped with the decorator, they are always wrapped. So when we call the function, they are automatically decorated.)</p>
-<div class="highlight"><pre><span class="k">print</span> <span class="n">date_into_future</span><span class="p">(</span><span class="s">&#39;12/8/2014&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">date_in_past</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">date_in_past</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">)</span>
-</pre></div>
-
-
-<p>And the results:</p>
-<div class="highlight"><pre><span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_into_future</span>
-<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2015</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">07</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
-<span class="mi">2015</span><span class="n">_01_07</span>
-
-
-<span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_in_past</span>
-<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">11</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
-<span class="mi">2013</span><span class="n">_12_11</span>
-
-
-<span class="n">getting</span> <span class="n">the</span> <span class="n">date</span> <span class="kn">from</span> <span class="nn">function</span><span class="p">:</span> <span class="n">date_in_past</span>
-<span class="n">the</span> <span class="n">date</span><span class="p">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">14</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> <span class="p">(</span><span class="n">before</span> <span class="n">it</span> <span class="n">was</span> <span class="n">formatted</span><span class="p">)</span>
-<span class="mi">2014</span><span class="n">_01_14</span>
-</pre></div></div>
-        <hr />
-    </div>
-		
+        <span class="k">print</span> <span class="s">&#39;got the date: {} (before ...</span></pre></div> <a class="btn btn-info xsmall" href="http://www.deekras.com/decorators-with-args-kwargs.html">read more</a></div>
+    </div>	
+				
 
  
         
