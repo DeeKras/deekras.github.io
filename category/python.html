@@ -72,30 +72,30 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
         <div><h2>So how do recursions work?</h2>
 <p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
 <p>A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.</p>
-<p>The factorial of 5 = 5 x 4 x 3 x 2 x 1
-What is happening here:</p>
+<p>The factorial of 5 = 5 x 4 x 3 x 2 x 1.  What is happening here:</p>
 <ul>
 <li>first, 5 is multiplied by 5-1 (in other words 4) = 20</li>
-<li>then,  that result is multiplied by 4-1 (3)  = 60 </li>
-<li>then,  that result is multiplied by 3-1 (2) = 120</li>
-<li>lastly,  that result is multiplied by 2-1 (1) = 120</li>
+<li>then,  that result (20) is multiplied by 4-1 (3)  = 60 </li>
+<li>then,  that result (60) is multiplied by 3-1 (2) = 120</li>
+<li>lastly,  that result (120) is multiplied by 2-1 (1) = 120</li>
 <li>and it's over. We have the result.</li>
 </ul>
-<p>There's a repetetive pattern here - the number is multiplied by (the number - 1) <code>n * (n-1)</code>. That's where the recursive function comes in.</p>
-<p>Here is what the function might look like. I put in lots of print statements so you can see what is happening at each point.</p>
+<p>There's a repetetive pattern here - the result is multiplied by (the number - 1) <code>n * (n-1)</code>. That's where the recursive function comes in.</p>
+<p>Here is what the function might look like. I put in lots of print statements so you can see what is happening at each point.  </p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">print</span> <span class="s">&quot;NOW: We&#39;re (back) at the beginning of the function. n = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;-&quot;</span><span class="o">*</span><span class="mi">5</span>
+        <span class="k">print</span> <span class="s">&quot;--- HIT THE BASE CASE&quot;</span>
         <span class="k">print</span> <span class="s">&quot;NOW: the return is 1.&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;--- WILL START GOING BACK UP THE LADDER&quot;</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">print</span> <span class="s">&quot;   NOW: We&#39;re in the &#39;else statement&#39;. n = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span>  <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">print</span> <span class="s">&quot;&quot;&quot;NOW: The interim result (the previous &#39;return&#39;) is {result_was} and n = {n}.  </span>
-<span class="s">              So {result_was} * {n} = {result}.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_was</span> <span class="o">=</span> <span class="n">result</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+<span class="s">              So {result_was} * {n} = {result}.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_was</span><span class="o">=</span><span class="n">result</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
         <span class="k">print</span> <span class="s">&quot;   The NEW interim result (the current &#39;return&#39;) based on this recursion is:  {}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
@@ -109,7 +109,7 @@ What is happening here:</p>
 <p>Similarly, <code>if n == 1: return 1</code>. If the argument of the function is 1, it returns a 1 and that is the end. This line also plays an important role in the overall function. Every recursive function <strong>must have an end to the loop*</strong>, or it will go on in an infinite loop.  So in this case, if the number is equal to 1, it stops the recursion with a <code>return 1</code> and then the function finishes up the rest of its work.  (*This is also referred to as the 'base case' - when a problem can be solved without further recursion.)</p>
 <p>Now, let's go back and look at the crux of this function <code>result =  n * factorial(n-1)</code>. <code>n</code> is to be multiplied by what? a function. (Of course, we can call functions in a function). In this case, it is calling the same function, with a different argument <code>n - 1</code>. So <code>n</code> will wait until it knows what it should be multiplied with; it will wait for the <code>return</code> of that function. </p>
 <p>Here is where it gets interesting. That function will then call itself again. <code>n</code> waits for a <code>return</code>. And since this is a recursion, there is also a new <code>n</code> and that one also waits for a <code>return</code>. And the recursive loop goes on  and on - until it hits its 'base case'. And then the <code>return</code>s are all in and the <code>n</code>s can do their multiplication and be done with it.</p>
-<p>In other words, the recursive loop goes down the ladder and all the <code>n</code>s wait for their corresponding <code>return</code> - until it hits its 'base case', its absolute bottom.  And then it goes back up the ladder. The most recent <code>return</code> is multiplied to the lowest <code>n</code>, the most recent <code>n</code>. And the <code>return</code> of that multiplication is multiplied to the next lowest <code>n</code>. And so on until it reaches the top. And we have our final <code>return</code>. That is the result of the function.</p>
+<p>In other words, <strong>the recursive loop goes down the ladder and all the <code>n</code>s wait for their corresponding <code>return</code> - until it hits its 'base case', its absolute bottom.  And then it goes back up the ladder.</strong> The most recent <code>return</code> is multiplied to the lowest <code>n</code>, the most recent <code>n</code>. And the <code>return</code> of that multiplication is multiplied to the next lowest <code>n</code>. And so on until it reaches the top. And we have our final <code>return</code>. That is the result of the function.</p>
 <h3><strong>Let's see that in action. </strong></h3>
 <p>Here is the result of the above function - with all the print statements:</p>
 <div class="highlight"><pre><span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 3</span>
@@ -117,8 +117,9 @@ What is happening here:</p>
 <span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 2</span>
 <span class="s1">   NOW: We&#39;</span><span class="n">re</span> <span class="k">in</span> <span class="n">the</span> <span class="s1">&#39;else statement&#39;</span><span class="o">.</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 1</span>
-<span class="s1">-----</span>
+<span class="s1">--- HIT THE BASE CASE</span>
 <span class="s1">NOW: the return is 1.</span>
+<span class="s1">--- WILL START GOING BACK UP THE LADDER</span>
 <span class="s1">NOW: The interim result (the previous &#39;</span><span class="k">return</span><span class="s1">&#39;) is 1 and n = 2.  So 1 * 2 = 2.</span>
 <span class="s1">   The NEW interim result (the current &#39;</span><span class="k">return</span><span class="s1">&#39;) based on this recursion is:  2.</span>
 <span class="s1">NOW: The interim result (the previous &#39;</span><span class="k">return</span><span class="s1">&#39;) is 2 and n = 3.  So 2 * 3 = 6.</span>
@@ -128,13 +129,15 @@ What is happening here:</p>
 
 
 <p>Check out the flow of this function using <a href="http://pythontutor.com/">pythontutor.com</a>:  Click on the forward button to see what is happening step by step.
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+factorial(n)%3A%0A++++print+%22NOW%3A+We're+(back)+at+the+beginning+of+the+function.+n+%3D+%7B%7D%22.format(n)%0A++++if+n+%3C%3D+0%3A%0A++++++++return+0%0A++++if+n+%3D%3D+1%3A%0A++++++++print+%22-%22*5%0A++++++++print+%22NOW%3A+the+return+is+1.%22%0A++++++++return+1%0A++++else%3A%0A++++++++print+%22+++NOW%3A+We're+in+the+'else+statement'.+n+%3D+%7B%7D%22.format(n)%0A++++++++result+%3D++n+*+factorial(n-1)%0A++++++++print+%22NOW%3A+The+interim+result+(the+previous+'return')+is+%7Bresult_was%7D+and+n+%3D+%7Bn%7D.++So+%7Bresult_was%7D+*+%7Bn%7D+%3D+%7Bresult%7D.%22.format(result_was+%3D+result/n,+n%3Dn,+result%3Dresult)%0A++++++++print+%22+++The+NEW+interim+result+(the+current+'return')+based+on+this+recursion+is%3A++%7B%7D.%22.format(result)%0A++++++++return+result%0A%0Aprint+factorial(3)&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&drawParentPointers=false&textReferences=false&showOnlyOutputs=false&py=2&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=350&codeDivHeight=400"> </iframe></p>
+<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+factorial(n)%3A%0A++++print+%22NOW%3A+We're+(back)+at+the+beginning+of+the+function.+n+%3D+%7B%7D%22.format(n)%0A++++if+n+%3C%3D+0%3A%0A++++++++return+0%0A++++if+n+%3D%3D+1%3A%0A++++++++print+%22---+HIT+THE+BASE+CASE%22%0A++++++++print+%22NOW%3A+the+return+is+1.%22%0A++++++++print+%22---+WILL+START+GOING+BACK+UP+THE+LADDER%22%0A++++++++return+1%0A++++else%3A%0A++++++++print+%22+++NOW%3A+We're+in+the+'else+statement'.+n+%3D+%7B%7D%22.format(n)%0A++++++++result+%3D++n+*+factorial(n-1)%0A++++++++print+%22%22%22NOW%3A+The+interim+result+(the+previous+'return')+is+%7Bresult_was%7D+and+n+%3D+%7Bn%7D.++%0A++++++++++++++So+%7Bresult_was%7D+*+%7Bn%7D+%3D+%7Bresult%7D.%22%22%22.format(result_was%3Dresult/n,+n%3Dn,+result%3Dresult)%0A++++++++print+%22+++The+NEW+interim+result+(the+current+'return')+based+on+this+recursion+is%3A++%7B%7D.%22.format(result)%0A++++++++return+result%0A%0Aprint+factorial(3)&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&drawParentPointers=false&textReferences=false&showOnlyOutputs=false&py=2&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=350&codeDivHeight=400"> </iframe></p>
 <h3><strong>So what is happening here - step by step?</strong></h3>
-<p>Firstly, we start the function at the beginning and n = 3. Since <code>n</code> does not meet the 'if statements', it goes to the 'else statement'.  That's where it finds <code>result =  n * factorial(n-1)</code> and it calls the factorial function, this time with n-1 as the argument, as <code>factorial(2)</code>. And the 3 waits to find out what it will be multiplied by. What is the result of <code>factorial(2)</code>? The loop begins.</p>
+<p>Firstly, we start the function at the beginning and n = 3. Since <code>n</code> does not meet the 'if statements', it goes to the 'else statement'.  That's where it finds <code>result =  n * factorial(n-1)</code> and it calls the <code>factorial</code> function, this time with <code>n-1</code> as the argument, as <code>factorial(2)</code>. And the 3 waits to find out what it will be multiplied by - what is the result of <code>factorial(2)</code>? The loop begins.</p>
 <p>Now the <code>n</code> is 2. And it too wants to know what to be multiplied by and waits for the results of <code>factorial(1)</code>.</p>
-<p>And now finally, <code>n</code> does equal 1. It has hit 'base case' and returns 1. The <code>return</code> = 1. Now the multiplication can begin! </p>
-<p>The <code>2</code> is then multiplied by that previous <code>return</code>. So <code>n</code> * <code>return</code>  = <code>new return</code>. 2 * 1 = 2. That result, the 2, is the new <code>return</code> that the 3 is waiting for.  So again <code>n</code> * <code>return</code>  = <code>new return</code>. 3 * 2 = 6. And 6 is our final <code>return</code>.</p>
-<p>This is the code without all the extras.</p>
+<p>And now finally, <code>n</code> does equal 1. It has hit 'base case' and returns 1. The <code>return</code> = 1. Now it goes 'back up the ladder; now the multiplication can begin! </p>
+<p>The <code>n</code> is then multiplied by that previous <code>return</code>. So <code>n</code> * <code>return</code>  = <code>new return</code>.  2 * 1 = 2. </p>
+<p>That result, the 2, is the new <code>return</code> that the 3 is waiting for.  So again <code>n</code> * <code>return</code>  = <code>new return</code>. 3 * 2 = 6. </p>
+<p>And 6 is our final <code>return</code>.</p>
+<p><strong>This is the code without all the extras.</strong></p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -147,7 +150,7 @@ What is happening here:</p>
 </pre></div>
 
 
-<p>WOW! That was long. But I hope that is clear. In very short... The recursion goes down until it hits base case. And then goes up doing the function using the <code>return</code> from the previous step.</p>
+<p>WOW! That was long. But I hope that is clear. <strong>In very short... The recursion goes down until it hits base case. And then goes up doing the function using the <code>return</code> from the previous step.</strong></p>
 <hr />
 <p>more: 
 http://www.python-course.eu/recursive_functions.php</p></div>
