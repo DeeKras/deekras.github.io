@@ -58,6 +58,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;testing footnotes&lt;sup id="fnref:n"&gt;&lt;a class="footnote-ref" href="#fn:n" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;Check out the flow of this function using &lt;a href="http://pythontutor.com/"&gt;pythontutor.com&lt;/a&gt;:  Click on the forward button to see what is happening step by step.
 &lt;iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+factorial(n)%3A%0A++++print+%22NOW%3A+We're+(back)+at+the+beginning+of+the+function.+n+%3D+%7B%7D%22.format(n)%0A++++if+n+%3C%3D+0%3A%0A++++++++return+0%0A++++if+n+%3D%3D+1%3A%0A++++++++print+%22---+HIT+THE+BASE+CASE%22%0A++++++++print+%22NOW%3A+the+return+is+1.%22%0A++++++++print+%22---+WILL+START+GOING+BACK+UP+THE+LADDER%22%0A++++++++return+1%0A++++else%3A%0A++++++++print+%22+++NOW%3A+We're+in+the+'else+statement'.+n+%3D+%7B%7D%22.format(n)%0A++++++++result+%3D++n+*+factorial(n-1)%0A++++++++print+%22%22%22NOW%3A+The+interim+result+(the+previous+'return')+is+%7Bresult_was%7D+and+n+%3D+%7Bn%7D.++%0A++++++++++++++So+%7Bresult_was%7D+*+%7Bn%7D+%3D+%7Bresult%7D.%22%22%22.format(result_was%3Dresult/n,+n%3Dn,+result%3Dresult)%0A++++++++print+%22+++The+NEW+interim+result+(the+current+'return')+based+on+this+recursion+is%3A++%7B%7D.%22.format(result)%0A++++++++return+result%0A%0Aprint+factorial(3)&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;drawParentPointers=false&amp;textReferences=false&amp;showOnlyOutputs=false&amp;py=2&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0&amp;codeDivWidth=350&amp;codeDivHeight=400"&gt; &lt;/iframe&gt;&lt;/p&gt;
 &lt;h3&gt;&lt;strong&gt;So what is happening here - step by step?&lt;/strong&gt;&lt;/h3&gt;
@@ -83,7 +84,15 @@
 &lt;p&gt;WOW! That was long. But I hope that is clear. &lt;strong&gt;In very short... The recursion goes down until it hits base case. And then goes up doing the function using the &lt;code&gt;return&lt;/code&gt; from the previous step.&lt;/strong&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;more: 
-http://www.python-course.eu/recursive_functions.php&lt;/p&gt;</summary></entry><entry><title>Decorators with *args, **kwargs</title><link href="http://www.deekras.com/decorators-with-args-kwargs.html" rel="alternate"></link><updated>2014-12-16T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-16:decorators-with-args-kwargs.html</id><summary type="html">&lt;h2&gt;Decorators: Decorators - with *args and **kwargs&lt;/h2&gt;
+http://www.python-course.eu/recursive_functions.php&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:n"&gt;
+&lt;p&gt;the footnote&amp;#160;&lt;a class="footnote-backref" href="#fnref:n" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Decorators with *args, **kwargs</title><link href="http://www.deekras.com/decorators-with-args-kwargs.html" rel="alternate"></link><updated>2014-12-16T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-16:decorators-with-args-kwargs.html</id><summary type="html">&lt;h2&gt;Decorators: Decorators - with *args and **kwargs&lt;/h2&gt;
 &lt;p&gt;This post builds on my previous one about &lt;a href="http://www.deekras.com/working-with-decorators.html"&gt;Decorators&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;So we have the decorator that 'prettifies' the date returned from the original function.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pretty_date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
