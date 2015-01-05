@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://www.deekras.com/some-simple-recursive-functions.html"><h1>Some simple recursive functions</h1></a>
-Wed 17 December 2014
+            <a href="http://www.deekras.com/recursions-and-lists-and-slices.html"><h1>Recursions and Lists and Slices</h1></a>
+Thu 18 December 2014
 
 by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
  
@@ -69,97 +69,85 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h2>So how do recursions work?</h2>
-<p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
-<p>A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.</p>
-<p>The factorial of 5 = 5 x 4 x 3 x 2 x 1.  What is happening here:</p>
-<ul>
-<li>first, 5 is multiplied by 5-1 (in other words 4) = 20</li>
-<li>then,  that result (20) is multiplied by 4-1 (3)  = 60 </li>
-<li>then,  that result (60) is multiplied by 3-1 (2) = 120</li>
-<li>lastly,  that result (120) is multiplied by 2-1 (1) = 120</li>
-<li>and it's over. We have the result.</li>
-</ul>
-<p>There's a repetetive pattern here - the result is multiplied by (the number - 1) <code>n * (n-1)</code>. That's where the recursive function comes in.</p>
-<p>Here is what the function might look like. I put in lots of print statements so you can see what is happening at each point.  </p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&quot;NOW: We&#39;re (back) at the beginning of the function. n = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;--- HIT THE BASE CASE&quot;</span>
-        <span class="k">print</span> <span class="s">&quot;NOW: the return is 1.&quot;</span>
-        <span class="k">print</span> <span class="s">&quot;--- WILL START GOING BACK UP THE LADDER&quot;</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;   NOW: We&#39;re in the &#39;else statement&#39;. n = {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span>  <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&quot;&quot;&quot;NOW: The interim result (the previous &#39;return&#39;) is {result_was} and n = {n}.  </span>
-<span class="s">              So {result_was} * {n} = {result}.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_was</span><span class="o">=</span><span class="n">result</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&quot;   The NEW interim result (the current &#39;return&#39;) based on this recursion is:  {}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span>
+        <div><h2>Recursions on lists .. with slices</h2>
+<p>FOllowing up on my <a href="link">post about recursions</a>.  This time about recursive functions using a list. </p>
+<h3>When might we use this</h3>
+<p>SO here's where slices gets really useful.</p>
+<p>As a quick reminder about slices:
+<a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
+<p>Slices allow you to get a substring from a string or part of a list.
+Some examples</p>
+<div class="highlight"><pre>word = &#39;abcdefghij&#39;
+|a|b|c|d|e|f|g|h|i|j|
+|-|-|-|-|-|-|-|-|-|-|
+|0|1|2|3|4|5|6|7|8|9|
+**\*Notice that there are 10 positions here. Starting with 0.  (&#39;a&#39; is in the 1st position. &#39;j&#39; is in the 10th position.)**
 
-<span class="k">print</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+|            |         |
+|------------|---------|
+| word[0]    | a       | # index 1st position
+| word[-2]   | i       | # index 2nd to last position
+| word[7]    | h       | # index 8th position
+| word[7:9]  | hi      | # slice BETWEEN 8th &amp; 10th (inclusive) position = 8th &amp; 9th (indexes 8,9)
+| word[:6]   | abcdef  | # slice FROM BEGINNING until 7th position (indexes 0-6)
+| word[5:]   | fghij   | # slice FROM 6th position until END (indexes 5--&gt;)
+| word[::3]  | adgj    | # slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)
+| word[3::2] | dfhj    | # slice from 4th position until end, STEP 2 (3,5,7,9)
 </pre></div>
 
 
-<h3><strong>So what is happening here?</strong></h3>
-<p>Let's look at the key line <code>result =  n * factorial(n-1)</code>. The number <code>n</code> is being multiplied by ... the result of the same function <code>factorial(n-1)</code>.  In other words, a loop of the function calling itself.</p>
-<p>Let's look at the construct of the rest of the function and we'll come back to that line.   We start off with <code>if n &lt;= 0:  return 0</code>. For this function, we don't want to deal with negative numbers or 0. So if the argument is 0 or less, it returns a 0 and that is the end.</p>
-<p>Similarly, <code>if n == 1: return 1</code>. If the argument of the function is 1, it returns a 1 and that is the end. This line also plays an important role in the overall function. Every recursive function <strong>must have an end to the loop*</strong>, or it will go on in an infinite loop.  So in this case, if the number is equal to 1, it stops the recursion with a <code>return 1</code> and then the function finishes up the rest of its work.  (*This is also referred to as the 'base case' - when a problem can be solved without further recursion.)</p>
-<p>Now, let's go back and look at the crux of this function <code>result =  n * factorial(n-1)</code>. <code>n</code> is to be multiplied by what? a function. (Of course, we can call functions in a function). In this case, it is calling the same function, with a different argument <code>n - 1</code>. So <code>n</code> will wait until it knows what it should be multiplied with; it will wait for the <code>return</code> of that function. </p>
-<p>Here is where it gets interesting. That function will then call itself again. <code>n</code> waits for a <code>return</code>. And since this is a recursion, there is also a new <code>n</code> and that one also waits for a <code>return</code>. And the recursive loop goes on  and on - until it hits its 'base case'. And then the <code>return</code>s are all in and the <code>n</code>s can do their multiplication and be done with it.</p>
-<p>In other words, <strong>the recursive loop goes down the ladder and all the <code>n</code>s wait for their corresponding <code>return</code> - until it hits its 'base case', its absolute bottom.  And then it goes back up the ladder.</strong> The most recent <code>return</code> is multiplied to the lowest <code>n</code>, the most recent <code>n</code>. And the <code>return</code> of that multiplication is multiplied to the next lowest <code>n</code>. And so on until it reaches the top. And we have our final <code>return</code>. That is the result of the function.</p>
-<h3><strong>Let's see that in action. </strong></h3>
-<p>Here is the result of the above function - with all the print statements:</p>
-<div class="highlight"><pre><span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 3</span>
-<span class="s1">   NOW: We&#39;</span><span class="n">re</span> <span class="k">in</span> <span class="n">the</span> <span class="s1">&#39;else statement&#39;</span><span class="o">.</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 2</span>
-<span class="s1">   NOW: We&#39;</span><span class="n">re</span> <span class="k">in</span> <span class="n">the</span> <span class="s1">&#39;else statement&#39;</span><span class="o">.</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">NOW</span><span class="o">:</span> <span class="n">We</span><span class="s1">&#39;re (back) at the beginning of the function. n = 1</span>
-<span class="s1">--- HIT THE BASE CASE</span>
-<span class="s1">NOW: the return is 1.</span>
-<span class="s1">--- WILL START GOING BACK UP THE LADDER</span>
-<span class="s1">NOW: The interim result (the previous &#39;</span><span class="k">return</span><span class="s1">&#39;) is 1 and n = 2.  So 1 * 2 = 2.</span>
-<span class="s1">   The NEW interim result (the current &#39;</span><span class="k">return</span><span class="s1">&#39;) based on this recursion is:  2.</span>
-<span class="s1">NOW: The interim result (the previous &#39;</span><span class="k">return</span><span class="s1">&#39;) is 2 and n = 3.  So 2 * 3 = 6.</span>
-<span class="s1">   The NEW interim result (the current &#39;</span><span class="k">return</span><span class="err">&#39;</span><span class="o">)</span> <span class="n">based</span> <span class="n">on</span> <span class="k">this</span> <span class="n">recursion</span> <span class="k">is</span><span class="o">:</span>  <span class="mi">6</span><span class="o">.</span>
-<span class="mi">6</span>
-</pre></div>
-
-
-<p>Check out the flow of this function using <a href="http://pythontutor.com/">pythontutor.com</a>:  Click on the forward button to see what is happening step by step.
-<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+factorial(n)%3A%0A++++print+%22NOW%3A+We're+(back)+at+the+beginning+of+the+function.+n+%3D+%7B%7D%22.format(n)%0A++++if+n+%3C%3D+0%3A%0A++++++++return+0%0A++++if+n+%3D%3D+1%3A%0A++++++++print+%22---+HIT+THE+BASE+CASE%22%0A++++++++print+%22NOW%3A+the+return+is+1.%22%0A++++++++print+%22---+WILL+START+GOING+BACK+UP+THE+LADDER%22%0A++++++++return+1%0A++++else%3A%0A++++++++print+%22+++NOW%3A+We're+in+the+'else+statement'.+n+%3D+%7B%7D%22.format(n)%0A++++++++result+%3D++n+*+factorial(n-1)%0A++++++++print+%22%22%22NOW%3A+The+interim+result+(the+previous+'return')+is+%7Bresult_was%7D+and+n+%3D+%7Bn%7D.++%0A++++++++++++++So+%7Bresult_was%7D+*+%7Bn%7D+%3D+%7Bresult%7D.%22%22%22.format(result_was%3Dresult/n,+n%3Dn,+result%3Dresult)%0A++++++++print+%22+++The+NEW+interim+result+(the+current+'return')+based+on+this+recursion+is%3A++%7B%7D.%22.format(result)%0A++++++++return+result%0A%0Aprint+factorial(3)&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&drawParentPointers=false&textReferences=false&showOnlyOutputs=false&py=2&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=350&codeDivHeight=400"> </iframe></p>
-<h3><strong>So what is happening here - step by step?</strong></h3>
 <blockquote>
-<p>Quote</p>
+<p>One way to remember how slices work is to think of the indices as pointing <strong>between characters</strong>, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.</p>
 </blockquote>
-<p>Firstly, we start the function at the beginning and n = 3. Since <code>n</code> does not meet the 'if statements', it goes to the 'else statement'.  That's where it finds <code>result =  n * factorial(n-1)</code> and it calls the <code>factorial</code> function, this time with <code>n-1</code> as the argument, as <code>factorial(2)</code>. And the 3 waits to find out what it will be multiplied by - what is the result of <code>factorial(2)</code>? The loop begins.</p>
-<p>Now the <code>n</code> is 2. And it too wants to know what to be multiplied by and waits for the results of <code>factorial(1)</code>.</p>
-<p>And now finally, <code>n</code> does equal 1. It has hit 'base case' and returns 1. The <code>return</code> = 1. Now it goes 'back up the ladder; now the multiplication can begin! </p>
-<p>The <code>n</code> is then multiplied by that previous <code>return</code>. So <code>n</code> * <code>return</code>  = <code>new return</code>.  2 * 1 = 2. </p>
-<p>That result, the 2, is the new <code>return</code> that the 3 is waiting for.  So again <code>n</code> * <code>return</code>  = <code>new return</code>. 3 * 2 = 6. </p>
-<p>And 6 is our final <code>return</code>.</p>
-<p><strong>This is the code without all the extras.</strong></p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span>  <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<p>Ok, so that's about slices.  Here's why slices work so well with recursive.
+Let's work with <code>word = 'abcdefghij'</code>. Whatever .</p>
+<p>First time around <code>word[0]</code> is<code>'a'</code> and <code>word[1:]</code> is <code>'bcdefghij'.
+Second time around - the word is the previous</code>word[1:]<code>. So</code>word[0]<code>is</code>'b'<code>and</code>word[1:]<code>is now</code>'cdefghij'<code>. Until there there are no letters left in word and then</code>word[]==""`.</p>
+<p>Let's see that in action.  Here's the code:</p>
+<div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="s">&#39;abcdefghij&#39;</span>
 
-<span class="k">print</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;word: &quot;{}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;hit the base case. the end&#39;</span>
+        <span class="k">return</span> <span class="n">word</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;in the &#39;else statement&#39;&quot;</span>
+        <span class="k">print</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 </pre></div>
 
 
-<p>WOW! That was long. But I hope that is clear. <strong>In very short... The recursion goes down until it hits base case. And then goes up doing the function using the <code>return</code> from the previous step.</strong></p>
-<hr />
-<p>more: 
-http://www.python-course.eu/recursive_functions.php</p></div>
+<p>So what happened here?</p>
+<p>Each recursion starts off by printing what <code>word</code> looks like now.
+Then it checks for the 'base case', the exit of the loop.  Here it is   <code>if word == "":</code>
+If not the 'base case', then the recursion happens.  Here, it is the same function with a different <code>word</code> - the previous <code>word</code> - but from the second position. That is the slice <code>[1:]</code>.  And it loops and loops until it hits the 'base case' and exits.</p></div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.deekras.com/some-simple-recursive-functions.html"><h2>Some simple recursive functions</h2></a>
+        <div class= "well small"> Wed 17 December 2014
+
+by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>So how do recursions work?</h2>
+<p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
+<p>A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.</p>
+<p>The ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/some-simple-recursive-functions.html">read more</a></div>
+    </div>	
+				
 
  
         

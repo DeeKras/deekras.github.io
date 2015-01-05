@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-17T00:00:00+00:00</updated><entry><title>Some simple recursive functions</title><link href="http://www.deekras.com/some-simple-recursive-functions.html" rel="alternate"></link><updated>2014-12-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-17:some-simple-recursive-functions.html</id><summary type="html">&lt;h2&gt;So how do recursions work?&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-18T00:00:00+00:00</updated><entry><title>Recursions and Lists and Slices</title><link href="http://www.deekras.com/recursions-and-lists-and-slices.html" rel="alternate"></link><updated>2014-12-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-18:recursions-and-lists-and-slices.html</id><summary type="html">&lt;h2&gt;Recursions on lists .. with slices&lt;/h2&gt;
+&lt;p&gt;FOllowing up on my &lt;a href="link"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
+&lt;h3&gt;When might we use this&lt;/h3&gt;
+&lt;p&gt;SO here's where slices gets really useful.&lt;/p&gt;
+&lt;p&gt;As a quick reminder about slices:
+&lt;a href="https://docs.python.org/2/tutorial/introduction.html"&gt;More about slices&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Slices allow you to get a substring from a string or part of a list.
+Some examples&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;word = &amp;#39;abcdefghij&amp;#39;
+|a|b|c|d|e|f|g|h|i|j|
+|-|-|-|-|-|-|-|-|-|-|
+|0|1|2|3|4|5|6|7|8|9|
+**\*Notice that there are 10 positions here. Starting with 0.  (&amp;#39;a&amp;#39; is in the 1st position. &amp;#39;j&amp;#39; is in the 10th position.)**
+
+|            |         |
+|------------|---------|
+| word[0]    | a       | # index 1st position
+| word[-2]   | i       | # index 2nd to last position
+| word[7]    | h       | # index 8th position
+| word[7:9]  | hi      | # slice BETWEEN 8th &amp;amp; 10th (inclusive) position = 8th &amp;amp; 9th (indexes 8,9)
+| word[:6]   | abcdef  | # slice FROM BEGINNING until 7th position (indexes 0-6)
+| word[5:]   | fghij   | # slice FROM 6th position until END (indexes 5--&amp;gt;)
+| word[::3]  | adgj    | # slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)
+| word[3::2] | dfhj    | # slice from 4th position until end, STEP 2 (3,5,7,9)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;One way to remember how slices work is to think of the indices as pointing &lt;strong&gt;between characters&lt;/strong&gt;, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ok, so that's about slices.  Here's why slices work so well with recursive.
+Let's work with &lt;code&gt;word = 'abcdefghij'&lt;/code&gt;. Whatever .&lt;/p&gt;
+&lt;p&gt;First time around &lt;code&gt;word[0]&lt;/code&gt; is&lt;code&gt;'a'&lt;/code&gt; and &lt;code&gt;word[1:]&lt;/code&gt; is &lt;code&gt;'bcdefghij'.
+Second time around - the word is the previous&lt;/code&gt;word[1:]&lt;code&gt;. So&lt;/code&gt;word[0]&lt;code&gt;is&lt;/code&gt;'b'&lt;code&gt;and&lt;/code&gt;word[1:]&lt;code&gt;is now&lt;/code&gt;'cdefghij'&lt;code&gt;. Until there there are no letters left in word and then&lt;/code&gt;word[]==""`.&lt;/p&gt;
+&lt;p&gt;Let's see that in action.  Here's the code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;abcdefghij&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;print_letters&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;word: &amp;quot;{}&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hit the base case. the end&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;in the &amp;#39;else statement&amp;#39;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;print_letters&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+
+&lt;span class="n"&gt;print_letters&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So what happened here?&lt;/p&gt;
+&lt;p&gt;Each recursion starts off by printing what &lt;code&gt;word&lt;/code&gt; looks like now.
+Then it checks for the 'base case', the exit of the loop.  Here it is   &lt;code&gt;if word == "":&lt;/code&gt;
+If not the 'base case', then the recursion happens.  Here, it is the same function with a different &lt;code&gt;word&lt;/code&gt; - the previous &lt;code&gt;word&lt;/code&gt; - but from the second position. That is the slice &lt;code&gt;[1:]&lt;/code&gt;.  And it loops and loops until it hits the 'base case' and exits.&lt;/p&gt;</summary></entry><entry><title>Some simple recursive functions</title><link href="http://www.deekras.com/some-simple-recursive-functions.html" rel="alternate"></link><updated>2014-12-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-17:some-simple-recursive-functions.html</id><summary type="html">&lt;h2&gt;So how do recursions work?&lt;/h2&gt;
 &lt;p&gt;I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.&lt;/p&gt;
 &lt;p&gt;A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.&lt;/p&gt;
 &lt;p&gt;The factorial of 5 = 5 x 4 x 3 x 2 x 1.  What is happening here:&lt;/p&gt;
@@ -61,9 +115,6 @@
 &lt;p&gt;Check out the flow of this function using &lt;a href="http://pythontutor.com/"&gt;pythontutor.com&lt;/a&gt;:  Click on the forward button to see what is happening step by step.
 &lt;iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+factorial(n)%3A%0A++++print+%22NOW%3A+We're+(back)+at+the+beginning+of+the+function.+n+%3D+%7B%7D%22.format(n)%0A++++if+n+%3C%3D+0%3A%0A++++++++return+0%0A++++if+n+%3D%3D+1%3A%0A++++++++print+%22---+HIT+THE+BASE+CASE%22%0A++++++++print+%22NOW%3A+the+return+is+1.%22%0A++++++++print+%22---+WILL+START+GOING+BACK+UP+THE+LADDER%22%0A++++++++return+1%0A++++else%3A%0A++++++++print+%22+++NOW%3A+We're+in+the+'else+statement'.+n+%3D+%7B%7D%22.format(n)%0A++++++++result+%3D++n+*+factorial(n-1)%0A++++++++print+%22%22%22NOW%3A+The+interim+result+(the+previous+'return')+is+%7Bresult_was%7D+and+n+%3D+%7Bn%7D.++%0A++++++++++++++So+%7Bresult_was%7D+*+%7Bn%7D+%3D+%7Bresult%7D.%22%22%22.format(result_was%3Dresult/n,+n%3Dn,+result%3Dresult)%0A++++++++print+%22+++The+NEW+interim+result+(the+current+'return')+based+on+this+recursion+is%3A++%7B%7D.%22.format(result)%0A++++++++return+result%0A%0Aprint+factorial(3)&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;drawParentPointers=false&amp;textReferences=false&amp;showOnlyOutputs=false&amp;py=2&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0&amp;codeDivWidth=350&amp;codeDivHeight=400"&gt; &lt;/iframe&gt;&lt;/p&gt;
 &lt;h3&gt;&lt;strong&gt;So what is happening here - step by step?&lt;/strong&gt;&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Quote&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;Firstly, we start the function at the beginning and n = 3. Since &lt;code&gt;n&lt;/code&gt; does not meet the 'if statements', it goes to the 'else statement'.  That's where it finds &lt;code&gt;result =  n * factorial(n-1)&lt;/code&gt; and it calls the &lt;code&gt;factorial&lt;/code&gt; function, this time with &lt;code&gt;n-1&lt;/code&gt; as the argument, as &lt;code&gt;factorial(2)&lt;/code&gt;. And the 3 waits to find out what it will be multiplied by - what is the result of &lt;code&gt;factorial(2)&lt;/code&gt;? The loop begins.&lt;/p&gt;
 &lt;p&gt;Now the &lt;code&gt;n&lt;/code&gt; is 2. And it too wants to know what to be multiplied by and waits for the results of &lt;code&gt;factorial(1)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;And now finally, &lt;code&gt;n&lt;/code&gt; does equal 1. It has hit 'base case' and returns 1. The &lt;code&gt;return&lt;/code&gt; = 1. Now it goes 'back up the ladder; now the multiplication can begin! &lt;/p&gt;
