@@ -77,50 +77,86 @@ Slices allow you to get a substring from a string or part of a list.
 The syntax is string_or_list(start, end, step)
 <a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
 <p>Some examples</p>
-<p>word = 'abcdefghij'
-|a|b|c|d|e|f|g|h|i|j|
-|-|-|-|-|-|-|-|-|-|-|
-|0|1|2|3|4|5|6|7|8|9|
-<strong>*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)</strong></p>
+<p>word = 'abcdefghij'</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+<th>g</th>
+<th>h</th>
+<th>i</th>
+<th>j</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)</strong></p>
+<table>
+<thead>
+<tr>
+<th>syntax</th>
+<th>result</th>
+<th>explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>word[0]</td>
 <td>a</td>
+<td># index 1st position</td>
 </tr>
 <tr>
 <td>word[-2]</td>
 <td>i</td>
+<td># index 2nd to last position</td>
 </tr>
 <tr>
 <td>word[7]</td>
 <td>h</td>
+<td># index 8th position</td>
 </tr>
 <tr>
 <td>word[7:9]</td>
 <td>hi</td>
+<td># slice FROM 8th position UNTIL 10th position (not inclusive) 8th &amp; 9th (indexes 7,8)</td>
 </tr>
 <tr>
 <td>word[:6]</td>
 <td>abcdef</td>
+<td># slice FROM BEGINNING until 7th position (indexes 0-6)</td>
 </tr>
 <tr>
 <td>word[5:]</td>
 <td>fghij</td>
+<td># slice FROM 6th position until END (indexes 5--&gt;)</td>
 </tr>
 <tr>
 <td>word[::3]</td>
 <td>adgj</td>
+<td># slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)</td>
 </tr>
 <tr>
 <td>word[3::2]</td>
 <td>dfhj</td>
+<td># slice from 4th position until end, STEP 2 (3,5,7,9)</td>
 </tr>
 </tbody>
 </table>
