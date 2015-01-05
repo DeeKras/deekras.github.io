@@ -64,32 +64,60 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
         </div>
 	
         <div><h2>Recursions on lists .. with slices</h2>
-<p>Following up on my <a href="link">post about recursions</a>.  This time about recursive functions using a list. </p>
-<h3>When might we use this</h3>
+<p>Following up on my <a href="http://www.deekras.com/some-simple-recursive-functions.html">post about recursions</a>.  This time about recursive functions using a list. </p>
 <p>So here's where slices gets really useful.</p>
 <p>As a quick reminder about slices:
+Slices allow you to get a substring from a string or part of a list.
+The syntax is string_or_list(start, end, step)
 <a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
-<p>Slices allow you to get a substring from a string or part of a list.
-Some examples</p>
-<div class="highlight"><pre>word = &#39;abcdefghij&#39;
+<p>Some examples</p>
+<p>word = 'abcdefghij'
 |a|b|c|d|e|f|g|h|i|j|
 |-|-|-|-|-|-|-|-|-|-|
 |0|1|2|3|4|5|6|7|8|9|
-**\*Notice that there are 10 positions here. Starting with 0.  (&#39;a&#39; is in the 1st position. &#39;j&#39; is in the 10th position.)**
-
-|            |         |
-|------------|---------|
-| word[0]    | a       | # index 1st position
-| word[-2]   | i       | # index 2nd to last position
-| word[7]    | h       | # index 8th position
-| word[7:9]  | hi      | # slice BETWEEN 8th &amp; 10th (inclusive) position = 8th &amp; 9th (indexes 8,9)
-| word[:6]   | abcdef  | # slice FROM BEGINNING until 7th position (indexes 0-6)
-| word[5:]   | fghij   | # slice FROM 6th position until END (indexes 5--&gt;)
-| word[::3]  | adgj    | # slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)
-| word[3::2] | dfhj    | # slice from 4th position until end, STEP 2 (3,5,7,9)
-</pre></div>
-
-
+<strong>*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>word[0]</td>
+<td>a</td>
+</tr>
+<tr>
+<td>word[-2]</td>
+<td>i</td>
+</tr>
+<tr>
+<td>word[7]</td>
+<td>h</td>
+</tr>
+<tr>
+<td>word[7:9]</td>
+<td>hi</td>
+</tr>
+<tr>
+<td>word[:6]</td>
+<td>abcdef</td>
+</tr>
+<tr>
+<td>word[5:]</td>
+<td>fghij</td>
+</tr>
+<tr>
+<td>word[::3]</td>
+<td>adgj</td>
+</tr>
+<tr>
+<td>word[3::2]</td>
+<td>dfhj</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>One way to remember how slices work is to think of the indices as pointing <strong>between characters</strong>, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.</p>
 </blockquote>
@@ -159,10 +187,10 @@ Some examples</p>
 
 <p>So what's happening here. </p>
 <p>This function seeks to find the largest number in the list.  </p>
-<p><code>def max(numbers, largest_so_far=0):</code> : We define the function called <code>max</code> with 2 arguments:  <code>numbers</code>, which is the list of numbers from which to find the largest number. And 'largest_so_far<code>in which we will hold onto the 'largest number found up to that point' and we start it with a default of</code>0`.</p>
-<p><code>ext_num = numbers[0]</code> : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function `numbers[1:]. It is the previous list - but from the second position.</p>
+<p><code>def max(numbers, largest_so_far=0):</code> : We define the function called <code>max</code> with 2 arguments:  <code>numbers</code>, which is the list of numbers from which to find the largest number. And <code>largest_so_far</code> in which we will hold onto the 'largest number found up to that point' and we start it with a default of <code>0</code>.</p>
+<p><code>ext_num = numbers[0]</code> : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function <code>numbers[1:]</code>. It is the previous list - but from the second position.</p>
 <p><code>if numbers == []:</code> : This is the base case, the exit of the loop. If there are no more numbers, then the <code>largest_so_far</code> is the largest number. The end!</p>
-<p><code>if next_num &gt; largest_so_far:</code> : if 'next_num<code>is larger than</code>largest_so_far`, then ...</p>
+<p><code>if next_num &gt; largest_so_far:</code> : if <code>next_num</code> is larger than <code>largest_so_far</code>, then ...</p>
 <p><code>return max(numbers[1:], largest_so_far=next_num)</code> : do this function again - with the arguments: <code>numbers[1:]</code> and <code>largest_so_far=next_num</code>.</p>
 <p><code>else:</code> : if <code>next_num</code> is not larger (is equal to or less than), then ...</p>
 <p><code>return max(numbers[1:], largest_so_far=largest_so_far)</code> : call the recrusive function again - like above, but leave the <code>largest_so_far</code> as is.</p>

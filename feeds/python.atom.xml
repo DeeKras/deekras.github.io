@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-18T00:00:00+00:00</updated><entry><title>Recursions and Lists and Slices</title><link href="http://www.deekras.com/recursions-and-lists-and-slices.html" rel="alternate"></link><updated>2014-12-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-18:recursions-and-lists-and-slices.html</id><summary type="html">&lt;h2&gt;Recursions on lists .. with slices&lt;/h2&gt;
-&lt;p&gt;Following up on my &lt;a href="link"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
-&lt;h3&gt;When might we use this&lt;/h3&gt;
+&lt;p&gt;Following up on my &lt;a href="http://www.deekras.com/some-simple-recursive-functions.html"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
 &lt;p&gt;So here's where slices gets really useful.&lt;/p&gt;
 &lt;p&gt;As a quick reminder about slices:
+Slices allow you to get a substring from a string or part of a list.
+The syntax is string_or_list(start, end, step)
 &lt;a href="https://docs.python.org/2/tutorial/introduction.html"&gt;More about slices&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Slices allow you to get a substring from a string or part of a list.
-Some examples&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;word = &amp;#39;abcdefghij&amp;#39;
+&lt;p&gt;Some examples&lt;/p&gt;
+&lt;p&gt;word = 'abcdefghij'
 |a|b|c|d|e|f|g|h|i|j|
 |-|-|-|-|-|-|-|-|-|-|
 |0|1|2|3|4|5|6|7|8|9|
-**\*Notice that there are 10 positions here. Starting with 0.  (&amp;#39;a&amp;#39; is in the 1st position. &amp;#39;j&amp;#39; is in the 10th position.)**
-
-|            |         |
-|------------|---------|
-| word[0]    | a       | # index 1st position
-| word[-2]   | i       | # index 2nd to last position
-| word[7]    | h       | # index 8th position
-| word[7:9]  | hi      | # slice BETWEEN 8th &amp;amp; 10th (inclusive) position = 8th &amp;amp; 9th (indexes 8,9)
-| word[:6]   | abcdef  | # slice FROM BEGINNING until 7th position (indexes 0-6)
-| word[5:]   | fghij   | # slice FROM 6th position until END (indexes 5--&amp;gt;)
-| word[::3]  | adgj    | # slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)
-| word[3::2] | dfhj    | # slice from 4th position until end, STEP 2 (3,5,7,9)
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;strong&gt;*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;word[0]&lt;/td&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[-2]&lt;/td&gt;
+&lt;td&gt;i&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[7]&lt;/td&gt;
+&lt;td&gt;h&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[7:9]&lt;/td&gt;
+&lt;td&gt;hi&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[:6]&lt;/td&gt;
+&lt;td&gt;abcdef&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[5:]&lt;/td&gt;
+&lt;td&gt;fghij&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[::3]&lt;/td&gt;
+&lt;td&gt;adgj&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;word[3::2]&lt;/td&gt;
+&lt;td&gt;dfhj&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;One way to remember how slices work is to think of the indices as pointing &lt;strong&gt;between characters&lt;/strong&gt;, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -95,10 +123,10 @@ Some examples&lt;/p&gt;
 
 &lt;p&gt;So what's happening here. &lt;/p&gt;
 &lt;p&gt;This function seeks to find the largest number in the list.  &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;def max(numbers, largest_so_far=0):&lt;/code&gt; : We define the function called &lt;code&gt;max&lt;/code&gt; with 2 arguments:  &lt;code&gt;numbers&lt;/code&gt;, which is the list of numbers from which to find the largest number. And 'largest_so_far&lt;code&gt;in which we will hold onto the 'largest number found up to that point' and we start it with a default of&lt;/code&gt;0`.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;ext_num = numbers[0]&lt;/code&gt; : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function `numbers[1:]. It is the previous list - but from the second position.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;def max(numbers, largest_so_far=0):&lt;/code&gt; : We define the function called &lt;code&gt;max&lt;/code&gt; with 2 arguments:  &lt;code&gt;numbers&lt;/code&gt;, which is the list of numbers from which to find the largest number. And &lt;code&gt;largest_so_far&lt;/code&gt; in which we will hold onto the 'largest number found up to that point' and we start it with a default of &lt;code&gt;0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ext_num = numbers[0]&lt;/code&gt; : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function &lt;code&gt;numbers[1:]&lt;/code&gt;. It is the previous list - but from the second position.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;if numbers == []:&lt;/code&gt; : This is the base case, the exit of the loop. If there are no more numbers, then the &lt;code&gt;largest_so_far&lt;/code&gt; is the largest number. The end!&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;if next_num &amp;gt; largest_so_far:&lt;/code&gt; : if 'next_num&lt;code&gt;is larger than&lt;/code&gt;largest_so_far`, then ...&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;if next_num &amp;gt; largest_so_far:&lt;/code&gt; : if &lt;code&gt;next_num&lt;/code&gt; is larger than &lt;code&gt;largest_so_far&lt;/code&gt;, then ...&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;return max(numbers[1:], largest_so_far=next_num)&lt;/code&gt; : do this function again - with the arguments: &lt;code&gt;numbers[1:]&lt;/code&gt; and &lt;code&gt;largest_so_far=next_num&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;else:&lt;/code&gt; : if &lt;code&gt;next_num&lt;/code&gt; is not larger (is equal to or less than), then ...&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;return max(numbers[1:], largest_so_far=largest_so_far)&lt;/code&gt; : call the recrusive function again - like above, but leave the &lt;code&gt;largest_so_far&lt;/code&gt; as is.&lt;/p&gt;
