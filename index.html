@@ -100,9 +100,15 @@ Some examples</p>
 <p>One way to remember how slices work is to think of the indices as pointing <strong>between characters</strong>, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.</p>
 </blockquote>
 <p>Ok, so that's about slices.  Here's why slices work so well with recursive.
-Let's work with <code>word = 'abcdefghij'</code>. Whatever .</p>
-<p>First time around <code>word[0]</code> is<code>'a'</code> and <code>word[1:]</code> is <code>'bcdefghij'.
-Second time around - the word is the previous</code>word[1:]<code>. So</code>word[0]<code>is</code>'b'<code>and</code>word[1:]<code>is now</code>'cdefghij'<code>. Until there there are no letters left in word and then</code>word[]==""`.</p>
+Let's work with <code>word = 'abcdefghij'</code>. </p>
+<ul>
+<li>
+<p>First time around <code>word[0]</code> is<code>'a'</code> and <code>word[1:]</code> is <code>'bcdefghij'</code>.</p>
+</li>
+<li>
+<p>Second time around - <code>word</code> is the previous <code>word[1:]</code>. So <code>word[0]</code> is <code>'b'</code> and <code>word[1:]</code> is now <code>'cdefghij'</code>. Until there there are no letters left in word and then <code>word[]==""</code>.</p>
+</li>
+</ul>
 <p>Let's see that in action.  Here's the code:</p>
 <div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="s">&#39;abcdefghij&#39;</span>
 
