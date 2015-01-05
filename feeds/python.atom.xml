@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-18T00:00:00+00:00</updated><entry><title>Recursions and Lists and Slices</title><link href="http://www.deekras.com/recursions-and-lists-and-slices.html" rel="alternate"></link><updated>2014-12-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-18:recursions-and-lists-and-slices.html</id><summary type="html">&lt;h2&gt;Recursions on lists .. with slices&lt;/h2&gt;
-&lt;p&gt;FOllowing up on my &lt;a href="link"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
+&lt;p&gt;Following up on my &lt;a href="link"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
 &lt;h3&gt;When might we use this&lt;/h3&gt;
-&lt;p&gt;SO here's where slices gets really useful.&lt;/p&gt;
+&lt;p&gt;So here's where slices gets really useful.&lt;/p&gt;
 &lt;p&gt;As a quick reminder about slices:
 &lt;a href="https://docs.python.org/2/tutorial/introduction.html"&gt;More about slices&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Slices allow you to get a substring from a string or part of a list.
@@ -60,9 +60,49 @@ Some examples&lt;/p&gt;
 
 
 &lt;p&gt;So what happened here?&lt;/p&gt;
-&lt;p&gt;Each recursion starts off by printing what &lt;code&gt;word&lt;/code&gt; looks like now.
-Then it checks for the 'base case', the exit of the loop.  Here it is   &lt;code&gt;if word == "":&lt;/code&gt;
-If not the 'base case', then the recursion happens.  Here, it is the same function with a different &lt;code&gt;word&lt;/code&gt; - the previous &lt;code&gt;word&lt;/code&gt; - but from the second position. That is the slice &lt;code&gt;[1:]&lt;/code&gt;.  And it loops and loops until it hits the 'base case' and exits.&lt;/p&gt;</summary></entry><entry><title>Some simple recursive functions</title><link href="http://www.deekras.com/some-simple-recursive-functions.html" rel="alternate"></link><updated>2014-12-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-17:some-simple-recursive-functions.html</id><summary type="html">&lt;h2&gt;So how do recursions work?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Each recursion starts off by printing what &lt;code&gt;word&lt;/code&gt; looks like now.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then it checks for the 'base case', the exit of the loop.  Here it is   &lt;code&gt;if word == "":&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If not the 'base case', then the recursion happens.  Here, it is the same function with a new &lt;code&gt;word&lt;/code&gt; - the &lt;code&gt;word[1:]&lt;/code&gt; in the return.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;And it loops and loops until it hits the 'base case' and exits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That was a simple examples using slices and strings. Here's another with lists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;
+
+    &lt;span class="n"&gt;next_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="p"&gt;[]:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;next_num&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:],&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;next_num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:],&lt;/span&gt; &lt;span class="n"&gt;largest_so_far&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;largest_so_far&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So what's happening here. &lt;/p&gt;
+&lt;p&gt;This function seeks to find the largest number in the list.  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;def max(numbers, largest_so_far=0):&lt;/code&gt; : We define the function called &lt;code&gt;max&lt;/code&gt; with 2 arguments:  &lt;code&gt;numbers&lt;/code&gt;, which is the list of numbers from which to find the largest number. And 'largest_so_far&lt;code&gt;in which we will hold onto the 'largest number found up to that point' and we start it with a default of&lt;/code&gt;0`.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ext_num = numbers[0]&lt;/code&gt; : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function `numbers[1:]. It is the previous list - but from the second position.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;if numbers == []:&lt;/code&gt; : This is the base case, the exit of the loop. If there are no more numbers, then the &lt;code&gt;largest_so_far&lt;/code&gt; is the largest number. The end!&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;if next_num &amp;gt; largest_so_far:&lt;/code&gt; : if 'next_num&lt;code&gt;is larger than&lt;/code&gt;largest_so_far`, then ...&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;return max(numbers[1:], largest_so_far=next_num)&lt;/code&gt; : do this function again - with the arguments: &lt;code&gt;numbers[1:]&lt;/code&gt; and &lt;code&gt;largest_so_far=next_num&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;else:&lt;/code&gt; : if &lt;code&gt;next_num&lt;/code&gt; is not larger (is equal to or less than), then ...&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;return max(numbers[1:], largest_so_far=largest_so_far)&lt;/code&gt; : call the recrusive function again - like above, but leave the &lt;code&gt;largest_so_far&lt;/code&gt; as is.&lt;/p&gt;
+&lt;p&gt;And the loop continues until hits base case.&lt;/p&gt;</summary></entry><entry><title>Some simple recursive functions</title><link href="http://www.deekras.com/some-simple-recursive-functions.html" rel="alternate"></link><updated>2014-12-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-17:some-simple-recursive-functions.html</id><summary type="html">&lt;h2&gt;So how do recursions work?&lt;/h2&gt;
 &lt;p&gt;I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.&lt;/p&gt;
 &lt;p&gt;A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.&lt;/p&gt;
 &lt;p&gt;The factorial of 5 = 5 x 4 x 3 x 2 x 1.  What is happening here:&lt;/p&gt;

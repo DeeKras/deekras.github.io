@@ -70,9 +70,9 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
         </div>
         
         <div><h2>Recursions on lists .. with slices</h2>
-<p>FOllowing up on my <a href="link">post about recursions</a>.  This time about recursive functions using a list. </p>
+<p>Following up on my <a href="link">post about recursions</a>.  This time about recursive functions using a list. </p>
 <h3>When might we use this</h3>
-<p>SO here's where slices gets really useful.</p>
+<p>So here's where slices gets really useful.</p>
 <p>As a quick reminder about slices:
 <a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
 <p>Slices allow you to get a substring from a string or part of a list.
@@ -130,9 +130,49 @@ Some examples</p>
 
 
 <p>So what happened here?</p>
-<p>Each recursion starts off by printing what <code>word</code> looks like now.
-Then it checks for the 'base case', the exit of the loop.  Here it is   <code>if word == "":</code>
-If not the 'base case', then the recursion happens.  Here, it is the same function with a different <code>word</code> - the previous <code>word</code> - but from the second position. That is the slice <code>[1:]</code>.  And it loops and loops until it hits the 'base case' and exits.</p></div>
+<ul>
+<li>
+<p>Each recursion starts off by printing what <code>word</code> looks like now.</p>
+</li>
+<li>
+<p>Then it checks for the 'base case', the exit of the loop.  Here it is   <code>if word == "":</code></p>
+</li>
+<li>
+<p>If not the 'base case', then the recursion happens.  Here, it is the same function with a new <code>word</code> - the <code>word[1:]</code> in the return.</p>
+</li>
+<li>
+<p>And it loops and loops until it hits the 'base case' and exits.</p>
+</li>
+</ul>
+<p>That was a simple examples using slices and strings. Here's another with lists.</p>
+<div class="highlight"><pre><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">numbers</span>
+    <span class="k">print</span> <span class="n">largest_so_far</span>
+
+    <span class="n">next_num</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">numbers</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="n">largest_so_far</span>
+
+    <span class="k">if</span> <span class="n">next_num</span> <span class="o">&gt;</span> <span class="n">largest_so_far</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">next_num</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">largest_so_far</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So what's happening here. </p>
+<p>This function seeks to find the largest number in the list.  </p>
+<p><code>def max(numbers, largest_so_far=0):</code> : We define the function called <code>max</code> with 2 arguments:  <code>numbers</code>, which is the list of numbers from which to find the largest number. And 'largest_so_far<code>in which we will hold onto the 'largest number found up to that point' and we start it with a default of</code>0`.</p>
+<p><code>ext_num = numbers[0]</code> : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function `numbers[1:]. It is the previous list - but from the second position.</p>
+<p><code>if numbers == []:</code> : This is the base case, the exit of the loop. If there are no more numbers, then the <code>largest_so_far</code> is the largest number. The end!</p>
+<p><code>if next_num &gt; largest_so_far:</code> : if 'next_num<code>is larger than</code>largest_so_far`, then ...</p>
+<p><code>return max(numbers[1:], largest_so_far=next_num)</code> : do this function again - with the arguments: <code>numbers[1:]</code> and <code>largest_so_far=next_num</code>.</p>
+<p><code>else:</code> : if <code>next_num</code> is not larger (is equal to or less than), then ...</p>
+<p><code>return max(numbers[1:], largest_so_far=largest_so_far)</code> : call the recrusive function again - like above, but leave the <code>largest_so_far</code> as is.</p>
+<p>And the loop continues until hits base case.</p></div>
         <hr />
     </div>
 		
