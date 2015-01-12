@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-20T00:00:00+00:00</updated><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
 &lt;p&gt;There's a whole set of features of SQLAlchemy listed in their &lt;a href="http://www.sqlalchemy.org/features.html"&gt;docs&lt;/a&gt;. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.&lt;/p&gt;
-&lt;h2&gt;And now to jump right in&lt;/h2&gt;
-&lt;p&gt;The imports:&lt;/p&gt;
+&lt;h2&gt;And now to jump right in...&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;The imports:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.ext.declarative&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;To set things up:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To set things up:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#at the global level&lt;/span&gt;
 
 &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sqlite:///membership.db&amp;#39;&lt;/span&gt;  &lt;span class="c"&gt;#your database&lt;/span&gt;
@@ -26,6 +26,7 @@
 
 
 &lt;p&gt;&lt;strong&gt;Some explanations:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;These are all set at the global level.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;db = 'sqlite:///membership.db'&lt;/code&gt; &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;naming the database and where it resides&lt;/li&gt;
@@ -34,13 +35,13 @@
 &lt;p&gt;&lt;code&gt;engine = create_engine(db)&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the &lt;strong&gt;engine&lt;/strong&gt; is the 'home base' for the database - it contains the path to the database and some information about the dialect (there are other arguments too).&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;create_engine() creates a new Engine instance called&lt;/code&gt;engine`. The engine is not connected until it is specifically called to do so. &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_engine()&lt;/code&gt; creates a new Engine instance called &lt;code&gt;engine&lt;/code&gt;. &lt;/li&gt;
 &lt;li&gt;you can name it anything. &lt;code&gt;engine&lt;/code&gt; is convention.&lt;/li&gt;
 &lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html"&gt;engines&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;Base = declarative_base()&lt;/code&gt; &lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;the &lt;strong&gt;declarative&lt;/strong&gt; creates a new base class which all classes based on it will inherit. &lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;declarative&lt;/strong&gt; creates a new base class which all classes based on it will inherit. (See below when we create the &lt;code&gt;Member&lt;/code&gt; class.)&lt;/li&gt;
 &lt;li&gt;you can name it anything. &lt;code&gt;Base&lt;/code&gt; is convention.&lt;/li&gt;
 &lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_8/orm/extensions/declarative.html"&gt;declaratives&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
@@ -60,7 +61,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;after the tables are created&lt;/em&gt;, still need to create it in the &lt;code&gt;engine&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;we are creating the tables in the 'engine' and linking it to be saved as the &lt;code&gt;metadata&lt;/code&gt; of the &lt;code&gt;Base&lt;/code&gt; class.
-   -(&lt;code&gt;metadata&lt;/code&gt; is the structure of the data - ie: the fields and types )&lt;/li&gt;
+     -(&lt;code&gt;metadata&lt;/code&gt; is the structure of the data - ie: the fields and types )&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
 &lt;h3&gt;Here's a little example using the very basics of SQLAlchemy.&lt;/h3&gt;
@@ -70,23 +71,23 @@
 &lt;p&gt;A new user &lt;em&gt;inquires&lt;/em&gt; about membership.  &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;She fills in some basic info about herself.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;member_id&lt;/code&gt; is automatically set.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;inquiry_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;member_id&lt;/code&gt; is automatically set.  [This will be done with the &lt;code&gt;autoincrement&lt;/code&gt;. See below.]&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;inquiry_date&lt;/code&gt; is set to current date/ time. [This will be done with the &lt;code&gt;default&lt;/code&gt; set to current time. See below.]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The inquirer becomes a member (activate).&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;She adds some more info (password, etc.).&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;active_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;active_date&lt;/code&gt; is set to current date/ time. [This will be done in the &lt;code&gt;activate&lt;/code&gt; method. See below.]&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;. [This will be done in the &lt;code&gt;activate&lt;/code&gt; method. See below.]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The active member can unsubscribe (deactivate).&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;inactive_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;inactive_date&lt;/code&gt; is set to current date/ time. [This will be done in the &lt;code&gt;deactivate&lt;/code&gt; method. See below.]&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;. [This will be done in the &lt;code&gt;deactivate&lt;/code&gt; method. See below.]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -111,8 +112,8 @@
 &lt;ul&gt;
 &lt;li&gt;The class is based on the &lt;code&gt;Base&lt;/code&gt; object declared above.  &lt;/li&gt;
 &lt;li&gt;It must contain the &lt;code&gt;__tablename__&lt;/code&gt;. &lt;/li&gt;
-&lt;li&gt;And at least one column that is the primary key.&lt;ul&gt;
-&lt;li&gt;[About &lt;code&gt;primary_key&lt;/code&gt;:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. ]&lt;/li&gt;
+&lt;li&gt;And at least one column that is the primary key, in this example, it is &lt;code&gt;member_id&lt;/code&gt;.&lt;ul&gt;
+&lt;li&gt;About &lt;code&gt;primary_key&lt;/code&gt;:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -146,7 +147,7 @@
 &lt;p&gt;&lt;strong&gt;VERY IMPORTANT!&lt;/strong&gt; Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to &lt;code&gt;commit()&lt;/code&gt; it, or the data will not be saved. &lt;code&gt;session.commit()&lt;/code&gt;.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;So for example, the user is on the 'I'm interested' page and enters her last name, first name and email address and then hits 'submit'.  The function might be something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_interested&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_inquiry&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
 
     &lt;span class="n"&gt;last_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -160,9 +161,19 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;&lt;strong&gt;Explanations&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is when the user comes to the website for the first time and is interested.
+She enters her last name, first name and email address and then 'submit'.&lt;/p&gt;
+&lt;p&gt;When 'submit' is hit, the fun begins.
+   - the data is collected from the form (request.form['field'])
+   - an instance of the Member class is created with these fields. 
+     - AND the &lt;code&gt;member_id&lt;/code&gt; is created; remember it was set as &lt;code&gt;autoincrement&lt;/code&gt;. 
+     - AND the &lt;code&gt;inquiry_date&lt;/code&gt; is set to &lt;code&gt;now()&lt;/code&gt;; that is its &lt;code&gt;default&lt;/code&gt;.
+   - the &lt;code&gt;add_to_db()&lt;/code&gt; method is called. This will add all these fields as a new row in the table.
+   - LASTLY and IMPORTANTLY, this row which is sitting in the 'holding zone' of the &lt;code&gt;session&lt;/code&gt; gets a commit().  If the session is not committed, the data will sit there until it is committed or lost when a new session begins.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3&gt;Using queries&lt;/h3&gt;
-&lt;p&gt;It is interesting to see your data.  For that we use queries.  Here is a super simple one:&lt;/p&gt;
+&lt;p&gt;It is interesting to see your data.  For that we use queries.  Of course, there are lots of other uses for queries. Here is a super simple query:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;display_members&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;members&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;members&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;

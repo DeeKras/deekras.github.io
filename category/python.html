@@ -71,14 +71,14 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
         
         <div><h2>First, why SQLAlchemy is powerful.</h2>
 <p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.</p>
-<h2>And now to jump right in</h2>
-<p>The imports:</p>
+<h2>And now to jump right in...</h2>
+<p><strong>The imports:</strong></p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">String</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
 </pre></div>
 
 
-<p>To set things up:</p>
+<p><strong>To set things up:</strong></p>
 <div class="highlight"><pre><span class="c">#at the global level</span>
 
 <span class="n">db</span> <span class="o">=</span> <span class="s">&#39;sqlite:///membership.db&#39;</span>  <span class="c">#your database</span>
@@ -96,6 +96,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 
 <p><strong>Some explanations:</strong></p>
+<p>These are all set at the global level.</p>
 <p><code>db = 'sqlite:///membership.db'</code> </p>
 <ul>
 <li>naming the database and where it resides</li>
@@ -104,13 +105,13 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><code>engine = create_engine(db)</code></p>
 <ul>
 <li>the <strong>engine</strong> is the 'home base' for the database - it contains the path to the database and some information about the dialect (there are other arguments too).</li>
-<li><code>create_engine() creates a new Engine instance called</code>engine`. The engine is not connected until it is specifically called to do so. </li>
+<li><code>create_engine()</code> creates a new Engine instance called <code>engine</code>. </li>
 <li>you can name it anything. <code>engine</code> is convention.</li>
 <li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html">engines</a>)</li>
 </ul>
 <p><code>Base = declarative_base()</code> </p>
 <ul>
-<li>the <strong>declarative</strong> creates a new base class which all classes based on it will inherit. </li>
+<li>the <strong>declarative</strong> creates a new base class which all classes based on it will inherit. (See below when we create the <code>Member</code> class.)</li>
 <li>you can name it anything. <code>Base</code> is convention.</li>
 <li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_8/orm/extensions/declarative.html">declaratives</a>)</li>
 </ul>
@@ -130,7 +131,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <ul>
 <li><em>after the tables are created</em>, still need to create it in the <code>engine</code></li>
 <li>we are creating the tables in the 'engine' and linking it to be saved as the <code>metadata</code> of the <code>Base</code> class.
-   -(<code>metadata</code> is the structure of the data - ie: the fields and types )</li>
+     -(<code>metadata</code> is the structure of the data - ie: the fields and types )</li>
 </ul>
 <hr />
 <h3>Here's a little example using the very basics of SQLAlchemy.</h3>
@@ -140,23 +141,23 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p>A new user <em>inquires</em> about membership.  </p>
 <ul>
 <li>She fills in some basic info about herself.</li>
-<li>The <code>member_id</code> is automatically set.</li>
-<li>The <code>inquiry_date</code> is set to current date/ time.</li>
+<li>The <code>member_id</code> is automatically set.  [This will be done with the <code>autoincrement</code>. See below.]</li>
+<li>The <code>inquiry_date</code> is set to current date/ time. [This will be done with the <code>default</code> set to current time. See below.]</li>
 </ul>
 </li>
 <li>
 <p>The inquirer becomes a member (activate).</p>
 <ul>
 <li>She adds some more info (password, etc.).</li>
-<li>The <code>active_date</code> is set to current date/ time.</li>
-<li><code>is_active</code> is set to <code>true</code>.</li>
+<li>The <code>active_date</code> is set to current date/ time. [This will be done in the <code>activate</code> method. See below.]</li>
+<li><code>is_active</code> is set to <code>true</code>. [This will be done in the <code>activate</code> method. See below.]</li>
 </ul>
 </li>
 <li>
 <p>The active member can unsubscribe (deactivate).</p>
 <ul>
-<li>The <code>inactive_date</code> is set to current date/ time.</li>
-<li><code>is_active</code> is set to <code>false</code>.</li>
+<li>The <code>inactive_date</code> is set to current date/ time. [This will be done in the <code>deactivate</code> method. See below.]</li>
+<li><code>is_active</code> is set to <code>false</code>. [This will be done in the <code>deactivate</code> method. See below.]</li>
 </ul>
 </li>
 </ul>
@@ -181,8 +182,8 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <ul>
 <li>The class is based on the <code>Base</code> object declared above.  </li>
 <li>It must contain the <code>__tablename__</code>. </li>
-<li>And at least one column that is the primary key.<ul>
-<li>[About <code>primary_key</code>:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. ]</li>
+<li>And at least one column that is the primary key, in this example, it is <code>member_id</code>.<ul>
+<li>About <code>primary_key</code>:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. </li>
 </ul>
 </li>
 </ul>
@@ -216,7 +217,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <p><strong>VERY IMPORTANT!</strong> Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to <code>commit()</code> it, or the data will not be saved. <code>session.commit()</code>.</p>
 <hr />
 <p>So for example, the user is on the 'I'm interested' page and enters her last name, first name and email address and then hits 'submit'.  The function might be something like this:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">add_interested</span><span class="p">():</span>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">add_inquiry</span><span class="p">():</span>
 
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;last_name&#39;</span><span class="p">]</span>
     <span class="n">first_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;first_name&#39;</span><span class="p">]</span>
@@ -230,9 +231,19 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 </pre></div>
 
 
+<p><strong>Explanations</strong></p>
+<p>This is when the user comes to the website for the first time and is interested.
+She enters her last name, first name and email address and then 'submit'.</p>
+<p>When 'submit' is hit, the fun begins.
+   - the data is collected from the form (request.form['field'])
+   - an instance of the Member class is created with these fields. 
+     - AND the <code>member_id</code> is created; remember it was set as <code>autoincrement</code>. 
+     - AND the <code>inquiry_date</code> is set to <code>now()</code>; that is its <code>default</code>.
+   - the <code>add_to_db()</code> method is called. This will add all these fields as a new row in the table.
+   - LASTLY and IMPORTANTLY, this row which is sitting in the 'holding zone' of the <code>session</code> gets a commit().  If the session is not committed, the data will sit there until it is committed or lost when a new session begins.</p>
 <hr />
 <h3>Using queries</h3>
-<p>It is interesting to see your data.  For that we use queries.  Here is a super simple one:</p>
+<p>It is interesting to see your data.  For that we use queries.  Of course, there are lots of other uses for queries. Here is a super simple query:</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">display_members</span><span class="p">():</span>
     <span class="n">members</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
