@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://www.deekras.com/recursions-and-lists-and-slices.html"><h1>Recursions and Lists and Slices</h1></a>
-Thu 18 December 2014
+            <a href="http://www.deekras.com/basic-sqlalchemy.html"><h1>Basic SQLAlchemy</h1></a>
+Sat 20 December 2014
 
 by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
  
@@ -69,177 +69,167 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h2>Recursions on lists .. with slices</h2>
+        <div><h2>First, why SQLAlchemy is powerful.</h2>
+<p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.</p>
+<h3>Some very basics about how it works.</h3>
+<p>Some very important points <a href="http://alextechrants.blogspot.com/2013/11/10-common-stumbling-blocks-for.html">here</a></p>
+<p>The imports:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ForeignKey</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">backref</span><span class="p">,</span> <span class="n">sessionmaker</span>
+</pre></div>
+
+
+<p>To set things up:</p>
+<div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="s">&#39;sqlite:///membership.db&#39;</span>  <span class="c">#your database</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="c">#you can name it anything. convention names it &#39;engine&#39;.</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>  <span class="c">#you can name it anything. convention names it &#39;session&#39;.</span>
+</pre></div>
+
+
+<h3>A quick background to what this little program is about:</h3>
+<p>This program is a webform. (At this point, using regular Flask forms. Will refactor to use WTForms.)
+   - A new user <em>inquires</em> about membership.<br />
+        - She fills in some basic info about herself.
+        - The <code>member_id</code> is automatically set.
+        - The <code>inquiry_date</code> is set to current date/ time.</p>
+<ul>
+<li>
+<p>The inquirer becomes a member (activate).
+        - She adds some more info (email/ password).
+        - The <code>active_date</code> is set to current date/ time.
+        - <code>is_active</code> is set to <code>true</code>.</p>
+</li>
+<li>
+<p>The active member can unsubscribe (deactivate).
+        - The <code>inactive_date</code> is set to current date/ time.
+        - <code>is_active</code> is set to <code>false</code>.</p>
+</li>
+</ul>
+<p>Set up the Class:</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;members&#39;</span>
+
+    <span class="n">member_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">inquiry_date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">active__date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">inactive__date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">email_address</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The class is based on the <code>Base</code> object.  It must contain the <code>__tablename__</code>. And at least one column that is the primary key.</p>
+<p>[About <code>primary_key</code>:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. ]</p>
+<p>And now to add some methods to the <code>Member</code> class:</p>
+<div class="highlight"><pre>    <span class="k">def</span> <span class="nf">add_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  
+
+    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+
+
+<p><code>session.add(self)</code>: This method will (attempt to) create a new row in the database and add the data to that row.  The <code>primary_key</code> must be unique. In this case, it is unique, since we are using '<code>autoincrement' to create the</code>member_id`.</p>
+<p>(We can use <code>add_all([list of new rows])</code> to create several rows at once.)</p>
+<p>Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to <code>commit()</code> it, or the data will not be saved. <code>session.commit()</code>.</p>
+<p>So for example, the user is on the 'I'm interested' page and enters her last name, first name and email address and then hits 'submit'.  The function might be something like this:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">add_interested</span><span class="p">():</span>
+
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;last_name&#39;</span><span class="p">]</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;first_name&#39;</span><span class="p">]</span>
+    <span class="n">email_address</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;email_address&#39;</span><span class="p">]</span>
+
+    <span class="n">Member</span><span class="p">(</span><span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> 
+           <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> 
+           <span class="n">email_address</span><span class="o">=</span><span class="n">email_address</span><span class="p">)</span><span class="o">.</span><span class="n">add_to_db</span><span class="p">()</span>
+
+    <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="n">It</span> <span class="ow">is</span> <span class="n">interesting</span> <span class="n">to</span> <span class="n">see</span> <span class="n">your</span> <span class="n">data</span><span class="o">.</span>  <span class="n">For</span> <span class="n">that</span> <span class="n">we</span> <span class="n">use</span> <span class="n">queries</span><span class="o">.</span>  <span class="n">Here</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">super</span> <span class="n">simple</span> <span class="n">one</span><span class="p">:</span>
+
+<span class="sb">``</span><span class="err">`</span><span class="n">python</span>
+
+<span class="k">def</span> <span class="nf">display_members</span><span class="p">():</span>
+    <span class="n">members</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">member</span><span class="o">.</span><span class="n">email_address</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">is_active</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span> 
+                <span class="n">member</span><span class="o">.</span><span class="n">active_date</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">cell_phone</span>
+</pre></div>
+
+
+<p>The basic syntax for a query in SQLAlchemy is:
+<code>session.query(whatever you are searching)</code> *This will need a 'return results'argument at the end. See below.
+You can search through a class <code>session.query(Member)</code>
+or you can list a few fields <code>session.query(Member.last_name, Member.first_name)</code></p>
+<p><code>session</code> is the same 'session' that we declared at the very beginning.
+There are many different arguments.</p>
+<p><strong>Return results</strong>
+At the very end - which indicates how many results to return - you can use:
+   - <code>.all()</code>
+        - returns all results. As a list of tuples.
+   - <code>.first()
+        - returns the first result. As a tuple.
+        - if there were no results, returns</code>None<code>.
+   -</code>.limit(limit)<code>ex:</code>limit(3)<code>will return 3
+        - returns the 'limit' number of rows. As a list of tuples.
+   -</code>.one()<code>- returns exactly one result. As a tuple.
+        - if there are more results than 1, raises</code>MultipleResultsFound<code>- if there were no results, raises</code>NoResultFound<code>-</code>.scalar()<code>- returns the first column of the first result ex:</code>session.query(Item.id, Item.name).scalar()<code>will return just the value of Item.id (the first column)
+        - if there are more results than 1, raises</code>MultipleResultsFound<code>- if there were no results, returns</code>None`</p>
+<p>Other more common arguments are:
+   - <code>.filter()</code> or <code>.filter_by()</code>
+        - criterion to filter results
+        - <code>filter</code> uses SQL expressions and is more pythonic. So uses <code>==</code> (double equal). ex: <code>.filter(Member.last_name == 'Silver')</code>
+        - <code>filter_by</code> uses keyword expressions. So uses <code>=</code> (single equal). ex: <code>.filter_by(Member.last_name = 'Silver')</code>
+        - use a comma to add more criteria, ex: <code>.filter(Member.last_name == 'Silver', Member.first_name = 'Mark')</code></p>
+<ul>
+<li><code>.order_by()</code>
+        - the results will be sorted in the order specified. ex: <code>.order_by(Member.active_date)</code> will be sorted by <code>active_date</code></li>
+<li><code>.group_by</code>
+        - the results will be grouped by the criterion. returns a set, based on the columns indicated. ex: <code>.group_by(Member.active_date)</code> will group by <code>active_date</code> and return one row for each active date in the table, even if there are many of the same active date in the table</li>
+<li><code>.count()</code>
+        - returns a count (the number) of rows this query would return</li>
+</ul>
+<p>And then there are a whole set of different types of 'joins' for working with 2 tables that have a relationship. Will explore these in a separate post about relationships between tables.</p>
+<p>That's the very very basic. It gets much more interesting and useful, when we start adding relationships between the tables. And making the queries a bit more complex.  More next time.</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.deekras.com/recursions-and-lists-and-slices.html"><h2>Recursions and Lists and Slices</h2></a>
+        <div class= "well small"> Thu 18 December 2014
+
+by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>Recursions on lists .. with slices</h2>
 <p>Following up on my <a href="http://www.deekras.com/some-simple-recursive-functions.html">post about recursions</a>.  This time about recursive functions using a list. </p>
 <p>So here's where slices gets really useful.</p>
 <p>As a quick reminder about slices:
 Slices allow you to get a substring from a string or part of a list.
-The syntax is string_or_list(start, end, step)
-<a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
-<p>Some examples</p>
-<p>word = 'abcdefghij'</p>
-<table>
-<thead>
-<tr>
-<th>a</th>
-<th>b</th>
-<th>c</th>
-<th>d</th>
-<th>e</th>
-<th>f</th>
-<th>g</th>
-<th>h</th>
-<th>i</th>
-<th>j</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-<td>6</td>
-<td>7</td>
-<td>8</td>
-<td>9</td>
-</tr>
-</tbody>
-</table>
-<p><strong>*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)</strong></p>
-<table>
-<thead>
-<tr>
-<th>syntax</th>
-<th>result</th>
-<th>explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>word[0]</td>
-<td>a</td>
-<td># index 1st position</td>
-</tr>
-<tr>
-<td>word[-2]</td>
-<td>i</td>
-<td># index 2nd to last position</td>
-</tr>
-<tr>
-<td>word[7]</td>
-<td>h</td>
-<td># index 8th position</td>
-</tr>
-<tr>
-<td>word[7:9]</td>
-<td>hi</td>
-<td># slice FROM 8th position UNTIL 10th position (not inclusive) 8th &amp; 9th (indexes 7,8)</td>
-</tr>
-<tr>
-<td>word[:6]</td>
-<td>abcdef</td>
-<td># slice FROM BEGINNING until 7th position (indexes 0-6)</td>
-</tr>
-<tr>
-<td>word[5:]</td>
-<td>fghij</td>
-<td># slice FROM 6th position until END (indexes 5--&gt;)</td>
-</tr>
-<tr>
-<td>word[::3]</td>
-<td>adgj</td>
-<td># slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)</td>
-</tr>
-<tr>
-<td>word[3::2]</td>
-<td>dfhj</td>
-<td># slice from 4th position until end, STEP 2 (3,5,7,9)</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>One way to remember how slices work is to think of the indices as pointing <strong>between characters</strong>, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.</p>
-</blockquote>
-<p>Ok, so that's about slices.  Here's why slices work so well with recursive.</p>
-<p>Let's work with <code>word = 'abcdefghij'</code>. </p>
-<ul>
-<li>
-<p>First time around <code>word[0]</code> is<code>'a'</code> and <code>word[1:]</code> is <code>'bcdefghij'</code>.</p>
-</li>
-<li>
-<p>Second time around - <code>word</code> is the previous <code>word[1:]</code>. So <code>word[0]</code> is <code>'b'</code> and <code>word[1:]</code> is now <code>'cdefghij'</code>. </p>
-</li>
-<li>
-<p>Keep looping until there there are no letters left in <code>word</code> and then <code>word[]==""</code>.</p>
-</li>
-</ul>
-<p>Let's see that in action.  Here's the code:</p>
-<div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="s">&#39;abcdefghij&#39;</span>
-
-<span class="k">def</span> <span class="nf">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&#39;word: &quot;{}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&#39;hit the base case. the end&#39;</span>
-        <span class="k">return</span> <span class="n">word</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&quot;in the &#39;else statement&#39;&quot;</span>
-        <span class="k">print</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-
-<span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-</pre></div>
-
-
-<p>So what happened here?</p>
-<ul>
-<li>
-<p>Each recursion starts off by printing what <code>word</code> looks like now.</p>
-</li>
-<li>
-<p>Then it checks for the 'base case', the exit of the loop.  Here it is   <code>if word == "":</code></p>
-</li>
-<li>
-<p>If not the 'base case', then the recursion happens.  Here, it is the same function with a new <code>word</code> - the <code>word[1:]</code> in the return.</p>
-</li>
-<li>
-<p>And it loops and loops until it hits the 'base case' and exits.</p>
-</li>
-</ul>
-<p>That was a simple examples using slices and strings. Here's another with lists.</p>
-<div class="highlight"><pre><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">numbers</span>
-    <span class="k">print</span> <span class="n">largest_so_far</span>
-
-    <span class="n">next_num</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="n">numbers</span> <span class="o">==</span> <span class="p">[]:</span>
-        <span class="k">return</span> <span class="n">largest_so_far</span>
-
-    <span class="k">if</span> <span class="n">next_num</span> <span class="o">&gt;</span> <span class="n">largest_so_far</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">next_num</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">largest_so_far</span><span class="p">)</span>
-</pre></div>
-
-
-<p>So what's happening here. </p>
-<p>This function seeks to find the largest number in the list.  </p>
-<p><code>def max(numbers, largest_so_far=0):</code> : We define the function called <code>max</code> with 2 arguments:  <code>numbers</code>, which is the list of numbers from which to find the largest number. And <code>largest_so_far</code> in which we will hold onto the 'largest number found up to that point' and we start it with a default of <code>0</code>.</p>
-<p><code>ext_num = numbers[0]</code> : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function <code>numbers[1:]</code>. It is the previous list - but from the second position.</p>
-<p><code>if numbers == []:</code> : This is the base case, the exit of the loop. If there are no more numbers, then the <code>largest_so_far</code> is the largest number. The end!</p>
-<p><code>if next_num &gt; largest_so_far:</code> : if <code>next_num</code> is larger than <code>largest_so_far</code>, then ...</p>
-<p><code>return max(numbers[1:], largest_so_far=next_num)</code> : do this function again - with the arguments: <code>numbers[1:]</code> and <code>largest_so_far=next_num</code>.</p>
-<p><code>else:</code> : if <code>next_num</code> is not larger (is equal to or less than), then ...</p>
-<p><code>return max(numbers[1:], largest_so_far=largest_so_far)</code> : call the recrusive function again - like above, but leave the <code>largest_so_far</code> as is.</p>
-<p>And the loop continues until hits base case.</p></div>
-        <hr />
-    </div>
-		
+The ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/recursions-and-lists-and-slices.html">read more</a></div>
+    </div>	
+				
 
  
         
