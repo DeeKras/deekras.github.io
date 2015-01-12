@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="http://www.deekras.com/basic-sqlalchemy.html"><h1>Basic SQLAlchemy</h1></a>
-Sat 20 December 2014
+            <a href="http://www.deekras.com/sqlalchemy-and-relationship.html"><h1>SQLAlchemy and Relationship</h1></a>
+Mon 22 December 2014
 
 by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
  
@@ -69,100 +69,12 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
  
         </div>
         
-        <div><h2>First, why SQLAlchemy is powerful.</h2>
-<p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.</p>
-<h2>And now to jump right in...</h2>
-<p><strong>The imports:</strong></p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">String</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
-</pre></div>
-
-
-<p><strong>To set things up:</strong></p>
-<div class="highlight"><pre><span class="c">#at the global level</span>
-
-<span class="n">db</span> <span class="o">=</span> <span class="s">&#39;sqlite:///membership.db&#39;</span>  <span class="c">#your database</span>
-
-<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> 
-<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
-
-<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span> 
-
-<span class="c">#create tables</span>
-
-<span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span> 
-</pre></div>
-
-
-<p><strong>Some explanations:</strong></p>
-<p>These are all set at the global level.</p>
-<p><code>db = 'sqlite:///membership.db'</code> </p>
-<ul>
-<li>naming the database and where it resides</li>
-<li>you can name it anything. <code>db</code> is good too.</li>
-</ul>
-<p><code>engine = create_engine(db)</code></p>
-<ul>
-<li>the <strong>engine</strong> is the 'home base' for the database - it contains the path to the database and some information about the dialect (there are other arguments too).</li>
-<li><code>create_engine()</code> creates a new Engine instance called <code>engine</code>. </li>
-<li>you can name it anything. <code>engine</code> is convention.</li>
-<li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html">engines</a>)</li>
-</ul>
-<p><code>Base = declarative_base()</code> </p>
-<ul>
-<li>the <strong>declarative</strong> creates a new base class which all classes based on it will inherit. (See below when we create the <code>Member</code> class.)</li>
-<li>you can name it anything. <code>Base</code> is convention.</li>
-<li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_8/orm/extensions/declarative.html">declaratives</a>)</li>
-</ul>
-<p><code>Session = sessionmaker(bind=engine)</code></p>
-<ul>
-<li>the <strong>session</strong> is a 'holding zone' for all the conversations between the program and the database. </li>
-<li><code>sessionmaker(bind=engine)</code> creates the Session object. And binds it to the <code>engine</code>; in this way the session knows how to connect to the database it is working with.</li>
-<li>you can name it anything. <code>Session</code> is convention.</li>
-<li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_9/orm/session_basics.html#what-does-the-session-do">sessions</a>)</li>
-</ul>
-<p><code>session = Session()</code></p>
-<ul>
-<li>create the 'session'</li>
-<li>you can name it anything.  *NOTE if you are also working with Flask which has a <code>session</code> object, things may get confusing; name this something else.</li>
-</ul>
-<p><code>Base.metadata.create_all(engine)</code></p>
-<ul>
-<li><em>after the tables are created</em>, still need to create it in the <code>engine</code></li>
-<li>we are creating the tables in the 'engine' and linking it to be saved as the <code>metadata</code> of the <code>Base</code> class.
-     -(<code>metadata</code> is the structure of the data - ie: the fields and types )</li>
-</ul>
-<hr />
-<h3>Here's a little example using the very basics of SQLAlchemy.</h3>
-<p>A quick background to what this little program is about: This program is a webform. (At this point, using regular Flask forms. Will refactor to use WTForms.)</p>
-<ul>
-<li>
-<p>A new user <em>inquires</em> about membership.  </p>
-<ul>
-<li>She fills in some basic info about herself.</li>
-<li>The <code>member_id</code> is automatically set.  [This will be done with the <code>autoincrement</code>. See below.]</li>
-<li>The <code>inquiry_date</code> is set to current date/ time. [This will be done with the <code>default</code> set to current time. See below.]</li>
-</ul>
-</li>
-<li>
-<p>The inquirer becomes a member (activate).</p>
-<ul>
-<li>She adds some more info (password, etc.).</li>
-<li>The <code>active_date</code> is set to current date/ time. [This will be done in the <code>activate</code> method. See below.]</li>
-<li><code>is_active</code> is set to <code>true</code>. [This will be done in the <code>activate</code> method. See below.]</li>
-</ul>
-</li>
-<li>
-<p>The active member can unsubscribe (deactivate).</p>
-<ul>
-<li>The <code>inactive_date</code> is set to current date/ time. [This will be done in the <code>deactivate</code> method. See below.]</li>
-<li><code>is_active</code> is set to <code>false</code>. [This will be done in the <code>deactivate</code> method. See below.]</li>
-</ul>
-</li>
-</ul>
-<hr />
-<p><strong>So now, let's set up the Class:</strong></p>
+        <div><h2>Moving along with SQLAlchemy and ... Relationships</h2>
+<p>Most of programming is not a simple flat table. Mostly, there are several tables, and there is something that links them - the tables have relationships.</p>
+<p>So going back to the small membership program from the <a href="link">previous post</a>, let's add a purchases table, where we can keep track of all purchases each member makes.  The two tables are linked by the <code>member_id</code>. They have a relationship.</p>
+<p>Each member can have several purchases.  The one member can have many purchases. That is a <strong>one-to-many relationship</strong>.</p>
+<h3>Let's set that up in SQLAlchemy:</h3>
+<p>This is the Member class we set up last time:</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;members&#39;</span>
 
@@ -178,172 +90,97 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 </pre></div>
 
 
-<p><strong>The Class</strong></p>
-<ul>
-<li>The class is based on the <code>Base</code> object declared above.  </li>
-<li>It must contain the <code>__tablename__</code>. </li>
-<li>And at least one column that is the primary key, in this example, it is <code>member_id</code>.<ul>
-<li>About <code>primary_key</code>:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. </li>
-</ul>
-</li>
-</ul>
-<p><strong>The Fields</strong></p>
-<ul>
-<li>The syntax is: <code>field_name = Column(args, kwargs)</code></li>
-<li>There are several different <strong>data types</strong> (ex: DateTime, String, Boolean, Float, Integer, Text and others. Must import each type that will be used, as we did above.)</li>
-<li>(Much more about <a href="http://docs.sqlalchemy.org/en/rel_0_9/core/type_basics.html">columns and data types</a>)</li>
-<li>There are several <strong>args</strong> that can be used (ex: default, autoincrement, index, nullable and others)</li>
-<li>Much more about the <a href="http://docs.sqlalchemy.org/en/rel_0_9/core/metadata.html#column-table-metadata-api">rest of the args</a></li>
-</ul>
-<p><strong>And now to add some methods to the <code>Member</code> class:</strong></p>
-<div class="highlight"><pre>    <span class="k">def</span> <span class="nf">add_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  
+<p>And now we will set up the Purchase class.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Purchase</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;purchases&#39;</span>
 
-    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">active_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="bp">True</span>
-
-    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inactive_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">purchase_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">member_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;members.member_id&#39;</span><span class="p">))</span>
+    <span class="n">item_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">purchase_date</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">purchase_amt</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">)</span>
 </pre></div>
 
 
-<p><code>session.add(self)</code>:</p>
-<ul>
-<li>This method will (attempt to) create a new row in the database and add the data to that row.  The <code>primary_key</code> must be unique. In this case, it is unique, since we are using <code>autoincrement</code> to create the <code>member_id</code>.</li>
-<li>We can use <code>add_all([list of new rows])</code> to create several rows at once.)</li>
-</ul>
-<p><strong>VERY IMPORTANT!</strong> Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to <code>commit()</code> it, or the data will not be saved. <code>session.commit()</code>.</p>
-<hr />
-<p>So for example, the user is on the 'I'm interested' page and enters her last name, first name and email address and then hits 'submit'.  The function might be something like this:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">add_inquiry</span><span class="p">():</span>
-
-    <span class="n">last_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;last_name&#39;</span><span class="p">]</span>
-    <span class="n">first_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;first_name&#39;</span><span class="p">]</span>
-    <span class="n">email_address</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&#39;email_address&#39;</span><span class="p">]</span>
-
-    <span class="n">Member</span><span class="p">(</span><span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> 
-           <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> 
-           <span class="n">email_address</span><span class="o">=</span><span class="n">email_address</span><span class="p">)</span><span class="o">.</span><span class="n">add_to_db</span><span class="p">()</span>
-
-    <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<p>Let's go back to the Member class and add the relevant code to the bottom.</p>
+<p><code>purchases = relationship("Purchase", backref="members")</code></p>
+<p>And we have to add a bit to the <code>imports</code> - <code>relationship</code>, <code>backref</code>, <code>ForeignKey</code></p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">backref</span><span class="p">,</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span>
 </pre></div>
 
 
 <p><strong>Explanations</strong></p>
-<p>This is when the user comes to the website for the first time and is interested.
-She enters her last name, first name and email address and then 'submit'.</p>
-<p>When 'submit' is hit, the fun begins.
-   - the data is collected from the form (request.form['field'])
-   - an instance of the Member class is created with these fields. 
-     - AND the <code>member_id</code> is created; remember it was set as <code>autoincrement</code>. 
-     - AND the <code>inquiry_date</code> is set to <code>now()</code>; that is its <code>default</code>.
-   - the <code>add_to_db()</code> method is called. This will add all these fields as a new row in the table.
-   - LASTLY and IMPORTANTLY, this row which is sitting in the 'holding zone' of the <code>session</code> gets a commit().  If the session is not committed, the data will sit there until it is committed or lost when a new session begins.</p>
+<p>The Purchase class is pretty straightforward. It is based on the <code>Base</code> class and it has a primary key. The interesting piece is in the args of <code>member_id</code>.  Remember, the <code>member_id</code> is the one field that both tables share; it creates the relationship. So we have to state that somehow.(More about <a href="http://docs.sqlalchemy.org/en/rel_0_9/orm/basic_relationships.html">relationships</a>)</p>
+<p>The <code>purchases</code> table is a 'child' of the <code>members</code> table, which is its parent.</p>
+<p><code>member_id = Column(Integer, ForeignKey('members.member_id'))</code></p>
+<ul>
+<li><code>Integer</code>: The data type must be the same in both tables.</li>
+<li><code>ForeignKey('members.member_id')</code> : This states that it is the 'child' of the <code>members</code> table, specifically linked to the <code>member_id</code>.<ul>
+<li>It is linked to the field in the <code>members</code> table, not the <code>Member</code> class.</li>
+</ul>
+</li>
+</ul>
+<p><code>purchases = relationship("Purchase", backref="members")</code></p>
+<ul>
+<li>This is the link to the 'child'. The <code>relationship</code> is on the 'parent' class.</li>
+<li><code>backref</code>. This establishes the bi-directional relationship - from the many to the one, from the child to the parent.</li>
+<li><code>backref</code> is a shortcut for creating the relationship instead of creating the relationships in  both classes. Much more about <a href="http://docs.sqlalchemy.org/en/latest/orm/backref.html"><code>backref</code></a></li>
+<li>This establishes <code>Member.purchases</code>; purchases is an attribute of Member class.</li>
+<li>And it also establishes <code>Purchase.member</code>; `member is an attribute of Purchase class.</li>
+</ul>
+<p>So now the relationships between the 2 tables has been established.  </p>
 <hr />
-<h3>Using queries</h3>
-<p>It is interesting to see your data.  For that we use queries.  Of course, there are lots of other uses for queries. Here is a super simple query:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">display_members</span><span class="p">():</span>
-    <span class="n">members</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">member</span><span class="o">.</span><span class="n">email_address</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">is_active</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span> 
-                <span class="n">member</span><span class="o">.</span><span class="n">active_date</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">cell_phone</span>
+<h3>Queries for tables with relationships</h3>
+<p>Let's say we want to know who purchased what.  We need the name data from the <strong>members</strong> table and the purchase data from the <strong>purchases table</strong>.  We need a query that somehow pulls from both tables.  There are some query(args) for that.</p>
+<p>Here's a simple query of 2 tables:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
+    <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Member</span><span class="p">,</span> <span class="n">Purchase</span><span class="p">)</span><span class="o">.</span>\
+                        <span class="nb">filter</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span> <span class="o">==</span> <span class="n">Member</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>
+                        <span class="n">order_by</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>\
+                        <span class="nb">all</span><span class="p">()</span>
+    <span class="k">for</span>  <span class="n">member</span><span class="p">,</span> <span class="n">purchase</span> <span class="ow">in</span> <span class="n">purchases</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">,</span> <span class="n">purchase</span><span class="o">.</span><span class="n">purchase_date</span>
 </pre></div>
 
 
-<p>The basic syntax for a query in SQLAlchemy is:
-<code>session.query(whatever you are searching)</code> *This will need a 'return results' argument at the end. See below.</p>
 <ul>
-<li>
-<p><code>session</code> is the same 'session' that we declared at the very beginning.</p>
-</li>
-<li>
-<p>You can search through a class <code>session.query(Member)</code>.</p>
-</li>
-<li>Or you can list a few fields <code>session.query(Member.last_name, Member.first_name)</code>.</li>
+<li>both classes are included in the args of the query.</li>
+<li>the filter is when <code>member_id</code> in the <code>Member</code> class is equal to the <code>member_id</code> in the Purchase class.</li>
+<li>in the <code>for</code> statement,  the order of the 2 variables matters. It must be in the same order that the classes were listed in the args.  (Member is first, so the object that will hold all Member's attributes must be first)</li>
+<li>it uses <code>order_by</code></li>
+<li>and it returns all results</li>
 </ul>
-<h3>There are many different arguments for the <code>query</code>.</h3>
-<p><strong>Return results</strong></p>
-<p>At the very end - which indicates how many results to return - you can use:</p>
-<ul>
-<li>
-<p><code>.all()</code></p>
-<ul>
-<li>returns all results. As a list of tuples.</li>
-</ul>
-</li>
-<li>
-<p><code>.first()</code></p>
-<ul>
-<li>returns the first result. As a tuple.</li>
-<li>if there were no results, returns <code>None</code>.</li>
-</ul>
-</li>
-<li>
-<p><code>.limit(limit)</code> </p>
-<ul>
-<li>returns the 'limit' number of rows. As a list of tuples.</li>
-<li>ex: <code>limit(3)</code> will return 3</li>
-</ul>
-</li>
-<li>
-<p><code>.one()</code>  </p>
-<ul>
-<li>returns exactly one result. As a tuple.</li>
-<li>if there are more results than 1, raises <code>MultipleResultsFound</code></li>
-<li>if there were no results, raises <code>NoResultFound</code></li>
-</ul>
-</li>
-<li>
-<p><code>.scalar()</code></p>
-<ul>
-<li>returns the first column of the first result ex: <code>session.query(Item.id, Item.name).scalar()</code> will return just the value of Item.id (the first column)</li>
-<li>if there are more results than 1, raises <code>MultipleResultsFound</code></li>
-<li>if there were no results, returns <code>None</code></li>
-</ul>
-</li>
-</ul>
-<p><strong>Other more common arguments are:</strong></p>
-<ul>
-<li>
-<p><code>.filter()</code> or <code>.filter_by()</code></p>
-<ul>
-<li>criterion to filter results</li>
-<li><code>filter</code> uses SQL expressions and is more pythonic. So uses <code>==</code> (double equal). ex: <code>.filter(Member.last_name == 'Silver')</code></li>
-<li><code>filter_by</code> uses keyword expressions. So uses <code>=</code> (single equal). ex: <code>.filter_by(Member.last_name = 'Silver')</code></li>
-<li>use a comma to add more criteria, ex: <code>.filter(Member.last_name == 'Silver', Member.first_name = 'Mark')</code></li>
-</ul>
-</li>
-<li>
-<p><code>.order_by()</code></p>
-<ul>
-<li>the results will be sorted in the order specified. ex: <code>.order_by(Member.active_date)</code> will be sorted by <code>active_date</code></li>
-</ul>
-</li>
-<li>
-<p><code>.group_by</code></p>
-<ul>
-<li>the results will be grouped by the criterion. returns a set, based on the columns indicated. ex: <code>.group_by(Member.active_date)</code> will group by <code>active_date</code> and return one row for each active date in the table, even if there are many of the same active date in the table</li>
-</ul>
-</li>
-<li>
-<p><code>.count()</code></p>
-<ul>
-<li>returns a count (the number) of rows this query would return</li>
-</ul>
-</li>
-<li>
-<p>And then there are a whole set of different types of 'joins' for working with 2 tables that have a relationship. Will explore these in a separate post about relationships between tables.</p>
-</li>
-</ul>
-<p>That's the very very basic. It gets much more interesting and useful, when we start adding relationships between the tables. And making the queries a bit more complex.  More next time.</p>
-<hr />
-<h3>Some very basics about how it works.</h3>
-<p>Some very important points <a href="http://alextechrants.blogspot.com/2013/11/10-common-stumbling-blocks-for.html">here</a></p></div>
+<!-- Here is another function that will have the same results - another way to write the query. Using a `join`.
+
+
+
+wzxhzdk:4
+
+
+   - the `join` works because the relationship has already been declared previously when we created the classes. --></div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.deekras.com/basic-sqlalchemy.html"><h2>Basic SQLAlchemy</h2></a>
+        <div class= "well small"> Sat 20 December 2014
+
+by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras</a>
+ 
+
+
+ </div>
+        <div class="summary"><h2>First, why SQLAlchemy is powerful.</h2>
+<p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that ...</p> <a class="btn btn-info xsmall" href="http://www.deekras.com/basic-sqlalchemy.html">read more</a></div>
+    </div>	
+				
 
  
         
