@@ -125,18 +125,18 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <ul>
 <li>This is the link to the 'child'. The <code>relationship</code> is on the 'parent' class.</li>
 <li><code>backref</code>. This establishes the bi-directional relationship - from the many to the one, from the child to the parent.</li>
-<li><code>backref</code> is a shortcut for creating the relationship instead of creating the relationships in  both classes. Much more about <a href="http://docs.sqlalchemy.org/en/latest/orm/backref.html"><code>backref</code></a></li>
+<li><code>backref</code> is a shortcut for creating the relationship instead of creating the relationships in  both classes. Much more about <a href="http://docs.sqlalchemy.org/en/latest/orm/backref.html">backref</a></li>
 <li>This establishes <code>Member.purchases</code>; purchases is an attribute of Member class.</li>
 <li>And it also establishes <code>Purchase.member</code>; `member is an attribute of Purchase class.</li>
 </ul>
 <p>So now the relationships between the 2 tables has been established.  </p>
 <hr />
 <h3>Queries for tables with relationships</h3>
-<p>Let's say we want to know who purchased what.  We need the name data from the <strong>members</strong> table and the purchase data from the <strong>purchases table</strong>.  We need a query that somehow pulls from both tables.  There are some query(args) for that.</p>
+<p>Let's say we want to know who purchased what.  We need the name data from the <strong>members</strong> table and the purchase data from the <strong>purchases</strong> table.  We need a query that somehow pulls from both tables.  There are some query(args) for that.</p>
 <p>Here's a simple query of 2 tables:</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
     <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Member</span><span class="p">,</span> <span class="n">Purchase</span><span class="p">)</span><span class="o">.</span>\
-                        <span class="nb">filter</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span> <span class="o">==</span> <span class="n">Member</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>
+                        <span class="nb">filter</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span> <span class="o">==</span> <span class="n">Member</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>\
                         <span class="n">order_by</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>\
                         <span class="nb">all</span><span class="p">()</span>
     <span class="k">for</span>  <span class="n">member</span><span class="p">,</span> <span class="n">purchase</span> <span class="ow">in</span> <span class="n">purchases</span><span class="p">:</span>
@@ -151,14 +151,31 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <li>it uses <code>order_by</code></li>
 <li>and it returns all results</li>
 </ul>
-<!-- Here is another function that will have the same results - another way to write the query. Using a `join`.
+<p>Here is another function that will have the same results - another way to write the query. Using a <code>join</code>.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
+    <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Purchase</span><span class="p">,</span> <span class="n">Member</span><span class="p">)</span><span class="o">.</span>\
+                <span class="n">join</span><span class="p">(</span><span class="n">Member</span><span class="o">.</span><span class="n">purchases</span><span class="p">)</span><span class="o">.</span>\
+                <span class="n">order_by</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>\
+                <span class="nb">all</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">purchase</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">purchases</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span> <span class="n">purchase</span><span class="o">.</span><span class="n">purchase_date</span>
+</pre></div>
 
 
-
-wzxhzdk:4
-
-
-   - the `join` works because the relationship has already been declared previously when we created the classes. --></div>
+<ul>
+<li>the <code>join</code> works because the relationship has already been declared previously when we created the classes.</li>
+<li>include both classes in the query(paren)</li>
+</ul>
+<p>And one more way to write the query.</p>
+<p>```python</p>
+<p>def items_purchased_by_purchaser():
+    purchases = session.query(Purchase, Member).\
+                join(Purchase).\
+                join(Member).\
+                order_by(Purchase.member_id).\
+                all()
+    for purchase, member in purchases:
+        print purchase.member_id, member.last_name, purchase.purchase_date</p></div>
         <hr />
     </div>
 		

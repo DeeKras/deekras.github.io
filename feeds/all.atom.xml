@@ -55,18 +55,18 @@
 &lt;ul&gt;
 &lt;li&gt;This is the link to the 'child'. The &lt;code&gt;relationship&lt;/code&gt; is on the 'parent' class.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;backref&lt;/code&gt;. This establishes the bi-directional relationship - from the many to the one, from the child to the parent.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;backref&lt;/code&gt; is a shortcut for creating the relationship instead of creating the relationships in  both classes. Much more about &lt;a href="http://docs.sqlalchemy.org/en/latest/orm/backref.html"&gt;&lt;code&gt;backref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;backref&lt;/code&gt; is a shortcut for creating the relationship instead of creating the relationships in  both classes. Much more about &lt;a href="http://docs.sqlalchemy.org/en/latest/orm/backref.html"&gt;backref&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;This establishes &lt;code&gt;Member.purchases&lt;/code&gt;; purchases is an attribute of Member class.&lt;/li&gt;
 &lt;li&gt;And it also establishes &lt;code&gt;Purchase.member&lt;/code&gt;; `member is an attribute of Purchase class.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So now the relationships between the 2 tables has been established.  &lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3&gt;Queries for tables with relationships&lt;/h3&gt;
-&lt;p&gt;Let's say we want to know who purchased what.  We need the name data from the &lt;strong&gt;members&lt;/strong&gt; table and the purchase data from the &lt;strong&gt;purchases table&lt;/strong&gt;.  We need a query that somehow pulls from both tables.  There are some query(args) for that.&lt;/p&gt;
+&lt;p&gt;Let's say we want to know who purchased what.  We need the name data from the &lt;strong&gt;members&lt;/strong&gt; table and the purchase data from the &lt;strong&gt;purchases&lt;/strong&gt; table.  We need a query that somehow pulls from both tables.  There are some query(args) for that.&lt;/p&gt;
 &lt;p&gt;Here's a simple query of 2 tables:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;items_purchased_by_purchaser&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;purchases&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
-                        &lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+                        &lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
                         &lt;span class="n"&gt;order_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
                         &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt;  &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;purchases&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -81,14 +81,31 @@
 &lt;li&gt;it uses &lt;code&gt;order_by&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;and it returns all results&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- Here is another function that will have the same results - another way to write the query. Using a `join`.
+&lt;p&gt;Here is another function that will have the same results - another way to write the query. Using a &lt;code&gt;join&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;items_purchased_by_purchaser&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;purchases&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;purchases&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="n"&gt;order_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;purchases&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;purchase_date&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
-
-wzxhzdk:4
-
-
-   - the `join` works because the relationship has already been declared previously when we created the classes. --&gt;</summary></entry><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;code&gt;join&lt;/code&gt; works because the relationship has already been declared previously when we created the classes.&lt;/li&gt;
+&lt;li&gt;include both classes in the query(paren)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And one more way to write the query.&lt;/p&gt;
+&lt;p&gt;```python&lt;/p&gt;
+&lt;p&gt;def items_purchased_by_purchaser():
+    purchases = session.query(Purchase, Member).\
+                join(Purchase).\
+                join(Member).\
+                order_by(Purchase.member_id).\
+                all()
+    for purchase, member in purchases:
+        print purchase.member_id, member.last_name, purchase.purchase_date&lt;/p&gt;</summary></entry><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
 &lt;p&gt;There's a whole set of features of SQLAlchemy listed in their &lt;a href="http://www.sqlalchemy.org/features.html"&gt;docs&lt;/a&gt;. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.&lt;/p&gt;
 &lt;h2&gt;And now to jump right in...&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;The imports:&lt;/strong&gt;&lt;/p&gt;
