@@ -1,46 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-20T00:00:00+00:00</updated><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
 &lt;p&gt;There's a whole set of features of SQLAlchemy listed in their &lt;a href="http://www.sqlalchemy.org/features.html"&gt;docs&lt;/a&gt;. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.&lt;/p&gt;
-&lt;h3&gt;Some very basics about how it works.&lt;/h3&gt;
-&lt;p&gt;Some very important points &lt;a href="http://alextechrants.blogspot.com/2013/11/10-common-stumbling-blocks-for.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;And now to jump right in&lt;/h2&gt;
 &lt;p&gt;The imports:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Float&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ForeignKey&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.ext.declarative&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy.orm&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;relationship&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;backref&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sessionmaker&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To set things up:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sqlite:///membership.db&amp;#39;&lt;/span&gt;  &lt;span class="c"&gt;#your database&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#at the global level&lt;/span&gt;
 
-&lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#you can name it anything. convention names it &amp;#39;engine&amp;#39;.&lt;/span&gt;
+&lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;sqlite:///membership.db&amp;#39;&lt;/span&gt;  &lt;span class="c"&gt;#your database&lt;/span&gt;
+
+&lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
 &lt;span class="n"&gt;Base&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;declarative_base&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
 &lt;span class="n"&gt;Session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sessionmaker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c"&gt;#you can name it anything. convention names it &amp;#39;session&amp;#39;.&lt;/span&gt;
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; 
+
+&lt;span class="c"&gt;#create tables&lt;/span&gt;
+
+&lt;span class="n"&gt;Base&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h3&gt;A quick background to what this little program is about:&lt;/h3&gt;
-&lt;p&gt;This program is a webform. (At this point, using regular Flask forms. Will refactor to use WTForms.)
-   - A new user &lt;em&gt;inquires&lt;/em&gt; about membership.&lt;br /&gt;
-        - She fills in some basic info about herself.
-        - The &lt;code&gt;member_id&lt;/code&gt; is automatically set.
-        - The &lt;code&gt;inquiry_date&lt;/code&gt; is set to current date/ time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Some explanations:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;db = 'sqlite:///membership.db'&lt;/code&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;naming the database and where it resides&lt;/li&gt;
+&lt;li&gt;you can name it anything. &lt;code&gt;db&lt;/code&gt; is good too.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;engine = create_engine(db)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;engine&lt;/strong&gt; is the 'home base' for the database - it contains the path to the database and some information about the dialect (there are other arguments too).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create_engine() creates a new Engine instance called&lt;/code&gt;engine`. The engine is not connected until it is specifically called to do so. &lt;/li&gt;
+&lt;li&gt;you can name it anything. &lt;code&gt;engine&lt;/code&gt; is convention.&lt;/li&gt;
+&lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html"&gt;engines&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Base = declarative_base()&lt;/code&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;declarative&lt;/strong&gt; creates a new base class which all classes based on it will inherit. &lt;/li&gt;
+&lt;li&gt;you can name it anything. &lt;code&gt;Base&lt;/code&gt; is convention.&lt;/li&gt;
+&lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_8/orm/extensions/declarative.html"&gt;declaratives&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Session = sessionmaker(bind=engine)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;session&lt;/strong&gt; is a 'holding zone' for all the conversations between the program and the database. &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sessionmaker(bind=engine)&lt;/code&gt; creates the Session object. And binds it to the &lt;code&gt;engine&lt;/code&gt;; in this way the session knows how to connect to the database it is working with.&lt;/li&gt;
+&lt;li&gt;you can name it anything. &lt;code&gt;Session&lt;/code&gt; is convention.&lt;/li&gt;
+&lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_9/orm/session_basics.html#what-does-the-session-do"&gt;sessions&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;session = Session()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create the 'session'&lt;/li&gt;
+&lt;li&gt;you can name it anything.  *NOTE if you are also working with Flask which has a &lt;code&gt;session&lt;/code&gt; object, things may get confusing; name this something else.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Base.metadata.create_all(engine)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;after the tables are created&lt;/em&gt;, still need to create it in the &lt;code&gt;engine&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;we are creating the tables in the 'engine' and linking it to be saved as the &lt;code&gt;metadata&lt;/code&gt; of the &lt;code&gt;Base&lt;/code&gt; class.
+   -(&lt;code&gt;metadata&lt;/code&gt; is the structure of the data - ie: the fields and types )&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h3&gt;Here's a little example using the very basics of SQLAlchemy.&lt;/h3&gt;
+&lt;p&gt;A quick background to what this little program is about: This program is a webform. (At this point, using regular Flask forms. Will refactor to use WTForms.)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;The inquirer becomes a member (activate).
-        - She adds some more info (email/ password).
-        - The &lt;code&gt;active_date&lt;/code&gt; is set to current date/ time.
-        - &lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A new user &lt;em&gt;inquires&lt;/em&gt; about membership.  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;She fills in some basic info about herself.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;member_id&lt;/code&gt; is automatically set.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;inquiry_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The active member can unsubscribe (deactivate).
-        - The &lt;code&gt;inactive_date&lt;/code&gt; is set to current date/ time.
-        - &lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The inquirer becomes a member (activate).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;She adds some more info (password, etc.).&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;active_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The active member can unsubscribe (deactivate).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;inactive_date&lt;/code&gt; is set to current date/ time.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_active&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Set up the Class:&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;So now, let's set up the Class:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;__tablename__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;members&amp;#39;&lt;/span&gt;
 
@@ -56,9 +107,24 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The class is based on the &lt;code&gt;Base&lt;/code&gt; object.  It must contain the &lt;code&gt;__tablename__&lt;/code&gt;. And at least one column that is the primary key.&lt;/p&gt;
-&lt;p&gt;[About &lt;code&gt;primary_key&lt;/code&gt;:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. ]&lt;/p&gt;
-&lt;p&gt;And now to add some methods to the &lt;code&gt;Member&lt;/code&gt; class:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Class&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The class is based on the &lt;code&gt;Base&lt;/code&gt; object declared above.  &lt;/li&gt;
+&lt;li&gt;It must contain the &lt;code&gt;__tablename__&lt;/code&gt;. &lt;/li&gt;
+&lt;li&gt;And at least one column that is the primary key.&lt;ul&gt;
+&lt;li&gt;[About &lt;code&gt;primary_key&lt;/code&gt;:  A primary key is unique. That is no other row in that column has the same data.  It is the field that identifies the row as unique.  In this example, each member has a unique member_id. ]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;The Fields&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The syntax is: &lt;code&gt;field_name = Column(args, kwargs)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;There are several different &lt;strong&gt;data types&lt;/strong&gt; (ex: DateTime, String, Boolean, Float, Integer, Text and others. Must import each type that will be used, as we did above.)&lt;/li&gt;
+&lt;li&gt;(Much more about &lt;a href="http://docs.sqlalchemy.org/en/rel_0_9/core/type_basics.html"&gt;columns and data types&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;There are several &lt;strong&gt;args&lt;/strong&gt; that can be used (ex: default, autoincrement, index, nullable and others)&lt;/li&gt;
+&lt;li&gt;Much more about the &lt;a href="http://docs.sqlalchemy.org/en/rel_0_9/core/metadata.html#column-table-metadata-api"&gt;rest of the args&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;And now to add some methods to the &lt;code&gt;Member&lt;/code&gt; class:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_to_db&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 
@@ -72,9 +138,13 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;code&gt;session.add(self)&lt;/code&gt;: This method will (attempt to) create a new row in the database and add the data to that row.  The &lt;code&gt;primary_key&lt;/code&gt; must be unique. In this case, it is unique, since we are using '&lt;code&gt;autoincrement' to create the&lt;/code&gt;member_id`.&lt;/p&gt;
-&lt;p&gt;(We can use &lt;code&gt;add_all([list of new rows])&lt;/code&gt; to create several rows at once.)&lt;/p&gt;
-&lt;p&gt;Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to &lt;code&gt;commit()&lt;/code&gt; it, or the data will not be saved. &lt;code&gt;session.commit()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;session.add(self)&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This method will (attempt to) create a new row in the database and add the data to that row.  The &lt;code&gt;primary_key&lt;/code&gt; must be unique. In this case, it is unique, since we are using &lt;code&gt;autoincrement&lt;/code&gt; to create the &lt;code&gt;member_id&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We can use &lt;code&gt;add_all([list of new rows])&lt;/code&gt; to create several rows at once.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;VERY IMPORTANT!&lt;/strong&gt; Later when we actually call any of these methods that make changes (additions, changes or deletions) to the database, we will also have to &lt;code&gt;commit()&lt;/code&gt; it, or the data will not be saved. &lt;code&gt;session.commit()&lt;/code&gt;.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;So for example, the user is on the 'I'm interested' page and enters her last name, first name and email address and then hits 'submit'.  The function might be something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_interested&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
 
@@ -87,12 +157,13 @@
            &lt;span class="n"&gt;email_address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;email_address&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_to_db&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
     &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="n"&gt;It&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;interesting&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="n"&gt;For&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;we&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;queries&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="n"&gt;Here&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="nb"&gt;super&lt;/span&gt; &lt;span class="n"&gt;simple&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 
-&lt;span class="sb"&gt;``&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;display_members&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;hr /&gt;
+&lt;h3&gt;Using queries&lt;/h3&gt;
+&lt;p&gt;It is interesting to see your data.  For that we use queries.  Here is a super simple one:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;display_members&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;members&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;members&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;email_address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;is_active&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
@@ -101,39 +172,94 @@
 
 
 &lt;p&gt;The basic syntax for a query in SQLAlchemy is:
-&lt;code&gt;session.query(whatever you are searching)&lt;/code&gt; *This will need a 'return results'argument at the end. See below.
-You can search through a class &lt;code&gt;session.query(Member)&lt;/code&gt;
-or you can list a few fields &lt;code&gt;session.query(Member.last_name, Member.first_name)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;session&lt;/code&gt; is the same 'session' that we declared at the very beginning.
-There are many different arguments.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Return results&lt;/strong&gt;
-At the very end - which indicates how many results to return - you can use:
-   - &lt;code&gt;.all()&lt;/code&gt;
-        - returns all results. As a list of tuples.
-   - &lt;code&gt;.first()
-        - returns the first result. As a tuple.
-        - if there were no results, returns&lt;/code&gt;None&lt;code&gt;.
-   -&lt;/code&gt;.limit(limit)&lt;code&gt;ex:&lt;/code&gt;limit(3)&lt;code&gt;will return 3
-        - returns the 'limit' number of rows. As a list of tuples.
-   -&lt;/code&gt;.one()&lt;code&gt;- returns exactly one result. As a tuple.
-        - if there are more results than 1, raises&lt;/code&gt;MultipleResultsFound&lt;code&gt;- if there were no results, raises&lt;/code&gt;NoResultFound&lt;code&gt;-&lt;/code&gt;.scalar()&lt;code&gt;- returns the first column of the first result ex:&lt;/code&gt;session.query(Item.id, Item.name).scalar()&lt;code&gt;will return just the value of Item.id (the first column)
-        - if there are more results than 1, raises&lt;/code&gt;MultipleResultsFound&lt;code&gt;- if there were no results, returns&lt;/code&gt;None`&lt;/p&gt;
-&lt;p&gt;Other more common arguments are:
-   - &lt;code&gt;.filter()&lt;/code&gt; or &lt;code&gt;.filter_by()&lt;/code&gt;
-        - criterion to filter results
-        - &lt;code&gt;filter&lt;/code&gt; uses SQL expressions and is more pythonic. So uses &lt;code&gt;==&lt;/code&gt; (double equal). ex: &lt;code&gt;.filter(Member.last_name == 'Silver')&lt;/code&gt;
-        - &lt;code&gt;filter_by&lt;/code&gt; uses keyword expressions. So uses &lt;code&gt;=&lt;/code&gt; (single equal). ex: &lt;code&gt;.filter_by(Member.last_name = 'Silver')&lt;/code&gt;
-        - use a comma to add more criteria, ex: &lt;code&gt;.filter(Member.last_name == 'Silver', Member.first_name = 'Mark')&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;session.query(whatever you are searching)&lt;/code&gt; *This will need a 'return results' argument at the end. See below.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;.order_by()&lt;/code&gt;
-        - the results will be sorted in the order specified. ex: &lt;code&gt;.order_by(Member.active_date)&lt;/code&gt; will be sorted by &lt;code&gt;active_date&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.group_by&lt;/code&gt;
-        - the results will be grouped by the criterion. returns a set, based on the columns indicated. ex: &lt;code&gt;.group_by(Member.active_date)&lt;/code&gt; will group by &lt;code&gt;active_date&lt;/code&gt; and return one row for each active date in the table, even if there are many of the same active date in the table&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;.count()&lt;/code&gt;
-        - returns a count (the number) of rows this query would return&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;session&lt;/code&gt; is the same 'session' that we declared at the very beginning.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can search through a class &lt;code&gt;session.query(Member)&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Or you can list a few fields &lt;code&gt;session.query(Member.last_name, Member.first_name)&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3&gt;There are many different arguments for the &lt;code&gt;query&lt;/code&gt;.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Return results&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;At the very end - which indicates how many results to return - you can use:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.all()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns all results. As a list of tuples.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.first()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns the first result. As a tuple.&lt;/li&gt;
+&lt;li&gt;if there were no results, returns &lt;code&gt;None&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.limit(limit)&lt;/code&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns the 'limit' number of rows. As a list of tuples.&lt;/li&gt;
+&lt;li&gt;ex: &lt;code&gt;limit(3)&lt;/code&gt; will return 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.one()&lt;/code&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns exactly one result. As a tuple.&lt;/li&gt;
+&lt;li&gt;if there are more results than 1, raises &lt;code&gt;MultipleResultsFound&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;if there were no results, raises &lt;code&gt;NoResultFound&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.scalar()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns the first column of the first result ex: &lt;code&gt;session.query(Item.id, Item.name).scalar()&lt;/code&gt; will return just the value of Item.id (the first column)&lt;/li&gt;
+&lt;li&gt;if there are more results than 1, raises &lt;code&gt;MultipleResultsFound&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;if there were no results, returns &lt;code&gt;None&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Other more common arguments are:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.filter()&lt;/code&gt; or &lt;code&gt;.filter_by()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;criterion to filter results&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter&lt;/code&gt; uses SQL expressions and is more pythonic. So uses &lt;code&gt;==&lt;/code&gt; (double equal). ex: &lt;code&gt;.filter(Member.last_name == 'Silver')&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;filter_by&lt;/code&gt; uses keyword expressions. So uses &lt;code&gt;=&lt;/code&gt; (single equal). ex: &lt;code&gt;.filter_by(Member.last_name = 'Silver')&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;use a comma to add more criteria, ex: &lt;code&gt;.filter(Member.last_name == 'Silver', Member.first_name = 'Mark')&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.order_by()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the results will be sorted in the order specified. ex: &lt;code&gt;.order_by(Member.active_date)&lt;/code&gt; will be sorted by &lt;code&gt;active_date&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.group_by&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the results will be grouped by the criterion. returns a set, based on the columns indicated. ex: &lt;code&gt;.group_by(Member.active_date)&lt;/code&gt; will group by &lt;code&gt;active_date&lt;/code&gt; and return one row for each active date in the table, even if there are many of the same active date in the table&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.count()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;returns a count (the number) of rows this query would return&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;And then there are a whole set of different types of 'joins' for working with 2 tables that have a relationship. Will explore these in a separate post about relationships between tables.&lt;/p&gt;
-&lt;p&gt;That's the very very basic. It gets much more interesting and useful, when we start adding relationships between the tables. And making the queries a bit more complex.  More next time.&lt;/p&gt;</summary></entry><entry><title>Recursions and Lists and Slices</title><link href="http://www.deekras.com/recursions-and-lists-and-slices.html" rel="alternate"></link><updated>2014-12-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-18:recursions-and-lists-and-slices.html</id><summary type="html">&lt;h2&gt;Recursions on lists .. with slices&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That's the very very basic. It gets much more interesting and useful, when we start adding relationships between the tables. And making the queries a bit more complex.  More next time.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;Some very basics about how it works.&lt;/h3&gt;
+&lt;p&gt;Some very important points &lt;a href="http://alextechrants.blogspot.com/2013/11/10-common-stumbling-blocks-for.html"&gt;here&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Recursions and Lists and Slices</title><link href="http://www.deekras.com/recursions-and-lists-and-slices.html" rel="alternate"></link><updated>2014-12-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-18:recursions-and-lists-and-slices.html</id><summary type="html">&lt;h2&gt;Recursions on lists .. with slices&lt;/h2&gt;
 &lt;p&gt;Following up on my &lt;a href="http://www.deekras.com/some-simple-recursive-functions.html"&gt;post about recursions&lt;/a&gt;.  This time about recursive functions using a list. &lt;/p&gt;
 &lt;p&gt;So here's where slices gets really useful.&lt;/p&gt;
 &lt;p&gt;As a quick reminder about slices:
