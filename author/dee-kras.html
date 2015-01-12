@@ -154,7 +154,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <li>it uses <code>order_by</code></li>
 <li>and it returns all results</li>
 </ul>
-<p>Here is another function that will have the same results - another way to write the query. Using a <code>join</code>.</p>
+<p><strong>Here is another function that will have the same results</strong> - another way to write the query. Using a <code>join</code>.</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
     <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Purchase</span><span class="p">,</span> <span class="n">Member</span><span class="p">)</span><span class="o">.</span>\
                 <span class="n">join</span><span class="p">(</span><span class="n">Member</span><span class="o">.</span><span class="n">purchases</span><span class="p">)</span><span class="o">.</span>\
@@ -169,7 +169,7 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <li>the <code>join</code> works because the relationship has already been declared previously when we created the classes.</li>
 <li>include both classes in the query(paren)</li>
 </ul>
-<p>And one more way to write the query.</p>
+<p><strong>And one more way to write the query.</strong></p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
     <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Purchase</span><span class="p">,</span> <span class="n">Member</span><span class="p">)</span><span class="o">.</span>\
                 <span class="n">join</span><span class="p">(</span><span class="n">Purchase</span><span class="p">)</span><span class="o">.</span>\
