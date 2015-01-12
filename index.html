@@ -170,15 +170,15 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 <li>include both classes in the query(paren)</li>
 </ul>
 <p>And one more way to write the query.</p>
-<p>```python</p>
-<p>def items_purchased_by_purchaser():
-    purchases = session.query(Purchase, Member).\
-                join(Purchase).\
-                join(Member).\
-                order_by(Purchase.member_id).\
-                all()
-    for purchase, member in purchases:
-        print purchase.member_id, member.last_name, purchase.purchase_date</p></div>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">items_purchased_by_purchaser</span><span class="p">():</span>
+    <span class="n">purchases</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Purchase</span><span class="p">,</span> <span class="n">Member</span><span class="p">)</span><span class="o">.</span>\
+                <span class="n">join</span><span class="p">(</span><span class="n">Purchase</span><span class="p">)</span><span class="o">.</span>\
+                <span class="n">join</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span><span class="o">.</span>\
+                <span class="n">order_by</span><span class="p">(</span><span class="n">Purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">)</span><span class="o">.</span>\
+                <span class="nb">all</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">purchase</span><span class="p">,</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">purchases</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">purchase</span><span class="o">.</span><span class="n">member_id</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span> <span class="n">purchase</span><span class="o">.</span><span class="n">purchase_date</span>
+</pre></div></div>
         <hr />
     </div>
 		

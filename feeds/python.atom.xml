@@ -100,15 +100,15 @@
 &lt;li&gt;include both classes in the query(paren)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And one more way to write the query.&lt;/p&gt;
-&lt;p&gt;```python&lt;/p&gt;
-&lt;p&gt;def items_purchased_by_purchaser():
-    purchases = session.query(Purchase, Member).\
-                join(Purchase).\
-                join(Member).\
-                order_by(Purchase.member_id).\
-                all()
-    for purchase, member in purchases:
-        print purchase.member_id, member.last_name, purchase.purchase_date&lt;/p&gt;</summary></entry><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;items_purchased_by_purchaser&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;purchases&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Member&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="n"&gt;order_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;\
+                &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;purchases&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;member_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;member&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;purchase&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;purchase_date&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Basic SQLAlchemy</title><link href="http://www.deekras.com/basic-sqlalchemy.html" rel="alternate"></link><updated>2014-12-20T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-20:basic-sqlalchemy.html</id><summary type="html">&lt;h2&gt;First, why SQLAlchemy is powerful.&lt;/h2&gt;
 &lt;p&gt;There's a whole set of features of SQLAlchemy listed in their &lt;a href="http://www.sqlalchemy.org/features.html"&gt;docs&lt;/a&gt;. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that data is simpler than straight up SQL.&lt;/p&gt;
 &lt;h2&gt;And now to jump right in...&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;The imports:&lt;/strong&gt;&lt;/p&gt;
