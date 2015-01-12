@@ -103,7 +103,10 @@ by <a class="url fn" href="http://www.deekras.com/author/dee-kras.html">Dee Kras
 
 
 <p>Let's go back to the Member class and add the relevant code to the bottom.</p>
-<p><code>purchases = relationship("Purchase", backref="members")</code></p>
+<div class="highlight"><pre><span class="n">purchases</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s">&quot;Purchase&quot;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&quot;members&quot;</span><span class="p">)</span>
+</pre></div>
+
+
 <p>And we have to add a bit to the <code>imports</code> - <code>relationship</code>, <code>backref</code>, <code>ForeignKey</code></p>
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">backref</span><span class="p">,</span> <span class="n">sessionmaker</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">ForeignKey</span>
