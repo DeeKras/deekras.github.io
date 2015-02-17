@@ -74,12 +74,10 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <p>In very short, a linked list is comprised of <code>nodes</code> that are linked together to create a collection of nodes, in other words a list.</p>
 <p><em>So what's a node?</em>  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.</p>
 <p>To kind of visualize it ...</p>
-<p>--------------        --------------- 
-| val | next |  ----&gt; |val   |  None |</p>
-<p>--------------        ---------------
-Here, the first node points the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is <code>None</code>. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.</p>
+<p><b>|</b> val | next <b>|</b>  ----&gt; <b>|</b>val   |  None <b>|</b></p>
+<p>Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is <code>None</code>. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.</p>
 <p>The first node is generally called the <em>head</em> of the linked list. The rest is referred to as the <em>tail</em>.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. </p>
-<p>**How to set up a linked list?</p>
+<p><em>How to set up a linked list?</em></p>
 <p>We first set up a Node Class and instantiate the <code>val</code> and the <code>next</code>.</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>

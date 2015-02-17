@@ -4,12 +4,10 @@
 &lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;So what's a node?&lt;/em&gt;  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.&lt;/p&gt;
 &lt;p&gt;To kind of visualize it ...&lt;/p&gt;
-&lt;p&gt;--------------        --------------- 
-| val | next |  ----&amp;gt; |val   |  None |&lt;/p&gt;
-&lt;p&gt;--------------        ---------------
-Here, the first node points the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;|&lt;/b&gt; val | next &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;val   |  None &lt;b&gt;|&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
 &lt;p&gt;The first node is generally called the &lt;em&gt;head&lt;/em&gt; of the linked list. The rest is referred to as the &lt;em&gt;tail&lt;/em&gt;.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. &lt;/p&gt;
-&lt;p&gt;**How to set up a linked list?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;How to set up a linked list?&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;We first set up a Node Class and instantiate the &lt;code&gt;val&lt;/code&gt; and the &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
