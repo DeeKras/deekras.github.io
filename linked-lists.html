@@ -72,12 +72,14 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 	<h2>Working with linked lists:</h2>
 <p><strong>First: What is a 'linked list'?</strong></p>
 <p>In very short, a linked list is comprised of <code>nodes</code> that are linked together to create a collection of nodes, in other words a list.</p>
-<p><strong>So what's a node?</strong>  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.</p>
+<p><strong>So what's a node?</strong>  You can think of it as a nugget of data that contains 2 sections: 
+   1 – the data, the value, the cargo (different words for the same thing).</p>
+<p>2 – the pointer, the reference, the 'next' which points to the next node in the linked list.</p>
 <p><em>To kind of visualize it ...</em></p>
 <p><b>|</b> val | next <b>|</b>  ----&gt; <b>|</b>val   |  None <b>|</b></p>
 <p>Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is <code>None</code>. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.</p>
-<p>The first node is generally called the <em>head</em> of the linked list. The rest is referred to as the <em>tail</em>.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. </p>
-<p><em>How to set up a linked list?</em></p>
+<p>The first node is generally called the <strong>head</strong> of the linked list. The rest is referred to as the <strong>tail</strong>.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. </p>
+<p><strong>How to set up a linked list?</strong></p>
 <p>We first set up a Node Class and instantiate the <code>val</code> and the <code>next</code>.</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -88,12 +90,19 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </pre></div>
 
 
-<p>So, a simple node can be set up:
-<code>&gt;&gt;node = Node(4)</code>
-This creates an instance of the Node class. The <code>val</code> is <code>4</code>. And <code>next</code> is still at the default of <code>None</code>
-<code>node.val</code> = 4
-<code>node.next</code> = None</p>
-<p>There are several ways to actually set up the nodes and the whole list.  And add or delete or modify the nodes. Here's my preferred way:</p>
+<p>So, a simple node can be set up:</p>
+<p><code>&gt;&gt;node = Node(4)</code></p>
+<p>This creates an instance of the Node class. 
+   - The <code>val</code> is <code>4</code>. And <code>next</code> is still at the default of <code>None</code></p>
+<ul>
+<li>
+<p><code>node.val</code> = 4</p>
+</li>
+<li>
+<p><code>node.next</code> = None</p>
+</li>
+</ul>
+<p>There are several ways to actually set up the nodes and the whole list.  And add or delete or modify the nodes. Here's my preferred way, several methods in the LinkedList class.</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">None</span>
@@ -102,6 +111,7 @@ This creates an instance of the Node class. The <code>val</code> is <code>4</cod
 
 
 <p>Start off by instantiating the list itself – defining the <code>head</code> and the <code>tail</code>. Both start off as <code>None</code>.  </p>
+<p><strong>Here's the method for adding nodes.</strong></p>
 <div class="highlight"><pre>  <span class="k">def</span> <span class="nf">add_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 
@@ -115,27 +125,24 @@ This creates an instance of the Node class. The <code>val</code> is <code>4</cod
 </pre></div>
 
 
-<p>In this <code>add_node</code> method, we will set the <code>head</code> of the list- when adding the first node. If the new node doesn't point to anywhere, the next remains as the default <code>None</code>.</p>
-<p>With each new node, we set the 'next' of the previous node – because only now we know where it will point to. And we add that new node – only the value; the <code>next</code> will remain <code>None</code> until it knows where to point to.</p>
+<p>In this <code>add_node</code> method, we will set the <code>head</code> of the list- when adding the first node. If the new node doesn't yet point to anywhere, the <code>next</code> remains as the default <code>None</code>.</p>
+<p>With each new node, we set the <code>next</code> of the previous node – because <em>only now</em> we know where it will point to. And we add that new node – only the value; the <code>next</code> will remain <code>None</code> until it knows where to point to.</p>
 <ol>
 <li>
-<ul>
-<li><code>new_node</code> is an instance of Node.
-(ex: if Node(6) then new_node is 6.)</li>
-</ul>
+<p><code>new_node</code> is an instance of Node.
+(ex: if Node(6) then <code>new_node</code> is 6.)</p>
 </li>
 <li>
 <p>Then, we see if we need to set the <code>head</code> or if it was already set.  If <code>head</code> is still <code>None</code>, then this <code>new_node</code> is the head. If it is already set to something, then the head remains the same.</p>
 </li>
 <li>
-<p>Next, we check if there is anything in the tail. If there is something other than <code>None</code> -  meaning that there is a 'previous node' that is waiting to find out what it will point to - then the <code>tail.next</code> should be set to <code>new_node</code>.  In other words, we now know where it should point to.</p>
+<p>Next, we check if there is anything in the tail. If there is something other than <code>None</code> -  meaning that there is a 'previous node' that is waiting to find out what it will point to - then the <code>tail.next</code> should be set to <code>new_node</code>.  In other words, we now know where it should point to - to the new node.</p>
 </li>
 <li>
-<p>We now add the new_node to the tail of the list.</p>
+<p>Lastly, we add the <code>new_node</code> to the tail of the list.</p>
 </li>
 </ol>
-<p>–
-In other words …</p>
+<p><strong>In other words …</strong></p>
 <table>
   <col width="80">
   <col width="80">
@@ -183,22 +190,24 @@ In other words …</p>
 </table>
 
 <p>When we first instantiate – Node #0, there is no <code>new_node</code> yet, the <em>head</em> and <em>tail</em> are set to <code>None</code>.</p>
-<p>Adding Node #1 = Node(6)
-   1. the new_node = 6</p>
+<p>Adding Node #1 = Node(6)</p>
 <ol>
 <li>
-<p>We check if the <code>head</code> (here shown as row above) is <code>None</code> and since it is the first added node, it is <code>None</code>. Then we set the <code>head</code> to 6.  Which it will be from hereon until we change that first node.</p>
+<p>the <code>new_node</code> = 6</p>
 </li>
 <li>
-<p>We check if the <code>tail</code> (here shown as row above) is not <code>None</code>. When adding this first node, it is still <code>None</code>. So we leave the <code>next</code>  as <code>None</code>. When we add the next node, we will change it (hence the arrow indicating that it was first none and then when adding the next node, we change the <code>next</code> to point to it.</p>
+<p>We check if the <code>head</code> (here shown as row above) is <code>None</code> and since it is the first added node, it is indeed <code>None</code>. Then we set the <code>head</code> to <code>6</code>.  Which it will be from hereon until we change that first node.</p>
 </li>
 <li>
-<p>We add the 6 to the tail.</p>
+<p>We check if the <code>tail</code> (here shown as row above) is not <code>None</code>. When adding this first node, it is still <code>None</code>. So we leave the <code>next</code>  as <code>None</code>. When we will add the next node, we will change it (hence the arrow indicating that it was first <code>none</code> and then when adding the next node, we change the <code>next</code> to point to it.</p>
+</li>
+<li>
+<p>We add the <code>6</code> to the <code>tail</code>.</p>
 </li>
 </ol>
-<p>When we add the second node (the 8), the <code>head</code> remains, the same. We see that the previous <code>tail</code> now != None. So we need to add the 8 to <code>next</code> to that previous node.</p>
-<p>The last node has a value, and its <code>next</code> is <code>None</code>.</p>
+<p>When we add the second node (the 8), the <code>head</code> remains the same. We see that the previous <code>tail</code> now is not equal to None. So we need to add the <code>8</code> to <code>next</code> to that previous node.</p>
 <p>And so it goes!</p>
+<p>The last node has a value, and its <code>next</code> is <code>None</code>.</p>
 <h2>Now onto searching for something in that linked list</h2>
 <p>The basic idea is that we'll traverse through the linked list until we find what we are looking for.  I've created it as another method of the LinkedList class.</p>
 <div class="highlight"><pre><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
@@ -212,11 +221,23 @@ In other words …</p>
 </pre></div>
 
 
-<p>We start off by setting the node to the head of the list.</p>
-<p>And use a while loop to loop through the list.</p>
-<p>If the <code>node.val</code> matches the searchitem, return that <code>node.val</code>
-And if that <code>node.val</code> is not the search item, then move to the next node – by setting the node to the <code>node.next</code>.
-And if after it goes through all nodes (when it does equal <code>None</code>) and it still has not been found, return 'not found'.</p>
+<ol>
+<li>
+<p>We start off by setting the node to the 'head' of the list.</p>
+</li>
+<li>
+<p>And use a 'while loop' to loop through the list.</p>
+</li>
+<li>
+<p>If the <code>node.val</code> matches the searchitem, return that <code>node.val</code></p>
+</li>
+<li>
+<p>And if that <code>node.val</code> is not the search item, then move to the next node – by setting the node to the <code>node.next</code>.</p>
+</li>
+<li>
+<p>And if after it goes through all nodes (when it does equal <code>None</code>) and it still has not been found, return 'not found'.</p>
+</li>
+</ol>
 <p>Pretty straight forward. We'll use this as the base for removing nodes.</p>
 <h2>Removing Nodes</h2>
 <p>An important point to remember as we think about removing nodes. </p>
@@ -254,9 +275,15 @@ And if after it goes through all nodes (when it does equal <code>None</code>) an
 <p>We set the node to the head and <code>previous</code> to <code>None</code>.  We will use this <code>previous</code> to keep track of the previous node.</p>
 <p>Use a while loop to traverse through the list.
 We set the <code>current</code> to the current node.</p>
-<p>Next, we check if the <code>node.val</code> is the item we are searching for.
-   - And if it is, then <code>next</code> of the previous node is now set to th <code>next</code> of what is the current node.
-   - And if it is not, then we move both the previous and the current along the traversal of the list. The previous gets the value of the current one. And the <code>current</code> gets the value from the <code>next</code>. Until it is found. Or not.</p>
+<p>Next, we check if the <code>node.val</code> is the item we are searching for.</p>
+<ul>
+<li>
+<p>And if it is, then <code>next</code> of the previous node is now set to th <code>next</code> of what is the current node.</p>
+</li>
+<li>
+<p>And if it is not, then we move both the previous and the current along the traversal of the list. The previous gets the value of the current one. And the <code>current</code> gets the value from the <code>next</code>. Until it is found. Or not.</p>
+</li>
+</ul>
 <p>This works great for searching any item in the list, or even something not in the list.  But if the search item is the very first node – the head, then there is no <code>previous</code> as there simply is no previous. And also we set it to <code>None</code>. So the line <code>previous.next = current.next</code> won't work since <code>previous</code> is None, it can't have the <code>next</code> attribute. You'll get this error: <code>AttributeError: 'NoneType' object has no attribute 'next'</code></p>
 <p>Here's a solution.  Add these lines before the <code>while</code> </p>
 <div class="highlight"><pre>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
@@ -266,7 +293,7 @@ We set the <code>current</code> to the current node.</p>
 </pre></div>
 
 
-<p>If the item == the self.head.val (the val of the first node), then we have found the node to be removed. But before we remove it, we need to set the new head. So  the <code>node.next</code> of that node, of the <code>self.head</code> will be the new <code>self.head</code>.  And we jump out of the method.  (Read it slowly a second time, it does make sense.)</p>
+<p>If the item == the <code>self.head.val</code> (the val of the first node), then we have found the node to be removed. But before we remove it, we need to set the new head. So  the <code>node.next</code> of that node, of the <code>self.head</code> will be the new <code>self.head</code>.  And we jump out of the method.  (Read it slowly a second time, it does make sense.)</p>
 	<hr />
       </div>
     </div>
