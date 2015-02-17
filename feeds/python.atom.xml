@@ -1,5 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2014-12-22T00:00:00+00:00</updated><entry><title>SQLAlchemy and Relationship</title><link href="http://www.deekras.com/sqlalchemy-and-relationship.html" rel="alternate"></link><updated>2014-12-22T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-22:sqlalchemy-and-relationship.html</id><summary type="html">&lt;h2&gt;Moving along with SQLAlchemy and ... Relationships&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-17T00:00:00+00:00</updated><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
+&lt;p&gt;**First: What is a 'linked list'?&lt;/p&gt;
+&lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.&lt;/p&gt;
+&lt;p&gt;So what's a node?  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.&lt;/p&gt;
+&lt;p&gt;To kind of visualize it ...&lt;/p&gt;
+&lt;p&gt;--------------        --------------- 
+| val | next |  ----&amp;gt; |val   |  None |&lt;/p&gt;
+&lt;p&gt;--------------        ---------------
+Here, the first node points the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
+&lt;p&gt;The first node is generally called the &lt;em&gt;head&lt;/em&gt; of the linked list. The rest is referred to as the &lt;em&gt;tail&lt;/em&gt;.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. &lt;/p&gt;
+&lt;p&gt;**How to set up a linked list?&lt;/p&gt;
+&lt;p&gt;We first set up a Node Class and instantiate the &lt;code&gt;val&lt;/code&gt; and the &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;next&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__str__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, a simple node can be set up:
+&lt;code&gt;&amp;gt;&amp;gt;node = Node(4)&lt;/code&gt;
+This creates an instance of the Node class. The &lt;code&gt;val&lt;/code&gt; is &lt;code&gt;4&lt;/code&gt;. And &lt;code&gt;next&lt;/code&gt; is still at the default of &lt;code&gt;None&lt;/code&gt;
+&lt;code&gt;node.val&lt;/code&gt; = 4
+&lt;code&gt;node.next&lt;/code&gt; = None&lt;/p&gt;
+&lt;p&gt;There are several ways to actually set up the nodes and the whole list.  And add or delete or modify the nodes. Here's my preferred way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;LinkedList&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Start off by instantiating the list itself – defining the &lt;code&gt;head&lt;/code&gt; and the &lt;code&gt;tail&lt;/code&gt;. Both start off as &lt;code&gt;None&lt;/code&gt;.  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;new_node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_node&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_node&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_node&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In this &lt;code&gt;add_node&lt;/code&gt; method, we will set the &lt;code&gt;head&lt;/code&gt; of the list- when adding the first node. If the new node doesn't point to anywhere, the next remains as the default &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With each new node, we set the 'next' of the previous node – because only now we know where it will point to. And we add that new node – only the value; the &lt;code&gt;next&lt;/code&gt; will remain &lt;code&gt;None&lt;/code&gt; until it knows where to point to.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;new_node&lt;/code&gt; is an instance of Node.
+(ex: if Node(6) then new_node is 6.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then, we see if we need to set the &lt;code&gt;head&lt;/code&gt; or if it was already set.  If &lt;code&gt;head&lt;/code&gt; is still &lt;code&gt;None&lt;/code&gt;, then this &lt;code&gt;new_node&lt;/code&gt; is the head. If it is already set to something, then the head remains the same.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Next, we check if there is anything in the tail. If there is something other than &lt;code&gt;None&lt;/code&gt; -  meaning that there is a 'previous node' that is waiting to find out what it will point to - then the &lt;code&gt;tail.next&lt;/code&gt; should be set to &lt;code&gt;new_node&lt;/code&gt;.  In other words, we now know where it should point to.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We now add the new_node to the tail of the list.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;–
+In other words …&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;  Node #     &lt;/th&gt;
+    &lt;th&gt;  New_node   &lt;/th&gt;
+    &lt;th&gt;  Head       &lt;/th&gt;
+    &lt;th&gt;  Next       &lt;/th&gt;
+    &lt;th&gt;  Tail       &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;  0          &lt;/td&gt;
+    &lt;td&gt;  --         &lt;/td&gt;
+    &lt;td&gt;  None       &lt;/td&gt;
+    &lt;td&gt;  --         &lt;/td&gt;  
+    &lt;td&gt;  None       &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;  1          &lt;/td&gt;
+    &lt;td&gt;  6          &lt;/td&gt;
+    &lt;td&gt;  6          &lt;/td&gt;
+    &lt;td&gt;None  --&gt;8   &lt;/td&gt;
+    &lt;td&gt;6            &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 2           &lt;/td&gt;
+    &lt;td&gt;8            &lt;/td&gt;
+    &lt;td&gt;6            &lt;/td&gt;
+    &lt;td&gt;None  --&gt;10&lt;/td&gt;
+    &lt;td&gt;8&lt;/td&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;3&lt;/td&gt;
+    &lt;td&gt;10&lt;/td&gt;
+    &lt;td&gt;6&lt;/td&gt;
+    &lt;td&gt;None&lt;/td&gt;
+    &lt;td&gt;10&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When we first instantiate – Node #0, there is no &lt;code&gt;new_node&lt;/code&gt; yet, the &lt;em&gt;head&lt;/em&gt; and &lt;em&gt;tail&lt;/em&gt; are set to &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Adding Node #1 = Node(6)
+1. the new_node = 6
+2. We check if the &lt;code&gt;head&lt;/code&gt; (here shown as row above) is &lt;code&gt;None&lt;/code&gt; and since it is the first added node, it is &lt;code&gt;None&lt;/code&gt;. Then we set the &lt;code&gt;head&lt;/code&gt; to 6.  Which it will be from hereon until we change that first node.
+3. We check if the &lt;code&gt;tail&lt;/code&gt; (here shown as row above) is not &lt;code&gt;None&lt;/code&gt;. When adding this first node, it is still &lt;code&gt;None&lt;/code&gt;. So we leave the &lt;code&gt;next&lt;/code&gt;  as &lt;code&gt;None&lt;/code&gt;. When we add the next node, we will change it (hence the arrow indicating that it was first none and then when adding the next node, we change the &lt;code&gt;next&lt;/code&gt; to point to it.
+4. We add the 6 to the tail.&lt;/p&gt;
+&lt;p&gt;When we add the second node (the 8), the &lt;code&gt;head&lt;/code&gt; remains, the same. We see that the previous &lt;code&gt;tail&lt;/code&gt; now != None. So we need to add the 8 to &lt;code&gt;next&lt;/code&gt; to that previous node.&lt;/p&gt;
+&lt;p&gt;The last node has a value, and its &lt;code&gt;next&lt;/code&gt; is &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And so it goes!&lt;/p&gt;
+&lt;h2&gt;Now onto searching for something in that linked list&lt;/h2&gt;
+&lt;p&gt;The basic idea is that we'll traverse through the linked list until we find what we are looking for.  I've created it as another method of the LinkedList class.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;not found&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We start off by setting the node to the head of the list.&lt;/p&gt;
+&lt;p&gt;And use a while loop to loop through the list.&lt;/p&gt;
+&lt;p&gt;If the &lt;code&gt;node.val&lt;/code&gt; matches the searchitem, return that &lt;code&gt;node.val&lt;/code&gt;
+And if that &lt;code&gt;node.val&lt;/code&gt; is not the search item, then move to the next node – by setting the node to the &lt;code&gt;node.next&lt;/code&gt;.
+And if after it goes through all nodes (when it does equal &lt;code&gt;None&lt;/code&gt;) and it still has not been found, return 'not found'.&lt;/p&gt;
+&lt;p&gt;Pretty straight forward. We'll use this as the base for removing nodes.&lt;/p&gt;
+&lt;h2&gt;Removing Nodes&lt;/h2&gt;
+&lt;p&gt;An important point to remember as we think about removing nodes. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;When nothing points to a node, it simply hangs about until Python's 'garbage collection' just throws it out.  So removing the pointer that points to that node is part of the way we remove a node.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If we simply remove the &lt;code&gt;next&lt;/code&gt;  from a node, then anything after that is also disconnected from the first part of the list and thus lost.  Like those long linked Xmas lights.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The best way to remove a node is to have the pointer that was pointing to it just point to something else, to the next node on the link. So for example if node 4 points to 5, and 5 points to 7, and 7 points to 8. If we want to remove node 7, we can change the pointer of 5 (which currently points to 7) to point to 8. And then nothing points to 7 and it's gone to garbage collection.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So we traverse the list searching for that node and then point the previous node – that was pointing to the one we want to remove – the next one.  That's the idea.   &lt;/p&gt;
+&lt;p&gt;But once we pass the previous node, we can't reference it anymore.  So we have to keep track of the current node and the previous node. &lt;/p&gt;
+&lt;p&gt;Here's the code and then I'll explain:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;
+    &lt;span class="n"&gt;previous&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;previous&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;removed {}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;previous&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt;
+            &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;not found&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We set the node to the head and &lt;code&gt;previous&lt;/code&gt; to &lt;code&gt;None&lt;/code&gt;.  We will use this &lt;code&gt;previous&lt;/code&gt; to keep track of the previous node.&lt;/p&gt;
+&lt;p&gt;Use a while loop to traverse through the list.
+We set the &lt;code&gt;current&lt;/code&gt; to the current node.&lt;/p&gt;
+&lt;p&gt;Next, we check if the &lt;code&gt;node.val&lt;/code&gt; is the item we are searching for.
+   - And if it is, then &lt;code&gt;next&lt;/code&gt; of the previous node is now set to th &lt;code&gt;next&lt;/code&gt; of what is the current node.
+   - And if it is not, then we move both the previous and the current along the traversal of the list. The previous gets the value of the current one. And the &lt;code&gt;current&lt;/code&gt; gets the value from the &lt;code&gt;next&lt;/code&gt;. Until it is found. Or not.&lt;/p&gt;
+&lt;p&gt;This works great for searching any item in the list, or even something not in the list.  But if the search item is the very first node – the head, then there is no &lt;code&gt;previous&lt;/code&gt; as there simply is no previous. And also we set it to &lt;code&gt;None&lt;/code&gt;. So the line &lt;code&gt;previous.next = current.next&lt;/code&gt; won't work since &lt;code&gt;previous&lt;/code&gt; is None, it can't have the &lt;code&gt;next&lt;/code&gt; attribute. You'll get this error: &lt;code&gt;AttributeError: 'NoneType' object has no attribute 'next'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here's a solution.  Add these lines before the &lt;code&gt;while&lt;/code&gt; &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;removed {}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the item == the self.head.val (the val of the first node), then we have found the node to be removed. But before we remove it, we need to set the new head. So  the &lt;code&gt;node.next&lt;/code&gt; of that node, of the &lt;code&gt;self.head&lt;/code&gt; will be the new &lt;code&gt;self.head&lt;/code&gt;.  And we jump out of the method.  (Read it slowly a second time, it does make sense.)&lt;/p&gt;</summary></entry><entry><title>SQLAlchemy and Relationship</title><link href="http://www.deekras.com/sqlalchemy-and-relationship.html" rel="alternate"></link><updated>2014-12-22T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2014-12-22:sqlalchemy-and-relationship.html</id><summary type="html">&lt;h2&gt;Moving along with SQLAlchemy and ... Relationships&lt;/h2&gt;
 &lt;p&gt;Most of programming is not a simple flat table. Mostly, there are several tables, and there is something that links them - the tables have relationships.&lt;/p&gt;
 &lt;p&gt;So going back to the small membership program from the &lt;a href="link"&gt;previous post&lt;/a&gt;, let's add a purchases table, where we can keep track of all purchases each member makes.  The two tables are linked by the &lt;code&gt;member_id&lt;/code&gt;. They have a relationship.&lt;/p&gt;
 &lt;p&gt;Each member can have several purchases.  The one member can have many purchases. That is a &lt;strong&gt;one-to-many relationship&lt;/strong&gt;.&lt;/p&gt;
