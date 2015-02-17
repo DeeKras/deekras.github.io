@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-17T00:00:00+00:00</updated><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;First: What is a 'linked list'?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First: What is a 'linked list'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;So what's a node?&lt;/em&gt;  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.&lt;/p&gt;
-&lt;p&gt;To kind of visualize it ...&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So what's a node?&lt;/strong&gt;  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;To kind of visualize it ...&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;|&lt;/b&gt; val | next &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;val   |  None &lt;b&gt;|&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
 &lt;p&gt;The first node is generally called the &lt;em&gt;head&lt;/em&gt; of the linked list. The rest is referred to as the &lt;em&gt;tail&lt;/em&gt;.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. &lt;/p&gt;
