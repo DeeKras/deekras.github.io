@@ -70,9 +70,9 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       
       <div class="span8">
 	<h2>Working with linked lists:</h2>
-<p>**First: What is a 'linked list'?</p>
+<p><em>First: What is a 'linked list'?</em></p>
 <p>In very short, a linked list is comprised of <code>nodes</code> that are linked together to create a collection of nodes, in other words a list.</p>
-<p>So what's a node?  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.</p>
+<p><em>So what's a node?</em>  You can think of it as a nugget of data that contains 2 sections: 1 – the data, the value, the cargo (different words for the same thing).And 2 – the pointer, the reference, the 'next' which points to the next node in the linked list.</p>
 <p>To kind of visualize it ...</p>
 <p>--------------        --------------- 
 | val | next |  ----&gt; |val   |  None |</p>
@@ -139,6 +139,12 @@ This creates an instance of the Node class. The <code>val</code> is <code>4</cod
 <p>–
 In other words …</p>
 <table>
+  <col width="80">
+  <col width="80">
+  <col width="80">
+  <col width="80">
+  <col width="80">
+  <center>
   <tr>
     <th>  Node #     </th>
     <th>  New_node   </th>
@@ -175,14 +181,23 @@ In other words …</p>
     <td>None</td>
     <td>10</td>
   </tr>
+  </center>
 </table>
 
 <p>When we first instantiate – Node #0, there is no <code>new_node</code> yet, the <em>head</em> and <em>tail</em> are set to <code>None</code>.</p>
 <p>Adding Node #1 = Node(6)
-1. the new_node = 6
-2. We check if the <code>head</code> (here shown as row above) is <code>None</code> and since it is the first added node, it is <code>None</code>. Then we set the <code>head</code> to 6.  Which it will be from hereon until we change that first node.
-3. We check if the <code>tail</code> (here shown as row above) is not <code>None</code>. When adding this first node, it is still <code>None</code>. So we leave the <code>next</code>  as <code>None</code>. When we add the next node, we will change it (hence the arrow indicating that it was first none and then when adding the next node, we change the <code>next</code> to point to it.
-4. We add the 6 to the tail.</p>
+   1. the new_node = 6</p>
+<ol>
+<li>
+<p>We check if the <code>head</code> (here shown as row above) is <code>None</code> and since it is the first added node, it is <code>None</code>. Then we set the <code>head</code> to 6.  Which it will be from hereon until we change that first node.</p>
+</li>
+<li>
+<p>We check if the <code>tail</code> (here shown as row above) is not <code>None</code>. When adding this first node, it is still <code>None</code>. So we leave the <code>next</code>  as <code>None</code>. When we add the next node, we will change it (hence the arrow indicating that it was first none and then when adding the next node, we change the <code>next</code> to point to it.</p>
+</li>
+<li>
+<p>We add the 6 to the tail.</p>
+</li>
+</ol>
 <p>When we add the second node (the 8), the <code>head</code> remains, the same. We see that the previous <code>tail</code> now != None. So we need to add the 8 to <code>next</code> to that previous node.</p>
 <p>The last node has a value, and its <code>next</code> is <code>None</code>.</p>
 <p>And so it goes!</p>
