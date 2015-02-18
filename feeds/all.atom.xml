@@ -73,7 +73,7 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;In other words …&lt;/strong&gt;&lt;/p&gt;
-&lt;table border = "1"&gt;
+&lt;table border="1" cellpadding="3"&gt;
   &lt;center&gt;
   &lt;col width="180"&gt;
   &lt;col width="180"&gt;
