@@ -75,11 +75,11 @@
 &lt;p&gt;&lt;strong&gt;In other words …&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;center&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
+  &lt;col width="180"&gt;
+  &lt;col width="180"&gt;
+  &lt;col width="180"&gt;
+  &lt;col width="180"&gt;
+  &lt;col width="180"&gt;
 
   &lt;tr&gt;
     &lt;th&gt;  Node #     &lt;/th&gt;
