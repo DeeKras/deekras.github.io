@@ -75,12 +75,14 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;p&gt;When we first begin the search, 
-   - The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]&lt;/code&gt;
-   - &lt;code&gt;first = 0&lt;/code&gt;
-   - &lt;code&gt;last = len(alist) -1&lt;/code&gt; --&amp;gt; &lt;code&gt;last = 10&lt;/code&gt; 
-   - &lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(10 + 0)\\2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 5&lt;/code&gt;
-   - &lt;code&gt;alist[midpoint] = 11&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;When we first begin the search, &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;first = 0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;last = len(alist) -1&lt;/code&gt; --&amp;gt; &lt;code&gt;last = 10&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(10 + 0)\\2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;alist[midpoint] = 11&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Since the &lt;code&gt;7&lt;/code&gt; that we are searching for is &lt;strong&gt;less than&lt;/strong&gt; the &lt;code&gt;11&lt;/code&gt; at the midpoint, the next run of the search will be on the &lt;strong&gt;lower&lt;/strong&gt; half of the list. So we have to change the &lt;code&gt;last&lt;/code&gt; to reflect that. The &lt;code&gt;last&lt;/code&gt; will be &lt;strong&gt;1 less&lt;/strong&gt; than the midpoint (since we already know that the midpoint is not what we are searching for).&lt;/p&gt;
 &lt;p&gt;In the next round of the search, &lt;/p&gt;
 &lt;ul&gt;
@@ -96,9 +98,10 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
 &lt;li&gt;The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[7]&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;first = midpoint +1 --&amp;gt; &lt;code&gt;first = 3&lt;/code&gt;. &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;last = 4&lt;/code&gt;. * It is still &lt;code&gt;4&lt;/code&gt; from previous round.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(4 + 3)\\2&lt;/code&gt; --&amp;gt; midpoint = 3`&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(4 + 3)\\2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 3&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;alist[midpoint] = 7&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
+&lt;/ul&gt;
+&lt;p&gt;And we have found the &lt;code&gt;7&lt;/code&gt; when the &lt;code&gt;midpoint = 3&lt;/code&gt;. in other words, when the midpoint was representing the index at position &lt;code&gt;3&lt;/code&gt;. So if we asked for &lt;code&gt;alist[3]&lt;/code&gt;, we get our &lt;code&gt;7&lt;/code&gt; that we were searching for.&lt;/p&gt;</summary></entry><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is a 'linked list'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;So what's a node?&lt;/strong&gt;  You can think of it as a nugget of data that contains 2 sections: 
