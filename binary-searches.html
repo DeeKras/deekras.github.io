@@ -71,9 +71,9 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       <div class="span8">
 	<h2>Binary Search</h2>
 <p><strong>First: What is a 'binary search'?</strong></p>
-<p>The task: search through a sorted list to find the specified value.
-A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. 
-A binary search can save time.  The binary search seeks the midpoint of the list -  (first + last)//2. And then checks if that is the item. </p>
+<p>The task: search through a sorted list to find the specified value.</p>
+<p>A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. </p>
+<p>A binary search can save time.  The binary search seeks the midpoint of the list -  (last + first)//2. And then checks if that is the item. </p>
 <ul>
 <li>If it is, great. The search is done.</li>
 <li>If it is greater than the search item, then we search through the upper half of the list.</li>
@@ -99,12 +99,14 @@ A binary search can save time.  The binary search seeks the midpoint of the list
 </pre></div>
 
 
+<p><strong>important note</strong>: 
+<code>midpoint = (last + first)//2</code> . This keeps track of the correct index from the original <code>alist</code>, not the segment of the list that it is now searching through.  In this way, when we have indeed found what we were searching for, we know its index in the original <code>alist</code>.
+(the <code>//2</code> is floor division - where the answer is rounded down. Read more about floor division at (PEP 238)[https://www.python.org/dev/peps/pep-0238/])</p>
 <p>So say the list is as below:</p>
 <p><code>alist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]</code>
 and we are searching for <code>7</code></p>
-<p>print binary_search(alist, 7)
-```</p>
-<p><strong>In other words …</strong></p>
+<p><code>print binary_search(alist, 7)</code></p>
+<p><strong>This is what is happening as we run through the binary search</strong></p>
 <table border="1" cellpadding="3">
   <center>
   <col width="180">
@@ -138,32 +140,33 @@ and we are searching for <code>7</code></p>
     <td><center> 3           </center></td>
     <td><center>4            </center></td>
     <td><center>1            </center></td>
-    <td><center> 7 </center></td>
+    <td><center> 9 </center></td>
     <td><center>7            </center></td>
   </tr>
 </table>
 
-<p>When we first begin the search, </p>
-<ul>
-<li><code>first = 0</code></li>
-<li><code>last = len(alist) -1</code> --&gt; <code>last = 10</code> </li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>midpoint = 5</code></li>
-<li><code>alist[midpoint] = 11</code></li>
-</ul>
+<p>When we first begin the search, 
+   - The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]</code>
+   - <code>first = 0</code>
+   - <code>last = len(alist) -1</code> --&gt; <code>last = 10</code> 
+   - <code>midpoint = (last + first)//2</code> --&gt; <code>(10 + 0)\\2</code> --&gt; <code>midpoint = 5</code>
+   - <code>alist[midpoint] = 11</code></p>
 <p>Since the <code>7</code> that we are searching for is <strong>less than</strong> the <code>11</code> at the midpoint, the next run of the search will be on the <strong>lower</strong> half of the list. So we have to change the <code>last</code> to reflect that. The <code>last</code> will be <strong>1 less</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
 <p>In the next round of the search, </p>
 <ul>
+<li>The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7]</code></li>
 <li><code>first = 0</code>. <em>We are still searching from the beginning of the list.</em></li>
 <li><code>last = midpoint -1</code> --&gt; <code>last = 4</code></li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>midpoint = 2</code></li>
+<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 0)\\2</code> --&gt; <code>midpoint = 2</code></li>
 <li><code>alist[midpoint] = 5</code></li>
 </ul>
 <p>Since the <code>7</code> that we are searching for is <strong>greater than</strong> than the <code>5</code> at the midpoint, the next run of the search will be on the <strong>upper</strong> half of the previous list. So we have to change the <code>first</code> to reflect that. The <code>first</code> will be <strong>1 more</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
 <p>In the next round of the search, </p>
 <ul>
+<li>The segment of <code>alist</code> it will search through is: <code>[7]</code></li>
 <li>first = midpoint +1 --&gt; <code>first = 3</code>. </li>
 <li><code>last = 4</code>. * It is still <code>4</code> from previous round.</li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>midpoint = 1</code></li>
+<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 3)\\2</code> --&gt; midpoint = 3`</li>
 <li><code>alist[midpoint] = 7</code></li>
 </ul>
 	<hr />

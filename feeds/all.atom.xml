@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/all.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-18T00:00:00+00:00</updated><entry><title>Binary Searches</title><link href="http://www.deekras.com/binary-searches.html" rel="alternate"></link><updated>2015-01-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-18:binary-searches.html</id><summary type="html">&lt;h2&gt;Binary Search&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is a 'binary search'?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The task: search through a sorted list to find the specified value.
-A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. 
-A binary search can save time.  The binary search seeks the midpoint of the list -  (first + last)//2. And then checks if that is the item. &lt;/p&gt;
+&lt;p&gt;The task: search through a sorted list to find the specified value.&lt;/p&gt;
+&lt;p&gt;A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. &lt;/p&gt;
+&lt;p&gt;A binary search can save time.  The binary search seeks the midpoint of the list -  (last + first)//2. And then checks if that is the item. &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;If it is, great. The search is done.&lt;/li&gt;
 &lt;li&gt;If it is greater than the search item, then we search through the upper half of the list.&lt;/li&gt;
@@ -29,12 +29,14 @@ A binary search can save time.  The binary search seeks the midpoint of the list
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;&lt;strong&gt;important note&lt;/strong&gt;: 
+&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; . This keeps track of the correct index from the original &lt;code&gt;alist&lt;/code&gt;, not the segment of the list that it is now searching through.  In this way, when we have indeed found what we were searching for, we know its index in the original &lt;code&gt;alist&lt;/code&gt;.
+(the &lt;code&gt;//2&lt;/code&gt; is floor division - where the answer is rounded down. Read more about floor division at (PEP 238)[https://www.python.org/dev/peps/pep-0238/])&lt;/p&gt;
 &lt;p&gt;So say the list is as below:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;alist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]&lt;/code&gt;
 and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;print binary_search(alist, 7)
-```&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;In other words …&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;print binary_search(alist, 7)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This is what is happening as we run through the binary search&lt;/strong&gt;&lt;/p&gt;
 &lt;table border="1" cellpadding="3"&gt;
   &lt;center&gt;
   &lt;col width="180"&gt;
@@ -68,32 +70,33 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
     &lt;td&gt;&lt;center&gt; 3           &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt;4            &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt;1            &lt;/center&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;center&gt; 7 &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 9 &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt;7            &lt;/center&gt;&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;p&gt;When we first begin the search, &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;first = 0&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;last = len(alist) -1&lt;/code&gt; --&amp;gt; &lt;code&gt;last = 10&lt;/code&gt; &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 5&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;alist[midpoint] = 11&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;When we first begin the search, 
+   - The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]&lt;/code&gt;
+   - &lt;code&gt;first = 0&lt;/code&gt;
+   - &lt;code&gt;last = len(alist) -1&lt;/code&gt; --&amp;gt; &lt;code&gt;last = 10&lt;/code&gt; 
+   - &lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(10 + 0)\\2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 5&lt;/code&gt;
+   - &lt;code&gt;alist[midpoint] = 11&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Since the &lt;code&gt;7&lt;/code&gt; that we are searching for is &lt;strong&gt;less than&lt;/strong&gt; the &lt;code&gt;11&lt;/code&gt; at the midpoint, the next run of the search will be on the &lt;strong&gt;lower&lt;/strong&gt; half of the list. So we have to change the &lt;code&gt;last&lt;/code&gt; to reflect that. The &lt;code&gt;last&lt;/code&gt; will be &lt;strong&gt;1 less&lt;/strong&gt; than the midpoint (since we already know that the midpoint is not what we are searching for).&lt;/p&gt;
 &lt;p&gt;In the next round of the search, &lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[1, 3, 5, 7]&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;first = 0&lt;/code&gt;. &lt;em&gt;We are still searching from the beginning of the list.&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;last = midpoint -1&lt;/code&gt; --&amp;gt; &lt;code&gt;last = 4&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(4 + 0)\\2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 2&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;alist[midpoint] = 5&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Since the &lt;code&gt;7&lt;/code&gt; that we are searching for is &lt;strong&gt;greater than&lt;/strong&gt; than the &lt;code&gt;5&lt;/code&gt; at the midpoint, the next run of the search will be on the &lt;strong&gt;upper&lt;/strong&gt; half of the previous list. So we have to change the &lt;code&gt;first&lt;/code&gt; to reflect that. The &lt;code&gt;first&lt;/code&gt; will be &lt;strong&gt;1 more&lt;/strong&gt; than the midpoint (since we already know that the midpoint is not what we are searching for).&lt;/p&gt;
 &lt;p&gt;In the next round of the search, &lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[7]&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;first = midpoint +1 --&amp;gt; &lt;code&gt;first = 3&lt;/code&gt;. &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;last = 4&lt;/code&gt;. * It is still &lt;code&gt;4&lt;/code&gt; from previous round.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;midpoint = 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;midpoint = (last + first)//2&lt;/code&gt; --&amp;gt; &lt;code&gt;(4 + 3)\\2&lt;/code&gt; --&amp;gt; midpoint = 3`&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;alist[midpoint] = 7&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is a 'linked list'?&lt;/strong&gt;&lt;/p&gt;
