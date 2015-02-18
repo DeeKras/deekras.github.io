@@ -82,11 +82,11 @@
   &lt;col width="180"&gt;
 
   &lt;tr&gt;
-    &lt;th&gt;  Node #     &lt;/th&gt;
-    &lt;th&gt;  New_node   &lt;/th&gt;
-    &lt;th&gt;  Head       &lt;/th&gt;
-    &lt;th&gt;  Next       &lt;/th&gt;
-    &lt;th&gt;  Tail       &lt;/th&gt;
+    &lt;th&gt;  node #     &lt;/th&gt;
+    &lt;th&gt;  new_node   &lt;/th&gt;
+    &lt;th&gt;  head       &lt;/th&gt;
+    &lt;th&gt;  next       &lt;/th&gt;
+    &lt;th&gt;  tail       &lt;/th&gt;
   &lt;/tr&gt;
   &lt;tr&gt;&lt;center&gt;
     &lt;td&gt;&lt;center&gt;  0         &lt;/center&gt;&lt;/td&gt;
