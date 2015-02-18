@@ -114,14 +114,24 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;And we have found the &lt;code&gt;7&lt;/code&gt; when the &lt;code&gt;midpoint = 3&lt;/code&gt;. In other words, when the midpoint was representing the index at position &lt;code&gt;3&lt;/code&gt;. So if we asked for &lt;code&gt;alist[3]&lt;/code&gt;, we get our &lt;code&gt;7&lt;/code&gt; that we were searching for.&lt;/p&gt;</summary></entry><entry><title>Linked Lists</title><link href="http://www.deekras.com/linked-lists.html" rel="alternate"></link><updated>2015-01-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-17:linked-lists.html</id><summary type="html">&lt;h2&gt;Working with linked lists:&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is a 'linked list'?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.&lt;/p&gt;
+&lt;p&gt;In very short, a linked list is comprised of &lt;code&gt;nodes&lt;/code&gt; that are linked together to create a collection of nodes, in other words a list.  The nodes reside anywhere in the memory, not necessarily one right after the other as they  do in an array.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;So what's a node?&lt;/strong&gt;  You can think of it as a nugget of data that contains 2 sections: 
    1 – the data, the value, the cargo (different words for the same thing).&lt;/p&gt;
-&lt;p&gt;2 – the pointer, the reference, the 'next' which points to the next node in the linked list.&lt;/p&gt;
+&lt;p&gt;2 – the pointer, the reference, the 'next' which points to the next node in the linked list.  (Technically, it really holds the address of where the next node resides in memory.  But for our discussion here, we will refer to it as the 'pointer' or the 'next'.)&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;To kind of visualize it ...&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;|&lt;/b&gt; val | next &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;val   |  None &lt;b&gt;|&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
-&lt;p&gt;The first node is generally called the &lt;strong&gt;head&lt;/strong&gt; of the linked list. The rest is referred to as the &lt;strong&gt;tail&lt;/strong&gt;.  The entire linked list is referenced by its head.  So usually the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  The head is a node just like the others; it has a value and a next. &lt;/p&gt;
+&lt;p&gt;&lt;b&gt;|&lt;/b&gt; val | next    &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;val   |  &lt;code&gt;None&lt;/code&gt; &lt;b&gt;|&lt;/b&gt;
+Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is &lt;code&gt;None&lt;/code&gt;. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.&lt;/p&gt;
+&lt;p&gt;or:&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;|&lt;/b&gt; val | address &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;val   |  &lt;code&gt;None&lt;/code&gt; &lt;b&gt;|&lt;/b&gt;
+Technically, the first node holds the value and the &lt;em&gt;address&lt;/em&gt; of where the second node lives.
+The second node holds the value, but since it is not linked to anything, there is no address; it holds a &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;and as an example:&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;|&lt;/b&gt; 1   | 300     &lt;b&gt;|&lt;/b&gt;  ----&amp;gt; &lt;b&gt;|&lt;/b&gt;2     |  &lt;code&gt;None&lt;/code&gt; &lt;b&gt;|&lt;/b&gt;
+The first node lives at an address (not shown here) - see more about this below.
+The first node holds the value &lt;code&gt;1&lt;/code&gt; and the &lt;em&gt;address&lt;/em&gt; of its next node, here we made up the address as &lt;code&gt;300&lt;/code&gt;.
+The second node resides at the &lt;em&gt;address&lt;/em&gt; &lt;code&gt;300&lt;/code&gt; - which is what the first node was storing.&lt;/p&gt;
+&lt;p&gt;Technically, we need a reference to the address of the first node. That will be called the &lt;strong&gt;head&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To simplify for our discussion and in general, the  first node is generally called the &lt;strong&gt;head&lt;/strong&gt; of the linked list. The rest is referred to as the &lt;strong&gt;tail&lt;/strong&gt;.  The entire linked list is referenced by its head.  In most cases, the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;How to set up a linked list?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;We first set up a Node Class and instantiate the &lt;code&gt;val&lt;/code&gt; and the &lt;code&gt;next&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
