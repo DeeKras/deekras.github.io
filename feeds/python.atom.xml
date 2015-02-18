@@ -39,11 +39,11 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;This is what is happening as we run through the binary search&lt;/strong&gt;&lt;/p&gt;
 &lt;table border="1" cellpadding="3"&gt;
   &lt;center&gt;
-  &lt;col width="60"&gt;
+  &lt;col width="70"&gt;
   &lt;col width="60"&gt;
   &lt;col width="60"&gt;
   &lt;col width="300"&gt;
-  &lt;col width="60"&gt;
+  &lt;col width="70"&gt;
   &lt;col width="60"&gt;
   &lt;col width="60"&gt;
 
@@ -85,7 +85,7 @@ and we are searching for &lt;code&gt;7&lt;/code&gt;&lt;/p&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;p&gt;/* The search list is referring to a segment of the original &lt;code&gt;alist&lt;/code&gt; - beginning from the index of  &lt;code&gt;first&lt;/code&gt; and ending at the index of &lt;code&gt;last&lt;/code&gt;. The &lt;code&gt;midpoint&lt;/code&gt; is referring to the index of the original list, not the segment it is searching. &lt;/p&gt;
+&lt;p&gt;* The search list is referring to a segment of the original &lt;code&gt;alist&lt;/code&gt; - beginning from the index of  &lt;code&gt;first&lt;/code&gt; and ending at the index of &lt;code&gt;last&lt;/code&gt;. The &lt;code&gt;midpoint&lt;/code&gt; is referring to the index of the original list, not the segment it is searching. &lt;/p&gt;
 &lt;p&gt;When we first begin the search, &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The segment of &lt;code&gt;alist&lt;/code&gt; it will search through is: &lt;code&gt;[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]&lt;/code&gt;&lt;/li&gt;
