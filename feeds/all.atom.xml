@@ -74,12 +74,13 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;In other words …&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
-  &lt;col width="80"&gt;
   &lt;center&gt;
+  &lt;col width="80"&gt;
+  &lt;col width="80"&gt;
+  &lt;col width="80"&gt;
+  &lt;col width="80"&gt;
+  &lt;col width="80"&gt;
+
   &lt;tr&gt;
     &lt;th&gt;  Node #     &lt;/th&gt;
     &lt;th&gt;  New_node   &lt;/th&gt;
