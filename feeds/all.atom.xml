@@ -73,13 +73,15 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;In other words …&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;center&gt;
+&lt;table border = "1"&gt;
+  &lt;center&gt;
   &lt;col width="180"&gt;
   &lt;col width="180"&gt;
   &lt;col width="180"&gt;
   &lt;col width="180"&gt;
-  &lt;col width="180"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;tr&gt;
+  &lt;col width="180"&gt;
+
+  &lt;tr&gt;
     &lt;th&gt;  Node #     &lt;/th&gt;
     &lt;th&gt;  New_node   &lt;/th&gt;
     &lt;th&gt;  Head       &lt;/th&gt;
@@ -90,21 +92,21 @@
     &lt;td&gt;  0          &lt;/td&gt;
     &lt;td&gt;  --         &lt;/td&gt;
     &lt;td&gt;  None       &lt;/td&gt;
-    &lt;td&gt;  --         &lt;/td&gt;&lt;br /&gt;
+    &lt;td&gt;  --         &lt;/td&gt;  
     &lt;td&gt;  None       &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;&lt;center&gt;
     &lt;td&gt;  1          &lt;/td&gt;
     &lt;td&gt;  6          &lt;/td&gt;
     &lt;td&gt;  6          &lt;/td&gt;
-    &lt;td&gt;None  --&amp;gt;8   &lt;/td&gt;
+    &lt;td&gt;None  --&gt;8   &lt;/td&gt;
     &lt;td&gt;6            &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;&lt;center&gt;
     &lt;td&gt; 2           &lt;/td&gt;
     &lt;td&gt;8            &lt;/td&gt;
     &lt;td&gt;6            &lt;/td&gt;
-    &lt;td&gt;None  --&amp;gt;10&lt;/td&gt;
+    &lt;td&gt;None  --&gt;10&lt;/td&gt;
     &lt;td&gt;8&lt;/td&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
@@ -116,7 +118,8 @@
     &lt;td&gt;10&lt;/td&gt;
   &lt;/tr&gt;
   &lt;/center&gt;
-&lt;/table&gt;&lt;/p&gt;
+&lt;/table&gt;
+
 &lt;p&gt;When we first instantiate – Node #0, there is no &lt;code&gt;new_node&lt;/code&gt; yet, the &lt;em&gt;head&lt;/em&gt; and &lt;em&gt;tail&lt;/em&gt; are set to &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Adding Node #1 = Node(6)&lt;/p&gt;
 &lt;ol&gt;
