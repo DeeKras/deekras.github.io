@@ -111,36 +111,46 @@ and we are searching for <code>7</code></p>
 <p><strong>This is what is happening as we run through the binary search</strong></p>
 <table border="1" cellpadding="3">
   <center>
-  <col width="180">
-  <col width="180">
-  <col width="180">
-  <col width="180">
-  <col width="180">
+  <col width="60">
+  <col width="60">
+  <col width="60">
+  <col width="240">
+  <col width="60">
+  <col width="60">
+  <col width="60">
 
   <tr>
+    <th>  round # </th>
     <th>  first     </th>
     <th>  last    </th>
+    <th> search list</th>
     <th>  midpoint      </th>
     <th>  seq[midpoint]       </th>
     <th>  search_for       </th>
   </tr>
   <tr><center>
+    <td><center>  1         </center></td>
     <td><center>  0         </center></td>
     <td><center> 10       </center></td>
+    <td><center> `[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]`       </center></td>
     <td><center> 5      </center></td>
     <td><center> 11       </center></td>  
     <td><center> 7      </center></td>
   </tr>
   <tr>
+    <td><center>  2         </center></td>
     <td><center> 0           </center></td>
     <td><center>  4          </center></td>
+    <td><center> `[1, 3, 5, 7]`       </center></td>
     <td><center>  2          </center></td>
     <td><center> 5  </center></td>
     <td><center>7            </center></td>
   </tr>
   <tr>
+    <td><center>  3         </center></td>
     <td><center> 3           </center></td>
     <td><center>4            </center></td>
+    <td><center> `[7]`       </center></td>
     <td><center>1            </center></td>
     <td><center> 9 </center></td>
     <td><center>7            </center></td>
@@ -152,7 +162,7 @@ and we are searching for <code>7</code></p>
 <li>The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]</code></li>
 <li><code>first = 0</code></li>
 <li><code>last = len(alist) -1</code> --&gt; <code>last = 10</code> </li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(10 + 0)\\2</code> --&gt; <code>midpoint = 5</code></li>
+<li><code>midpoint = (last + first)//2</code> --&gt; <code>(10 + 0)//2</code> --&gt; <code>midpoint = 5</code></li>
 <li><code>alist[midpoint] = 11</code></li>
 </ul>
 <p>Since the <code>7</code> that we are searching for is <strong>less than</strong> the <code>11</code> at the midpoint, the next run of the search will be on the <strong>lower</strong> half of the list. So we have to change the <code>last</code> to reflect that. The <code>last</code> will be <strong>1 less</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
@@ -161,7 +171,7 @@ and we are searching for <code>7</code></p>
 <li>The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7]</code></li>
 <li><code>first = 0</code>. <em>We are still searching from the beginning of the list.</em></li>
 <li><code>last = midpoint -1</code> --&gt; <code>last = 4</code></li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 0)\\2</code> --&gt; <code>midpoint = 2</code></li>
+<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 0)//2</code> --&gt; <code>midpoint = 2</code></li>
 <li><code>alist[midpoint] = 5</code></li>
 </ul>
 <p>Since the <code>7</code> that we are searching for is <strong>greater than</strong> than the <code>5</code> at the midpoint, the next run of the search will be on the <strong>upper</strong> half of the previous list. So we have to change the <code>first</code> to reflect that. The <code>first</code> will be <strong>1 more</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
@@ -170,7 +180,7 @@ and we are searching for <code>7</code></p>
 <li>The segment of <code>alist</code> it will search through is: <code>[7]</code></li>
 <li>first = midpoint +1 --&gt; <code>first = 3</code>. </li>
 <li><code>last = 4</code>. * It is still <code>4</code> from previous round.</li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 3)\\2</code> --&gt; <code>midpoint = 3</code></li>
+<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 3)//2</code> --&gt; <code>midpoint = 3</code></li>
 <li><code>alist[midpoint] = 7</code></li>
 </ul>
 <p>And we have found the <code>7</code> when the <code>midpoint = 3</code>. In other words, when the midpoint was representing the index at position <code>3</code>. So if we asked for <code>alist[3]</code>, we get our <code>7</code> that we were searching for.</p> 
