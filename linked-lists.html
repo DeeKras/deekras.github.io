@@ -76,17 +76,23 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
    1 – the data, the value, the cargo (different words for the same thing).</p>
 <p>2 – the pointer, the reference, the 'next' which points to the next node in the linked list.  (Technically, it really holds the address of where the next node resides in memory.  But for our discussion here, we will refer to it as the 'pointer' or the 'next'.)</p>
 <p><em>To kind of visualize it ...</em></p>
+<blockquote>
 <p><b>|</b> val | next    <b>|</b>  ----&gt; <b>|</b>val   |  <code>None</code> <b>|</b></p>
 <p>Here, the first node points to the second node. And since there is no third node, the second node doesn't have a next or pointer, so it is <code>None</code>. Of course, there can be many nodes (with pointers pointing the next node) in a linked list.</p>
+</blockquote>
 <p>or:</p>
+<blockquote>
 <p><b>|</b> val | address <b>|</b>  ----&gt; <b>|</b>val   |  <code>None</code> <b>|</b></p>
 <p>Technically, the first node holds the value and the <em>address</em> of where the second node lives.
 The second node holds the value, but since it is not linked to anything, there is no address; it holds a <code>None</code>.</p>
+</blockquote>
 <p>and as an example:</p>
+<blockquote>
 <p><b>|</b> 1   | 300     <b>|</b>  ----&gt; <b>|</b>2     |  <code>None</code> <b>|</b></p>
 <p>The first node lives at an address (not shown here) - see more about this below.
 The first node holds the value <code>1</code> and the <em>address</em> of its next node, here we made up the address as <code>300</code>.
 The second node resides at the <em>address</em> <code>300</code> - which is what the first node was storing.</p>
+</blockquote>
 <p>Technically, we need a reference to the address of the first node. That will be called the <strong>head</strong>.</p>
 <p>To simplify for our discussion and in general, the  first node is generally called the <strong>head</strong> of the linked list. The rest is referred to as the <strong>tail</strong>.  The entire linked list is referenced by its head.  In most cases, the head doesn't change  too often, but the tail might. (The head would change if that first node is deleted or changed.)  </p>
 <p><strong>How to set up a linked list?</strong></p>
