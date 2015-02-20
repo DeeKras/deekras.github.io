@@ -5,12 +5,12 @@
 &lt;p&gt;For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.&lt;/p&gt;
 &lt;p&gt;**The Syntax&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;(lambda a: a *2)(6)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The lambda expression should be in parentheses &lt;code&gt;()&lt;/code&gt;.
-Starts off with the word &lt;code&gt;lambda&lt;/code&gt;
-And then the variable name, in this case &lt;code&gt;a&lt;/code&gt;.  There could be more than 1 variable.
-And the colon &lt;code&gt;:&lt;/code&gt;
-And then the quick little code. In this case &lt;code&gt;a * 2&lt;/code&gt;. The variable multiplied by 2.
-And lastly an argument for this little lambda function. In this case &lt;code&gt;(6)&lt;/code&gt;. In its own parentheses. This is how we &lt;em&gt;call&lt;/em&gt; the lambda function.&lt;/p&gt;
+&lt;p&gt;The lambda expression should be in parentheses &lt;code&gt;()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Starts off with the word &lt;code&gt;lambda&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And then the variable name, in this case &lt;code&gt;a&lt;/code&gt;.  There could be more than 1 variable.&lt;/p&gt;
+&lt;p&gt;And the colon &lt;code&gt;:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And then the quick little code. In this case &lt;code&gt;a * 2&lt;/code&gt;. The variable multiplied by 2.&lt;/p&gt;
+&lt;p&gt;And lastly an argument for this little lambda function. In this case &lt;code&gt;(6)&lt;/code&gt;. In its own parentheses. This is how we &lt;em&gt;call&lt;/em&gt; the lambda function.&lt;/p&gt;
 &lt;p&gt;**A few more examples:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;(lambda x: x &amp;lt;10)(11)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This lambda checks if &lt;code&gt;11&lt;/code&gt; is less than &lt;code&gt;10&lt;/code&gt;. And in this case returns &lt;code&gt;False&lt;/code&gt;.&lt;/p&gt;
