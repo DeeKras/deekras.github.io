@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>DeeKras.com [archive]</title>
+    <title>Lambda - DeeKras.com</title>
     <meta name="description" content="">
     <meta name="author" content="Dee Kras">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@
 	      <a href="http://www.deekras.com/category/about.html ">About</a>
 	    <li >
 	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
-	    <li >
+	    <li  class="active" >
 	      <a href="http://www.deekras.com/category/python.html ">Python</a>
 	</ul>
       </div>
@@ -49,74 +49,56 @@
     <div class="row-fluid">
 
         <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Lambda</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 25 January 2015 </p>
 
-<h2>Archives</h2>
-
-<table class="table table-striped">
-    <tbody>
-        <tr>
-        <td>25 Jan 2015</td>
-        <td><a href='lambda.html'>Lambda</a></td>
-        </tr>
-        <tr>
-        <td>18 Jan 2015</td>
-        <td><a href='binary-searches.html'>Binary Searches</a></td>
-        </tr>
-        <tr>
-        <td>17 Jan 2015</td>
-        <td><a href='linked-lists.html'>Linked Lists</a></td>
-        </tr>
-        <tr>
-        <td>22 Dec 2014</td>
-        <td><a href='sqlalchemy-and-relationship.html'>SQLAlchemy and Relationship</a></td>
-        </tr>
-        <tr>
-        <td>20 Dec 2014</td>
-        <td><a href='basic-sqlalchemy.html'>Basic SQLAlchemy</a></td>
-        </tr>
-        <tr>
-        <td>18 Dec 2014</td>
-        <td><a href='recursions-and-lists-and-slices.html'>Recursions and Lists and Slices</a></td>
-        </tr>
-        <tr>
-        <td>17 Dec 2014</td>
-        <td><a href='some-simple-recursive-functions.html'>Some simple recursive functions</a></td>
-        </tr>
-        <tr>
-        <td>16 Dec 2014</td>
-        <td><a href='decorators-with-args-kwargs.html'>Decorators with *args, **kwargs</a></td>
-        </tr>
-        <tr>
-        <td>15 Dec 2014</td>
-        <td><a href='working-with-decorators.html'>Working with Decorators</a></td>
-        </tr>
-        <tr>
-        <td>14 Dec 2014</td>
-        <td><a href='working-with-threads.html'>Working with Threads</a></td>
-        </tr>
-        <tr>
-        <td>13 Dec 2014</td>
-        <td><a href='using-a-weather-api-forecastio.html'>Using a weather api (forecast.io)</a></td>
-        </tr>
-        <tr>
-        <td>12 Dec 2014</td>
-        <td><a href='finding-longitude-latitude-based-on-ip.html'>Finding Longitude & Latitude based on IP</a></td>
-        </tr>
-        <tr>
-        <td>11 Dec 2014</td>
-        <td><a href='get-the-public-ip-of-users-computer.html'>Get the public IP of user's computer</a></td>
-        </tr>
-        <tr>
-        <td>10 Dec 2014</td>
-        <td><a href='my-first-python-project-and-what-i-learned.html'>My first Python project … and what I learned</a></td>
-        </tr>
-        <tr>
-        <td>09 Dec 2014</td>
-        <td><a href='about-my-blog.html'>About my Blog</a></td>
-        </tr>
-    </tbody>
-</table>
-
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>Lambdas</h2>
+<p><strong>First: What is 'lambda'?</strong></p>
+<p>In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then it still might pay to write a function for it. </p>
+<p>For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.</p>
+<p>**The Syntax</p>
+<p><code>(lambda a: a *2)(6)</code></p>
+<p>The lambda expression should be in parentheses <code>()</code>.
+Starts off with the word <code>lambda</code>
+And then the variable name, in this case <code>a</code>.  There could be more than 1 variable.
+And the colon <code>:</code>
+And then the quick little code. In this case <code>a * 2</code>. The variable multiplied by 2.
+And lastly an argument for this little lambda function. In this case <code>(6)</code>. In its own parentheses. This is how we <em>call</em> the lambda function.</p>
+<p>**A few more examples:</p>
+<p><code>(lambda x: x &lt;10)(11)</code></p>
+<p>This lambda checks if <code>11</code> is less than <code>10</code>. And in this case returns <code>False</code>.</p>
+<p><code>(lambda x: x %2)(8)</code></p>
+<p>This lambda checks if <code>8</code> is evenly divisible by 2. And in this case returns <code>True</code>.</p>
+<p><code>(lambda x, y: x &lt; y)(6, 7)</code></p>
+<p>This lambda uses 2 variables - <code>x</code> and <code>y</code>. It compares if <code>x</code> is less than <code>y</code>.
+It compares if <code>6 &lt; 7</code> and in this case returns <code>True</code>.</p>
+<p>**Lambdas get even cooler</p>
+<p>Lambdas can be used with <code>map</code>, <code>reduce</code> and <code>filter</code>. Coming soon.</p>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
         </div>
         
         

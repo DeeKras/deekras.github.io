@@ -55,8 +55,61 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="http://www.deekras.com/binary-searches.html"><h1>Binary Searches</h1></a>
+            <a href="http://www.deekras.com/lambda.html"><h1>Lambda</h1></a>
         </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 25 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h2>Lambdas</h2>
+<p><strong>First: What is 'lambda'?</strong></p>
+<p>In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then it still might pay to write a function for it. </p>
+<p>For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.</p>
+<p>**The Syntax</p>
+<p><code>(lambda a: a *2)(6)</code></p>
+<p>The lambda expression should be in parentheses <code>()</code>.
+Starts off with the word <code>lambda</code>
+And then the variable name, in this case <code>a</code>.  There could be more than 1 variable.
+And the colon <code>:</code>
+And then the quick little code. In this case <code>a * 2</code>. The variable multiplied by 2.
+And lastly an argument for this little lambda function. In this case <code>(6)</code>. In its own parentheses. This is how we <em>call</em> the lambda function.</p>
+<p>**A few more examples:</p>
+<p><code>(lambda x: x &lt;10)(11)</code></p>
+<p>This lambda checks if <code>11</code> is less than <code>10</code>. And in this case returns <code>False</code>.</p>
+<p><code>(lambda x: x %2)(8)</code></p>
+<p>This lambda checks if <code>8</code> is evenly divisible by 2. And in this case returns <code>True</code>.</p>
+<p><code>(lambda x, y: x &lt; y)(6, 7)</code></p>
+<p>This lambda uses 2 variables - <code>x</code> and <code>y</code>. It compares if <code>x</code> is less than <code>y</code>.
+It compares if <code>6 &lt; 7</code> and in this case returns <code>True</code>.</p>
+<p>**Lambdas get even cooler</p>
+<p>Lambdas can be used with <code>map</code>, <code>reduce</code> and <code>filter</code>. Coming soon.</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/lambda.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/binary-searches.html"><h1>Binary Searches</h1></a>
+      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -70,128 +123,18 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <p>
 </p>
       </div>
-      <div class="article-content span8">
+      <div class="summary span8">
 	<h2>Binary Search</h2>
 <p><strong>First: What is a 'binary search'?</strong></p>
 <p>The task: search through a sorted list to find the specified value.</p>
-<p>A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. </p>
-<p>A binary search can save time.  The binary search seeks the midpoint of the list -  (last + first)//2. And then checks if that is the item. </p>
-<ul>
-<li>If it is, great. The search is done.</li>
-<li>If it is greater than the search item, then we search through the upper half of the list.</li>
-<li>If it is less than the search item, then we search through the lower half of the list.</li>
-</ul>
-<p>In other words, it searches through half the list, and then again through half of that list, and again... until it finds what it is looking for. Or, there is nothing left to search through and the item is not found.  In other words, the list it searches through gets smaller and smaller.</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">alist</span><span class="p">,</span> <span class="n">search_for</span><span class="p">):</span>
-    <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">found</span> <span class="o">=</span> <span class="bp">False</span>
-
-    <span class="k">while</span> <span class="n">found</span> <span class="o">==</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="n">last</span><span class="p">:</span>
-        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">last</span> <span class="o">+</span> <span class="n">first</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
-
-        <span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span> <span class="o">==</span> <span class="n">search_for</span><span class="p">:</span>
-             <span class="n">found</span> <span class="o">=</span> <span class="bp">True</span>
-             <span class="k">return</span> <span class="s">&#39;found&#39;</span>
-        <span class="k">elif</span> <span class="n">search_for</span> <span class="o">&gt;</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
-            <span class="n">first</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">+</span><span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">last</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">return</span> <span class="s">&#39;not found&#39;</span>
-</pre></div>
-
-
-<p><strong>Important note</strong>: 
-<code>midpoint = (last + first)//2</code> . This keeps track of the correct index from the original <code>alist</code>, not the segment of the list that it is now searching through.  In this way, when we have indeed found what we were searching for, we know its index in the original <code>alist</code>.
-(the <code>//2</code> is floor division - where the answer is rounded down. Read more about floor division at <a href="https://www.python.org/dev/peps/pep-0238/">PEP 238</a>)</p>
-<p>So say the list is as below:</p>
-<p><code>alist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]</code>
-and we are searching for <code>7</code></p>
-<p><code>print binary_search(alist, 7)</code></p>
-<p><strong>This is what is happening as we run through the binary search</strong></p>
-<table border="1" cellpadding="3">
-  <center>
-  <col width="70">
-  <col width="60">
-  <col width="60">
-  <col width="300">
-  <col width="80">
-  <col width="60">
-  <col width="60">
-
-  <tr>
-    <th>  round # </th>
-    <th>  first     </th>
-    <th>  last    </th>
-    <th> search list * </th>
-    <th>  midpoint *     </th>
-    <th>  alist[midpoint]       </th>
-    <th>  search_for       </th>
-  </tr>
-  <tr><center>
-    <td><center>  1         </center></td>
-    <td><center>  0         </center></td>
-    <td><center> 10       </center></td>
-    <td><center> [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]       </center></td>
-    <td><center> 5      </center></td>
-    <td><center> 11       </center></td>  
-    <td><center> 7      </center></td>
-  </tr>
-  <tr>
-    <td><center>  2         </center></td>
-    <td><center> 0           </center></td>
-    <td><center>  4          </center></td>
-    <td><center> [1, 3, 5, 7]       </center></td>
-    <td><center>  2          </center></td>
-    <td><center> 5  </center></td>
-    <td><center>7            </center></td>
-  </tr>
-  <tr>
-    <td><center>  3         </center></td>
-    <td><center> 3           </center></td>
-    <td><center>4            </center></td>
-    <td><center> [7]       </center></td>
-    <td><center>3            </center></td>
-    <td><center> 7 </center></td>
-    <td><center>7            </center></td>
-  </tr>
-</table>
-
-<p>* The search list is referring to a segment of the original <code>alist</code> - beginning from the index of  <code>first</code> and ending at the index of <code>last</code>. The <code>midpoint</code> is referring to the index of the original list, not the segment it is searching. </p>
-<p>When we first begin the search, </p>
-<ul>
-<li>The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]</code></li>
-<li><code>first = 0</code></li>
-<li><code>last = len(alist) -1</code> --&gt; <code>last = 10</code> </li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(10 + 0)//2</code> --&gt; <code>midpoint = 5</code></li>
-<li><code>alist[midpoint] = 11</code></li>
-</ul>
-<p>Since the <code>7</code> that we are searching for is <strong>less than</strong> the <code>11</code> at the midpoint, the next run of the search will be on the <strong>lower</strong> half of the list. So we have to change the <code>last</code> to reflect that. The <code>last</code> will be <strong>1 less</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
-<p>In the next round of the search, </p>
-<ul>
-<li>The segment of <code>alist</code> it will search through is: <code>[1, 3, 5, 7]</code></li>
-<li><code>first = 0</code>. <em>We are still searching from the beginning of the list.</em></li>
-<li><code>last = midpoint -1</code> --&gt; <code>last = 4</code></li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 0)//2</code> --&gt; <code>midpoint = 2</code></li>
-<li><code>alist[midpoint] = 5</code></li>
-</ul>
-<p>Since the <code>7</code> that we are searching for is <strong>greater than</strong> than the <code>5</code> at the midpoint, the next run of the search will be on the <strong>upper</strong> half of the previous list. So we have to change the <code>first</code> to reflect that. The <code>first</code> will be <strong>1 more</strong> than the midpoint (since we already know that the midpoint is not what we are searching for).</p>
-<p>In the next round of the search, </p>
-<ul>
-<li>The segment of <code>alist</code> it will search through is: <code>[7]</code></li>
-<li>first = midpoint +1 --&gt; <code>first = 3</code>. </li>
-<li><code>last = 4</code>. * It is still <code>4</code> from previous round.</li>
-<li><code>midpoint = (last + first)//2</code> --&gt; <code>(4 + 3)//2</code> --&gt; <code>midpoint = 3</code></li>
-<li><code>alist[midpoint] = 7</code></li>
-</ul>
-<p>And we have found the <code>7</code> when the <code>midpoint = 3</code>. In other words, when the midpoint was representing the index at position <code>3</code>. So if we asked for <code>alist[3]</code>, we get our <code>7</code> that we were searching for.</p> 
+<p>A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the ...</p> 
 	<a class="btn btn-mini xsmall" href="http://www.deekras.com/binary-searches.html">
-          <i class="icon-comment"></i> Comment </a>
+          <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
       
     </div>
-    
+      
 
  
         
