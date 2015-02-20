@@ -77,12 +77,35 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <p>For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.</p>
 <p>**The Syntax</p>
 <p><code>(lambda a: a *2)(6)</code></p>
+<ul>
+<li>
 <p>The lambda expression should be in parentheses <code>()</code>.</p>
+</li>
+<li>
 <p>Starts off with the word <code>lambda</code></p>
+</li>
+<li>
 <p>And then the variable name, in this case <code>a</code>.  There could be more than 1 variable.</p>
+</li>
+<li>
 <p>And the colon <code>:</code></p>
+</li>
+<li>
 <p>And then the quick little code. In this case <code>a * 2</code>. The variable multiplied by 2.</p>
+</li>
+<li>
 <p>And lastly an argument for this little lambda function. In this case <code>(6)</code>. In its own parentheses. This is how we <em>call</em> the lambda function.</p>
+</li>
+</ul>
+<p>**Another way to write a lambda</p>
+<div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span> <span class="mi">2</span>
+<span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Here we are assigning the lambda function to <code>c</code> and then calling <code>c(2)</code>.
+This sort of defeats the purpose. But it still saves some coding since you don't have to <code>def</code> or <code>return</code>.</p>
+<hr />
 <p>**A few more examples:</p>
 <p><code>(lambda x: x &lt;10)(11)</code></p>
 <p>This lambda checks if <code>11</code> is less than <code>10</code>. And in this case returns <code>False</code>.</p>
