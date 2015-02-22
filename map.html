@@ -86,14 +86,13 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <hr />
 <p><strong>A few examples:</strong></p>
 <p><code>map(lambda x: x**2, [1, 2, 3, 4])</code></p>
-<div class="highlight"><pre><span class="o">-</span> <span class="nx">The</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">lambda</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">The</span> <span class="nx">iterable</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">list</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">This</span> <span class="nx">runs</span> <span class="nx">the</span> <span class="nx">lambda</span> <span class="p">(</span><span class="nx">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span><span class="p">,</span> <span class="nx">on</span> <span class="nx">the</span> <span class="err">`</span><span class="mi">1</span><span class="err">`</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">Then</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">next</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span> <span class="nx">and</span> <span class="nx">so</span> <span class="nx">on</span><span class="p">,</span> <span class="nx">until</span> <span class="nx">all</span> <span class="nx">items</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span> <span class="nx">have</span> <span class="nx">been</span> <span class="nx">run</span><span class="p">.</span> 
-<span class="o">-</span> <span class="nx">The</span> <span class="nx">result</span> <span class="nx">is</span> <span class="err">`</span><span class="cp">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="cp">]</span><span class="err">`</span>
-</pre></div>
-
-
+<ul>
+<li>The function here is a lambda.</li>
+<li>The iterable is the list.</li>
+<li>This runs the lambda (x**2) on the first item in the iterable - on the <code>1</code>.</li>
+<li>Then runs the lambda on the next item in the iterable, and so on. Until all items have been run.</li>
+<li>The result is <code>[1, 4, 9, 16]</code></li>
+</ul>
 <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">num</span> <span class="o">**</span><span class="mi">2</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
