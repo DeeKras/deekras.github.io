@@ -214,7 +214,7 @@
     &lt;td&gt;&lt;center&gt; returns a set   &lt;/center&gt;&lt;/td&gt;
   &lt;/tr&gt;
    &lt;tr&gt;
-    &lt;td&gt;&lt;center&gt;  symmetric_difference_update         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt;  symmetric difference update         &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt; updates set1 with only the elements that are found in either set, but not both  &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt;  set1.symmetric_difference_update(set2)           &lt;/center&gt;&lt;/td&gt;
     &lt;td&gt;&lt;center&gt; set1^=set2       &lt;/center&gt;&lt;/td&gt;
