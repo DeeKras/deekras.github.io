@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-25T00:00:00+00:00</updated><entry><title>Lambda</title><link href="http://www.deekras.com/lambda.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:lambda.html</id><summary type="html">&lt;h2&gt;Lambdas&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-26T00:00:00+00:00</updated><entry><title>Filter</title><link href="http://www.deekras.com/filter.html" rel="alternate"></link><updated>2015-01-26T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-26:filter.html</id><summary type="html">&lt;h2&gt;Filter&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;First: What is 'filter'?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In very short, &lt;code&gt;filter&lt;/code&gt; runs the given function over the given iterable and only returns those that are true.&lt;/p&gt;
+&lt;p&gt;For example: We have a function that returns only those items in the list that are integers.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;filter(function, iterable)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The function can be a function or a lambda expression.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The iterable can be any iterable - list, string, etc. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;A few examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;All these examples use this list: &lt;code&gt;list = [1, 2, 3,"A", 11, "C", 12, 13, 14]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;/strong&gt;  &lt;code&gt;filter(lambda x: type(x) is str, list)&lt;/code&gt;
+['A', 'C']&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x&amp;lt;10, list)&lt;/code&gt;
+[1, 2, 3]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int, list)&lt;/code&gt;
+[1, 2, 3, 11, 12, 13, 14]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int and int(x)%2==0, list)&lt;/code&gt;
+[2, 12, 14]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))&lt;/code&gt;
+ The inner filter returns all integers as a list. then the outer filter runs on that filtered list.
+ [2, 12, 14]&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;This&lt;/span&gt; &lt;span class="nx"&gt;runs&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;first&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;Then&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;so&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;until&lt;/span&gt; &lt;span class="nx"&gt;all&lt;/span&gt; &lt;span class="nx"&gt;items&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;have&lt;/span&gt; &lt;span class="nx"&gt;been&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;seq&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;This runs exactly as above.&lt;/li&gt;
+&lt;li&gt;It runs the &lt;code&gt;sqr&lt;/code&gt; function on the &lt;code&gt;seq&lt;/code&gt;. And run the function on every item in the iterable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;```&lt;/p&gt;</summary></entry><entry><title>Lambda</title><link href="http://www.deekras.com/lambda.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:lambda.html</id><summary type="html">&lt;h2&gt;Lambdas&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is 'lambda'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then it still might pay to write a function for it. &lt;/p&gt;
 &lt;p&gt;For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.&lt;/p&gt;
@@ -46,7 +94,7 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;p&gt;&lt;strong&gt;Lambdas get even cooler&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Lambdas can be used with &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;. Coming soon.&lt;/p&gt;</summary></entry><entry><title>Map</title><link href="http://www.deekras.com/map.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:map.html</id><summary type="html">&lt;h2&gt;Maps&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is 'map'?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In very short, &lt;code&gt;map&lt;/code&gt; runs the given function on the given iterable.&lt;/p&gt;
+&lt;p&gt;In very short, &lt;code&gt;map&lt;/code&gt; runs the given function over the given iterable.&lt;/p&gt;
 &lt;p&gt;For example: We have a function that converts years to their Roman numeral version. And we have a list of years. We can run a &lt;code&gt;map(convert_year_to_roman_numeral, ['1999', '1776', '2015']&lt;/code&gt;.  This will run the function &lt;code&gt;convert_year_to_roman_numeral&lt;/code&gt; on the list of years. And return the Roman numerals for those years. As a list.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;map(function, iterable)&lt;/code&gt;&lt;/p&gt;
@@ -55,7 +103,7 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;p&gt;The function can be a function or a lambda expression.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The iterable cab be any iterable - list, string, etc. &lt;/p&gt;
+&lt;p&gt;The iterable can be any iterable - list, string, etc. &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
@@ -83,29 +131,23 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;/ul&gt;
 &lt;p&gt;```&lt;/p&gt;</summary></entry><entry><title>Reduce</title><link href="http://www.deekras.com/reduce.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:reduce.html</id><summary type="html">&lt;h2&gt;Reduce&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is 'reduce'?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In very short, &lt;code&gt;reduce&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;In very short, &lt;code&gt;reduce&lt;/code&gt; applies the function of two arguments cumulatively to the items of iterable, from left to right, so as to &lt;strong&gt;reduce the iterable to a single value&lt;/strong&gt;. 
+The left argument is the accumulated value and the right argument is the update value from the iterable.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;map(function, iterable)&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The function can be a function or a lambda expression.&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;This function must work on 2 variables.  One is the result of the previous run of the function. The other is the next item in the iterable.&lt;/p&gt;
+&lt;p&gt;This function must work on 2 arguments.  One is the result of the previous run of the function (the accumulated value). The other is the next item in the iterable.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The iterable cab be any iterable - list, string, etc. &lt;/p&gt;
+&lt;p&gt;The iterable can be any iterable - list, string, etc. &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Sum is an example. The function is &lt;code&gt;a + b&lt;/code&gt;; the iterable is [1, 2, 3, 4].&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;first run  --&amp;gt; &lt;code&gt;a = 1&lt;/code&gt; and &lt;code&gt;b = 2&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;3&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;second run --&amp;gt; &lt;code&gt;a = 3&lt;/code&gt; and &lt;code&gt;b = 3&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;6&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;third runn --&amp;gt; &lt;code&gt;a = 6&lt;/code&gt; and &lt;code&gt;b = 4&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;10&lt;/code&gt;.
-   And since there are no more items in the iterable, we have our final result - &lt;code&gt;10&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;A few more examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A few  examples:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;For all these examples, we'll use this iterable: &lt;code&gt;list = [47, 11, 42, 102, 13]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt;&lt;code&gt;reduce((lambda a, b: a if a &amp;gt; b else b), list)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt;  &lt;code&gt;reduce((lambda a, b: a if a &amp;gt; b else b), list)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This returns the greatest of all numbers in the list. &lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;a&lt;/code&gt; is the result of the &lt;code&gt;a &amp;gt; b&lt;/code&gt;. And &lt;code&gt;b&lt;/code&gt; is the next item in the list. If &lt;code&gt;a&lt;/code&gt; is greater than &lt;code&gt;b&lt;/code&gt;, then the value in &lt;code&gt;a&lt;/code&gt; remains in &lt;code&gt;a&lt;/code&gt;, else the value of &lt;code&gt;b&lt;/code&gt; becomes the &lt;code&gt;a&lt;/code&gt;.  See below in this chart.&lt;/p&gt;
 &lt;table border="1" cellpadding="3"&gt;
@@ -148,7 +190,7 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;/table&gt;
 
 &lt;p&gt;and the final &lt;code&gt;a&lt;/code&gt; is &lt;code&gt;102&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; reduce((lambda a,b: a + b), list) &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt;  &lt;code&gt;reduce((lambda a,b: a + b), list)&lt;/code&gt; &lt;/p&gt;
 &lt;p&gt;This returns the sum of all numbers in the list. &lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;a&lt;/code&gt; is the result of the &lt;code&gt;a + b&lt;/code&gt;. And &lt;code&gt;b&lt;/code&gt; is the next item in the list.&lt;/p&gt;
 &lt;table border="1" cellpadding="3"&gt;
@@ -191,7 +233,7 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;/table&gt;
 
 &lt;p&gt;and the final &lt;code&gt;a&lt;/code&gt; is &lt;code&gt;215&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. &lt;/strong&gt;&lt;code&gt;reduce(lambda a, b: str(a)+str(b), list)&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. &lt;/strong&gt;  &lt;code&gt;reduce(lambda a, b: str(a)+str(b), list)&lt;/code&gt; &lt;/p&gt;
 &lt;p&gt;This returns the concatenation of all numbers in the list.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;a&lt;/code&gt; is the result of the &lt;code&gt;str(a)+str(b)&lt;/code&gt;. And &lt;code&gt;b&lt;/code&gt; is the next item in the list.&lt;/p&gt;
 &lt;table border="1" cellpadding="3"&gt;

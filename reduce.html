@@ -71,29 +71,23 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       <div class="span8">
 	<h2>Reduce</h2>
 <p><strong>First: What is 'reduce'?</strong></p>
-<p>In very short, <code>reduce</code> </p>
+<p>In very short, <code>reduce</code> applies the function of two arguments cumulatively to the items of iterable, from left to right, so as to <strong>reduce the iterable to a single value</strong>. 
+The left argument is the accumulated value and the right argument is the update value from the iterable.</p>
 <p><strong>The Syntax</strong></p>
 <p><code>map(function, iterable)</code></p>
 <ul>
 <li>The function can be a function or a lambda expression.</li>
 <li>
-<p>This function must work on 2 variables.  One is the result of the previous run of the function. The other is the next item in the iterable.</p>
+<p>This function must work on 2 arguments.  One is the result of the previous run of the function (the accumulated value). The other is the next item in the iterable.</p>
 </li>
 <li>
-<p>The iterable cab be any iterable - list, string, etc. </p>
+<p>The iterable can be any iterable - list, string, etc. </p>
 </li>
 </ul>
-<p>Sum is an example. The function is <code>a + b</code>; the iterable is [1, 2, 3, 4].</p>
-<ul>
-<li>first run  --&gt; <code>a = 1</code> and <code>b = 2</code>. The new <code>a</code> is the result. in this case <code>3</code>.</li>
-<li>second run --&gt; <code>a = 3</code> and <code>b = 3</code>. The new <code>a</code> is the result. in this case <code>6</code>.</li>
-<li>third runn --&gt; <code>a = 6</code> and <code>b = 4</code>. The new <code>a</code> is the result. in this case <code>10</code>.
-   And since there are no more items in the iterable, we have our final result - <code>10</code>.</li>
-</ul>
 <hr />
-<p><strong>A few more examples:</strong></p>
+<p><strong>A few  examples:</strong></p>
 <p>For all these examples, we'll use this iterable: <code>list = [47, 11, 42, 102, 13]</code></p>
-<p><strong>1.</strong><code>reduce((lambda a, b: a if a &gt; b else b), list)</code></p>
+<p><strong>1.</strong>  <code>reduce((lambda a, b: a if a &gt; b else b), list)</code></p>
 <p>This returns the greatest of all numbers in the list. </p>
 <p>The <code>a</code> is the result of the <code>a &gt; b</code>. And <code>b</code> is the next item in the list. If <code>a</code> is greater than <code>b</code>, then the value in <code>a</code> remains in <code>a</code>, else the value of <code>b</code> becomes the <code>a</code>.  See below in this chart.</p>
 <table border="1" cellpadding="3">
@@ -136,7 +130,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </table>
 
 <p>and the final <code>a</code> is <code>102</code></p>
-<p><strong>2.</strong> reduce((lambda a,b: a + b), list) </p>
+<p><strong>2.</strong>  <code>reduce((lambda a,b: a + b), list)</code> </p>
 <p>This returns the sum of all numbers in the list. </p>
 <p>The <code>a</code> is the result of the <code>a + b</code>. And <code>b</code> is the next item in the list.</p>
 <table border="1" cellpadding="3">
@@ -179,7 +173,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </table>
 
 <p>and the final <code>a</code> is <code>215</code></p>
-<p><strong>3. </strong><code>reduce(lambda a, b: str(a)+str(b), list)</code> </p>
+<p><strong>3. </strong>  <code>reduce(lambda a, b: str(a)+str(b), list)</code> </p>
 <p>This returns the concatenation of all numbers in the list.</p>
 <p>The <code>a</code> is the result of the <code>str(a)+str(b)</code>. And <code>b</code> is the next item in the list.</p>
 <table border="1" cellpadding="3">
