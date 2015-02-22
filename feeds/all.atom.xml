@@ -42,8 +42,115 @@ This sort of defeats the purpose. But it still saves some coding since you don't
 &lt;p&gt;&lt;code&gt;(lambda x, y: x &amp;lt; y)(6, 7)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This lambda uses 2 variables - &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;. It compares if &lt;code&gt;x&lt;/code&gt; is less than &lt;code&gt;y&lt;/code&gt;.
 It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &lt;code&gt;True&lt;/code&gt;.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;&lt;strong&gt;Lambdas get even cooler&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Lambdas can be used with &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;. Coming soon.&lt;/p&gt;</summary></entry><entry><title>Binary Searches</title><link href="http://www.deekras.com/binary-searches.html" rel="alternate"></link><updated>2015-01-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-18:binary-searches.html</id><summary type="html">&lt;h2&gt;Binary Search&lt;/h2&gt;
+&lt;p&gt;Lambdas can be used with &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;. Coming soon.&lt;/p&gt;</summary></entry><entry><title>Map</title><link href="http://www.deekras.com/map.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:map.html</id><summary type="html">&lt;h2&gt;Maps&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;First: What is 'map'?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In very short, &lt;code&gt;map&lt;/code&gt; runs the given function on the given iterable.&lt;/p&gt;
+&lt;p&gt;For example: We have a function that converts years to their Roman numeral version. And we have a list of years. We can run a &lt;code&gt;map(convert_year_to_roman_numeral, ['1999', '1776', '2015']&lt;/code&gt;.  This will run the function &lt;code&gt;convert_year_to_roman_numeral&lt;/code&gt; on the list of years. And return the Roman numerals for those years. As a list.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;map(function, iterable)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The function can be a function or a lambda expression.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The iterable cab be any iterable - list, string, etc. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;A few more examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;map(lambda x: x**2, [1, 2, 3, 4])&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;This&lt;/span&gt; &lt;span class="nx"&gt;runs&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;first&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;Then&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;so&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;until&lt;/span&gt; &lt;span class="nx"&gt;all&lt;/span&gt; &lt;span class="nx"&gt;items&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;have&lt;/span&gt; &lt;span class="nx"&gt;been&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; 
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;seq&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;This runs exactly as above.&lt;/li&gt;
+&lt;li&gt;It runs the &lt;code&gt;sqr&lt;/code&gt; function on the &lt;code&gt;seq&lt;/code&gt;. And run the function on every item in the iterable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;```&lt;/p&gt;</summary></entry><entry><title>Reduce</title><link href="http://www.deekras.com/reduce.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:reduce.html</id><summary type="html">&lt;h2&gt;Reduce&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;First: What is 'reduce'?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In very short, &lt;code&gt;reduce&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;map(function, iterable)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The function can be a function or a lambda expression.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This function must work on 2 variables.  One is the result of the previous run of the function. The other is the next item in the iterable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The iterable cab be any iterable - list, string, etc. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sum is an example. The function is &lt;code&gt;a + b&lt;/code&gt;; the iterable is [1, 2, 3, 4].&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;first run  --&amp;gt; &lt;code&gt;a = 1&lt;/code&gt; and &lt;code&gt;b = 2&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;3&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;second run --&amp;gt; &lt;code&gt;a = 3&lt;/code&gt; and &lt;code&gt;b = 3&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;6&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;third runn --&amp;gt; &lt;code&gt;a = 6&lt;/code&gt; and &lt;code&gt;b = 4&lt;/code&gt;. The new &lt;code&gt;a&lt;/code&gt; is the result. in this case &lt;code&gt;10&lt;/code&gt;.
+   And since there are no more items in the iterable, we have our final result - &lt;code&gt;10&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;A few more examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For all these examples, we'll use this iterable: &lt;code&gt;list = [47, 11, 42, 102, 13]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;reduce((lambda a, b: a if a&amp;gt;b else b), list)&lt;/code&gt;&lt;/p&gt;
+&lt;table border="1" cellpadding="3"&gt;
+  &lt;center&gt;
+  &lt;col width="70"&gt;
+  &lt;col width="60"&gt;
+  &lt;col width="60"&gt;
+  &lt;col width="300"&gt;
+  &lt;col width="80"&gt;
+  &lt;col width="60"&gt;
+  &lt;col width="60"&gt;
+
+  &lt;tr&gt;
+    &lt;th&gt;  round # &lt;/th&gt;
+    &lt;th&gt;  a     &lt;/th&gt;
+    &lt;th&gt;  b   &lt;/th&gt;
+    &lt;th&gt; a&gt;b * &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;&lt;center&gt;
+    &lt;td&gt;&lt;center&gt;  1         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt;  47         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 11       &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 47 &gt; 11 --&gt; true    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  2         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 47           &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt;  42          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 47 &gt; 42  --&gt; true       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  3         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 47           &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 102            &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 47 &gt; 102  --&gt; false       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  4         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 102           &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 13            &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; 102 &gt; 13  --&gt; true       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;reduce((lambda a,b: a + b), list) --&amp;gt; 215&lt;/p&gt;
+&lt;p&gt;reduce(lambda a, b: str(a)+str(b), list) --&amp;gt; '47114210213'
+--- so this can be used to concatenate items in a list  &lt;/p&gt;</summary></entry><entry><title>Binary Searches</title><link href="http://www.deekras.com/binary-searches.html" rel="alternate"></link><updated>2015-01-18T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-18:binary-searches.html</id><summary type="html">&lt;h2&gt;Binary Search&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is a 'binary search'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The task: search through a sorted list to find the specified value.&lt;/p&gt;
 &lt;p&gt;A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the item is, this isn't most efficient use of time. &lt;/p&gt;

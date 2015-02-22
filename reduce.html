@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Lambda - DeeKras.com</title>
+    <title>Reduce - DeeKras.com</title>
     <meta name="description" content="">
     <meta name="author" content="Dee Kras">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>Lambda</h1>
+             <h1>Reduce</h1>
            </div>
       </div>
     <div class="row-fluid">
@@ -69,52 +69,76 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       </div>
       
       <div class="span8">
-	<h2>Lambdas</h2>
-<p><strong>First: What is 'lambda'?</strong></p>
-<p>In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then it still might pay to write a function for it. </p>
-<p>For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.</p>
+	<h2>Reduce</h2>
+<p><strong>First: What is 'reduce'?</strong></p>
+<p>In very short, <code>reduce</code> </p>
 <p><strong>The Syntax</strong></p>
-<p><code>(lambda a: a *2)(6)</code></p>
+<p><code>map(function, iterable)</code></p>
 <ul>
+<li>The function can be a function or a lambda expression.</li>
 <li>
-<p>The lambda expression should be in parentheses <code>()</code>.</p>
+<p>This function must work on 2 variables.  One is the result of the previous run of the function. The other is the next item in the iterable.</p>
 </li>
 <li>
-<p>Starts off with the word <code>lambda</code></p>
-</li>
-<li>
-<p>And then the variable name, in this case <code>a</code>.  There could be more than 1 variable.</p>
-</li>
-<li>
-<p>And the colon <code>:</code></p>
-</li>
-<li>
-<p>And then the quick little code. In this case <code>a * 2</code>. The variable multiplied by 2.</p>
-</li>
-<li>
-<p>And lastly an argument for this little lambda function. In this case <code>(6)</code>. In its own parentheses. This is how we <em>call</em> the lambda function.</p>
+<p>The iterable cab be any iterable - list, string, etc. </p>
 </li>
 </ul>
-<p><strong>Another way to write a lambda</strong></p>
-<div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span> <span class="mi">2</span>
-<span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Here we are assigning the lambda function to <code>c</code> and then calling <code>c(2)</code>.
-This sort of defeats the purpose. But it still saves some coding since you don't have to <code>def</code> or <code>return</code>.</p>
+<p>Sum is an example. The function is <code>a + b</code>; the iterable is [1, 2, 3, 4].</p>
+<ul>
+<li>first run  --&gt; <code>a = 1</code> and <code>b = 2</code>. The new <code>a</code> is the result. in this case <code>3</code>.</li>
+<li>second run --&gt; <code>a = 3</code> and <code>b = 3</code>. The new <code>a</code> is the result. in this case <code>6</code>.</li>
+<li>third runn --&gt; <code>a = 6</code> and <code>b = 4</code>. The new <code>a</code> is the result. in this case <code>10</code>.
+   And since there are no more items in the iterable, we have our final result - <code>10</code>.</li>
+</ul>
 <hr />
 <p><strong>A few more examples:</strong></p>
-<p><code>(lambda x: x &lt;10)(11)</code></p>
-<p>This lambda checks if <code>11</code> is less than <code>10</code>. And in this case returns <code>False</code>.</p>
-<p><code>(lambda x: x %2)(8)</code></p>
-<p>This lambda checks if <code>8</code> is evenly divisible by 2. And in this case returns <code>True</code>.</p>
-<p><code>(lambda x, y: x &lt; y)(6, 7)</code></p>
-<p>This lambda uses 2 variables - <code>x</code> and <code>y</code>. It compares if <code>x</code> is less than <code>y</code>.
-It compares if <code>6 &lt; 7</code> and in this case returns <code>True</code>.</p>
-<hr />
-<p><strong>Lambdas get even cooler</strong></p>
-<p>Lambdas can be used with <code>map</code>, <code>reduce</code> and <code>filter</code>. Coming soon.</p>
+<p>For all these examples, we'll use this iterable: <code>list = [47, 11, 42, 102, 13]</code></p>
+<p><code>reduce((lambda a, b: a if a&gt;b else b), list)</code></p>
+<table border="1" cellpadding="3">
+  <center>
+  <col width="70">
+  <col width="60">
+  <col width="60">
+  <col width="300">
+  <col width="80">
+  <col width="60">
+  <col width="60">
+
+  <tr>
+    <th>  round # </th>
+    <th>  a     </th>
+    <th>  b   </th>
+    <th> a>b * </th>
+  </tr>
+  <tr><center>
+    <td><center>  1         </center></td>
+    <td><center>  47         </center></td>
+    <td><center> 11       </center></td>
+    <td><center> 47 > 11 --> true    </center></td>
+  </tr>
+  <tr>
+    <td><center>  2         </center></td>
+    <td><center> 47           </center></td>
+    <td><center>  42          </center></td>
+    <td><center> 47 > 42  --> true       </center></td>
+  </tr>
+  <tr>
+    <td><center>  3         </center></td>
+    <td><center> 47           </center></td>
+    <td><center> 102            </center></td>
+    <td><center> 47 > 102  --> false       </center></td>
+  </tr>
+  <tr>
+    <td><center>  4         </center></td>
+    <td><center> 102           </center></td>
+    <td><center> 13            </center></td>
+    <td><center> 102 > 13  --> true       </center></td>
+  </tr>
+</table>
+
+<p>reduce((lambda a,b: a + b), list) --&gt; 215</p>
+<p>reduce(lambda a, b: str(a)+str(b), list) --&gt; '47114210213'
+--- so this can be used to concatenate items in a list  </p>
 	<hr />
       </div>
     </div>
