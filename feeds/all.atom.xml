@@ -86,7 +86,7 @@ It compares if &lt;code&gt;6 &amp;lt; 7&lt;/code&gt; and in this case returns &l
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;A few more examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A few examples:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;map(lambda x: x**2, [1, 2, 3, 4])&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
 &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
