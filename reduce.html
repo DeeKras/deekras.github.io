@@ -93,16 +93,15 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <hr />
 <p><strong>A few more examples:</strong></p>
 <p>For all these examples, we'll use this iterable: <code>list = [47, 11, 42, 102, 13]</code></p>
-<p><code>reduce((lambda a, b: a if a&gt;b else b), list)</code></p>
+<p><strong>1.</strong><code>reduce((lambda a, b: a if a &gt; b else b), list)</code></p>
+<p>This returns the greatest of all numbers in the list. </p>
+<p>The <code>a</code> is the result of the <code>a &gt; b</code>. And <code>b</code> is the next item in the list. If <code>a</code> is greater than <code>b</code>, then the value in <code>a</code> remains in <code>a</code>, else the value of <code>b</code> becomes the <code>a</code>.  See below in this chart.</p>
 <table border="1" cellpadding="3">
   <center>
   <col width="70">
   <col width="60">
   <col width="60">
   <col width="300">
-  <col width="80">
-  <col width="60">
-  <col width="60">
 
   <tr>
     <th>  round # </th>
@@ -136,8 +135,93 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
   </tr>
 </table>
 
-<p>reduce((lambda a,b: a + b), list) --&gt; 215</p>
-<p>reduce(lambda a, b: str(a)+str(b), list) --&gt; '47114210213'
+<p>and the final <code>a</code> is <code>102</code></p>
+<p><strong>2.</strong> reduce((lambda a,b: a + b), list) </p>
+<p>This returns the sum of all numbers in the list. </p>
+<p>The <code>a</code> is the result of the <code>a + b</code>. And <code>b</code> is the next item in the list.</p>
+<table border="1" cellpadding="3">
+  <center>
+  <col width="70">
+  <col width="60">
+  <col width="60">
+  <col width="300">
+
+  <tr>
+    <th>  round # </th>
+    <th>  a     </th>
+    <th>  b   </th>
+    <th> a>b * </th>
+  </tr>
+  <tr><center>
+    <td><center>  1         </center></td>
+    <td><center>  47         </center></td>
+    <td><center> 11       </center></td>
+    <td><center> 47 + 11 --> 58    </center></td>
+  </tr>
+  <tr>
+    <td><center>  2         </center></td>
+    <td><center> 58          </center></td>
+    <td><center>  42          </center></td>
+    <td><center> 58 + 42 --> 100      </center></td>
+  </tr>
+  <tr>
+    <td><center>  3         </center></td>
+    <td><center> 100          </center></td>
+    <td><center> 102            </center></td>
+    <td><center> 100 + 102  --> 202      </center></td>
+  </tr>
+  <tr>
+    <td><center>  4         </center></td>
+    <td><center> 202           </center></td>
+    <td><center> 13            </center></td>
+    <td><center> 202 + 13  --> 215      </center></td>
+  </tr>
+</table>
+
+<p>and the final <code>a</code> is <code>215</code></p>
+<p><strong>3. </strong><code>reduce(lambda a, b: str(a)+str(b), list)</code> </p>
+<p>This returns the concatenation of all numbers in the list.</p>
+<p>The <code>a</code> is the result of the <code>str(a)+str(b)</code>. And <code>b</code> is the next item in the list.</p>
+<table border="1" cellpadding="3">
+  <center>
+  <col width="70">
+  <col width="60">
+  <col width="60">
+  <col width="300">
+
+  <tr>
+    <th>  round # </th>
+    <th>  a     </th>
+    <th>  b   </th>
+    <th> a>b * </th>
+  </tr>
+  <tr><center>
+    <td><center>  1         </center></td>
+    <td><center>  47         </center></td>
+    <td><center> 11       </center></td>
+    <td><center> '4711'    </center></td>
+  </tr>
+  <tr>
+    <td><center>  2         </center></td>
+    <td><center> '4711'          </center></td>
+    <td><center>  42          </center></td>
+    <td><center> '471142'     </center></td>
+  </tr>
+  <tr>
+    <td><center>  3         </center></td>
+    <td><center> '471142'          </center></td>
+    <td><center> 102            </center></td>
+    <td><center> '471142102'      </center></td>
+  </tr>
+  <tr>
+    <td><center>  4         </center></td>
+    <td><center> '471142102'           </center></td>
+    <td><center> 13            </center></td>
+    <td><center> '47114210213'     </center></td>
+  </tr>
+</table>
+
+<p>and the final <code>a</code> is <code>'47114210213'</code>
 --- so this can be used to concatenate items in a list  </p>
 	<hr />
       </div>
