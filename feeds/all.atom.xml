@@ -16,38 +16,17 @@
 &lt;hr /&gt;
 &lt;p&gt;&lt;strong&gt;A few examples:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;All these examples use this list: &lt;code&gt;list = [1, 2, 3,"A", 11, "C", 12, 13, 14]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. &lt;/strong&gt;  &lt;code&gt;filter(lambda x: type(x) is str, list)&lt;/code&gt;
-['A', 'C']&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x&amp;lt;10, list)&lt;/code&gt;
-[1, 2, 3]&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int, list)&lt;/code&gt;
-[1, 2, 3, 11, 12, 13, 14]&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int and int(x)%2==0, list)&lt;/code&gt;
-[2, 12, 14]&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))&lt;/code&gt;
- The inner filter returns all integers as a list. then the outer filter runs on that filtered list.
- [2, 12, 14]&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;This&lt;/span&gt; &lt;span class="nx"&gt;runs&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;first&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;Then&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt; &lt;span class="nx"&gt;item&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;so&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;until&lt;/span&gt; &lt;span class="nx"&gt;all&lt;/span&gt; &lt;span class="nx"&gt;items&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;iterable&lt;/span&gt; &lt;span class="nx"&gt;have&lt;/span&gt; &lt;span class="nx"&gt;been&lt;/span&gt; &lt;span class="nx"&gt;run&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; 
-&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
-    &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sqr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;seq&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;This runs exactly as above.&lt;/li&gt;
-&lt;li&gt;It runs the &lt;code&gt;sqr&lt;/code&gt; function on the &lt;code&gt;seq&lt;/code&gt;. And run the function on every item in the iterable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;</summary></entry><entry><title>Lambda</title><link href="http://www.deekras.com/lambda.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:lambda.html</id><summary type="html">&lt;h2&gt;Lambdas&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;/strong&gt;  &lt;code&gt;filter(lambda x: type(x) is str, list)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;['A', 'C']&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x&amp;lt;10, list)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;[1, 2, 3]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int, list)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;[1, 2, 3, 11, 12, 13, 14]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. &lt;/strong&gt; &lt;code&gt;filter(lambda x: type(x) is int and int(x)%2==0, list)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;[2, 12, 14]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. &lt;/strong&gt; &lt;code&gt;filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The inner filter returns all integers as a list. then the outer filter runs on that filtered list.&lt;/p&gt;
+&lt;p&gt;[2, 12, 14]&lt;/p&gt;</summary></entry><entry><title>Lambda</title><link href="http://www.deekras.com/lambda.html" rel="alternate"></link><updated>2015-01-25T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-25:lambda.html</id><summary type="html">&lt;h2&gt;Lambdas&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is 'lambda'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then it still might pay to write a function for it. &lt;/p&gt;
 &lt;p&gt;For example: if we have to double a digit. Instead of writing a function to do that, we might write a quick lambda.&lt;/p&gt;

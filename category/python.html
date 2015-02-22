@@ -88,38 +88,17 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <hr />
 <p><strong>A few examples:</strong></p>
 <p>All these examples use this list: <code>list = [1, 2, 3,"A", 11, "C", 12, 13, 14]</code></p>
-<p><strong>1. </strong>  <code>filter(lambda x: type(x) is str, list)</code>
-['A', 'C']</p>
-<p><strong>2. </strong> <code>filter(lambda x: x&lt;10, list)</code>
-[1, 2, 3]</p>
-<p><strong>3. </strong> <code>filter(lambda x: type(x) is int, list)</code>
-[1, 2, 3, 11, 12, 13, 14]</p>
-<p><strong>4. </strong> <code>filter(lambda x: type(x) is int and int(x)%2==0, list)</code>
-[2, 12, 14]</p>
-<p><strong>5. </strong> <code>filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))</code>
- The inner filter returns all integers as a list. then the outer filter runs on that filtered list.
- [2, 12, 14]</p>
-<div class="highlight"><pre><span class="o">-</span> <span class="nx">The</span> <span class="kd">function</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">lambda</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">The</span> <span class="nx">iterable</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">list</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">This</span> <span class="nx">runs</span> <span class="nx">the</span> <span class="nx">lambda</span> <span class="p">(</span><span class="nx">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span><span class="p">,</span> <span class="nx">on</span> <span class="nx">the</span> <span class="err">`</span><span class="mi">1</span><span class="err">`</span><span class="p">.</span>
-<span class="o">-</span> <span class="nx">Then</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">next</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span> <span class="nx">and</span> <span class="nx">so</span> <span class="nx">on</span><span class="p">,</span> <span class="nx">until</span> <span class="nx">all</span> <span class="nx">items</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">iterable</span> <span class="nx">have</span> <span class="nx">been</span> <span class="nx">run</span><span class="p">.</span> 
-<span class="o">-</span> <span class="nx">The</span> <span class="nx">result</span> <span class="nx">is</span> <span class="err">`</span><span class="cp">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="cp">]</span><span class="err">`</span>
-</pre></div>
-
-
-<div class="highlight"><pre>    <span class="k">def</span> <span class="nf">sqr</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">num</span> <span class="o">**</span><span class="mi">2</span>
-    <span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-
-    <span class="nb">map</span><span class="p">(</span><span class="n">sqr</span><span class="p">,</span><span class="n">seq</span><span class="p">)</span>
-</pre></div>
-
-
-<ul>
-<li>This runs exactly as above.</li>
-<li>It runs the <code>sqr</code> function on the <code>seq</code>. And run the function on every item in the iterable.</li>
-</ul>
-<p>```</p> 
+<p><strong>1. </strong>  <code>filter(lambda x: type(x) is str, list)</code></p>
+<p>['A', 'C']</p>
+<p><strong>2. </strong> <code>filter(lambda x: x&lt;10, list)</code></p>
+<p>[1, 2, 3]</p>
+<p><strong>3. </strong> <code>filter(lambda x: type(x) is int, list)</code></p>
+<p>[1, 2, 3, 11, 12, 13, 14]</p>
+<p><strong>4. </strong> <code>filter(lambda x: type(x) is int and int(x)%2==0, list)</code></p>
+<p>[2, 12, 14]</p>
+<p><strong>5. </strong> <code>filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))</code></p>
+<p>The inner filter returns all integers as a list. then the outer filter runs on that filtered list.</p>
+<p>[2, 12, 14]</p> 
 	<a class="btn btn-mini xsmall" href="http://www.deekras.com/filter.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
