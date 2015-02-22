@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Sets - DeeKras.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Sets</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 27 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>Sets</h2>
+<p><strong>First: What is a 'set'?</strong></p>
+<p>In very short, a <code>set</code> is a collection with no duplicates.</p>
+<p>For example: We have a list of names: <code>names = ['Alice', 'Bill', 'Jane', 'Jack', 'Bill']</code>. <code>Bill</code> is in that list twice. When we call <code>set(names)</code>, we will get back that list with <code>Bill</code> there only once. <code>['Alice', 'Bill', 'Jane', 'Jack']</code> </p>
+<p><strong>The Syntax</strong></p>
+<p><code>set(iterable)</code></p>
+<p><code>frozenset(iterable)</code></p>
+<ul>
+<li>The iterable can be any iterable - list, string, etc. </li>
+</ul>
+<p>More about sets from the <a href="https://docs.python.org/2/library/stdtypes.html#set">docs</a></p>
+<hr />
+<p><strong>A few more things about sets</strong></p>
+<ul>
+<li>
+<p>There are 2 types of sets: the regular <code>set()</code> and <code>frozenset()</code>.</p>
+<ul>
+<li>
+<p><strong>set</strong> is mutable. So we can add or remove or update items in the set.</p>
+</li>
+<li>
+<p><strong>frozenset</strong> is immutable. And we cannot change anything about the set.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Sets are not ordered.</p>
+</li>
+</ul>
+<hr />
+<p><strong>Once we are working with </strong>sets<strong>, we can do a few more cool things like:</strong></p>
+<p>These operations only work on <code>set</code> and <code>frozenset</code> datatypes.</p>
+<table border="1" cellpadding="3">
+  <center>
+  <col width="70">
+  <col width="500">
+  <col width="60">
+  <col width="300">
+
+  <tr>
+    <th>  operation # </th>
+    <th>  description   </th>
+    <th>  syntax 1    </th>
+    <th>  syntax 2 </th>
+    <th> results </th>
+  </tr>
+  <tr><center>
+    <td><center>  is subset?         </center></td>
+    <td><center> does set1 include all items in set2?</center></td> 
+    <td><center>  set1.issubset(set2)         </center></td>
+    <td><center> set1 <= set2      </center></td>
+    <td><center> returns True or False    </center></td>
+  </tr>
+  <tr><center>
+    <td><center>  is **proper** subset?         </center></td>
+    <td><center> does set1 include all items in set2 AND set1 != set2?</center></td> 
+    <td><center>  --        </center></td>
+    <td><center> set1 < set2 (without equal sign)      </center></td>
+    <td><center> returns True or False    </center></td>
+  </tr>
+  <tr>
+    <td><center>  is superset?          </center></td>
+    <td><center> are all items in set 1 in set2?          </center></td>
+    <td><center>  set1.issuperset(set2)          </center></td>
+    <td><center> set1 >= set2       </center></td>
+    <td><center> returns True or False    </center></td>
+  </tr>
+   <tr>
+    <td><center>  is **proper** superset?          </center></td>
+    <td><center> are all items in set 1 in set2 AND set1 != set2?  </center></td>
+    <td><center>  --          </center></td>
+    <td><center> set1 > set2       </center></td>
+    <td><center> returns True or False    </center></td>
+  </tr>
+  <tr>
+    <td><center>  is disjointed?         </center></td>
+    <td><center> are *no* items in set1 in set2?           </center></td>
+    <td><center> set1.isdisjoint(set2)             </center></td>
+    <td><center> --      </center></td>
+    <td><center> returns True or False    </center></td>
+  </tr>
+  <tr>
+    <td><center>  union         </center></td>
+    <td><center> return all elements from all sets           </center></td>
+    <td><center> set1.union(set2) ** can have many .union(set3) ... </center></td>
+    <td><center> set1 | set2 (| set 3 ...)            </center></td>
+    <td><center> returns a set*       </center></td>
+  </tr>
+  <tr>
+    <td><center>  intersection        </center></td>
+    <td><center> return all elements that all sets have in common         </center></td>
+    <td><center> set1.intersection(set2) ** can have many .intersection(set3) ... </center></td>
+    <td><center> set1 & set2 (& set 3 ...)            </center></td>
+    <td><center> returns a set*       </center></td>
+  </tr>
+  <tr>
+    <td><center>  difference        </center></td>
+    <td><center> return all elements that are in set1 but not in set 2    </center></td>
+    <td><center> set1.difference(set2) ** can have many .difference(set3) ... </center></td>
+    <td><center> set1 - set2 (- set 3 ...)            </center></td>
+    <td><center> returns a set*       </center></td>
+  </tr>
+ <tr>
+    <td><center>  symmetric_difference       </center></td>
+    <td><center> return all elements that in **either** set1 **or** set2, but not both./center></td>
+    <td><center> set1.symmetric_difference(set2)  </center></td>
+    <td><center> set1 ^ set2  </center></td>
+    <td><center> returns a set*       </center></td>
+  </tr> 
+</table>
+
+<p>* If operations mix a <code>set</code> and <code>frozenset</code>, then the result is an instance of the first. So the result of <code>set1 | frozenset2</code> is a <code>set</code>.  The result of <code>frozenset1 | set2</code> is a <code>frozenset</code>.</p>
+<hr />
+<p><strong>A few examples:</strong></p>
+<p>All these examples use these lists:</p>
+<div class="highlight"><pre><span class="n">co_workers</span> <span class="o">=</span><span class="p">[</span><span class="s">&quot;Zach&quot;</span><span class="p">,</span> <span class="s">&quot;Dave&quot;</span><span class="p">,</span> <span class="s">&quot;Jack&quot;</span><span class="p">,</span> <span class="s">&quot;Emily&quot;</span><span class="p">,</span> <span class="s">&quot;Zach&quot;</span><span class="p">]</span>
+<span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Mary&quot;</span><span class="p">,</span> <span class="s">&quot;Lisa&quot;</span><span class="p">,</span> <span class="s">&quot;Jack&quot;</span><span class="p">,</span> <span class="s">&quot;Mary&quot;</span><span class="p">]</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Annie&quot;</span><span class="p">,</span> <span class="s">&quot;Bill&quot;</span><span class="p">,</span> <span class="s">&quot;Mary&quot;</span><span class="p">,</span> <span class="s">&quot;Annie&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Notice that each of those lists has a duplicate.  So to make sure we don't include any duplicates, we'll call <code>set()</code> on each.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">set_coworkers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">co_workers</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&quot;Zach&quot;</span><span class="p">,</span> <span class="s">&quot;Dave&quot;</span><span class="p">,</span> <span class="s">&quot;Jack&quot;</span><span class="p">,</span> <span class="s">&quot;Emily&quot;</span><span class="p">])</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_friends</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">friends</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&quot;Mary&quot;</span><span class="p">,</span> <span class="s">&quot;Lisa&quot;</span><span class="p">,</span> <span class="s">&quot;Jack&quot;</span><span class="p">])</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&quot;Annie&quot;</span><span class="p">,</span> <span class="s">&quot;Bill&quot;</span><span class="p">,</span> <span class="s">&quot;Mary&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>intersection </strong>  --&gt; return all elements that all sets have in common </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_friends</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Mary&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">&amp;</span><span class="n">set_friends</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Mary&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>union </strong>  --&gt; return all elements from all sets </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set_friends</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set_coworkers</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Zach&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Dave&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">,</span> <span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Mary&#39;</span><span class="p">,</span> <span class="s">&#39;Emily&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">|</span><span class="n">set_friends</span><span class="o">|</span><span class="n">set_coworkers</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Zach&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Dave&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">,</span> <span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Mary&#39;</span><span class="p">,</span> <span class="s">&#39;Emily&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>difference </strong>  --&gt; return all elements that are in set1 but not in set 2 </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set_friends</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">-</span><span class="n">set_friends</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_friends</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set_neighbors</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_friends</span><span class="o">-</span><span class="n">set_neighbors</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>symmetric_difference</strong>  --&gt; return all elements that in <strong>either</strong> set1 <strong>or</strong> set2, but not both.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">set_friends</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set_neighbors</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">set_friends</span><span class="o">^</span><span class="n">set_neighbors</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_friends</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set_neighbors</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">set_neighbors</span><span class="o">^</span><span class="n">set_friends</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">&#39;Lisa&#39;</span><span class="p">,</span> <span class="s">&#39;Bill&#39;</span><span class="p">,</span> <span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="s">&#39;Annie&#39;</span><span class="p">])</span>
+</pre></div>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

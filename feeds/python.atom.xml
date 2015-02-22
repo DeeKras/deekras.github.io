@@ -1,5 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-26T00:00:00+00:00</updated><entry><title>Filter</title><link href="http://www.deekras.com/filter.html" rel="alternate"></link><updated>2015-01-26T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-26:filter.html</id><summary type="html">&lt;h2&gt;Filter&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/python.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-27T00:00:00+00:00</updated><entry><title>Sets</title><link href="http://www.deekras.com/sets.html" rel="alternate"></link><updated>2015-01-27T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-27:sets.html</id><summary type="html">&lt;h2&gt;Sets&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;First: What is a 'set'?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In very short, a &lt;code&gt;set&lt;/code&gt; is a collection with no duplicates.&lt;/p&gt;
+&lt;p&gt;For example: We have a list of names: &lt;code&gt;names = ['Alice', 'Bill', 'Jane', 'Jack', 'Bill']&lt;/code&gt;. &lt;code&gt;Bill&lt;/code&gt; is in that list twice. When we call &lt;code&gt;set(names)&lt;/code&gt;, we will get back that list with &lt;code&gt;Bill&lt;/code&gt; there only once. &lt;code&gt;['Alice', 'Bill', 'Jane', 'Jack']&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Syntax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;set(iterable)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;frozenset(iterable)&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The iterable can be any iterable - list, string, etc. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;More about sets from the &lt;a href="https://docs.python.org/2/library/stdtypes.html#set"&gt;docs&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;A few more things about sets&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There are 2 types of sets: the regular &lt;code&gt;set()&lt;/code&gt; and &lt;code&gt;frozenset()&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;set&lt;/strong&gt; is mutable. So we can add or remove or update items in the set.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;frozenset&lt;/strong&gt; is immutable. And we cannot change anything about the set.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sets are not ordered.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Once we are working with &lt;/strong&gt;sets&lt;strong&gt;, we can do a few more cool things like:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;These operations only work on &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;frozenset&lt;/code&gt; datatypes.&lt;/p&gt;
+&lt;table border="1" cellpadding="3"&gt;
+  &lt;center&gt;
+  &lt;col width="70"&gt;
+  &lt;col width="500"&gt;
+  &lt;col width="60"&gt;
+  &lt;col width="300"&gt;
+
+  &lt;tr&gt;
+    &lt;th&gt;  operation # &lt;/th&gt;
+    &lt;th&gt;  description   &lt;/th&gt;
+    &lt;th&gt;  syntax 1    &lt;/th&gt;
+    &lt;th&gt;  syntax 2 &lt;/th&gt;
+    &lt;th&gt; results &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;&lt;center&gt;
+    &lt;td&gt;&lt;center&gt;  is subset?         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; does set1 include all items in set2?&lt;/center&gt;&lt;/td&gt; 
+    &lt;td&gt;&lt;center&gt;  set1.issubset(set2)         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 &lt;= set2      &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns True or False    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;&lt;center&gt;
+    &lt;td&gt;&lt;center&gt;  is **proper** subset?         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; does set1 include all items in set2 AND set1 != set2?&lt;/center&gt;&lt;/td&gt; 
+    &lt;td&gt;&lt;center&gt;  --        &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 &lt; set2 (without equal sign)      &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns True or False    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  is superset?          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; are all items in set 1 in set2?          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt;  set1.issuperset(set2)          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 &gt;= set2       &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns True or False    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  is **proper** superset?          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; are all items in set 1 in set2 AND set1 != set2?  &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt;  --          &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 &gt; set2       &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns True or False    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  is disjointed?         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; are *no* items in set1 in set2?           &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1.isdisjoint(set2)             &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; --      &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns True or False    &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  union         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; return all elements from all sets           &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1.union(set2) ** can have many .union(set3) ... &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 | set2 (| set 3 ...)            &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns a set*       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  intersection        &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; return all elements that all sets have in common         &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1.intersection(set2) ** can have many .intersection(set3) ... &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 &amp; set2 (&amp; set 3 ...)            &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns a set*       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  difference        &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; return all elements that are in set1 but not in set 2    &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1.difference(set2) ** can have many .difference(set3) ... &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 - set2 (- set 3 ...)            &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns a set*       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+ &lt;tr&gt;
+    &lt;td&gt;&lt;center&gt;  symmetric_difference       &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; return all elements that in **either** set1 **or** set2, but not both./center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1.symmetric_difference(set2)  &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; set1 ^ set2  &lt;/center&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;center&gt; returns a set*       &lt;/center&gt;&lt;/td&gt;
+  &lt;/tr&gt; 
+&lt;/table&gt;
+
+&lt;p&gt;* If operations mix a &lt;code&gt;set&lt;/code&gt; and &lt;code&gt;frozenset&lt;/code&gt;, then the result is an instance of the first. So the result of &lt;code&gt;set1 | frozenset2&lt;/code&gt; is a &lt;code&gt;set&lt;/code&gt;.  The result of &lt;code&gt;frozenset1 | set2&lt;/code&gt; is a &lt;code&gt;frozenset&lt;/code&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;A few examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;All these examples use these lists:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;co_workers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Zach&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Dave&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Emily&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Zach&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;friends&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Mary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Lisa&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Mary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;neighbors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Annie&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Bill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Mary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Annie&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that each of those lists has a duplicate.  So to make sure we don't include any duplicates, we'll call &lt;code&gt;set()&lt;/code&gt; on each.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_coworkers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;co_workers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Zach&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Dave&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Emily&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;friends&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Mary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Lisa&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;neighbors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Annie&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Bill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Mary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;intersection &lt;/strong&gt;  --&amp;gt; return all elements that all sets have in common &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;intersection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Mary&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Mary&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;union &lt;/strong&gt;  --&amp;gt; return all elements from all sets &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;union&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;union&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_coworkers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Zach&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Dave&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Mary&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Emily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;set_coworkers&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Zach&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Dave&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Mary&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Emily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;difference &lt;/strong&gt;  --&amp;gt; return all elements that are in set1 but not in set 2 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;difference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;difference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;symmetric_difference&lt;/strong&gt;  --&amp;gt; return all elements that in &lt;strong&gt;either&lt;/strong&gt; set1 &lt;strong&gt;or&lt;/strong&gt; set2, but not both.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symmetric_difference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symmetric_difference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;set_neighbors&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="n"&gt;set_friends&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Lisa&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Bill&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Jack&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Annie&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Filter</title><link href="http://www.deekras.com/filter.html" rel="alternate"></link><updated>2015-01-26T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-26:filter.html</id><summary type="html">&lt;h2&gt;Filter&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;First: What is 'filter'?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In very short, &lt;code&gt;filter&lt;/code&gt; runs the given function over the given iterable and only returns those that are true.&lt;/p&gt;
 &lt;p&gt;For example: We have a function that returns only those items in the list that are integers.&lt;/p&gt;
