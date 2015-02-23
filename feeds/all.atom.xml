@@ -196,7 +196,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;lower(), upper(), title(), swapcase(), capitalize()&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;lower(), upper(), title(), swapcase(), capitalize()&lt;/h3&gt;
 &lt;p&gt;NOTE: These do not &lt;em&gt;change&lt;/em&gt; the original string. They just display them according to the operation.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;LESLIE&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c"&gt;# returns the string as lowercase&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;leslie&amp;#39;&lt;/span&gt;
@@ -239,7 +239,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;endswith(), startswith()&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;endswith(), startswith()&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;123456789*&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="bp"&gt;True&lt;/span&gt;
 
