@@ -71,7 +71,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       <div class="span8">
 	<h2>Strings</h2>
 <p>Here I share some cool things you can do with strings.</p>
-<p><strong>zfill</strong></p>
+<h3>zfill</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;123&#39;</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="s">&#39;00123&#39;</span>
 </pre></div>
@@ -84,7 +84,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <li>in this case the str had 3 digits (<code>'123'</code>), so zfill() added 2 leading zeroes.</li>
 </ul>
 <hr />
-<p><strong>join</strong></p>
+<h3>join</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;*&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
 <span class="s">&#39;1*2*3*4*5&#39;</span>
 </pre></div>
@@ -92,7 +92,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 
 <p><strong>Syntax</strong>  str.join(iterable)</p>
 <ul>
-<li>returns a string which a contenation of the str between each iterable.</li>
+<li>returns a string which a concatenation of the str between each iterable.</li>
 </ul>
 <p><strong>Examples</strong></p>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;555&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">])</span>
@@ -104,7 +104,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 
 
 <hr />
-<p><strong>replace</strong></p>
+<h3>replace</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
 <span class="s">&#39;ABCDEFGH&#39;</span>
 </pre></div>
@@ -115,32 +115,29 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <li>returns a string.</li>
 <li>original_string.replace(replace_what, replace_with, [how many of those to replace])</li>
 </ul>
-<p><strong>Examples</strong>
-``python</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>'AB.CD.EF.GH'.replace('.','')
-'ABCDEFGH'</p>
-<p>'AB.CD.EF.GH'.replace('.','',2)
-'ABCDEF.GH'</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1>replaces only the first 2</h1>
-<div class="highlight"><pre>**find / index**
-```python
-&gt;&gt;&gt; &#39;ABCABDAGH&#39;.find(&#39;A&#39;)
-0
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="s">&#39;ABCDEFGH&#39;</span>
 
-&gt;&gt;&gt; &#39;ABCABDAGH&#39;.index(&#39;A&#39;)
-0
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="s">&#39;ABCDEF.GH&#39;</span>
+<span class="c">#replaces only the first 2</span>
+</pre></div>
 
-&gt;&gt;&gt; &#39;ABCABDAGH&#39;.find(&#39;B&#39;)
-1
 
-&gt;&gt;&gt; &#39;ABCABDAGH&#39;.index(&#39;B&#39;)
-1
+<hr />
+<h3>find / index</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="mi">0</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="mi">0</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">)</span>
+<span class="mi">1</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">)</span>
+<span class="mi">1</span>
 </pre></div>
 
 
@@ -164,7 +161,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;IS&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="o">-</span><span class="mi">1</span>  <span class="c">#The start position of 5 means that this search is searching through everything beginning from index of 5 ie: &#39;SSIPPI&#39; and thus the seach_item is not found. And the result is -1.</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;IS&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c">#The start position of 4 means that this search is searching through everything beginning from index of 4 ie: &#39;ISSIPPI&#39; and thus the seach_item is not found. And the result is index 4 - from the beginning of the oridinal string. </span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;IS&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c">#The start position of 4 means that this search is searching through everything beginning from index of 4 ie: &#39;ISSIPPI&#39; and thus the seach_item is not found. And the result is index 4 - from the beginning of the original string. </span>
 <span class="mi">4</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
@@ -175,7 +172,8 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </pre></div>
 
 
-<p><strong>split/ partition</strong> (rsplit/ rpartition)</p>
+<hr />
+<h3>split/ partition (rsplit/ rpartition)</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="s">&#39;212-555-1212&#39;</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
@@ -193,16 +191,18 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <ul>
 <li><code>split</code> - separates the original_string at every instance of the 'separator'</li>
 <li>returns a list.</li>
-<li>if maxsplit is given, then the original_string is only separated that number of times.</li>
-<li>a separator is not required. if none is given, the algorithm separates at 'empty space' (consecutive spaces)</li>
+<li>if <code>maxsplit</code> is given, then the original_string is only separated that number of times.</li>
+<li>a <code>separator</code> is not required. if none is given, the algorithm separates at 'empty space' (consecutive spaces)</li>
 <li>
-<p>rsplit - begins separating from the right (from the end of the string)</p>
+<p><code>rsplit</code> - begins separating from the right (from the end of the string)
+<br>
+<br></p>
 </li>
 <li>
 <p><code>partition</code> - separates at the <em>first</em> instance of the separator.</p>
 </li>
 <li>returns a 3 part tuple: (before_the_first_separator, the separator, after_the_first_ separator)</li>
-<li>if the separator is not found, then returns a 3 part tuple:(the original_string, '', '')</li>
+<li>if the <code>separator</code>  is not found, then returns a 3 part tuple:(the original_string, '', '')</li>
 <li><code>rpartition</code> does the partition starting from the right.</li>
 </ul>
 <p><strong>Examples</strong></p>
@@ -229,7 +229,7 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 
 
 <hr />
-<p><strong>Strip</strong> (lstrip(), rstrip())</p>
+<h3>Strip (lstrip(), rstrip())</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;   abcd   &#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="n">abcd</span>
 </pre></div>
@@ -243,9 +243,9 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 <p>if no characters are specificed, this strips off the empty spaces at the beginning and end</p>
 </li>
 <li>
-<p>rstrip() - strips off the characters from the right</p>
+<p><code>rstrip()</code> - strips off the characters from the right</p>
 </li>
-<li>lstrip() - strips off the characters from the left</li>
+<li><code>lstrip()</code> - strips off the characters from the left</li>
 </ul>
 <p><strong>Examples</strong></p>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#39;   abcdeabcdeeeef&#39;</span>
@@ -281,15 +281,13 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;barry smith&#39;</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="c">#returns the string with *only* the first letter capitalized</span>
 <span class="s">&#39;Barry smith&#39;</span>
+</pre></div>
 
-<span class="o">--------</span>
 
-<span class="o">**</span><span class="n">center</span><span class="p">(),</span> <span class="n">ljust</span><span class="p">(),</span> <span class="n">rjust</span><span class="p">()</span><span class="o">**</span>
-
-<span class="n">center</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="n">ljust</span><span class="p">(</span><span class="n">width</span><span class="p">[,</span><span class="n">character</span><span class="p">]),</span> <span class="n">rjust</span><span class="p">(</span><span class="n">width</span><span class="p">[,</span><span class="n">character</span><span class="p">])</span>
-
-<span class="sb">``</span><span class="err">`</span><span class="n">python</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<hr />
+<h3>center(), ljust(), rjust()</h3>
+<p><strong>Syntax</strong> center(width), ljust(width[,character]), rjust(width[,character])</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 <span class="s">&#39;            rachel            &#39;</span>  <span class="c"># centers the string in the specified width</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">)</span>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/all.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-28T00:00:00+00:00</updated><entry><title>Cool stuff with Strings</title><link href="http://www.deekras.com/cool-stuff-with-strings.html" rel="alternate"></link><updated>2015-01-28T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-28:cool-stuff-with-strings.html</id><summary type="html">&lt;h2&gt;Strings&lt;/h2&gt;
 &lt;p&gt;Here I share some cool things you can do with strings.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;zfill&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;zfill&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;123&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zfill&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;00123&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -14,7 +14,7 @@
 &lt;li&gt;in this case the str had 3 digits (&lt;code&gt;'123'&lt;/code&gt;), so zfill() added 2 leading zeroes.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;join&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;join&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;12345&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;1*2*3*4*5&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -22,7 +22,7 @@
 
 &lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt;  str.join(iterable)&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;returns a string which a contenation of the str between each iterable.&lt;/li&gt;
+&lt;li&gt;returns a string which a concatenation of the str between each iterable.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;212&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;555&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1212&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -34,7 +34,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;replace&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;replace&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;AB.CD.EF.GH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;ABCDEFGH&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -45,32 +45,29 @@
 &lt;li&gt;returns a string.&lt;/li&gt;
 &lt;li&gt;original_string.replace(replace_what, replace_with, [how many of those to replace])&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;
-``python&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;'AB.CD.EF.GH'.replace('.','')
-'ABCDEFGH'&lt;/p&gt;
-&lt;p&gt;'AB.CD.EF.GH'.replace('.','',2)
-'ABCDEF.GH'&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;h1&gt;replaces only the first 2&lt;/h1&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;**find / index**
-```python
-&amp;gt;&amp;gt;&amp;gt; &amp;#39;ABCABDAGH&amp;#39;.find(&amp;#39;A&amp;#39;)
-0
+&lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;AB.CD.EF.GH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;ABCDEFGH&amp;#39;&lt;/span&gt;
 
-&amp;gt;&amp;gt;&amp;gt; &amp;#39;ABCABDAGH&amp;#39;.index(&amp;#39;A&amp;#39;)
-0
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;AB.CD.EF.GH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;ABCDEF.GH&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;#replaces only the first 2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&amp;gt;&amp;gt;&amp;gt; &amp;#39;ABCABDAGH&amp;#39;.find(&amp;#39;B&amp;#39;)
-1
 
-&amp;gt;&amp;gt;&amp;gt; &amp;#39;ABCABDAGH&amp;#39;.index(&amp;#39;B&amp;#39;)
-1
+&lt;hr /&gt;
+&lt;h3&gt;find / index&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ABCABDAGH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ABCABDAGH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ABCABDAGH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ABCABDAGH&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -94,7 +91,7 @@
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;IS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;  &lt;span class="c"&gt;#The start position of 5 means that this search is searching through everything beginning from index of 5 ie: &amp;#39;SSIPPI&amp;#39; and thus the seach_item is not found. And the result is -1.&lt;/span&gt;
 
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;IS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#The start position of 4 means that this search is searching through everything beginning from index of 4 ie: &amp;#39;ISSIPPI&amp;#39; and thus the seach_item is not found. And the result is index 4 - from the beginning of the oridinal string. &lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;IS&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;#The start position of 4 means that this search is searching through everything beginning from index of 4 ie: &amp;#39;ISSIPPI&amp;#39; and thus the seach_item is not found. And the result is index 4 - from the beginning of the original string. &lt;/span&gt;
 &lt;span class="mi"&gt;4&lt;/span&gt;
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;I&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -105,7 +102,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;split/ partition&lt;/strong&gt; (rsplit/ rpartition)&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3&gt;split/ partition (rsplit/ rpartition)&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;212-555-1212&amp;#39;&lt;/span&gt;
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -123,16 +121,18 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;split&lt;/code&gt; - separates the original_string at every instance of the 'separator'&lt;/li&gt;
 &lt;li&gt;returns a list.&lt;/li&gt;
-&lt;li&gt;if maxsplit is given, then the original_string is only separated that number of times.&lt;/li&gt;
-&lt;li&gt;a separator is not required. if none is given, the algorithm separates at 'empty space' (consecutive spaces)&lt;/li&gt;
+&lt;li&gt;if &lt;code&gt;maxsplit&lt;/code&gt; is given, then the original_string is only separated that number of times.&lt;/li&gt;
+&lt;li&gt;a &lt;code&gt;separator&lt;/code&gt; is not required. if none is given, the algorithm separates at 'empty space' (consecutive spaces)&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;rsplit - begins separating from the right (from the end of the string)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rsplit&lt;/code&gt; - begins separating from the right (from the end of the string)
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;partition&lt;/code&gt; - separates at the &lt;em&gt;first&lt;/em&gt; instance of the separator.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;returns a 3 part tuple: (before_the_first_separator, the separator, after_the_first_ separator)&lt;/li&gt;
-&lt;li&gt;if the separator is not found, then returns a 3 part tuple:(the original_string, '', '')&lt;/li&gt;
+&lt;li&gt;if the &lt;code&gt;separator&lt;/code&gt;  is not found, then returns a 3 part tuple:(the original_string, '', '')&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;rpartition&lt;/code&gt; does the partition starting from the right.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
@@ -159,7 +159,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;Strip&lt;/strong&gt; (lstrip(), rstrip())&lt;/p&gt;
+&lt;h3&gt;Strip (lstrip(), rstrip())&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;   abcd   &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;abcd&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -173,9 +173,9 @@
 &lt;p&gt;if no characters are specificed, this strips off the empty spaces at the beginning and end&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;rstrip() - strips off the characters from the right&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rstrip()&lt;/code&gt; - strips off the characters from the right&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;lstrip() - strips off the characters from the left&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lstrip()&lt;/code&gt; - strips off the characters from the left&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;   abcdeabcdeeeef&amp;#39;&lt;/span&gt;
@@ -211,15 +211,13 @@
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;barry smith&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;capitalize&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c"&gt;#returns the string with *only* the first letter capitalized&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;Barry smith&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="o"&gt;--------&lt;/span&gt;
 
-&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;ljust&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;rjust&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;
-
-&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;ljust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt;&lt;span class="n"&gt;character&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="n"&gt;rjust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;[,&lt;/span&gt;&lt;span class="n"&gt;character&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
-&lt;span class="sb"&gt;``&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;rachel&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;hr /&gt;
+&lt;h3&gt;center(), ljust(), rjust()&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt; center(width), ljust(width[,character]), rjust(width[,character])&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;rachel&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="s"&gt;&amp;#39;            rachel            &amp;#39;&lt;/span&gt;  &lt;span class="c"&gt;# centers the string in the specified width&lt;/span&gt;
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;rachel&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
