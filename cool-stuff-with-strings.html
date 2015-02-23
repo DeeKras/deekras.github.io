@@ -71,6 +71,54 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       <div class="span8">
 	<h2>Strings</h2>
 <p>Here I share some cool things you can do with strings.</p>
+<h3>count(),  len(), max(), min(),</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;bb&#39;</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">1</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s">&#39;afhjcrnamwvsiytdr&#39;</span><span class="p">)</span>
+<span class="mi">17</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="s">&#39;afhjcrnamwvsiytdr&#39;</span><span class="p">)</span>
+<span class="s">&#39;y&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="s">&#39;fhjcrnmwvsiytdr&#39;</span><span class="p">)</span>
+<span class="s">&#39;c&#39;</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong> str.count(substring[,start[,end]])</p>
+<ul>
+<li>original_string.count(what_to_count[,where_to_start[,where_to_end]])</li>
+<li>counts how many times that substring is found in that section of the string</li>
+<li>returns a number</li>
+</ul>
+<p><strong>Syntax</strong> len(string), max(string), min(string)</p>
+<ul>
+<li><code>len</code> - returns a number - the length of the string</li>
+<li><code>max</code> - returns an alphanumeric - the highest one in the string (numbers are lower than letters)</li>
+<li><code>min</code> - returns an alphanumeric - the lowest one in the string (numbers are lower than letters. And there are some characters that are even lower than some numbers.)</li>
+</ul>
+<p><strong> Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">characters</span> <span class="o">=</span> <span class="s">&quot;`~!@#$%^&amp;*()_-+={}[]|</span><span class="se">\\</span><span class="s">:;&#39;&lt;&gt;,.?/123ABC&quot;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="s">&#39;!&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="s">&#39;~&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="p">[</span><span class="s">&#39;!&#39;</span><span class="p">,</span> <span class="s">&#39;#&#39;</span><span class="p">,</span> <span class="s">&#39;$&#39;</span><span class="p">,</span> <span class="s">&#39;%&#39;</span><span class="p">,</span> <span class="s">&#39;&amp;&#39;</span><span class="p">,</span> <span class="s">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s">&#39;(&#39;</span><span class="p">,</span> <span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;:&#39;</span><span class="p">,</span> <span class="s">&#39;;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s">&#39;=&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;?&#39;</span><span class="p">,</span> <span class="s">&#39;@&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;[&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;]&#39;</span><span class="p">,</span> <span class="s">&#39;^&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">,</span> <span class="s">&#39;`&#39;</span><span class="p">,</span> <span class="s">&#39;{&#39;</span><span class="p">,</span> <span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;}&#39;</span><span class="p">,</span> <span class="s">&#39;~&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>That last one has interesting results!</p>
+<hr />
 <h3>zfill</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;123&#39;</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="s">&#39;00123&#39;</span>
