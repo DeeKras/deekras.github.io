@@ -32,8 +32,8 @@
 &lt;p&gt;&lt;strong&gt;Syntax&lt;/strong&gt; len(string), max(string), min(string)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;len&lt;/code&gt; - returns a number - the length of the string&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;max&lt;/code&gt; - returns an alphanumeric - the highest one in the string (numbers are lower than letters)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;min&lt;/code&gt; - returns an alphanumeric - the lowest one in the string (numbers are lower than letters. And there are some characters that are even lower than some numbers.)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;max&lt;/code&gt; - returns a character - the highest one in the string (numbers are lower than letters)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;min&lt;/code&gt; - returns a character - the lowest one in the string (numbers are lower than letters. And there are some characters that are even lower than some numbers.)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt; Examples&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;characters&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;`~!@#$%^&amp;amp;*()_-+={}[]|&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;:;&amp;#39;&amp;lt;&amp;gt;,.?/123ABC&amp;quot;&lt;/span&gt;
