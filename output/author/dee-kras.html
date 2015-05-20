@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>DeeKras.com <small>Dee Kras</small></title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+        
+
+        
+
+    <div class='row-fluid''>
+        <div class="article-title span9">
+            <a href="http://www.deekras.com/cool-stuff-with-strings.html"><h1>Cool stuff with Strings</h1></a>
+        </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Wed 28 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h2>Strings</h2>
+<p>Here I share some cool things you can do with strings.</p>
+<h3>count(),  len(), max(), min(),</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;bb&#39;</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ababababbbbababab&#39;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">1</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s">&#39;afhjcrnamwvsiytdr&#39;</span><span class="p">)</span>
+<span class="mi">17</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="s">&#39;afhjcrnamwvsiytdr&#39;</span><span class="p">)</span>
+<span class="s">&#39;y&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="s">&#39;fhjcrnmwvsiytdr&#39;</span><span class="p">)</span>
+<span class="s">&#39;c&#39;</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong> str.count(substring[,start[,end]])</p>
+<ul>
+<li>original_string.count(what_to_count[,where_to_start[,where_to_end]])</li>
+<li>counts how many times that substring is found in that section of the string</li>
+<li>returns a number</li>
+</ul>
+<p><strong>Syntax</strong> len(string), max(string), min(string)</p>
+<ul>
+<li><code>len</code> - returns a number - the length of the string</li>
+<li><code>max</code> - returns a character - the highest one in the string (numbers are lower than letters)</li>
+<li><code>min</code> - returns a character - the lowest one in the string (numbers are lower than letters. And there are some characters that are even lower than some numbers.)</li>
+</ul>
+<p><strong> Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">characters</span> <span class="o">=</span> <span class="s">&quot;`~!@#$%^&amp;*()_-+={}[]|</span><span class="se">\\</span><span class="s">:;&#39;&lt;&gt;,.?/123ABC&quot;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="s">&#39;!&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="s">&#39;~&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">characters</span><span class="p">)</span>
+<span class="p">[</span><span class="s">&#39;!&#39;</span><span class="p">,</span> <span class="s">&#39;#&#39;</span><span class="p">,</span> <span class="s">&#39;$&#39;</span><span class="p">,</span> <span class="s">&#39;%&#39;</span><span class="p">,</span> <span class="s">&#39;&amp;&#39;</span><span class="p">,</span> <span class="s">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s">&#39;(&#39;</span><span class="p">,</span> <span class="s">&#39;)&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;:&#39;</span><span class="p">,</span> <span class="s">&#39;;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s">&#39;=&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;?&#39;</span><span class="p">,</span> <span class="s">&#39;@&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;[&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;]&#39;</span><span class="p">,</span> <span class="s">&#39;^&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">,</span> <span class="s">&#39;`&#39;</span><span class="p">,</span> <span class="s">&#39;{&#39;</span><span class="p">,</span> <span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;}&#39;</span><span class="p">,</span> <span class="s">&#39;~&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>That last one has interesting results!</p>
+<hr />
+<h3>zfill</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;123&#39;</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="s">&#39;00123&#39;</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong>   str.zfill(width)</p>
+<ul>
+<li>returns a numeric string with as many leading zeroes as needed to fill the width in the argument of the <code>zfill()</code>.</li>
+<li>in this case, the zfill() has argument of 5. so there must be 5 digits in the result. if there are less, then it places zeroes in front of the number.</li>
+<li>in this case the str had 3 digits (<code>'123'</code>), so zfill() added 2 leading zeroes.</li>
+</ul>
+<hr />
+<h3>join</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;*&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+<span class="s">&#39;1*2*3*4*5&#39;</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong>  str.join(iterable)</p>
+<ul>
+<li>returns a string which a concatenation of the str between each iterable.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;555&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">])</span>
+<span class="s">&#39;212-555-1212&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;?&#39;</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+<span class="s">&#39;?,?,?,?,?,?,?&#39;</span>
+</pre></div>
+
+
+<hr />
+<h3>replace</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="s">&#39;ABCDEFGH&#39;</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong> str.replace(old, new[,count])</p>
+<ul>
+<li>returns a string.</li>
+<li>original_string.replace(replace_what, replace_with, [how many of those to replace])</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="s">&#39;ABCDEFGH&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;AB.CD.EF.GH&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="s">&#39;ABCDEF.GH&#39;</span>
+<span class="c">#replaces only the first 2</span>
+</pre></div>
+
+
+<hr />
+<h3>find / index</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="mi">0</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span>
+<span class="mi">0</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">)</span>
+<span class="mi">1</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCABDAGH&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">)</span>
+<span class="mi">1</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong> str.find(sub[,start[,end]])  / str.index(sub[,start[,end]])</p>
+<ul>
+<li>returns the index of the first substring was found</li>
+<li>
+<p>original_string.find(what_to_find, where_to_start_looking, where_to_stop_looking)</p>
+</li>
+<li>
+<p><code>find</code> - if the substring is not found, returns <code>-1</code></p>
+</li>
+<li><code>index</code> - will raise <code>ValueError</code> if the substring is not found</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">&#39;MISSISSIPPI&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">)</span>
+<span class="mi">1</span>  
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;IS&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">1</span>  <span class="c">#The start position of 5 means that this search is searching through everything beginning from index of 5 ie: &#39;SSIPPI&#39; and thus the seach_item is not found. And the result is -1.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;IS&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c">#The start position of 4 means that this search is searching through everything beginning from index of 4 ie: &#39;ISSIPPI&#39; and thus the seach_item is not found. And the result is index 4 - from the beginning of the original string. </span>
+<span class="mi">4</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="mi">10</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">1</span>
+</pre></div>
+
+
+<hr />
+<h3>split/ partition (rsplit/ rpartition)</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="s">&#39;212-555-1212&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;555-1212&#39;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;555&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#39;212-555&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong>  str.split([separator[,maxsplit]])  str.partition(separator)</p>
+<ul>
+<li><code>split</code> - separates the original_string at every instance of the 'separator'</li>
+<li>returns a list.</li>
+<li>if <code>maxsplit</code> is given, then the original_string is only separated that number of times.</li>
+<li>a <code>separator</code> is not required. if none is given, the algorithm separates at 'empty space' (consecutive spaces)</li>
+<li>
+<p><code>rsplit</code> - begins separating from the right (from the end of the string)
+<br>
+<br></p>
+</li>
+<li>
+<p><code>partition</code> - separates at the <em>first</em> instance of the separator.</p>
+</li>
+<li>returns a 3 part tuple: (before_the_first_separator, the separator, after_the_first_ separator)</li>
+<li>if the <code>separator</code>  is not found, then returns a 3 part tuple:(the original_string, '', '')</li>
+<li><code>rpartition</code> does the partition starting from the right.</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">w</span><span class="o">=</span><span class="s">&#39;212 555    1212&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">w</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="p">[</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;555&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">w</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;555    1212&#39;</span><span class="p">]</span>  <span class="c"># This separates only 1 time. And since the separator is `None`, it uses the empty spaces as a separator.</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">w</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">[</span><span class="s">&#39;212 555&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">]</span>  <span class="c"># Separates 1 time. Starting from the right.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#39;212&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;555-1212&#39;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#39;212-555-1212&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>  <span class="c"># The separator is not found.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="s">&#39;212-555&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;1212&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<h3>Strip (lstrip(), rstrip())</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="s">&#39;   abcd   &#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">abcd</span>
+</pre></div>
+
+
+<p><strong>Syntax</strong>  str.strip([characters])</p>
+<ul>
+<li>strips off the characters - from the beginning and end of the string. until it hits a character that doesn't match the specified character.</li>
+<li>returns a string</li>
+<li>
+<p>if no characters are specificed, this strips off the empty spaces at the beginning and end</p>
+</li>
+<li>
+<p><code>rstrip()</code> - strips off the characters from the right</p>
+</li>
+<li><code>lstrip()</code> - strips off the characters from the left</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#39;   abcdeabcdeeeef&#39;</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="s">&#39;abcdeabcdeeeef&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;e&#39;</span><span class="p">)</span>
+<span class="s">&#39;   abcdeabcdeeeef&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&#39;f&#39;</span><span class="p">)</span>
+<span class="s">&#39;   abcdeabcdeeee&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;ef&#39;</span><span class="p">)</span>
+<span class="s">&#39;   abcdeabcd&#39;</span>  <span class="c"># strips all the &#39;e&#39;s and &#39;f&#39; until it finds another character and then stops stripping.</span>
+</pre></div>
+
+
+<hr />
+<h3>lower(), upper(), title(), swapcase(), capitalize()</h3>
+<p>NOTE: These do not <em>change</em> the original string. They just display them according to the operation.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;LESLIE&#39;</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  <span class="c"># returns the string as lowercase</span>
+<span class="s">&#39;leslie&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;john&#39;</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>  <span class="c"># returns the string as uppercase</span>
+<span class="s">&#39;JOHN&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;jason street&#39;</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>  <span class="c">#returns the string as title case - the first letter of every word is capitalized</span>
+<span class="s">&#39;Jason Street&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rACHEL gREEN&#39;</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>  <span class="c">#returns the string with cases swapped - upper becomes lower and lower becomes upper</span>
+<span class="s">&#39;Rachel Green&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;barry smith&#39;</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="c">#returns the string with *only* the first letter capitalized</span>
+<span class="s">&#39;Barry smith&#39;</span>
+</pre></div>
+
+
+<hr />
+<h3>center(), ljust(), rjust()</h3>
+<p><strong>Syntax</strong> center(width), ljust(width[,character]), rjust(width[,character])</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="s">&#39;            rachel            &#39;</span>  <span class="c"># centers the string in the specified width</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="s">&#39;------------rachel------------&#39;</span>  <span class="c"># centers the string in the specified width and pads the empty spaces with the specified character.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="s">&#39;rachel                        &#39;</span>  <span class="c"># left justifies (pushes all the way to the left) of the specified width.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">)</span> 
+<span class="s">&#39;rachel------------------------&#39;</span> <span class="c"># left justifies of the specified width and pads the empty spaces with specified character.</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> 
+<span class="s">&#39;                        rachel&#39;</span> <span class="c"># right justifies (pushes all the way to the right) of the specified width.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;rachel&#39;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">)</span>
+<span class="s">&#39;------------------------rachel&#39;</span> <span class="c"># rght justifies of the specified width and pads the empty spaces with specified character.</span>
+</pre></div>
+
+
+<hr />
+<h3>endswith(), startswith()</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123456789*&#39;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;*1234&#39;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+<span class="bp">True</span>
+</pre></div>
+
+
+<ul>
+<li>string.endswith(what_to_look_for[, index_start_looking[, index_stop_looking]])</li>
+<li>string.startswith(what_to_look_for[, index_start_looking[, index_stop_looking]])</li>
+<li>returns <code>True</code> if the string startswith / endswith the substring in that section of the string. returns <code>False</code> if the string in that section does not startswith/ endswith the substring</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123456789*&#39;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123456789*&#39;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123456789*&#39;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="bp">False</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123456789*&#39;</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;78&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCDEFGH&#39;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;AB&#39;</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCDEFGH&#39;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCDEFGH&#39;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;EF&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;ABCDEFGH&#39;</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;EF&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="bp">False</span>
+</pre></div>
+
+
+<hr />
+<p><strong>isalnum(), isalpha(), isdigit(), isspace(), islower(), istitle(), isupper()  </strong></p>
+<p>All these return True or False</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123ABC&#39;</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>
+<span class="bp">True</span>  <span class="c">#checks if all characters in the string are alphanumeric. And string is not empty.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;*asfd897&#39;</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>
+<span class="bp">False</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123ABC&#39;</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
+<span class="bp">False</span>  <span class="c"># checks if all characters in the string are alphabetic. And string is not empty.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;123ABC&#39;</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
+<span class="bp">False</span>  <span class="c"># checks if all characters in the string are numeric. And string is not empty.</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;        &#39;</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
+<span class="bp">True</span>  <span class="c"># checks if all characters in the string are empty spaces. And string is not empty.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span>
+<span class="bp">False</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;1234abc&#39;</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span>  <span class="c"># checks if all alphabetic are lower case</span>
+<span class="bp">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;1234Abv&#39;</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>  <span class="c">#checks if all instances of the alphabetic sequences are  title case.   </span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;1234abv&#39;</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;12As45df&#39;</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;12As45Ddf&#39;</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span>
+<span class="bp">True</span>
+
+
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;1234abv&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="c"># checks if all alphabetic are lower case</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;1234ABV&#39;</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span>
+<span class="bp">True</span>
+</pre></div> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/cool-stuff-with-strings.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/sets.html"><h1>Sets</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 27 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Sets</h2>
+<p><strong>First: What is a 'set'?</strong></p>
+<p>In very short, a <code>set</code> is a collection with no duplicates.</p>
+<p>For example: We have a list of names: <code>names = ['Alice', 'Bill', 'Jane', 'Jack', 'Bill']</code>. <code>Bill</code> is in that list twice. When we call <code>set(names)</code>, we will get back that list with <code>Bill ...</code></p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/sets.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/filter.html"><h1>Filter</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 26 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Filter</h2>
+<p><strong>First: What is 'filter'?</strong></p>
+<p>In very short, <code>filter</code> runs the given function over the given iterable and only returns those that are true.</p>
+<p>For example: We have a function that returns only those items in the list that are integers.</p>
+<p><strong>The Syntax</strong></p>
+<p><code>filter(function, iterable)</code></p>
+<ul>
+<li>
+<p>The function can be ...</p></li></ul> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/filter.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/lambda.html"><h1>Lambda</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 25 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Lambdas</h2>
+<p><strong>First: What is 'lambda'?</strong></p>
+<p>In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/lambda.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/map.html"><h1>Map</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 25 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Maps</h2>
+<p><strong>First: What is 'map'?</strong></p>
+<p>In very short, <code>map</code> runs the given function over the given iterable.</p>
+<p>For example: We have a function that converts years to their Roman numeral version. And we have a list of years. We can run a <code>map(convert_year_to_roman_numeral, ['1999', '1776', '2015']</code>.  This will run ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/map.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/reduce.html"><h1>Reduce</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 25 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Reduce</h2>
+<p><strong>First: What is 'reduce'?</strong></p>
+<p>In very short, <code>reduce</code> applies the function of two arguments cumulatively to the items of iterable, from left to right, so as to <strong>reduce the iterable to a single value</strong>. 
+The left argument is the accumulated value and the right argument is the update value ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/reduce.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/binary-searches.html"><h1>Binary Searches</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 18 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Binary Search</h2>
+<p><strong>First: What is a 'binary search'?</strong></p>
+<p>The task: search through a sorted list to find the specified value.</p>
+<p>A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/binary-searches.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/linked-lists.html"><h1>Linked Lists</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sat 17 January 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Working with linked lists:</h2>
+<p><strong>First: What is a 'linked list'?</strong></p>
+<p>In very short, a linked list is comprised of <code>nodes</code> that are linked together to create a collection of nodes, in other words a list.  The nodes reside anywhere in the memory, not necessarily one right after the other as ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/linked-lists.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/sqlalchemy-and-relationship.html"><h1>SQLAlchemy and Relationship</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 22 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Moving along with SQLAlchemy and ... Relationships</h2>
+<p>Most of programming is not a simple flat table. Mostly, there are several tables, and there is something that links them - the tables have relationships.</p>
+<p>So going back to the small membership program from the <a href="link">previous post</a>, let's add a purchases table, where ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/sqlalchemy-and-relationship.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/basic-sqlalchemy.html"><h1>Basic SQLAlchemy</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sat 20 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>First, why SQLAlchemy is powerful.</h2>
+<p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/basic-sqlalchemy.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/recursions-and-lists-and-slices.html"><h1>Recursions and Lists and Slices</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Thu 18 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Recursions on lists .. with slices</h2>
+<p>Following up on my <a href="http://www.deekras.com/some-simple-recursive-functions.html">post about recursions</a>.  This time about recursive functions using a list. </p>
+<p>So here's where slices gets really useful.</p>
+<p>As a quick reminder about slices:
+Slices allow you to get a substring from a string or part of a list.
+The ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/recursions-and-lists-and-slices.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/some-simple-recursive-functions.html"><h1>Some simple recursive functions</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Wed 17 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>So how do recursions work?</h2>
+<p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
+<p>A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.</p>
+<p>The ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/some-simple-recursive-functions.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/decorators-with-args-kwargs.html"><h1>Decorators with *args, **kwargs</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 16 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Decorators: Decorators - with *args and **kwargs</h2>
+<p>This post builds on my previous one about <a href="http://www.deekras.com/working-with-decorators.html">Decorators</a>.</p>
+<p>So we have the decorator that 'prettifies' the date returned from the original function.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">pretty_date</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&#39;got the date: {} (before ...</span></pre></div> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/decorators-with-args-kwargs.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/working-with-decorators.html"><h1>Working with Decorators</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 15 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Decorators: a function within a function</h2>
+<p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them <strike>easy</strike> easier to understand.</p>
+<h3>First, when might decorators be used?</h3>
+<p>Decorators are used to extend a function. To give it more ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/working-with-decorators.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/working-with-threads.html"><h1>Working with Threads</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sun 14 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h3>Working with Threads</h3>
+<p>I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/working-with-threads.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"><h1>Using a weather api (forecast.io)</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Sat 13 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>Kinda cool to get the weather jsut the way I need it</h4>
+<p>Moving along in discussing some of features of the little application I wrote.  </p>
+<p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
+<p>The next step is to find the local ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/using-a-weather-api-forecastio.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"><h1>Finding Longitude & Latitude based on IP</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Fri 12 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
+<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"><h1>Get the public IP of user's computer</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Thu 11 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>Here's how to get the IP</h4>
+<p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
+<p>To do that, I'd find her local IP and then later use ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"><h1>My first Python project … and what I learned</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Wed 10 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/about-python.html">About  Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>My first project. And I learned tons.</h4>
+<p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/about-my-blog.html"><h1>About my Blog</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 09 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/about.html">About</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h4>So here's a little about me and this blog.</h4>
+<p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/about-my-blog.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="http://www.deekras.com/author/dee-kras.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

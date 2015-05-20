@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Recursions and Lists and Slices - DeeKras.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Recursions and Lists and Slices</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Thu 18 December 2014 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>Recursions on lists .. with slices</h2>
+<p>Following up on my <a href="http://www.deekras.com/some-simple-recursive-functions.html">post about recursions</a>.  This time about recursive functions using a list. </p>
+<p>So here's where slices gets really useful.</p>
+<p>As a quick reminder about slices:
+Slices allow you to get a substring from a string or part of a list.
+The syntax is string_or_list(start, end, step)
+<a href="https://docs.python.org/2/tutorial/introduction.html">More about slices</a></p>
+<p>Some examples</p>
+<p>word = 'abcdefghij'</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+<th>g</th>
+<th>h</th>
+<th>i</th>
+<th>j</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>*Notice that there are 10 positions here. Starting with 0.  ('a' is in the 1st position. 'j' is in the 10th position.)</strong></p>
+<table>
+<thead>
+<tr>
+<th>syntax</th>
+<th>result</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>word[0]</td>
+<td>a</td>
+<td># index 1st position</td>
+</tr>
+<tr>
+<td>word[-2]</td>
+<td>i</td>
+<td># index 2nd to last position</td>
+</tr>
+<tr>
+<td>word[7]</td>
+<td>h</td>
+<td># index 8th position</td>
+</tr>
+<tr>
+<td>word[7:9]</td>
+<td>hi</td>
+<td># slice FROM 8th position UNTIL 10th position (not inclusive) 8th &amp; 9th (indexes 7,8)</td>
+</tr>
+<tr>
+<td>word[:6]</td>
+<td>abcdef</td>
+<td># slice FROM BEGINNING until 7th position (indexes 0-6)</td>
+</tr>
+<tr>
+<td>word[5:]</td>
+<td>fghij</td>
+<td># slice FROM 6th position until END (indexes 5--&gt;)</td>
+</tr>
+<tr>
+<td>word[::3]</td>
+<td>adgj</td>
+<td># slice FROM BEGINNING until END, STEP 3  (indexes 0,3,6,9)</td>
+</tr>
+<tr>
+<td>word[3::2]</td>
+<td>dfhj</td>
+<td># slice from 4th position until end, STEP 2 (3,5,7,9)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>One way to remember how slices work is to think of the indices as pointing <strong>between characters</strong>, with the left edge of the first character numbered 0. Then the right edge of the last character of a string of n characters has index n.</p>
+</blockquote>
+<p>Ok, so that's about slices.  Here's why slices work so well with recursive.</p>
+<p>Let's work with <code>word = 'abcdefghij'</code>. </p>
+<ul>
+<li>
+<p>First time around <code>word[0]</code> is<code>'a'</code> and <code>word[1:]</code> is <code>'bcdefghij'</code>.</p>
+</li>
+<li>
+<p>Second time around - <code>word</code> is the previous <code>word[1:]</code>. So <code>word[0]</code> is <code>'b'</code> and <code>word[1:]</code> is now <code>'cdefghij'</code>. </p>
+</li>
+<li>
+<p>Keep looping until there there are no letters left in <code>word</code> and then <code>word[]==""</code>.</p>
+</li>
+</ul>
+<p>Let's see that in action.  Here's the code:</p>
+<div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="s">&#39;abcdefghij&#39;</span>
+
+<span class="k">def</span> <span class="nf">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;word: &quot;{}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;hit the base case. the end&#39;</span>
+        <span class="k">return</span> <span class="n">word</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;in the &#39;else statement&#39;&quot;</span>
+        <span class="k">print</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">print_letters</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So what happened here?</p>
+<ul>
+<li>
+<p>Each recursion starts off by printing what <code>word</code> looks like now.</p>
+</li>
+<li>
+<p>Then it checks for the 'base case', the exit of the loop.  Here it is   <code>if word == "":</code></p>
+</li>
+<li>
+<p>If not the 'base case', then the recursion happens.  Here, it is the same function with a new <code>word</code> - the <code>word[1:]</code> in the return.</p>
+</li>
+<li>
+<p>And it loops and loops until it hits the 'base case' and exits.</p>
+</li>
+</ul>
+<p>That was a simple examples using slices and strings. Here's another with lists.</p>
+<div class="highlight"><pre><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">numbers</span>
+    <span class="k">print</span> <span class="n">largest_so_far</span>
+
+    <span class="n">next_num</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">numbers</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="n">largest_so_far</span>
+
+    <span class="k">if</span> <span class="n">next_num</span> <span class="o">&gt;</span> <span class="n">largest_so_far</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">next_num</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">largest_so_far</span><span class="o">=</span><span class="n">largest_so_far</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So what's happening here. </p>
+<p>This function seeks to find the largest number in the list.  </p>
+<p><code>def max(numbers, largest_so_far=0):</code> : We define the function called <code>max</code> with 2 arguments:  <code>numbers</code>, which is the list of numbers from which to find the largest number. And <code>largest_so_far</code> in which we will hold onto the 'largest number found up to that point' and we start it with a default of <code>0</code>.</p>
+<p><code>ext_num = numbers[0]</code> : Which number in the list are we comparing? It is always the first number of the new list. See the 'else statement' where we make the make the new argument for the recursive function <code>numbers[1:]</code>. It is the previous list - but from the second position.</p>
+<p><code>if numbers == []:</code> : This is the base case, the exit of the loop. If there are no more numbers, then the <code>largest_so_far</code> is the largest number. The end!</p>
+<p><code>if next_num &gt; largest_so_far:</code> : if <code>next_num</code> is larger than <code>largest_so_far</code>, then ...</p>
+<p><code>return max(numbers[1:], largest_so_far=next_num)</code> : do this function again - with the arguments: <code>numbers[1:]</code> and <code>largest_so_far=next_num</code>.</p>
+<p><code>else:</code> : if <code>next_num</code> is not larger (is equal to or less than), then ...</p>
+<p><code>return max(numbers[1:], largest_so_far=largest_so_far)</code> : call the recrusive function again - like above, but leave the <code>largest_so_far</code> as is.</p>
+<p>And the loop continues until hits base case.</p>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
