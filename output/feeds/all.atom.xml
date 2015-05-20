@@ -1,5 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/all.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-01-28T00:00:00+00:00</updated><entry><title>Cool stuff with Strings</title><link href="http://www.deekras.com/cool-stuff-with-strings.html" rel="alternate"></link><updated>2015-01-28T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-28:cool-stuff-with-strings.html</id><summary type="html">&lt;h2&gt;Strings&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/all.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-05-15T00:00:00+00:00</updated><entry><title>Django: Validations during Form Processing</title><link href="http://www.deekras.com/django-validations-during-form-processing.html" rel="alternate"></link><updated>2015-05-15T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-05-15:django-validations-during-form-processing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This post is mostly based on the Django Docs on &lt;a href="https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-a-specific-field-attribute"&gt;Form and Field Validation&lt;/a&gt;. I reformatted the information in a way that feels easier to use.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;There are 3 types of cleaning methods that are run during form processing. These are normally executed when you call the &lt;code&gt;is_valid()&lt;/code&gt; method on a form.  (&lt;code&gt;is_valid()&lt;/code&gt; runs validation routines for all fields on the form. When this method is called, if all fields contain valid data, it will:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;return True&lt;/li&gt;
+&lt;li&gt;place the form’s data in its &lt;code&gt;cleaned_data&lt;/code&gt; attribute.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In general, any cleaning method can raise a &lt;code&gt;ValidationError&lt;/code&gt; if there is a problem with the data it is processing; it passes the relevant information to the &lt;code&gt;ValidationError&lt;/code&gt; constructor. &lt;/p&gt;
+&lt;h3&gt;Steps of validation&lt;/h3&gt;
+&lt;p&gt;The methods below are run in the order given, one field at a time. That is, for each field in the form (in the order they are declared in the form definition). Then the &lt;code&gt;form.clean()&lt;/code&gt;, or its override, is executed regardless if the previous methods have raised errors.
+If the &lt;code&gt;Field.clean()&lt;/code&gt; method raises a &lt;code&gt;ValidationError&lt;/code&gt;, its field-specific cleaning methods are not called. However, the cleaning methods for all remaining fields are still executed.&lt;/p&gt;
+&lt;p&gt;Normally, the &lt;code&gt;clean()&lt;/code&gt; method will be run and it will take care of the first three validations (&lt;code&gt;to_python()&lt;/code&gt;, &lt;code&gt;validate()&lt;/code&gt;, &lt;code&gt;run_validators()&lt;/code&gt;). But you can customize any of them, and when the clean() method is executed, it will run the customized method.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;to_python()&lt;/code&gt; method on a Field&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  It coerces the value to correct datatype and raises &lt;code&gt;ValidationError&lt;/code&gt; if that is not possible. This method accepts the raw value from the widget and returns the converted value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;EXAMPLE:&lt;/strong&gt;  a FloatField will turn the data into a Python float or raise a ValidationError.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS:&lt;/strong&gt; raises &lt;code&gt;ValidationError&lt;/code&gt; on any error&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; returns the converted value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. &lt;code&gt;validate()&lt;/code&gt; method on a Field&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  handles field-specific validation that is not suitable for a validator. It takes a value that has been coerced to correct datatype and raises ValidationError on any error. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS:&lt;/strong&gt; raises &lt;code&gt;ValidationError&lt;/code&gt; on any error&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; This method does not return anything and shouldn’t alter the value. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt; NOTES: &lt;/strong&gt; You should override it to handle validation logic that you can’t or don’t want to put in a validator.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. &lt;code&gt;run_validators()&lt;/code&gt; method on a Field&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  runs all of the field’s validators &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS:&lt;/strong&gt; aggregates all the errors into a single ValidationError.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NOTES:&lt;/strong&gt; You shouldn’t need to override this method.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. The &lt;code&gt;clean()&lt;/code&gt; method on a Field subclass.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  This is responsible for running &lt;code&gt;to_python&lt;/code&gt;, &lt;code&gt;validate&lt;/code&gt; and &lt;code&gt;run_validators&lt;/code&gt; in the correct order and propagating their errors. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS:&lt;/strong&gt; If, at any time, any of the methods raise &lt;code&gt;ValidationError&lt;/code&gt;, the validation stops and that error is raised. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; This method returns the clean data, which is then inserted into the &lt;code&gt;cleaned_data&lt;/code&gt; dictionary of the form.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;strong&gt;5. The &lt;code&gt;clean_&amp;lt;fieldname&amp;gt;()&lt;/code&gt; method in a form subclass&lt;/strong&gt;
+– where &lt;code&gt;&amp;lt;fieldname&amp;gt;&lt;/code&gt; is replaced with the name of the form field attribute.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  This method does any cleaning that is specific to that particular attribute, unrelated to the type of field that it is. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HOW TO USE:&lt;/strong&gt; This method is not passed any parameters. You will need to look up the value of the field in self.cleaned_data and remember that it will be a Python object at this point, not the original string submitted in the form (it will be in &lt;code&gt;cleaned_data&lt;/code&gt; because the general field &lt;code&gt;clean()&lt;/code&gt; method, above, has already cleaned the data once).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS: &lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; the cleaned value obtained from cleaned_data  -- regardless of whether it changed anything or not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;strong&gt;6. The Form subclass’s &lt;code&gt;clean()&lt;/code&gt; method. &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WHAT IT DOES:&lt;/strong&gt;  This method can perform any validation that requires access to multiple fields from the form at once. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;EXAMPLE:&lt;/strong&gt; Checks that if field A is supplied, field B must contain a valid email address and the like.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HOW TO USE:&lt;/strong&gt; Since the field validation methods have been run by the time &lt;code&gt;clean()&lt;/code&gt; is called, you also have access to the form’s errors attribute which contains all the errors raised by cleaning of individual fields.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HANDLES ERRORS:&lt;/strong&gt; Note that any errors raised by your &lt;code&gt;Form.clean()&lt;/code&gt; override will not be associated with any field in particular. They go into a special “field” (called &lt;code&gt;__all__&lt;/code&gt;), which you can access via the &lt;code&gt;non_field_errors()&lt;/code&gt; method if you need to. If you want to attach errors to a specific field in the form, you need to call &lt;code&gt;add_error()&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;RETURNS:&lt;/strong&gt; This method can return a completely different dictionary if it wishes, which will be used as the cleaned_data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NOTES:&lt;/strong&gt; Also note that there are special considerations when overriding the &lt;code&gt;clean()&lt;/code&gt; method of a ModelForm subclass.  (see the &lt;a href="https://docs.djangoproject.com/en/1.8/topics/forms/modelforms/#overriding-modelform-clean-method"&gt;ModelForm documentation&lt;/a&gt; for more information)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+&lt;h3&gt;Raising ValidationError examples:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Please submit flag&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt;  &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;simple&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;text: &lt;/span&gt;&lt;span class="si"&gt;%(flag)s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
+                            &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;no flag&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                            &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;flag&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;42&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;multiple errors&lt;/strong&gt;
+can be created as a list&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+        &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Error 1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;error1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Error 2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;error2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Writing Validators&lt;/h3&gt;
+&lt;p&gt;There are many builtin validators that match the field type (ex: EmailValidator 
+ for EmailField). Those validators can be customized too. (ex: &lt;code&gt;class EmailValidator([message=None, code=None, whitelist=None])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Here's a sample custom validator:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.exceptions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ValidationError&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;validate_even&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;ValidationError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; is not an even number&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, this validator can be used for any fields when setting up the models:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyModel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="n"&gt;even_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IntegerField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;validators&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;validate_even&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It can also be used for forms:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyForm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Form&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="n"&gt;even_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IntegerField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;validators&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;validate_even&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Validators will not be run automatically when you save a model, but if you are using a ModelForm, it will run your validators on any fields that are included in your form.&lt;/p&gt;</summary></entry><entry><title>Dictionaries</title><link href="http://www.deekras.com/dictionaries.html" rel="alternate"></link><updated>2015-01-31T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-31:dictionaries.html</id><summary type="html">&lt;h2&gt;Dictionaries&lt;/h2&gt;
+&lt;h3&gt;ways to create the dictionary&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;zipped&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;zipped&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;   &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt; 
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Cool stuff with Strings</title><link href="http://www.deekras.com/cool-stuff-with-strings.html" rel="alternate"></link><updated>2015-01-28T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-01-28:cool-stuff-with-strings.html</id><summary type="html">&lt;h2&gt;Strings&lt;/h2&gt;
 &lt;p&gt;Here I share some cool things you can do with strings.&lt;/p&gt;
 &lt;h3&gt;count(),  len(), max(), min(),&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ababababbbbababab&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
