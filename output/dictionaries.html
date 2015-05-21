@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Filter - DeeKras.com</title>
+    <title>Dictionaries - DeeKras.com</title>
     <meta name="description" content="">
     <meta name="author" content="Dee Kras">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,12 +54,12 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>Filter</h1>
+             <h1>Dictionaries</h1>
            </div>
       </div>
     <div class="row-fluid">
       <div class="span2">
-<p>Mon 26 January 2015 </p>
+<p>Sat 31 January 2015 </p>
 
 <p style="text-align: left;">
 Filed under <a href="./category/python.html">Python</a>
@@ -71,34 +71,35 @@ Filed under <a href="./category/python.html">Python</a>
       </div>
       
       <div class="span8">
-	<h2>Filter</h2>
-<p><strong>First: What is 'filter'?</strong></p>
-<p>In very short, <code>filter</code> runs the given function over the given iterable and only returns those that are true.</p>
-<p>For example: We have a function that returns only those items in the list that are integers.</p>
-<p><strong>The Syntax</strong></p>
-<p><code>filter(function, iterable)</code></p>
-<ul>
-<li>
-<p>The function can be a function or a lambda expression.</p>
-</li>
-<li>
-<p>The iterable can be any iterable - list, string, etc. </p>
-</li>
-</ul>
-<hr />
-<p><strong>A few examples:</strong></p>
-<p>All these examples use this list: <code>list = [1, 2, 3,"A", 11, "C", 12, 13, 14]</code></p>
-<p><strong>1. </strong>  <code>filter(lambda x: type(x) is str, list)</code></p>
-<p>['A', 'C']</p>
-<p><strong>2. </strong> <code>filter(lambda x: x&lt;10, list)</code></p>
-<p>[1, 2, 3]</p>
-<p><strong>3. </strong> <code>filter(lambda x: type(x) is int, list)</code></p>
-<p>[1, 2, 3, 11, 12, 13, 14]</p>
-<p><strong>4. </strong> <code>filter(lambda x: type(x) is int and int(x)%2==0, list)</code></p>
-<p>[2, 12, 14]</p>
-<p><strong>5. </strong> <code>filter(lambda x: x%2==0, filter(lambda x: type(x) is int, list))</code></p>
-<p>The inner filter returns all integers as a list. then the outer filter runs on that filtered list.</p>
-<p>[2, 12, 14]</p>
+	<h2>Dictionaries</h2>
+<h3>ways to create the dictionary</h3>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="p">[</span><span class="s">&#39;B&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">=</span> <span class="p">{}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">((</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">zipped</span><span class="p">:</span>
+<span class="o">...</span>   <span class="n">e</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
 	<hr />
       </div>
     </div>
