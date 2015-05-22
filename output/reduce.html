@@ -38,6 +38,8 @@
 	      <a href="./category/about-python.html ">About  Python</a>
 	    <li >
 	      <a href="./category/django.html ">Django</a>
+	    <li >
+	      <a href="./category/general.html ">General</a>
 	    <li  class="active" >
 	      <a href="./category/python.html ">Python</a>
 	</ul>
@@ -76,7 +78,7 @@ Filed under <a href="./category/python.html">Python</a>
 <p>In very short, <code>reduce</code> applies the function of two arguments cumulatively to the items of iterable, from left to right, so as to <strong>reduce the iterable to a single value</strong>. 
 The left argument is the accumulated value and the right argument is the update value from the iterable.</p>
 <p><strong>The Syntax</strong></p>
-<p><code>map(function, iterable)</code></p>
+<p><code>reduce(function, iterable)</code></p>
 <ul>
 <li>The function can be a function or a lambda expression.</li>
 <li>
@@ -87,7 +89,8 @@ The left argument is the accumulated value and the right argument is the update 
 </li>
 </ul>
 <hr />
-<p><strong>A few  examples:</strong></p>
+<p><strong>A few  examples:</strong>
+<em>These examples are for demonstration of <code>reduce</code>. There are simpler ways to accomplish the same thing that these examples do.</em></p>
 <p>For all these examples, we'll use this iterable: <code>list = [47, 11, 42, 102, 13]</code></p>
 <p><strong>1.</strong>  <code>reduce((lambda a, b: a if a &gt; b else b), list)</code></p>
 <p>This returns the greatest of all numbers in the list. </p>
