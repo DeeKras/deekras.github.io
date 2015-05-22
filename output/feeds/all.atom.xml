@@ -151,7 +151,7 @@
 &lt;p&gt;Defined the three functions.  &lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Created a dictionary &lt;code&gt;funcs_dict&lt;/code&gt; of the functions. The keywords - in this case a number - and the values are the functions.  * Notice that there are no quotes around the function names.*&lt;/p&gt;
+&lt;p&gt;Created a dictionary &lt;code&gt;funcs_dict&lt;/code&gt; of the functions. The keywords - in this case a number - and the values are the functions.  &lt;em&gt;it a Notice that there are no quotes around the function names.&lt;/em&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Then somehow (maybe an input from the user, or coming from another function, etc.) we got the value of &lt;code&gt;s&lt;/code&gt;. And some values for &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;.&lt;/p&gt;

@@ -57,208 +57,8 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../python-if-else-conditionals.html"><h1>Python: If-else Conditionals</h1></a>
+            <a href="../dictionaries.html"><h1>Dictionaries</h1></a>
         </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>Sat 16 May 2015 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
-</p>
-<p style="text-align: left;">
-</p>
-<p>
-</p>
-      </div>
-      <div class="article-content span8">
-	<p>The regular if-else statements syntax:</p>
-<div class="highlight"><pre><span class="k">if</span> <span class="n">condition1</span><span class="p">:</span>
-    <span class="n">to_do_if_condition1_istrue</span>
-<span class="k">elif</span> <span class="n">condition2</span><span class="p">:</span>
-    <span class="n">to_do_if_condition2_istrue</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">to_do_if_no_conditions_istrue</span>
-</pre></div>
-
-
-<hr>
-
-<h3>Some alternatives to the regular if-else statements.</h3>
-<p><strong>Inline if-else</strong></p>
-<p>Everything is on one line. </p>
-<div class="highlight"><pre><span class="n">expression_if_true</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="n">expression_if_false</span>
-</pre></div>
-
-
-<p>It looks at the condition.</p>
-<ul>
-<li>
-<p>If it is TRUE, then it does what is on the left.</p>
-</li>
-<li>
-<p>If it is FALSE, then it does what is on the right.</p>
-</li>
-</ul>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;a is larger&#39;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="s">&#39;a is smaller&#39;</span>
-<span class="s">&#39;a is smaller&#39;</span>
-</pre></div>
-
-
-<p>Another example:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-
-<span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-
-<span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span><span class="o">==</span><span class="s">&#39;add&#39;</span> <span class="k">else</span> <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-<span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="o">&gt;&gt;&gt;</span><span class="mi">10</span>
-
-<span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="o">&gt;&gt;&gt;-</span><span class="mi">2</span>
-</pre></div>
-
-
-<p><strong>Inline if-else EXPRESSION must always contain <code>else</code> clause.</strong> </p>
-<ul>
-<li>But if you want the variable to maintain its original value if the condition is false, then the expression_if_false can be the original variable. For example: <code>a = 1 if b else a</code>
-<hr>
-<strong>Inline also works for list comprehensions:</strong></li>
-</ul>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">f</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">else</span> <span class="s">&#39;not digit&#39;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">]]</span>
-<span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;not digit&#39;</span><span class="p">,</span> <span class="s">&#39;not digit&#39;</span><span class="p">,</span> <span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">]</span>
-</pre></div>
-
-
-<p>which is the same as:</p>
-<div class="highlight"><pre><span class="n">flist</span> <span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">flist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">flist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;not digit&#39;</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">flist</span>
-</pre></div>
-
-
-<p><hr>
-<strong>Nested ifs, as inline</strong></p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">student</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">status</span> <span class="o">=</span> <span class="s">&quot;S&quot;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;Freshie&#39;</span> <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s">&quot;F&quot;</span> <span class="k">else</span> <span class="s">&quot;not Freshie&quot;</span> <span class="k">if</span> <span class="n">student</span> <span class="o">==</span> <span class="bp">True</span> <span class="k">else</span> <span class="s">&#39;not a student&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;not Freshie&#39;</span>
-
-<span class="o">&gt;&gt;&gt;</span><span class="n">student</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">status</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;Freshie&#39;</span> <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s">&quot;F&quot;</span> <span class="k">else</span> <span class="s">&quot;not Freshie&quot;</span> <span class="k">if</span> <span class="n">student</span> <span class="o">==</span> <span class="bp">True</span> <span class="k">else</span> <span class="s">&#39;not a student&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;not a student&#39;</span>
-</pre></div>
-
-
-<p>How this one is evaluated:</p>
-<p>First, evaluates the RIGHTmost if statement.</p>
-<ul>
-<li>
-<p>If it is FALSE, it returns the expression_if_false.</p>
-</li>
-<li>
-<p>If it is TRUE, it looks to the right. In this case it encounters another if-else statement.</p>
-</li>
-</ul>
-<p>Then ,evaluates the next if-else.</p>
-<ul>
-<li>
-<p>If it is FALSE, it returns the expression_if_false.</p>
-</li>
-<li>
-<p>If it is TRUE, it looks to the right. In this case it encounters the expression_if_true. And stops there.</p>
-</li>
-</ul>
-<p><hr>
-<strong>Another way to accomplish nested ifs is with a dictionary</strong></p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;1&#39;</span><span class="p">:</span> <span class="n">add</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">:</span> <span class="n">multiply</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">:</span><span class="n">subtract</span><span class="p">}</span>
-
-
-<span class="o">&gt;&gt;&gt;</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;1&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span><span class="p">[</span><span class="n">s</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="mi">9</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span><span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">](</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="mi">9</span>
-</pre></div>
-
-
-<p>This is the same as doing this:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">do_func</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span><span class="p">:</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;2&#39;</span><span class="p">:</span>
-        <span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;3&#39;</span><span class="p">:</span>
-        <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-
-<span class="n">do_func</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-
-<p>So what is happening here?</p>
-<ul>
-<li>
-<p>Defined the three functions.  </p>
-</li>
-<li>
-<p>Created a dictionary <code>funcs_dict</code> of the functions. The keywords - in this case a number - and the values are the functions.  <em>it a Notice that there are no quotes around the function names.</em></p>
-</li>
-<li>
-<p>Then somehow (maybe an input from the user, or coming from another function, etc.) we got the value of <code>s</code>. And some values for <code>a</code> and <code>b</code>.</p>
-</li>
-</ul>
-<p>When we evaluate <code>funcs_dict[s](a,b)</code> is when the cool stuff happens.  </p>
-<ul>
-<li>
-<p>We go into the <code>funcs_dict</code> and pull the value of the given keyword. In this case, we get the value for the keyword <code>'1'</code>, which is the function <code>add</code>.</p>
-</li>
-<li>
-<p>And we add the parenthesis to make it a function call. In this case we also have some arguments to pass to the function - the <code>a</code> and <code>b</code>.  So what we are really doing is <code>add(a,b)</code> <br>
-   NOTE: We could have easily had a function that didn't use arguments, and then of course we wouldn't pass arguments; but it still needs the parentheses. It would look like this: <code>funcs_dict[s]()</code></p>
-</li>
-</ul>
-<p>This can happen because ... <strong>Python functions are first-class objects and can be stored as values in a dictionary.</strong>  Just remember not to enclose them in quotes.</p> 
-	<a class="btn btn-mini xsmall" href="../python-if-else-conditionals.html">
-          <i class="icon-comment"></i> Comment </a>
-	<hr />
-      </div>
-      
-    </div>
-    
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../dictionaries.html"><h1>Dictionaries</h1></a>
-      </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
@@ -272,7 +72,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>
 </p>
       </div>
-      <div class="summary span8">
+      <div class="article-content span8">
 	<h2>Dictionaries</h2>
 <h3>ways to create the dictionary</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
@@ -295,14 +95,20 @@ Filed under <a href="../category/python.html">Python</a>
 
 
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">=</span> <span class="p">{}</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip ...</span></pre></div> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">((</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">zipped</span><span class="p">:</span>
+<span class="o">...</span>   <span class="n">e</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
+<span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div> 
 	<a class="btn btn-mini xsmall" href="../dictionaries.html">
-          <i class="icon-plus-sign"></i> Read More </a>
+          <i class="icon-comment"></i> Comment </a>
 	<hr />
       </div>
       
     </div>
-      
+    
 
  
         
