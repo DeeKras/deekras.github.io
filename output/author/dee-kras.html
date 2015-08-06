@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
     <![endif]-->
 
 
     <!-- Le styles -->
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
-    <link href="../theme/font-awesome.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
 
 </head>
@@ -27,21 +27,21 @@
   <div class="container">
     <div class="row-fluid">
       <div class="span9">
-	<a href=".." class="brand">DeeKras.com</a>
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
       </div>
 
       <div class="span3" id="blog-nav">
 	<ul class="nav nav-pills pull-right">
 	    <li >
-	      <a href="../category/about.html ">About</a>
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
 	    <li >
-	      <a href="../category/about-python.html ">About  Python</a>
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
 	    <li >
-	      <a href="../category/django.html ">Django</a>
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
 	    <li >
-	      <a href="../category/general.html ">General</a>
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
 	    <li >
-	      <a href="../category/python.html ">Python</a>
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
 	</ul>
       </div>
     </div> <!-- End of fluid row-->
@@ -59,15 +59,15 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../if-else.html"><h1>Python: If-else Conditionals</h1></a>
+            <a href="http://www.deekras.com/formsets.html"><h1>Formsets</h1></a>
         </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
-<p>Mon 18 May 2015 </p>
+<p>Thu 06 August 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -75,6 +75,232 @@ Filed under <a href="../category/python.html">Python</a>
 </p>
       </div>
       <div class="article-content span8">
+	<h2>Working with Formsets in Django</h2>
+<p>This was the specs: <br />
+- Form that is populated with rows of students: their first and last names. And the teacher then has to enter her comments about each student. Row by row, rather than having a separate form for each student. (Imagine an excel spreadsheet).</p>
+<p>The solution was to use formsets; essentially each record is its own form.</p>
+<h3>To setup the formset:</h3>
+<p><strong>In models:</strong></p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">firstname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">lastname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+</pre></div>
+
+
+<p><em>This is a standard Model.</em></p>
+<p><strong>In views:</strong></p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.forms.models</span> <span class="kn">import</span> <span class="n">modelformset_factory</span>
+
+<span class="n">StudentFormset</span> <span class="o">=</span> <span class="n">modelformset_factory</span><span class="p">(</span>
+      <span class="n">Student</span><span class="p">,</span> 
+        <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="s">&#39;lastname&#39;</span><span class="p">,</span> <span class="s">&#39;firstname&#39;</span><span class="p">,</span> <span class="s">&#39;comments&#39;</span><span class="p">),</span>
+        <span class="n">extra</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">student_list</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;lastname&#39;</span><span class="p">,</span> <span class="s">&#39;firstname&#39;</span><span class="p">)</span>
+
+<span class="n">student_formset</span> <span class="o">=</span> <span class="n">StudentFormset</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span> <span class="n">student_list</span><span class="p">)</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;formset&#39;</span><span class="p">:</span> <span class="n">student_formset</span> <span class="p">}</span>
+<span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/comments.html&#39;</span>
+<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>First, import the modelformset_factory    </p>
+</li>
+<li>
+<p>Then, I create my StudentFormset. </p>
+<ul>
+<li>The basic syntax is:<code>modelformset_factory(model, fields=(a tuple of fields from that model))</code>. There are many more arguments you might use – like <code>widgets</code>, <code>labels</code>, <code>error_messages</code>. See the <a href="https://docs.djangoproject.com/en/1.8/ref/forms/models/">docs</a>)</li>
+<li><code>fields:</code> I am basing this formset on the Student model, and listing exactly which fields from that model I want. </li>
+<li><code>extra:</code> how many blank forms I want. In this case, I don't want any, so it is <code>0</code>.  </li>
+</ul>
+</li>
+<li>
+<p>A formset can have several blank forms (you can determine how many). Or it can be prepopulated. In this case I needed a specific queryset. Hence I did my <code>student_list</code> queryset which I will soon pass to the formset (I could have also written it directly into the instance of the StudentFormset - below)  </p>
+</li>
+<li>
+<p>I create an instance of the StudentFormset with the student_list queryset.  </p>
+</li>
+<li>
+<p>I add the formset to the context to be rendered below.</p>
+</li>
+</ol>
+<p><strong>the <code>students/comments.html</code> template</strong></p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{{</span> <span class="n">formset</span><span class="o">.</span><span class="n">management_form</span> <span class="p">}}</span>
+    <span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="n">formset</span> <span class="o">%</span><span class="p">}</span>
+         <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+             <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">lastname</span><span class="p">}}</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">firstname</span> <span class="p">}}</span>  <span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">id</span><span class="p">}}</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+             <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">comments</span><span class="p">}}</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+       <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">button</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;save&quot;</span> <span class="o">&gt;</span><span class="n">Save</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>That line of the <code>management_form</code> is super important. It holds vital data about the formset – how many forms were actually created, etc.
+    – the prefix (<code>formset</code>) must match the arguments used in the context.
+    The rest is basic template with a <code>for</code> statement.</p>
+<h3>To save the data on the formset:</h3>
+<p><strong>In the views:</strong></p>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+    <span class="n">formset</span> <span class="o">=</span> <span class="n">StudentFormset</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formset</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">formset</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This is the most basic way to save. Normally, we might do other validations, etc.
+    - Create an instance of the StudentFormset with the request.POST.
+    - Make sure the data in all the forms in the formset it is valid. And then save.
+    If anything is not valid, it will not save the entire formset. And produce a dictionary of errors.</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/formsets.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/creating-forms-to-add-anor-edit.html"><h1>Creating forms to Add an/or Edit</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 21 July 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>CBV or FBV?</h2>
+<p><strong>Class Based Views</strong> or <strong>Function Based Views</strong>?  Both can accomplish the pretty much the same things, so what is the difference?</p>
+<p>Instead of going into the pros and cons of each, I'll provide a few links on the bottom that other bloggers have so eloquently written ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/creating-forms-to-add-anor-edit.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/namedtuple.html"><h1>Namedtuple</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Fri 29 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>namedtuple</h2>
+<p>I recently watched the most wonderful talk by  <a href="https://www.youtube.com/watch?v=wf-BqAjZb8M">Raymond Hettinger at Pycon 2015 about Pep8</a>. Amongst many interesting and important points, he spoke about <code>namedtuple</code> that I believe he wrote. (It's toward the end of the talk at ~47:00). He posits that the namedtuple is one of ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/namedtuple.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/timeit.html"><h1>Timeit</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Thu 28 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Timeit</h2>
+<p>A great library for testing the time of short code (a few short lines).</p>
+<p><strong>The syntax:</strong></p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">timeit</span>
+<span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">timer</span><span class="o">=&lt;</span><span class="n">default</span> <span class="n">timer</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+
+<span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">timer</span><span class="o">=&lt;</span><span class="n">default</span> <span class="n">timer</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre>- `stmt`: this is the statement that is ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/timeit.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/if-else.html"><h1>Python: If-else Conditionals</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 18 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
 	<p>The regular if-else statements syntax:</p>
 <div class="highlight"><pre><span class="k">if</span> <span class="n">condition1</span><span class="p">:</span>
     <span class="n">to_do_if_condition1_istrue</span>
@@ -100,185 +326,8 @@ Filed under <a href="../category/python.html">Python</a>
 <p>If it is TRUE, then it does what is on the left.</p>
 </li>
 <li>
-<p>If it is FALSE, then it does what is on the right.</p>
-</li>
-</ul>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s">&#39;a is larger&#39;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="s">&#39;a is smaller&#39;</span>
-<span class="s">&#39;a is smaller&#39;</span>
-</pre></div>
-
-
-<p>Another example:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-
-<span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-
-<span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span><span class="o">==</span><span class="s">&#39;add&#39;</span> <span class="k">else</span> <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-<span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;add&#39;</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="o">&gt;&gt;&gt;</span><span class="mi">10</span>
-
-<span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="o">&gt;&gt;&gt;-</span><span class="mi">2</span>
-</pre></div>
-
-
-<p><strong>Inline if-else EXPRESSION must always contain <code>else</code> clause.</strong> </p>
-<ul>
-<li>But if you want the variable to maintain its original value if the condition is false, then the expression_if_false can be the original variable. For example: <code>a = 1 if b else a</code>
-<hr>
-<strong>Inline also works for list comprehensions:</strong></li>
-</ul>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">f</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">else</span> <span class="s">&#39;not digit&#39;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">]]</span>
-<span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;not digit&#39;</span><span class="p">,</span> <span class="s">&#39;not digit&#39;</span><span class="p">,</span> <span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="s">&#39;9&#39;</span><span class="p">]</span>
-</pre></div>
-
-
-<p>which is the same as:</p>
-<div class="highlight"><pre><span class="n">flist</span> <span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">flist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">flist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;not digit&#39;</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">flist</span>
-</pre></div>
-
-
-<p><hr>
-<strong>Nested ifs, as inline</strong></p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">student</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">status</span> <span class="o">=</span> <span class="s">&quot;S&quot;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;Freshie&#39;</span> <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s">&quot;F&quot;</span> <span class="k">else</span> <span class="s">&quot;not Freshie&quot;</span> <span class="k">if</span> <span class="n">student</span> <span class="o">==</span> <span class="bp">True</span> <span class="k">else</span> <span class="s">&#39;not a student&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;not Freshie&#39;</span>
-
-<span class="o">&gt;&gt;&gt;</span><span class="n">student</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">status</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;Freshie&#39;</span> <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s">&quot;F&quot;</span> <span class="k">else</span> <span class="s">&quot;not Freshie&quot;</span> <span class="k">if</span> <span class="n">student</span> <span class="o">==</span> <span class="bp">True</span> <span class="k">else</span> <span class="s">&#39;not a student&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="s">&#39;not a student&#39;</span>
-</pre></div>
-
-
-<p>How this one is evaluated:</p>
-<p>First, evaluates the RIGHTmost if statement.</p>
-<ul>
-<li>
-<p>If it is FALSE, it returns the expression_if_false.</p>
-</li>
-<li>
-<p>If it is TRUE, it looks to the right. In this case it encounters another if-else statement.</p>
-</li>
-</ul>
-<p>Then ,evaluates the next if-else.</p>
-<ul>
-<li>
-<p>If it is FALSE, it returns the expression_if_false.</p>
-</li>
-<li>
-<p>If it is TRUE, it looks to the right. In this case it encounters the expression_if_true. And stops there.</p>
-</li>
-</ul>
-<p><hr>
-<strong>Another way to accomplish nested ifs is with a dictionary</strong></p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-<span class="o">...</span> 
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;1&#39;</span><span class="p">:</span> <span class="n">add</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">:</span> <span class="n">multiply</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">:</span><span class="n">subtract</span><span class="p">}</span>
-
-
-<span class="o">&gt;&gt;&gt;</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;1&#39;</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span><span class="p">[</span><span class="n">s</span><span class="p">](</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="mi">9</span>
-<span class="o">&gt;&gt;&gt;</span><span class="n">funcs_dict</span><span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">](</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="mi">9</span>
-</pre></div>
-
-
-<p>This is the same as doing this:</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">do_func</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span><span class="p">:</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;2&#39;</span><span class="p">:</span>
-        <span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="s">&#39;3&#39;</span><span class="p">:</span>
-        <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-
-<span class="n">do_func</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-
-<p>So what is happening here?</p>
-<ul>
-<li>
-<p>Defined the three functions.  </p>
-</li>
-<li>
-<p>Created a dictionary <code>funcs_dict</code> of the functions. The keywords - in this case a number - and the values are the functions.  <em>it a Notice that there are no quotes around the function names.</em></p>
-</li>
-<li>
-<p>Then somehow (maybe an input from the user, or coming from another function, etc.) we got the value of <code>s</code>. And some values for <code>a</code> and <code>b</code>.</p>
-</li>
-</ul>
-<p>When we evaluate <code>funcs_dict[s](a,b)</code> is when the cool stuff happens.  </p>
-<ul>
-<li>
-<p>We go into the <code>funcs_dict</code> and pull the value of the given keyword. In this case, we get the value for the keyword <code>'1'</code>, which is the function <code>add</code>.</p>
-</li>
-<li>
-<p>And we add the parenthesis to make it a function call. In this case we also have some arguments to pass to the function - the <code>a</code> and <code>b</code>.  So what we are really doing is <code>add(a,b)</code> <br>
-   NOTE: We could have easily had a function that didn't use arguments, and then of course we wouldn't pass arguments; but it still needs the parentheses. It would look like this: <code>funcs_dict[s]()</code></p>
-</li>
-</ul>
-<p>This can happen because ... <strong>Python functions are first-class objects and can be stored as values in a dictionary.</strong>  Just remember not to enclose them in quotes.</p> 
-	<a class="btn btn-mini xsmall" href="../if-else.html">
-          <i class="icon-comment"></i> Comment </a>
-	<hr />
-      </div>
-      
-    </div>
-    
-
- 
-        
-
-
-
-    <div class='row-fluid'>
-      <div class='article-title span9'> 
-        <a href="../django-validations-during-form-processing.html"><h1>Django: Validations during Form Processing</h1></a>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span2">
-<p>Fri 15 May 2015 </p>
-
-<p style="text-align: left;">
-Filed under <a href="../category/django.html">Django</a>
-</p>
-<p style="text-align: left;">
-</p>
-<p>
-</p>
-      </div>
-      <div class="summary span8">
-	<p><em>This post is mostly based on the Django Docs on <a href="https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-a-specific-field-attribute">Form and Field Validation</a>. I reformatted the information in a way that feels easier to use.</em></p>
-<p><br></p>
-<p>There are 3 types of cleaning methods that are run during form processing. These are normally executed when you call the <code>is_valid()</code> method on ...</p> 
-	<a class="btn btn-mini xsmall" href="../django-validations-during-form-processing.html">
+<p>If ...</p></li></ul> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/if-else.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -293,7 +342,41 @@ Filed under <a href="../category/django.html">Django</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../dictionaries.html"><h1>Dictionaries</h1></a>
+        <a href="http://www.deekras.com/django-validations-during-form-processing.html"><h1>Django: Validations during Form Processing</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Fri 15 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><em>This post is mostly based on the Django Docs on <a href="https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-a-specific-field-attribute">Form and Field Validation</a>. I reformatted the information in a way that feels easier to use.</em></p>
+<p><br></p>
+<p>There are 3 types of cleaning methods that are run during form processing. These are normally executed when you call the <code>is_valid()</code> method on ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/django-validations-during-form-processing.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/dictionaries.html"><h1>Dictionaries</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -301,7 +384,7 @@ Filed under <a href="../category/django.html">Django</a>
 <p>Sat 31 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -332,7 +415,7 @@ Filed under <a href="../category/python.html">Python</a>
 
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">=</span> <span class="p">{}</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip ...</span></pre></div> 
-	<a class="btn btn-mini xsmall" href="../dictionaries.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/dictionaries.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -347,7 +430,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../cool-stuff-with-strings.html"><h1>Cool stuff with Strings</h1></a>
+        <a href="http://www.deekras.com/cool-stuff-with-strings.html"><h1>Cool stuff with Strings</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -355,7 +438,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Wed 28 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -388,7 +471,7 @@ Filed under <a href="../category/python.html">Python</a>
 
 
 <p><strong>Syntax</strong> str ...</p> 
-	<a class="btn btn-mini xsmall" href="../cool-stuff-with-strings.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/cool-stuff-with-strings.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -403,7 +486,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../advanced-markdown.html"><h1>Advanced Markdown</h1></a>
+        <a href="http://www.deekras.com/advanced-markdown.html"><h1>Advanced Markdown</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -411,7 +494,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Tue 27 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/general.html">General</a>
+Filed under <a href="http://www.deekras.com/category/general.html">General</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -419,29 +502,11 @@ Filed under <a href="../category/general.html">General</a>
 </p>
       </div>
       <div class="summary span8">
-	<h2>Advanced markdown</h2>
-<p><strong>Escapes</strong></p>
-<p>Markdown provides backslash (\) escapes for the following characters:</p>
-<p>\   backslash
-`   backtick
-*   asterisk
-_   underscore
-{}  curly braces
-[]  square brackets
-()  parentheses</p>
-<h1>hash mark</h1>
-<ul>
-<li>plus sign</li>
-<li>minus sign (hyphen)
-.   dot
-!   exclamation mark</li>
-</ul>
-<p>There are other characters that backslash cannot escape. For those you can use the ascii
-|   "&#124;"
-^   "&#94;"</p>
-<p>For example: <br />
-    - <strong>Pipe (|)</strong>  If ...</p> 
-	<a class="btn btn-mini xsmall" href="../advanced-markdown.html">
+	<h3>Advanced markdown</h3>
+<p>~~Scratch this.~~</p>
+<p>Of course, there is the basic markdown docs like this one from <a href="https://help.github.com/articles/markdown-basics/">GitHub</a>. Or this <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">one</a> or this <a href="http://warpedvisions.org/projects/markdown-cheat-sheet/">one</a>.<br />
+But as I writing my posts for this blog or for reddit, I encountered challenges that those basic docs didn't address. So I googled further and ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/advanced-markdown.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -456,7 +521,7 @@ _   underscore
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../sets.html"><h1>Sets</h1></a>
+        <a href="http://www.deekras.com/sets.html"><h1>Sets</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -464,7 +529,7 @@ _   underscore
 <p>Tue 27 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -476,7 +541,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p><strong>First: What is a 'set'?</strong></p>
 <p>In very short, a <code>set</code> is a collection with no duplicates.</p>
 <p>For example: We have a list of names: <code>names = ['Alice', 'Bill', 'Jane', 'Jack', 'Bill']</code>. <code>Bill</code> is in that list twice. When we call <code>set(names)</code>, we will get back that list with <code>Bill ...</code></p> 
-	<a class="btn btn-mini xsmall" href="../sets.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/sets.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -491,7 +556,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../filter.html"><h1>Filter</h1></a>
+        <a href="http://www.deekras.com/filter.html"><h1>Filter</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -499,7 +564,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Mon 26 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -516,7 +581,7 @@ Filed under <a href="../category/python.html">Python</a>
 <ul>
 <li>
 <p>The function can be ...</p></li></ul> 
-	<a class="btn btn-mini xsmall" href="../filter.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/filter.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -531,7 +596,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../lambda.html"><h1>Lambda</h1></a>
+        <a href="http://www.deekras.com/lambda.html"><h1>Lambda</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -539,7 +604,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sun 25 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -550,7 +615,7 @@ Filed under <a href="../category/python.html">Python</a>
 	<h2>Lambdas</h2>
 <p><strong>First: What is 'lambda'?</strong></p>
 <p>In very short, lambda is a one-line, mini function.  So we just include the short code directly into that line of code instead of writing out a separate function for it.  If that mini function would be used in several places in the code, then ...</p> 
-	<a class="btn btn-mini xsmall" href="../lambda.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/lambda.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -565,7 +630,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../map.html"><h1>Map</h1></a>
+        <a href="http://www.deekras.com/map.html"><h1>Map</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -573,7 +638,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sun 25 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -585,7 +650,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p><strong>First: What is 'map'?</strong></p>
 <p>In very short, <code>map</code> runs the given function over the given iterable.</p>
 <p>For example: We have a function that converts years to their Roman numeral version. And we have a list of years. We can run a <code>map(convert_year_to_roman_numeral, ['1999', '1776', '2015']</code>.  This will run ...</p> 
-	<a class="btn btn-mini xsmall" href="../map.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/map.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -600,7 +665,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../reduce.html"><h1>Reduce</h1></a>
+        <a href="http://www.deekras.com/reduce.html"><h1>Reduce</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -608,7 +673,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sun 25 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -620,7 +685,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p><strong>First: What is 'reduce'?</strong></p>
 <p>In very short, <code>reduce</code> applies the function of two arguments cumulatively to the items of iterable, from left to right, so as to <strong>reduce the iterable to a single value</strong>. 
 The left argument is the accumulated value and the right argument is the update value ...</p> 
-	<a class="btn btn-mini xsmall" href="../reduce.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/reduce.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -635,7 +700,7 @@ The left argument is the accumulated value and the right argument is the update 
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../binary-searches.html"><h1>Binary Searches</h1></a>
+        <a href="http://www.deekras.com/binary-searches.html"><h1>Binary Searches</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -643,7 +708,7 @@ The left argument is the accumulated value and the right argument is the update 
 <p>Sun 18 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -655,7 +720,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p><strong>First: What is a 'binary search'?</strong></p>
 <p>The task: search through a sorted list to find the specified value.</p>
 <p>A linear search will start at the beginning and iterate through the list until it finds it. Depending on the size of the list and where in the list the ...</p> 
-	<a class="btn btn-mini xsmall" href="../binary-searches.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/binary-searches.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -670,7 +735,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../linked-lists.html"><h1>Linked Lists</h1></a>
+        <a href="http://www.deekras.com/linked-lists.html"><h1>Linked Lists</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -678,7 +743,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sat 17 January 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -689,7 +754,7 @@ Filed under <a href="../category/python.html">Python</a>
 	<h2>Working with linked lists:</h2>
 <p><strong>First: What is a 'linked list'?</strong></p>
 <p>In very short, a linked list is comprised of <code>nodes</code> that are linked together to create a collection of nodes, in other words a list.  The nodes reside anywhere in the memory, not necessarily one right after the other as ...</p> 
-	<a class="btn btn-mini xsmall" href="../linked-lists.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/linked-lists.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -704,7 +769,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../sqlalchemy-and-relationship.html"><h1>SQLAlchemy and Relationship</h1></a>
+        <a href="http://www.deekras.com/sqlalchemy-and-relationship.html"><h1>SQLAlchemy and Relationship</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -712,7 +777,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Mon 22 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -723,7 +788,7 @@ Filed under <a href="../category/python.html">Python</a>
 	<h2>Moving along with SQLAlchemy and ... Relationships</h2>
 <p>Most of programming is not a simple flat table. Mostly, there are several tables, and there is something that links them - the tables have relationships.</p>
 <p>So going back to the small membership program from the <a href="link">previous post</a>, let's add a purchases table, where ...</p> 
-	<a class="btn btn-mini xsmall" href="../sqlalchemy-and-relationship.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/sqlalchemy-and-relationship.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -738,7 +803,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../basic-sqlalchemy.html"><h1>Basic SQLAlchemy</h1></a>
+        <a href="http://www.deekras.com/basic-sqlalchemy.html"><h1>Basic SQLAlchemy</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -746,7 +811,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sat 20 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -756,7 +821,7 @@ Filed under <a href="../category/python.html">Python</a>
       <div class="summary span8">
 	<h2>First, why SQLAlchemy is powerful.</h2>
 <p>There's a whole set of features of SQLAlchemy listed in their <a href="http://www.sqlalchemy.org/features.html">docs</a>. I have found that using SQLAlchemy instead of SQLlite has made it much easier to access the data, since data is saved as a class. And writing methods and queries on that ...</p> 
-	<a class="btn btn-mini xsmall" href="../basic-sqlalchemy.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/basic-sqlalchemy.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -771,7 +836,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../recursions-and-lists-and-slices.html"><h1>Recursions and Lists and Slices</h1></a>
+        <a href="http://www.deekras.com/recursions-and-lists-and-slices.html"><h1>Recursions and Lists and Slices</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -779,7 +844,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Thu 18 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -793,7 +858,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>As a quick reminder about slices:
 Slices allow you to get a substring from a string or part of a list.
 The ...</p> 
-	<a class="btn btn-mini xsmall" href="../recursions-and-lists-and-slices.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/recursions-and-lists-and-slices.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -808,7 +873,7 @@ The ...</p>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../some-simple-recursive-functions.html"><h1>Some simple recursive functions</h1></a>
+        <a href="http://www.deekras.com/some-simple-recursive-functions.html"><h1>Some simple recursive functions</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -816,7 +881,7 @@ The ...</p>
 <p>Wed 17 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -828,7 +893,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>I hear so much about recursions. They're supposedly in all interview questions.  So here's my attempt at trying to make them easy to understand.</p>
 <p>A recursive function is a function that calls itself. I'll throw in a simple example. The factorial.</p>
 <p>The ...</p> 
-	<a class="btn btn-mini xsmall" href="../some-simple-recursive-functions.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/some-simple-recursive-functions.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -843,7 +908,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../decorators-with-args-kwargs.html"><h1>Decorators with *args, **kwargs</h1></a>
+        <a href="http://www.deekras.com/decorators-with-args-kwargs.html"><h1>Decorators with *args, **kwargs</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -851,7 +916,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Tue 16 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -867,7 +932,7 @@ Filed under <a href="../category/python.html">Python</a>
         <span class="k">print</span> <span class="s">&#39;getting the date from function: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="n">date</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">&#39;got the date: {} (before ...</span></pre></div> 
-	<a class="btn btn-mini xsmall" href="../decorators-with-args-kwargs.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/decorators-with-args-kwargs.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -882,7 +947,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../working-with-decorators.html"><h1>Working with Decorators</h1></a>
+        <a href="http://www.deekras.com/working-with-decorators.html"><h1>Working with Decorators</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -890,7 +955,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Mon 15 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -902,7 +967,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Now a post about decorators.  Decorators are quite useful - when you learn how to use them.  Here's my attempt at making them <strike>easy</strike> easier to understand.</p>
 <h3>First, when might decorators be used?</h3>
 <p>Decorators are used to extend a function. To give it more ...</p> 
-	<a class="btn btn-mini xsmall" href="../working-with-decorators.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/working-with-decorators.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -917,7 +982,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../working-with-threads.html"><h1>Working with Threads</h1></a>
+        <a href="http://www.deekras.com/working-with-threads.html"><h1>Working with Threads</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -925,7 +990,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sun 14 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -935,7 +1000,7 @@ Filed under <a href="../category/python.html">Python</a>
       <div class="summary span8">
 	<h3>Working with Threads</h3>
 <p>I've been encouraged to learn sockets and threading. It's been fun. With some frustrating moments when the book I am using and the docs are just not clear enough - for me.  So here I present it in a way that would have worked for me ...</p> 
-	<a class="btn btn-mini xsmall" href="../working-with-threads.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/working-with-threads.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -950,7 +1015,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../using-a-weather-api-forecastio.html"><h1>Using a weather api (forecast.io)</h1></a>
+        <a href="http://www.deekras.com/using-a-weather-api-forecastio.html"><h1>Using a weather api (forecast.io)</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -958,7 +1023,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Sat 13 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -970,7 +1035,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Moving along in discussing some of features of the little application I wrote.  </p>
 <p>I already <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">got the IP</a> and then <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">found the longitude and latitude coordinates based on that IP</a>.</p>
 <p>The next step is to find the local ...</p> 
-	<a class="btn btn-mini xsmall" href="../using-a-weather-api-forecastio.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/using-a-weather-api-forecastio.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -985,7 +1050,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../finding-longitude-latitude-based-on-ip.html"><h1>Finding Longitude & Latitude based on IP</h1></a>
+        <a href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html"><h1>Finding Longitude & Latitude based on IP</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -993,7 +1058,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Fri 12 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -1003,7 +1068,7 @@ Filed under <a href="../category/python.html">Python</a>
       <div class="summary span8">
 	<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
 <p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find ...</p> 
-	<a class="btn btn-mini xsmall" href="../finding-longitude-latitude-based-on-ip.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/finding-longitude-latitude-based-on-ip.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -1018,7 +1083,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../get-the-public-ip-of-users-computer.html"><h1>Get the public IP of user's computer</h1></a>
+        <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html"><h1>Get the public IP of user's computer</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -1026,7 +1091,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Thu 11 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -1037,7 +1102,7 @@ Filed under <a href="../category/python.html">Python</a>
 	<h4>Here's how to get the IP</h4>
 <p>For a <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a>, I needed to get the longitude and latitude of where the user was at the time.  And from that data, I could get the local weather.</p>
 <p>To do that, I'd find her local IP and then later use ...</p> 
-	<a class="btn btn-mini xsmall" href="../get-the-public-ip-of-users-computer.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -1052,7 +1117,7 @@ Filed under <a href="../category/python.html">Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../my-first-python-project-and-what-i-learned.html"><h1>My first Python project … and what I learned</h1></a>
+        <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html"><h1>My first Python project … and what I learned</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -1060,7 +1125,7 @@ Filed under <a href="../category/python.html">Python</a>
 <p>Wed 10 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/about-python.html">About  Python</a>
+Filed under <a href="http://www.deekras.com/category/about-python.html">About  Python</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -1070,7 +1135,7 @@ Filed under <a href="../category/about-python.html">About  Python</a>
       <div class="summary span8">
 	<h4>My first project. And I learned tons.</h4>
 <p>Been working my way through  <a href="http://books.google.com/books/about/Core_Python_Programming.html?id=CUIgM3e-I5gC">Core Python Programming</a>. And having lots of  fun.  Learning tons, quickly. Strings, functions, classes, loops, comprehensions, iterables, tuples, and the many attributes and properties of each. And also the libraries.  What cool stuff I could do. When I ...</p> 
-	<a class="btn btn-mini xsmall" href="../my-first-python-project-and-what-i-learned.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -1085,7 +1150,7 @@ Filed under <a href="../category/about-python.html">About  Python</a>
 
     <div class='row-fluid'>
       <div class='article-title span9'> 
-        <a href="../about-my-blog.html"><h1>About my Blog</h1></a>
+        <a href="http://www.deekras.com/about-my-blog.html"><h1>About my Blog</h1></a>
       </div>
     </div>
     <div class="row-fluid">
@@ -1093,7 +1158,7 @@ Filed under <a href="../category/about-python.html">About  Python</a>
 <p>Tue 09 December 2014 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/about.html">About</a>
+Filed under <a href="http://www.deekras.com/category/about.html">About</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -1103,7 +1168,7 @@ Filed under <a href="../category/about.html">About</a>
       <div class="summary span8">
 	<h4>So here's a little about me and this blog.</h4>
 <p>I'm fairly new to formal programming. In the past, I had dabbled in Access and Excel and played with VBA and SQL.  I always loved the logic of it.  But recently, I decided to jump fully into programming. I ...</p> 
-	<a class="btn btn-mini xsmall" href="../about-my-blog.html">
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/about-my-blog.html">
           <i class="icon-plus-sign"></i> Read More </a>
 	<hr />
       </div>
@@ -1114,7 +1179,7 @@ Filed under <a href="../category/about.html">About</a>
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../author/dee-kras.html">1</a></li>
+    <li class="active"><a href="http://www.deekras.com/author/dee-kras.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
@@ -1157,11 +1222,11 @@ Filed under <a href="../category/about.html">About</a>
             <li class="nav-header"> 
               Site
             </li>
-            <li><a href=".."><i class="icon-home" style="color: #1f334b">
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
                 </i>Home</a></li>
-            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
                 </i>Archives</a></li>
-	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
                 </i>Tags</a></li>
 	    
 	  </ul>
@@ -1171,7 +1236,7 @@ Filed under <a href="../category/about.html">About</a>
       </div> <!--end of fluid row-->
     </div> <!--end of blog-footer-->
     <hr />
-    <p align="center"><a href="..">DeeKras.com</a>
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
       &copy; Dee Kras
     Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
         <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 

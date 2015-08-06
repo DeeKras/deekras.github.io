@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
     <![endif]-->
 
 
     <!-- Le styles -->
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
-    <link href="../theme/font-awesome.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
 
 </head>
@@ -27,21 +27,21 @@
   <div class="container">
     <div class="row-fluid">
       <div class="span9">
-	<a href=".." class="brand">DeeKras.com</a>
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
       </div>
 
       <div class="span3" id="blog-nav">
 	<ul class="nav nav-pills pull-right">
 	    <li >
-	      <a href="../category/about.html ">About</a>
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
 	    <li >
-	      <a href="../category/about-python.html ">About  Python</a>
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
 	    <li  class="active" >
-	      <a href="../category/django.html ">Django</a>
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
 	    <li >
-	      <a href="../category/general.html ">General</a>
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
 	    <li >
-	      <a href="../category/python.html ">Python</a>
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
 	</ul>
       </div>
     </div> <!-- End of fluid row-->
@@ -59,15 +59,15 @@
 
     <div class='row-fluid''>
         <div class="article-title span9">
-            <a href="../django-validations-during-form-processing.html"><h1>Django: Validations during Form Processing</h1></a>
+            <a href="http://www.deekras.com/formsets.html"><h1>Formsets</h1></a>
         </div>
     </div>
     <div class="row-fluid">
       <div class="span2">
-<p>Fri 15 May 2015 </p>
+<p>Thu 06 August 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="../category/django.html">Django</a>
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -75,175 +75,172 @@ Filed under <a href="../category/django.html">Django</a>
 </p>
       </div>
       <div class="article-content span8">
-	<p><em>This post is mostly based on the Django Docs on <a href="https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-a-specific-field-attribute">Form and Field Validation</a>. I reformatted the information in a way that feels easier to use.</em></p>
-<p><br></p>
-<p>There are 3 types of cleaning methods that are run during form processing. These are normally executed when you call the <code>is_valid()</code> method on a form.  (<code>is_valid()</code> runs validation routines for all fields on the form. When this method is called, if all fields contain valid data, it will:</p>
-<ul>
-<li>return True</li>
-<li>place the form’s data in its <code>cleaned_data</code> attribute.)</li>
-</ul>
-<p>In general, any cleaning method can raise a <code>ValidationError</code> if there is a problem with the data it is processing; it passes the relevant information to the <code>ValidationError</code> constructor. </p>
-<h3>Steps of validation</h3>
-<p>The methods below are run in the order given, one field at a time. That is, for each field in the form (in the order they are declared in the form definition). Then the <code>form.clean()</code>, or its override, is executed regardless if the previous methods have raised errors.
-If the <code>Field.clean()</code> method raises a <code>ValidationError</code>, its field-specific cleaning methods are not called. However, the cleaning methods for all remaining fields are still executed.</p>
-<p>Normally, the <code>clean()</code> method will be run and it will take care of the first three validations (<code>to_python()</code>, <code>validate()</code>, <code>run_validators()</code>). But you can customize any of them, and when the clean() method is executed, it will run the customized method.</p>
-<p><strong>1. <code>to_python()</code> method on a Field</strong></p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  It coerces the value to correct datatype and raises <code>ValidationError</code> if that is not possible. This method accepts the raw value from the widget and returns the converted value.</p>
-</li>
-<li>
-<p><strong>EXAMPLE:</strong>  a FloatField will turn the data into a Python float or raise a ValidationError.</p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS:</strong> raises <code>ValidationError</code> on any error</p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> returns the converted value.</p>
-</li>
-</ul>
-<p><br></p>
-<p><strong>2. <code>validate()</code> method on a Field</strong></p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  handles field-specific validation that is not suitable for a validator. It takes a value that has been coerced to correct datatype and raises ValidationError on any error. </p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS:</strong> raises <code>ValidationError</code> on any error</p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> This method does not return anything and shouldn’t alter the value. </p>
-</li>
-<li>
-<p><strong> NOTES: </strong> You should override it to handle validation logic that you can’t or don’t want to put in a validator.</p>
-</li>
-</ul>
-<p><br></p>
-<p><strong>3. <code>run_validators()</code> method on a Field</strong></p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  runs all of the field’s validators </p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS:</strong> aggregates all the errors into a single ValidationError.</p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> </p>
-</li>
-<li>
-<p><strong>NOTES:</strong> You shouldn’t need to override this method.</p>
-</li>
-</ul>
-<p><br></p>
-<p><strong>4. The <code>clean()</code> method on a Field subclass.</strong></p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  This is responsible for running <code>to_python</code>, <code>validate</code> and <code>run_validators</code> in the correct order and propagating their errors. </p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS:</strong> If, at any time, any of the methods raise <code>ValidationError</code>, the validation stops and that error is raised. </p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> This method returns the clean data, which is then inserted into the <code>cleaned_data</code> dictionary of the form.</p>
-</li>
-</ul>
-<p><br>
-<strong>5. The <code>clean_&lt;fieldname&gt;()</code> method in a form subclass</strong>
-– where <code>&lt;fieldname&gt;</code> is replaced with the name of the form field attribute.</p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  This method does any cleaning that is specific to that particular attribute, unrelated to the type of field that it is. </p>
-</li>
-<li>
-<p><strong>HOW TO USE:</strong> This method is not passed any parameters. You will need to look up the value of the field in self.cleaned_data and remember that it will be a Python object at this point, not the original string submitted in the form (it will be in <code>cleaned_data</code> because the general field <code>clean()</code> method, above, has already cleaned the data once).</p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS: </strong></p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> the cleaned value obtained from cleaned_data  -- regardless of whether it changed anything or not.</p>
-</li>
-</ul>
-<p><br>
-<strong>6. The Form subclass’s <code>clean()</code> method. </strong></p>
-<ul>
-<li>
-<p><strong>WHAT IT DOES:</strong>  This method can perform any validation that requires access to multiple fields from the form at once. </p>
-</li>
-<li>
-<p><strong>EXAMPLE:</strong> Checks that if field A is supplied, field B must contain a valid email address and the like.</p>
-</li>
-<li>
-<p><strong>HOW TO USE:</strong> Since the field validation methods have been run by the time <code>clean()</code> is called, you also have access to the form’s errors attribute which contains all the errors raised by cleaning of individual fields.</p>
-</li>
-<li>
-<p><strong>HANDLES ERRORS:</strong> Note that any errors raised by your <code>Form.clean()</code> override will not be associated with any field in particular. They go into a special “field” (called <code>__all__</code>), which you can access via the <code>non_field_errors()</code> method if you need to. If you want to attach errors to a specific field in the form, you need to call <code>add_error()</code>.</p>
-</li>
-<li>
-<p><strong>RETURNS:</strong> This method can return a completely different dictionary if it wishes, which will be used as the cleaned_data.</p>
-</li>
-<li><strong>NOTES:</strong> Also note that there are special considerations when overriding the <code>clean()</code> method of a ModelForm subclass.  (see the <a href="https://docs.djangoproject.com/en/1.8/topics/forms/modelforms/#overriding-modelform-clean-method">ModelForm documentation</a> for more information)</li>
-</ul>
-<hr>
-
-<h3>Raising ValidationError examples:</h3>
-<div class="highlight"><pre><span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s">&#39;Please submit flag&#39;</span><span class="p">)</span> <span class="err">–</span>  <span class="n">a</span> <span class="n">simple</span> <span class="n">example</span>
+	<h2>Working with Formsets in Django</h2>
+<p>This was the specs: <br />
+- Form that is populated with rows of students: their first and last names. And the teacher then has to enter her comments about each student. Row by row, rather than having a separate form for each student. (Imagine an excel spreadsheet).</p>
+<p>The solution was to use formsets; essentially each record is its own form.</p>
+<h3>To setup the formset:</h3>
+<p><strong>In models:</strong></p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">firstname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">lastname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
 </pre></div>
 
 
-<div class="highlight"><pre>    <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;text: </span><span class="si">%(flag)s</span><span class="s">&#39;</span><span class="p">),</span> 
-                            <span class="n">code</span><span class="o">=</span><span class="s">&#39;no flag&#39;</span><span class="p">,</span> 
-                            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;flag&#39;</span><span class="p">:</span> <span class="s">&#39;42&#39;</span><span class="p">},)</span>
+<p><em>This is a standard Model.</em></p>
+<p><strong>In views:</strong></p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.forms.models</span> <span class="kn">import</span> <span class="n">modelformset_factory</span>
+
+<span class="n">StudentFormset</span> <span class="o">=</span> <span class="n">modelformset_factory</span><span class="p">(</span>
+      <span class="n">Student</span><span class="p">,</span> 
+        <span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="s">&#39;lastname&#39;</span><span class="p">,</span> <span class="s">&#39;firstname&#39;</span><span class="p">,</span> <span class="s">&#39;comments&#39;</span><span class="p">),</span>
+        <span class="n">extra</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">student_list</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;lastname&#39;</span><span class="p">,</span> <span class="s">&#39;firstname&#39;</span><span class="p">)</span>
+
+<span class="n">student_formset</span> <span class="o">=</span> <span class="n">StudentFormset</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span> <span class="n">student_list</span><span class="p">)</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;formset&#39;</span><span class="p">:</span> <span class="n">student_formset</span> <span class="p">}</span>
+<span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/comments.html&#39;</span>
+<span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 </pre></div>
 
 
-<p><strong>multiple errors</strong>
-can be created as a list</p>
-<div class="highlight"><pre>    <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">([</span>
-        <span class="n">ValidationError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;Error 1&#39;</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="s">&#39;error1&#39;</span><span class="p">),</span>
-        <span class="n">ValidationError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;Error 2&#39;</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="s">&#39;error2&#39;</span><span class="p">),</span>
-    <span class="p">])</span>
+<ol>
+<li>
+<p>First, import the modelformset_factory    </p>
+</li>
+<li>
+<p>Then, I create my StudentFormset. </p>
+<ul>
+<li>The basic syntax is:<code>modelformset_factory(model, fields=(a tuple of fields from that model))</code>. There are many more arguments you might use – like <code>widgets</code>, <code>labels</code>, <code>error_messages</code>. See the <a href="https://docs.djangoproject.com/en/1.8/ref/forms/models/">docs</a>)</li>
+<li><code>fields:</code> I am basing this formset on the Student model, and listing exactly which fields from that model I want. </li>
+<li><code>extra:</code> how many blank forms I want. In this case, I don't want any, so it is <code>0</code>.  </li>
+</ul>
+</li>
+<li>
+<p>A formset can have several blank forms (you can determine how many). Or it can be prepopulated. In this case I needed a specific queryset. Hence I did my <code>student_list</code> queryset which I will soon pass to the formset (I could have also written it directly into the instance of the StudentFormset - below)  </p>
+</li>
+<li>
+<p>I create an instance of the StudentFormset with the student_list queryset.  </p>
+</li>
+<li>
+<p>I add the formset to the context to be rendered below.</p>
+</li>
+</ol>
+<p><strong>the <code>students/comments.html</code> template</strong></p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{{</span> <span class="n">formset</span><span class="o">.</span><span class="n">management_form</span> <span class="p">}}</span>
+    <span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="n">formset</span> <span class="o">%</span><span class="p">}</span>
+         <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+             <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">lastname</span><span class="p">}}</span> <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">firstname</span> <span class="p">}}</span>  <span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">id</span><span class="p">}}</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+             <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="p">{{</span><span class="n">form</span><span class="o">.</span><span class="n">comments</span><span class="p">}}</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+       <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">button</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;save&quot;</span> <span class="o">&gt;</span><span class="n">Save</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 </pre></div>
 
 
-<h3>Writing Validators</h3>
-<p>There are many builtin validators that match the field type (ex: EmailValidator 
- for EmailField). Those validators can be customized too. (ex: <code>class EmailValidator([message=None, code=None, whitelist=None])</code></p>
-<p><strong>Here's a sample custom validator:</strong></p>
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
-
-<span class="k">def</span> <span class="nf">validate_even</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-   <span class="k">if</span> <span class="n">value</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> is not an even number&#39;</span> <span class="o">%</span> <span class="n">value</span><span class="p">)</span>
+<p>That line of the <code>management_form</code> is super important. It holds vital data about the formset – how many forms were actually created, etc.
+    – the prefix (<code>formset</code>) must match the arguments used in the context.
+    The rest is basic template with a <code>for</code> statement.</p>
+<h3>To save the data on the formset:</h3>
+<p><strong>In the views:</strong></p>
+<div class="highlight"><pre><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+    <span class="n">formset</span> <span class="o">=</span> <span class="n">StudentFormset</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formset</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">formset</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 </pre></div>
 
 
-<p>Then, this validator can be used for any fields when setting up the models:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-   <span class="n">even_field</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_even</span><span class="p">])</span>
-</pre></div>
-
-
-<p>It can also be used for forms:</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
-   <span class="n">even_field</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validate_even</span><span class="p">])</span>
-</pre></div>
-
-
-<p>Validators will not be run automatically when you save a model, but if you are using a ModelForm, it will run your validators on any fields that are included in your form.</p> 
-	<a class="btn btn-mini xsmall" href="../django-validations-during-form-processing.html">
+<p>This is the most basic way to save. Normally, we might do other validations, etc.
+    - Create an instance of the StudentFormset with the request.POST.
+    - Make sure the data in all the forms in the formset it is valid. And then save.
+    If anything is not valid, it will not save the entire formset. And produce a dictionary of errors.</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/formsets.html">
           <i class="icon-comment"></i> Comment </a>
 	<hr />
       </div>
       
     </div>
     
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/creating-forms-to-add-anor-edit.html"><h1>Creating forms to Add an/or Edit</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 21 July 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>CBV or FBV?</h2>
+<p><strong>Class Based Views</strong> or <strong>Function Based Views</strong>?  Both can accomplish the pretty much the same things, so what is the difference?</p>
+<p>Instead of going into the pros and cons of each, I'll provide a few links on the bottom that other bloggers have so eloquently written ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/creating-forms-to-add-anor-edit.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/django-validations-during-form-processing.html"><h1>Django: Validations during Form Processing</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Fri 15 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<p><em>This post is mostly based on the Django Docs on <a href="https://docs.djangoproject.com/en/1.8/ref/forms/validation/#cleaning-a-specific-field-attribute">Form and Field Validation</a>. I reformatted the information in a way that feels easier to use.</em></p>
+<p><br></p>
+<p>There are 3 types of cleaning methods that are run during form processing. These are normally executed when you call the <code>is_valid()</code> method on ...</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/django-validations-during-form-processing.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../category/django.html">1</a></li>
+    <li class="active"><a href="http://www.deekras.com/category/django.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
@@ -286,11 +283,11 @@ can be created as a list</p>
             <li class="nav-header"> 
               Site
             </li>
-            <li><a href=".."><i class="icon-home" style="color: #1f334b">
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
                 </i>Home</a></li>
-            <li><a href="../archives.html"><i class="icon-list" style="color: #1f334b">
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
                 </i>Archives</a></li>
-	    <li><a href="../tags.html"><i class="icon-tags" style="color: #1f334b">
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
                 </i>Tags</a></li>
 	    
 	  </ul>
@@ -300,7 +297,7 @@ can be created as a list</p>
       </div> <!--end of fluid row-->
     </div> <!--end of blog-footer-->
     <hr />
-    <p align="center"><a href="..">DeeKras.com</a>
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
       &copy; Dee Kras
     Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
         <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
