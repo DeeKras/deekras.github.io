@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Creating forms to Add an/or Edit - DeeKras.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Creating forms to Add an/or Edit</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Tue 21 July 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/django.html">Django</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>CBV or FBV?</h2>
+<p><strong>Class Based Views</strong> or <strong>Function Based Views</strong>?  Both can accomplish the pretty much the same things, so what is the difference?</p>
+<p>Instead of going into the pros and cons of each, I'll provide a few links on the bottom that other bloggers have so eloquently written. I'll go straight to the code.</p>
+<p>Here's the requirement: <br />
+    1. Create new students 
+    2. Retrieve existing students and display as a list 
+    3. Update (or edit) existing students
+    4. Delete students</p>
+<p>This is so common, some developers call it CRUD - <em>C</em>reate, <em>R</em>etreive, <em>U</em>pdate, <em>D</em>elete.</p>
+<h2>Function Based forms</h2>
+<p>First, the model on which all this is based:</p>
+<div class="highlight"><pre><span class="c">#models.py</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">GROUPS_LIST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;Group A&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;Group B&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;Group C&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;Group D&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="n">GENDER_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s">&#39;M&#39;</span><span class="p">,</span><span class="s">&#39;Male&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">,</span><span class="s">&#39;Female&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">firstname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">lastname</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                             <span class="n">choices</span><span class="o">=</span><span class="n">GENDER_CHOICES</span><span class="p">,</span>
+                             <span class="n">blank</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                             <span class="n">choices</span><span class="o">=</span><span class="n">GROUPS_LIST</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;{}, {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+<em>This assumes you have some basic background in django models.</em></p>
+<div class="highlight"><pre>For both `gender` and `group`, we are providing predefined choices.  These choices will be used in several places throughout the app.
+</pre></div>
+
+
+<h2>Starting first with the <em>Retrieve</em></h2>
+<p>the views.py</p>
+<div class="highlight"><pre><span class="c">#views.py</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Student</span>
+
+<span class="k">def</span> <span class="nf">student_retrieve</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">students</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/student_list.html&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;students&#39;</span><span class="p">:</span> <span class="n">students</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p>and the html</p>
+<div class="highlight"><pre><span class="c">#students/student_list.html</span>
+
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Students</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">col</span> <span class="n">width</span><span class="o">=</span><span class="s">&quot;300&quot;</span><span class="o">&gt;</span>
+
+      <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">students</span> <span class="o">%</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="p">{{</span><span class="n">student</span><span class="o">.</span><span class="n">lastname</span><span class="p">}},</span> <span class="p">{{</span> <span class="n">student</span><span class="o">.</span><span class="n">firstname</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;{</span><span class="si">% u</span><span class="s">rl &quot;</span><span class="n">student_new</span><span class="s">&quot; %}&quot;</span><span class="o">&gt;&lt;</span><span class="n">button</span><span class="o">&gt;</span><span class="n">Add</span> <span class="n">New</span> <span class="n">Student</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>and the urls.py</p>
+<div class="highlight"><pre><span class="c">#urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;students.views.student_retrieve&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;student_list&#39;</span><span class="p">),]</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+    - In the html file, I used a table, because we will be adding more elements and a table will keep it looking just a tad bit neater.<br />
+    - In the last line of the html <code>&lt;a href="{% url "student_new" %}"&gt;&lt;button&gt;Add New Student&lt;/button&gt;&lt;/a&gt;</code>, I created a button - with the text 'Add New Student'. This points to the url that is named <code>student_new</code> and will open the related view that is listed in the urlpatterns <code>students.views.student_retrieve</code>.  (see it in the <code>urls.py</code>)
+        - I really could have put the real url there. `'\'.  But if I ever changed the url, i would have to find the url throughout my code, it is easier to use the name.</p>
+<h2>Next, the <strong>Delete</strong></h2>
+<p>When deleting or updating, we need to know exactly which instance will be affected.  We can pass that in to the view through the url. Notice the regex in the newly added url in <code>url.py</code>.</p>
+<div class="highlight"><pre><span class="c">#urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;students.views.student_retrieve&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;student_list&#39;</span><span class="p">),</span>
+  <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^delete/(?P&lt;pk&gt;\d+)$&#39;</span><span class="p">,</span> <span class="s">&#39;students.views.student_delete&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;student_delete&#39;</span><span class="p">),]</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+This url might look like <code>www.example.com/delete/12</code>. The <code>(?P&lt;pk&gt;\d+)$</code> is what holds the <code>primarykey</code> of the instance or record.  This means that the delete view will be called with a keyword argument <code>pk=12</code>, (or what ever number follows the <code>delete</code>).
+    - The <code>&lt;pk&gt;</code> can be replaced with any other field, as applicable (name, date, etc.).
+    - The <code>d+</code> is regex for any number of digits.  This can be replaced with any other applicable regex.</p>
+<p>the views</p>
+<div class="highlight"><pre><span class="c">#views.py</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">get_object_or_404</span> <span class="o">&lt;---</span> <span class="n">changed</span> <span class="n">here</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span>  <span class="n">HttpResponseRedirect</span> <span class="o">&lt;---</span> <span class="n">add</span> <span class="n">this</span>
+<span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="kn">import</span> <span class="n">reverse</span> <span class="o">&lt;---</span> <span class="n">added</span> <span class="n">this</span>
+
+<span class="k">def</span> <span class="nf">student_delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">student</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&#39;student_list&#39;</span><span class="p">))</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/student_confirm_delete.html&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;object&#39;</span><span class="p">:</span> <span class="n">student</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p>and the html</p>
+<div class="highlight"><pre><span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="n">Are</span> <span class="n">you</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">delete</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="p">{{</span> <span class="nb">object</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span>  <span class="err">?</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;Submit&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+    - <code>def student_delete(request, pk):</code> Here, the <code>pk</code> is passed to the method. </p>
+<div class="highlight"><pre><span class="x">- `student = get_object_or_404(Student, pk=pk)`: We try to get the object from Student where the Student.pk is equal to the `pk` that was passed in. Or if it doesn&#39;t exist, display a 404 error page.</span>
+<span class="x">- the docs about `get_object_or_404`</span>
+
+<span class="x">- If we are coming to this page as a `POST`, then the student is deleted (`delete()`) is a built in method.</span>
+<span class="x">- And then we will redirect to the url/ view that is associated with `student_list`. See the urls.py.</span>
+<span class="x">- the docs about `HttpResponseRedirect`</span>
+<span class="x">- the docs about `revserse`</span>
+
+<span class="x">- If we are coming to this page as a `GET`, then it renders the template and context, which is `</span><span class="cp">{{</span><span class="nv">object</span><span class="cp">}}</span><span class="x">`, the student&#39;s name as was defined in the  `__unicode__` in the model.</span>
+
+<span class="x">- When we click from another page to get to this page, or by typing directly into the url, it is a `GET`.  Then once we click the `submit` and are coming back to this page it is a `POST`.</span>
+</pre></div>
+
+
+<h2>Next the <strong>CREATE</strong>:</h2>
+<p>First, we will create the Create and Update separately and then show a way to combine them, if it works for the programming.</p>
+<p>the forms.py</p>
+<div class="highlight"><pre><span class="c">#forms.py</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+<span class="k">class</span> <span class="nc">StudentForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Student</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;firstname&#39;</span><span class="p">,</span> <span class="s">&#39;lastname&#39;</span><span class="p">,</span> <span class="s">&#39;gender&#39;</span><span class="p">,</span>
+                  <span class="s">&#39;avatar&#39;</span><span class="p">,</span> <span class="s">&#39;group&#39;</span><span class="p">,</span> <span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;firstname&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span>
+                <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;placeholder&#39;</span><span class="p">:</span><span class="s">&#39;First Name&#39;</span><span class="p">,</span> <span class="s">&#39;class&#39;</span><span class="p">:</span><span class="s">&#39;form-control&#39;</span><span class="p">}),</span>
+            <span class="s">&#39;lastname&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span>
+                <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;placeholder&#39;</span><span class="p">:</span><span class="s">&#39;First Name&#39;</span><span class="p">,</span> <span class="s">&#39;class&#39;</span><span class="p">:</span><span class="s">&#39;form-control&#39;</span><span class="p">}),</span>
+            <span class="s">&#39;gender&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">GENDER_CHOICES</span><span class="p">),</span>
+            <span class="s">&#39;group&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">GROUPS_LIST</span><span class="p">)</span>
+        <span class="p">}</span>
+</pre></div>
+
+
+<p><strong>Quick explanation:</strong>
+    - We create a new form, based on ModelForm.
+    - we include the <code>model</code>, <code>fields</code> and <code>widgets</code>. There are other attributes that might be useful too.
+    - the docs about <code>ModelForm</code>
+    - the docs about <code>widgets</code></p>
+<p>the views</p>
+<div class="highlight"><pre><span class="c">#views.py</span>
+
+<span class="k">def</span> <span class="nf">student_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&#39;student_list&#39;</span><span class="p">))</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/student_form.html&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">StudentForm</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Quick Explanation</strong>
+    - We are declaring which form this view is based.<br />
+      - When it is a <code>GET</code>, then the form is <code>StudentForm()</code>, essentially an empty form waiting for data.
+      - When it is a <code>POST</code>, then the form is <code>StudentForm(request.POST)</code>, which now has the data from the request.POST.</p>
+<div class="highlight"><pre>- When it is a `POST`, the form will try to validate all the fields on the form. If all `is_valid()`, then we can save and then will be redirected, as before.
+</pre></div>
+
+
+<p>the html</p>
+<div class="highlight"><pre>#students/student_form.html
+
+<span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
+    <span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+    <span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+
+<p><strong>Quick explanations</strong>
+    - Here again, the first time we come to this view, it is a <code>GET</code> and it renders the template and context. Then when we click <code>submit</code>, and we come to this view again, then it is a <code>POST</code> and it attempts to save the data.</p>
+<div class="highlight"><pre><span class="x">- In the html, `</span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span><span class="x">` takes all the fields on the form and displays them as html `&lt;p&gt;` - paragraphs. </span>
+<span class="x">- the docs about `</span><span class="cp">{{</span><span class="nv">form.as_p</span><span class="cp">}}</span><span class="x"></span>
+</pre></div>
+
+
+<p>the urls.py</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^new$&#39;</span><span class="p">,</span> <span class="s">&#39;students.views.student_new_update&#39;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span><span class="s">&#39;student_new&#39;</span><span class="p">),</span>
+</pre></div>
+
+
+<h2>Now the <em>UPDATE</em></h2>
+<p>the form.py and html are the same.
+the view.py</p>
+<div class="highlight"><pre><span class="c">#views.py</span>
+
+<span class="k">def</span> <span class="nf">student_update</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span><span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&#39;student_list&#39;</span><span class="p">))</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/student_form.html&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p>the urls.py</p>
+<div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^edit/(?P&lt;pk&gt;\d+)$&#39;</span><span class="p">,</span> <span class="s">&#39;students.views.student_new_update&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;student_edit&#39;</span><span class="p">),</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+    - First thing, it tries to get the <code>student</code> instance, based on the <code>pk</code>.
+    - If it is a <code>GET</code>, then the form is <code>StudentForm(instance=student)</code>, the same StudentForm that was used in the Create. And this time, the form is populated with the instance. And the user can make changes.
+    - If it is a <code>POST</code>, then the form is <code>StudentForm(request.POST, instance=student)</code>. The form is populated with the instance and the data from request.POST.
+    - If the data on the form is valid, it saves and redirects.</p>
+<p>So in a sense, the CREATE and UPDATE are pretty similar. They both use the same form <code>StudentForm</code> and the same html <code>students/student_form.html</code>.  So if possible, they could be combined.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">student_new_update</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">student</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pk</span><span class="p">:</span>
+        <span class="n">student</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+             <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+             <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&#39;student_list&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)</span>
+
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;students/student_form.html&#39;</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Quick explanation</strong>
+    - <code>def student_new_update(request, pk=None, student=None):</code>  We set the defaults of <code>pk</code> and <code>student</code> to <code>None</code>.  In this way, we can use the same code whether we have a <code>pk</code> or <code>student</code> or not. </p>
+<div class="highlight"><pre>- `if pk:
+    student = get_object_or_404(Student, pk=pk)`
+    if there is a `pk` being passed in (then it overrides the default), then it tries to find the student instance.
+
+- if it is a not a `POST`, in other words a`GET`, then `form = StudentForm(instance=student)`. This could be a `GET` with a `pk` being passed in - in other words, an update and the instance is populated. Or a `GET` without a `pk` and then `student=None` so the `form = StudentForm(instance=student)` is just like `StudentForm()`. And then it renders the template and the context.
+
+- if it is a `POST`, then the `request.POST` is passed in. If a `pk` is passed in, then the instance is populated based on the `pk`. Or else, it is a new/ create and the instace is the default `student=None`.)
+</pre></div>
+
+
+<p><hr>
+NEXT: How to do this as CBV.</p>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

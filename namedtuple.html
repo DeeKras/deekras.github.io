@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Namedtuple - DeeKras.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Namedtuple</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Fri 29 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>namedtuple</h2>
+<p>I recently watched the most wonderful talk by  <a href="https://www.youtube.com/watch?v=wf-BqAjZb8M">Raymond Hettinger at Pycon 2015 about Pep8</a>. Amongst many interesting and important points, he spoke about <code>namedtuple</code> that I believe he wrote. (It's toward the end of the talk at ~47:00). He posits that the namedtuple is one of the easiest ways to clean up your code and make it more readable.  It self-documents what is happening in the tuple.</p>
+<p>Another advantage: Namedtuples instances are just as memory efficient as regular tuples as they do not have per-instance dictionaries, making them faster than dictionaries. </p>
+<p>Here's the code from his talk:</p>
+<p>f```python
+from collections import namedtuple</p>
+<p>Color = namedtuple('Color', ['hue', 'saturation', 'luminosity'])</p>
+<p>p = Color(170, 0.1, 0.6)
+if p.saturation &gt;= 0.5:
+  print "Whew, that is bright!"
+if p.luminosity &gt;= 0.5:
+  print "Wow, that is light"</p>
+<div class="highlight"><pre>Without naming each element in the tuple, it would read like this:
+
+```python
+
+p = (170, 0.1, 0.6)
+if p[1] &gt;= 0.5:
+  print &quot;Whew, that is bright!&quot;
+if p[2]&gt;= 0.5:
+  print &quot;Wow, that is light&quot;
+</pre></div>
+
+
+<p>It is so much harder to understand what is going on in the first example.  With a namedtuple, each field has a name.  And you access it by name rather than position or index.  Instead of <code>p[1]</code>, we can call it <code>p.saturation</code>. It's easier to understand. And it looks cleaner.</p>
+<p>Creating an instance of the namedtuple is easier than creating a dictionary.</p>
+<div class="highlight"><pre><span class="c"># dictionary</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">hue</span> <span class="o">=</span> <span class="mi">170</span><span class="p">,</span> <span class="n">saturation</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">luminosity</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;hue&#39;</span><span class="p">]</span>
+<span class="mi">170</span>
+
+<span class="c">#nametuple</span>
+<span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">Color</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;Color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;hue&#39;</span><span class="p">,</span> <span class="s">&#39;saturation&#39;</span><span class="p">,</span> <span class="s">&#39;luminosity&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span><span class="o">.</span><span class="n">hue</span>
+<span class="mi">170</span>
+</pre></div>
+
+
+<p><strong>When might you use namedtuple</strong></p>
+<p>As just stated, the namedtuple makes understanding tuples much easier. So if you need to reference the items in the tuple, then creating them as namedtuples just makes sense.</p>
+<p>Besides being more lightweight than a dictionary, namedtuple also keeps the order unlike the dictionary.</p>
+<p>As in the example above, it is simpler to create an instance of namedtuple than dictionary. And referencing the item in the named tuple looks cleaner than a dictionary. <code>p.hue</code> rather than <code>p['hue']</code>.</p>
+<p><strong>The syntax</strong>  </p>
+<p><code>collections.namedtuple(typename, field_names[, verbose=False][, rename=False])</code></p>
+<div class="highlight"><pre><span class="o">-</span> <span class="nx">namedtuple</span> <span class="nx">is</span> <span class="k">in</span> <span class="nx">the</span> <span class="err">`</span><span class="nx">collections</span><span class="err">`</span> <span class="nx">library</span>
+<span class="o">-</span> <span class="err">`</span><span class="nx">typename</span><span class="err">`</span><span class="o">:</span> <span class="nx">This</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">name</span> <span class="nx">of</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">tuple</span> <span class="nx">subclass</span><span class="p">.</span>  
+<span class="o">-</span> <span class="err">`</span><span class="nx">field_names</span><span class="err">`</span><span class="o">:</span> <span class="nx">a</span> <span class="nx">sequence</span> <span class="nx">of</span> <span class="nx">names</span> <span class="k">for</span> <span class="nx">each</span> <span class="nx">field</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">sequence</span> <span class="nx">as</span> <span class="k">in</span> <span class="nx">a</span> <span class="nx">list</span> <span class="err">`</span><span class="cp">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="cp">]</span><span class="err">`</span> <span class="nx">or</span> <span class="nx">string</span> <span class="err">`</span><span class="nx">x</span> <span class="nx">y</span> <span class="nx">z</span><span class="err">`</span> <span class="p">(</span><span class="nx">without</span> <span class="nx">commas</span><span class="p">,</span> <span class="nx">just</span> <span class="nx">whitespace</span><span class="p">)</span> <span class="nx">or</span> <span class="err">`</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="err">`</span><span class="p">.</span>
+<span class="o">-</span> <span class="err">`</span><span class="nx">rename</span><span class="err">`</span><span class="o">:</span> <span class="nx">If</span> <span class="nx">rename</span> <span class="nx">is</span> <span class="err">`</span><span class="nx">True</span><span class="err">`</span><span class="p">,</span> <span class="nx">invalid</span> <span class="nx">fieldnames</span> <span class="nx">are</span> <span class="nx">automatically</span> <span class="nx">replaced</span> <span class="kd">with</span> <span class="nx">positional</span> <span class="nx">names</span><span class="p">.</span> <span class="nx">For</span> <span class="nx">example</span><span class="p">,</span> <span class="cp">[</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="s1">&#39;ghi&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="cp">]</span> <span class="nx">is</span> <span class="nx">converted</span> <span class="nx">to</span> <span class="cp">[</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;_1&#39;</span><span class="p">,</span> <span class="s1">&#39;ghi&#39;</span><span class="p">,</span> <span class="s1">&#39;_3&#39;</span><span class="cp">]</span><span class="p">,</span> <span class="nx">eliminating</span> <span class="nx">the</span> <span class="nx">keyword</span> <span class="s1">&#39;def&#39;</span> <span class="p">(</span><span class="nx">since</span> <span class="nx">that</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">reserved</span> <span class="nx">word</span> <span class="k">for</span> <span class="nx">defining</span> <span class="nx">functions</span><span class="p">)</span> <span class="nx">and</span> <span class="nx">the</span> <span class="nx">duplicate</span> <span class="nx">fieldname</span> <span class="s1">&#39;abc&#39;</span><span class="p">.</span>  
+<span class="o">-</span> <span class="err">`</span><span class="nx">verbose</span><span class="err">`</span><span class="o">:</span> <span class="nx">If</span> <span class="nx">verbose</span> <span class="nx">is</span> <span class="err">`</span><span class="nx">True</span><span class="err">`</span><span class="p">,</span> <span class="nx">the</span> <span class="kr">class</span> <span class="nx">definition</span> <span class="nx">is</span> <span class="nx">printed</span> <span class="nx">just</span> <span class="nx">before</span> <span class="nx">being</span> <span class="nx">built</span><span class="p">.</span>
+</pre></div>
+
+
+<p>You can still access namedtuples by their position, if you so choose.
+<code>p[1] == p.saturation</code></p>
+<p>It still unpacks like a regular tuple.</p>
+<p><strong>Methods</strong>
+All the <a href="https://docs.python.org/2/library/stdtypes.html#typesseq">regular tuple methods</a> are supported. Ex: min(), max(), len(), in, not in, concatenation (+), index, slice, etc. </p>
+<p>And there are a few additional ones for namedtuple.  Note: these all start with an underscore. <code>_replace</code>, <code>_make</code>, <code>_asdict</code>.</p>
+<h3><code>_replace</code></h3>
+<p>Returns a new instance of the named tuple replacing specified fields with new values.</p>
+<p><strong>The syntax</strong>  </p>
+<p><code>somenamedtuple._replace(kwargs)</code></p>
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">Color</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;Color&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;hue&#39;</span><span class="p">,</span> <span class="s">&#39;saturation&#39;</span><span class="p">,</span> <span class="s">&#39;luminosity&#39;</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">169</span><span class="p">)</span>
+<span class="n">Color</span><span class="p">(</span><span class="mi">169</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">p</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">169</span><span class="p">,</span> <span class="n">staturation</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">Color</span><span class="p">(</span><span class="mi">169</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>Notice:</strong> The field names are <em>not in quotes</em>; they are keywords here.
+<strong>Remember:</strong> Tuples are immutable - even if they are namedtuples and have the <code>_replace</code> method.  The <code>_replace</code> produces a <em>new</em> instance; it does not modify the original or replace the old value. You can of course save the new result to the variable. <code>p = p._replace(hue=169)</code></p>
+<h3><code>_make</code></h3>
+<p>Makes a new instance from an existing sequence or iterable.  </p>
+<p><strong>The syntax</strong></p>
+<p><code>somenamedtuple._make(iterable)</code>¶</p>
+<p><strong>Example</strong></p>
+<div class="highlight"><pre> <span class="o">&gt;&gt;&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+ <span class="o">&gt;&gt;&gt;</span><span class="n">Color</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">Color</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">luminosity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">Color</span><span class="o">.</span><span class="n">_make</span><span class="p">([</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>  <span class="c">#the list is an iterable</span>
+<span class="n">Color</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">luminosity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">Color</span><span class="o">.</span><span class="n">_make</span><span class="p">((</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>  <span class="c">#the tuple is an iterable</span>
+<span class="n">Color</span><span class="p">(</span><span class="n">hue</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">luminosity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">Color</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span> 
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s">&quot;&lt;string&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">15</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_make</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="s">&#39;float&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">callable</span>
+ <span class="sb">``</span><span class="err">`</span>
+
+ <span class="n">What</span> <span class="n">happened</span> <span class="k">with</span> <span class="n">the</span> <span class="n">last</span> <span class="n">one</span><span class="err">?</span> <span class="n">The</span> <span class="n">item</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">parenthesis</span> <span class="n">should</span> <span class="n">be</span> <span class="n">the</span> <span class="n">iterable</span><span class="o">.</span> <span class="n">So</span> <span class="n">a</span> <span class="nb">list</span> <span class="ow">or</span> <span class="nb">tuple</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">parenthesis</span> <span class="n">works</span><span class="p">,</span> <span class="n">but</span> <span class="n">the</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">values</span> <span class="n">without</span> <span class="n">enclosing</span> <span class="k">as</span> <span class="n">an</span> <span class="n">iterable</span> <span class="n">returns</span> <span class="n">an</span> <span class="n">error</span><span class="o">.</span>
+
+
+
+ <span class="c">###`_asdict`</span>
+ <span class="n">Returns</span> <span class="n">a</span> <span class="n">new</span> <span class="p">[</span><span class="n">OrderedDict</span><span class="p">](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">collections</span><span class="o">.</span><span class="n">html</span><span class="c">#collections.OrderedDict) which maps field names to their corresponding values.  </span>
+
+ <span class="o">**</span><span class="n">The</span> <span class="n">syntax</span><span class="o">**</span>
+
+ <span class="sb">`somenamedtuple._asdict()`</span>
+
+ <span class="o">**</span><span class="n">Example</span><span class="o">**</span>
+
+ <span class="sb">``</span><span class="err">`</span><span class="n">python</span>
+
+ <span class="o">&gt;&gt;&gt;</span><span class="n">p</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="n">OrderedDict</span><span class="p">([(</span><span class="s">&#39;hue&#39;</span><span class="p">,</span> <span class="mi">169</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;saturation&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;luminosity&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)])</span>
+</pre></div>
+
+
+<p><a href="https://docs.python.org/2/library/collections.html#collections.namedtuple"><code>namedtuple</code> in the docs</a></p>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

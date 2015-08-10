@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Timeit - DeeKras.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+    <div class='article'>
+      <div class="row-fluid">
+           <div class="content-title span9">
+             <h1>Timeit</h1>
+           </div>
+      </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Thu 28 May 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      
+      <div class="span8">
+	<h2>Timeit</h2>
+<p>A great library for testing the time of short code (a few short lines).</p>
+<p><strong>The syntax:</strong></p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">timeit</span>
+<span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">timer</span><span class="o">=&lt;</span><span class="n">default</span> <span class="n">timer</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+
+<span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">timer</span><span class="o">=&lt;</span><span class="n">default</span> <span class="n">timer</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre>- `stmt`: this is the statement that is being timed. It is a **string**; it is enclosed by quotes and can include newlines.  This statement can be run or repeated a number of times.
+- `setup`: this is the setup statement - to setup variables for example.  The setup is run only once - at setup.   
+- `timer`: usually the default timer for the platform you are using (Windows or Unix)  
+- `repeat`: how many times should the statement be repeated in this test. All of the responses are returned in a list.
+- `number`: controls how many times to run the statement; the default is 1,000,000.
+
+*Note: You don&#39;t really need to include the keywords of the positional arguments like stmt and setup. You do need `repeat` or `number`.*
+</pre></div>
+
+
+<p><strong>Some examples:</strong></p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="n">setup</span> <span class="o">=</span> <span class="s">&quot;c= {&#39;Quiz1&#39;: 90, &#39;Quiz2&#39;:91, &#39;Test1&#39;:89, &#39;Quiz3&#39;:87, &#39;Test2&#39;:90, &#39;Quiz4&#39;:89, &#39;Final&#39;:88}&quot;</span>
+
+<span class="n">stmt</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;c[&#39;Final&#39;]=c[&#39;Final&#39;] + 3 &quot;&quot;&quot;</span>
+
+<span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="n">stmt</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="n">setup</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This is testing how long it will take to add 3 points to the Final mark.<br />
+    - First the setup, written as a string: the initial marks are set up in a dictionary; each quiz or test is a keyword.<br />
+    - Then the statement, written as a string.  This adds 3 to the Final mark.
+    - Lastly, the <code>timeit</code>. We are repeating this 10 times - so we can see the various times it takes to run this code; it is returned as a list.</p>
+<div class="highlight"><pre><span class="p">[</span><span class="mf">0.002605915069580078</span><span class="p">,</span> <span class="mf">0.0019431114196777344</span><span class="p">,</span> <span class="mf">0.0020720958709716797</span><span class="p">,</span> <span class="mf">0.0030710697174072266</span><span class="p">,</span> <span class="mf">0.0030739307403564453</span><span class="p">,</span> <span class="mf">0.00308990478515625</span><span class="p">,</span> <span class="mf">0.0024268627166748047</span>
+<span class="p">,</span> <span class="mf">0.002237081527709961</span><span class="p">,</span> <span class="mf">0.0023369789123535156</span><span class="p">,</span> <span class="mf">0.0021729469299316406</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Let's compare a 2 methods that return the same results:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="n">setup</span> <span class="o">=</span> <span class="s">&quot;list = [47, 11, 42, 102, 13]&quot;</span>
+<span class="n">stmt1</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;max(list)&quot;&quot;&quot;</span>
+<span class="n">stmt2</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;reduce((lambda a, b: a if a &gt; b else b), list)&quot;&quot;&quot;</span>
+
+<span class="n">test_max</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="n">stmt1</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="n">setup</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">test_reduce</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="o">=</span><span class="n">stmt2</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="n">setup</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&#39;Max {}.format(test_max)</span>
+<span class="k">print</span> <span class="s">&#39;Reduce {}.format(test_reduce)</span>
+</pre></div>
+
+
+<p>The results:</p>
+<div class="highlight"><pre><span class="n">Max</span> <span class="p">[</span><span class="mf">0.00048422813415527344</span><span class="p">,</span> <span class="mf">0.0004940032958984375</span><span class="p">,</span> <span class="mf">0.0005421638488769531</span><span class="p">,</span> <span class="mf">0.0008389949798583984</span><span class="p">,</span> <span class="mf">0.0008420944213867188</span><span class="p">]</span>
+
+<span class="n">Reduce</span> <span class="p">[</span><span class="mf">0.0017399787902832031</span><span class="p">,</span> <span class="mf">0.001605987548828125</span><span class="p">,</span> <span class="mf">0.0016090869903564453</span><span class="p">,</span> <span class="mf">0.001589059829711914</span><span class="p">,</span> <span class="mf">0.0015668869018554688</span><span class="p">]</span>
+</pre></div>
+
+
+<p><strong>You can use <code>timeit</code> with a function too</strong></p>
+<div class="highlight"><pre><span class="o">-</span> <span class="n">First</span> <span class="n">define</span> <span class="n">your</span> <span class="n">function</span><span class="p">,</span> <span class="k">as</span> <span class="n">normally</span><span class="o">.</span>  
+<span class="o">-</span> <span class="n">Then</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">timeit</span> <span class="n">code</span><span class="p">,</span> 
+<span class="mf">1.</span> <span class="n">include</span> <span class="n">the</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">quotes</span><span class="o">.</span>
+<span class="mf">2.</span> <span class="n">add</span> <span class="sb">`setup = &quot;from __main__ import funcname&quot;`</span><span class="o">.</span> <span class="n">Notice</span> <span class="n">the</span> <span class="n">double</span> <span class="n">underscores</span> <span class="n">around</span> <span class="n">the</span> <span class="n">word</span> <span class="n">main</span> <span class="sb">`__main__`</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="kn">import</span> <span class="nn">timeit</span>
+ <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s">&quot;add(4,5)&quot;</span><span class="p">,</span> <span class="s">&quot;from __main__ import add&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<p><strong>More about Timeit</strong></p>
+<p>The <a href="https://docs.python.org/2/library/timeit.html">docs on Timeit</a>
+From <a href="http://pymotw.com/2/timeit/">timeit from Python Module of the Week</a></p>
+	<hr />
+      </div>
+    </div>
+    <div class="span10">
+      <h3>Comments</h3>
+    
+    </div>  
+    </div>
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
