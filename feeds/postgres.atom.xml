@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/postgres.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-08-13T00:00:00+00:00</updated><entry><title>Some Postgres basics</title><link href="http://www.deekras.com/some-postgres-basics.html" rel="alternate"></link><updated>2015-08-13T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-08-13:some-postgres-basics.html</id><summary type="html">&lt;h2&gt;Some basic Postgres that I have used&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;psql Dbname
+Dbname =&amp;gt; \dt -------------------------------&amp;gt; See tables in the DB
+Dbname =&amp;gt; \d+ tablename ---------------------&amp;gt; See columns in specific table
+Dbname =&amp;gt; ALTER TABLE tablename RENAME old_column_name TO new_column_name; ----&amp;gt; Change column name
+Dbname =&amp;gt; \quit -----------------------------&amp;gt; To get back to commandline prompt
+Dbname =&amp;gt; DROP TABLE tablename;  ------------&amp;gt; Drop table
+python manage.py makemigrations appname ---&amp;gt; New migration after deleting all migrations.!!Make sure to include the name of the app&lt;/p&gt;
+&lt;/blockquote&gt;</summary></entry></feed>

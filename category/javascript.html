@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>DeeKras.com <small>javascript</small></title>
+    <meta name="description" content="">
+    <meta name="author" content="Dee Kras">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.deekras.com/theme/html5.js"></script>
+    <![endif]-->
+
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/pygments.css" rel="stylesheet">
+    <link href="http://www.deekras.com/theme/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,400italic|Alegreya+SC' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<header class="blog-header">
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+	<a href="http://www.deekras.com" class="brand">DeeKras.com</a>
+      </div>
+
+      <div class="span3" id="blog-nav">
+	<ul class="nav nav-pills pull-right">
+	    <li >
+	      <a href="http://www.deekras.com/category/about.html ">About</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/about-python.html ">About  Python</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/django.html ">Django</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/general.html ">General</a>
+	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/javascript.html ">javascript</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/postgres.html ">postgres</a>
+	    <li >
+	      <a href="http://www.deekras.com/category/python.html ">Python</a>
+	</ul>
+      </div>
+    </div> <!-- End of fluid row-->
+  </div>   <!-- End of Container-->
+</header>
+    
+<div class="container">
+    <div class="content">
+    <div class="row-fluid">
+
+        <div class="span10">
+        
+
+        
+
+    <div class='row-fluid''>
+        <div class="article-title span9">
+            <a href="http://www.deekras.com/jqery-some-basics.html"><h1>Jqery: Some basics</h1></a>
+        </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 17 August 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/javascript.html">Javascript</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="article-content span8">
+	<h2>What is jQuery?</h2>
+<p>With jQuery you select (query) HTML elements and perform "actions" on them.  For example, when you hover over a button, the button is highlighted.</p>
+<h2>Getting started</h2>
+<p>In the <code>&lt;head&gt;</code> of your html, include a reference to the jquery library - in the <code>&lt;script&gt;</code> tags. </p>
+<div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+</pre></div>
+
+
+<p>You can write your jquery right into the html. Or, you can write it as a jquery file with a <code>.js</code> extension (ex: <code>example.js</code>) and reference it in your <code>&lt;head&gt;</code>. The second way allows for you to reuse the code in several html templates. </p>
+<div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;path/to/example.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+</pre></div>
+
+
+<h2>Basic syntax</h2>
+<p><em>!!First and foremost, all jQuery commands end with a semi-colon <code>;</code>.</em></p>
+<p><code>$(' html selector').action();</code></p>
+<p><b>Note:</b><br />
+    The <b>selector</b> is surrounded with quotes. <br />
+    The <b>action</b> is followed by parenthesis. There may be arguments in those ().</p>
+<h1>The selector#</h1>
+<p>The selector can be any html element:
+    <code>$('p')</code> or <code>$('h1')</code> or <code>$('button')</code> or <code>$('ol')</code> or <code>$('td')</code> and so forth.</p>
+<p>The selector can also reference a specific class in the html code.
+    For example in the html <code>&lt;div class="highlighted"&gt;</code> is referenced as <code>$('.highlighted')</code>. Notice the <code>.</code> dot before the class name.</p>
+<p>The selector can also reference a specific ID in the html code.<br />
+    For example in the html <code>&lt;p ID="target"&gt;</code> is referenced as <code>$('#target')</code>. Notice the <code>#</code> hash  before the ID name.</p>
+<p>We can also reference a few html elements: 
+    <code>$('h1, h2, h3')</code>. References all <code>h1</code>, <code>h2</code>, <code>h3</code>. <b>Note:</b>  Elements are separated with commas. There is only 1 set of quotes areound all the elements.</p>
+<p>Or reference a specificly detailed element:
+    <code>$('div.highlighted')</code>  or <code>$('p#target'). &lt;b&gt;Note:&lt;/b&gt;  There is no space between</code>div<code>and the class.</code>$('div div p')<code>. This refers to any html elements that are a</code>p<code>in a</code>div<code>in a</code>div`.</p>
+<p>Lastly, the <code>this</code>:<br />
+<code>this</code> refers to the element that we are on currently. It is used instead of repeating the entire element again. You might think of it as a pronoun. We don't repeat someone's name every time we refer to her; we use the words 'she' or 'her'.
+   <code>$(this)</code>. <b>Note:</b>  There are no quotes around the <code>this</code>.</p>
+<p>Then there are some more cool selectors:
+<table>
+<tr>
+  <td>$('*')</td>
+  <td>all html elements</td>
+  <td></td>
+</tr>
+<tr>
+  <td>$('p:first')</td>
+  <td>FIRST p</td>
+  <td>notice the <code>:</code> colon</td>
+  <td>$('element:last')</td>
+</tr>
+<tr>
+  <td>$('tr:even')</td>
+  <td>the EVEN rows</td>
+  <td>notice the <code>:</code> colon</td>
+  <td>$('element:odd')</td>
+</tr>
+<tr>
+  <td>$(':button')</td>
+  <td>all <button> and related <input></td>
+  <td>notice the <code>:</code> colon</td>
+  <td>$(':checkbox'), $(':selected')</td>
+</tr>
+<tr>
+  <td>$('[href]')</td>
+  <td>all elements with <code>href</code> (links)</td>
+  <td>notice the square brackets</td>
+  <td>$("[href='value]")
+</tr>
+</table></p>
+<p>For a complete list of selectors, see <a href="http://www.w3schools.com/jquery/jquery_ref_selectors.asp">jquery from www.w3schools.com</a></p>
+<hr>
+
+<h1>The Events#</h1>
+<p>jquery works really well with different 'events' that happen on a webpage. </p>
+<p>Events are things like hovering over an element (<code>hover</code>), clicking on an element (<code>click</code>), pressing a key, (<code>keydown</code>) and many others.  These 'events' on an element trigger an action.</p>
+<h1>The syntax</h1>
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;element&#39;</span><span class="p">).</span><span class="nx">event</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// action function details here</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Some examples: For all these, we will use the same function <code>alert('Hello')</code>. This creates a pop-up with the word 'Hello'. <b>Notice</b> the 2 semi colons.</p>
+<table>
+  <tr>
+    <td><b>click</b></td>
+    <td>
+      ```
+      $('button').click(function(){
+        alert('Hello');
+      });
+      ```
+    </td>
+    <td> `dblclick`, `mousedown`</td>
+  </tr>
+  <tr>
+    <td><b>hover</b></td>
+    <td>
+      ```
+      $('hover').click(function(){
+        alert('Hello');
+      },
+      function(){
+        alert('Bye now!');
+        });
+      ```
+    </td>
+    <td>
+    takes 2 functions
+    </td>
+  </tr>
+</table>
+
+<p>Other common events:
+<table>
+<tr>
+  <td>click()</td>
+  <td>when the element is clicked</td>
+</tr>
+<tr>
+  <td>dblclick()</td>
+  <td>when the element is doubleclicked</td>
+</tr>
+<tr>
+  <td>mouseenter()</td>
+  <td>when the mouse enters the element</td>
+</tr>
+<tr>
+  <td>mouseleave()</td>
+  <td>when the mouse leaves the element</td>
+</tr>
+<tr>
+  <td>mousedown()</td>
+  <td>when the mouse is pressed when over that element</td>
+</tr>
+<tr>
+  <td>mouseup()</td>
+  <td>when the mouse is released when over that element</td>
+</tr>
+<tr>
+  <td>hover()</td>
+  <td>when the mouse enters the element, and then again when it leaves*</td>
+</tr>
+<tr>
+  <td>focus()</td>
+  <td>when the (form field) element gets focus</td>
+</tr>
+<tr>
+  <td>blur()</td>
+  <td>when the (form field) element loses focus</td>
+</tr>
+</table></p>
+<p>/* hover() gets 2 functions - first for when mouse enters that element; second when mouse leaves.</p>
+<p>And lastly, you can combine several events to the same element. with the <code>on</code>.  Example
+```
+$("p").on({
+  mouseenter: function(){
+  $(this).css("background-color", "lightgray");
+  },
+  mouseleave: function() {
+  $(this).css("background-color", "lightblue");
+  },
+  click: function() {
+  $(this).css("background-color", "yellow");
+  }
+});</p> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/jqery-some-basics.html">
+          <i class="icon-comment"></i> Comment </a>
+	<hr />
+      </div>
+      
+    </div>
+    
+
+ 
+        
+
+
+
+    <div class='row-fluid'>
+      <div class='article-title span9'> 
+        <a href="http://www.deekras.com/getting-started-with-javascript.html"><h1>Getting Started with Javascript</h1></a>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2">
+<p>Mon 10 August 2015 </p>
+
+<p style="text-align: left;">
+Filed under <a href="http://www.deekras.com/category/javascript.html">javascript</a>
+</p>
+<p style="text-align: left;">
+</p>
+<p>
+</p>
+      </div>
+      <div class="summary span8">
+	<h2>Some resources for basic javascript</h2>
+<p><a href="http://www.w3schools.com/jsref/dom_obj_event.asp">HTML Dom Events</a>
+reread: (http://www.w3schools.com/js/js_performance.asp)</p>
+<p>Sort Ascending</p>
+<div class="highlight"><pre>var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a-b});
+</pre></div>
+
+
+<p>Sort Descending</p>
+<div class="highlight"><pre>var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b-a ...</pre></div> 
+	<a class="btn btn-mini xsmall" href="http://www.deekras.com/getting-started-with-javascript.html">
+          <i class="icon-plus-sign"></i> Read More </a>
+	<hr />
+      </div>
+      
+    </div>
+      
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="http://www.deekras.com/category/javascript.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        
+    </div>     </div> </div>
+
+<!--footer-->
+<div class="container">
+  <div class="well" style="background-color: #E9EFF6">
+    <div id="blog-footer">
+      <div class="row-fluid">
+	<div class="social span2" align="center" id="socialist">
+	  <ul class="nav nav-list">
+	    <li class="nav-header">
+	      Social
+	    </li>
+	    <li><a href="deekras"><i class="icon-github" style="color: #1f334b"></i>github</a></li>
+	    <li><a href="#"><i class="icon-Another social link" style="color: #1f334b"></i>Another social link</a></li>
+
+	  </ul>
+	</div>
+        <div class="links span2" align="center">
+          <ul class="nav nav-list">
+            <li class="nav-header"> 
+              Links
+            </li>
+            
+            <li><a href="http://python.org/">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+          </ul>
+        </div>
+	<div class="site-nav span2" align="center">
+          <ul class="nav nav-list" id="site-links">
+            <li class="nav-header"> 
+              Site
+            </li>
+            <li><a href="http://www.deekras.com"><i class="icon-home" style="color: #1f334b">
+                </i>Home</a></li>
+            <li><a href="http://www.deekras.com/archives.html"><i class="icon-list" style="color: #1f334b">
+                </i>Archives</a></li>
+	    <li><a href="http://www.deekras.com/tags.html"><i class="icon-tags" style="color: #1f334b">
+                </i>Tags</a></li>
+	    
+	  </ul>
+
+        </div>
+
+      </div> <!--end of fluid row-->
+    </div> <!--end of blog-footer-->
+    <hr />
+    <p align="center"><a href="http://www.deekras.com">DeeKras.com</a>
+      &copy; Dee Kras
+    Powered by <a href="github.com/getpelican/pelican">Pelican</a> and
+        <a href="https://twitter.github.com/bootstrap">Twitter Bootstrap</a>. 
+        Icons by <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a> and 
+        <a href="http://gregoryloucas.github.com/Font-Awesome-More">Font Awesome More</a></p>
+
+  </div> <!--end of well -->
+</div> <!--end of container -->
+
+<!--/footer-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

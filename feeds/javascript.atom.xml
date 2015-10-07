@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>DeeKras.com</title><link href="http://www.deekras.com/" rel="alternate"></link><link href="http://www.deekras.com/feeds/javascript.atom.xml" rel="self"></link><id>http://www.deekras.com/</id><updated>2015-08-17T00:00:00+00:00</updated><entry><title>Jqery: Some basics</title><link href="http://www.deekras.com/jqery-some-basics.html" rel="alternate"></link><updated>2015-08-17T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-08-17:jqery-some-basics.html</id><summary type="html">&lt;h2&gt;What is jQuery?&lt;/h2&gt;
+&lt;p&gt;With jQuery you select (query) HTML elements and perform "actions" on them.  For example, when you hover over a button, the button is highlighted.&lt;/p&gt;
+&lt;h2&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;In the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; of your html, include a reference to the jquery library - in the &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; tags. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;script&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can write your jquery right into the html. Or, you can write it as a jquery file with a &lt;code&gt;.js&lt;/code&gt; extension (ex: &lt;code&gt;example.js&lt;/code&gt;) and reference it in your &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;. The second way allows for you to reuse the code in several html templates. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;script&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;script&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;path/to/example.js&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Basic syntax&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;!!First and foremost, all jQuery commands end with a semi-colon &lt;code&gt;;&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$(' html selector').action();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;br /&gt;
+    The &lt;b&gt;selector&lt;/b&gt; is surrounded with quotes. &lt;br /&gt;
+    The &lt;b&gt;action&lt;/b&gt; is followed by parenthesis. There may be arguments in those ().&lt;/p&gt;
+&lt;h1&gt;The selector#&lt;/h1&gt;
+&lt;p&gt;The selector can be any html element:
+    &lt;code&gt;$('p')&lt;/code&gt; or &lt;code&gt;$('h1')&lt;/code&gt; or &lt;code&gt;$('button')&lt;/code&gt; or &lt;code&gt;$('ol')&lt;/code&gt; or &lt;code&gt;$('td')&lt;/code&gt; and so forth.&lt;/p&gt;
+&lt;p&gt;The selector can also reference a specific class in the html code.
+    For example in the html &lt;code&gt;&amp;lt;div class="highlighted"&amp;gt;&lt;/code&gt; is referenced as &lt;code&gt;$('.highlighted')&lt;/code&gt;. Notice the &lt;code&gt;.&lt;/code&gt; dot before the class name.&lt;/p&gt;
+&lt;p&gt;The selector can also reference a specific ID in the html code.&lt;br /&gt;
+    For example in the html &lt;code&gt;&amp;lt;p ID="target"&amp;gt;&lt;/code&gt; is referenced as &lt;code&gt;$('#target')&lt;/code&gt;. Notice the &lt;code&gt;#&lt;/code&gt; hash  before the ID name.&lt;/p&gt;
+&lt;p&gt;We can also reference a few html elements: 
+    &lt;code&gt;$('h1, h2, h3')&lt;/code&gt;. References all &lt;code&gt;h1&lt;/code&gt;, &lt;code&gt;h2&lt;/code&gt;, &lt;code&gt;h3&lt;/code&gt;. &lt;b&gt;Note:&lt;/b&gt;  Elements are separated with commas. There is only 1 set of quotes areound all the elements.&lt;/p&gt;
+&lt;p&gt;Or reference a specificly detailed element:
+    &lt;code&gt;$('div.highlighted')&lt;/code&gt;  or &lt;code&gt;$('p#target'). &amp;lt;b&amp;gt;Note:&amp;lt;/b&amp;gt;  There is no space between&lt;/code&gt;div&lt;code&gt;and the class.&lt;/code&gt;$('div div p')&lt;code&gt;. This refers to any html elements that are a&lt;/code&gt;p&lt;code&gt;in a&lt;/code&gt;div&lt;code&gt;in a&lt;/code&gt;div`.&lt;/p&gt;
+&lt;p&gt;Lastly, the &lt;code&gt;this&lt;/code&gt;:&lt;br /&gt;
+&lt;code&gt;this&lt;/code&gt; refers to the element that we are on currently. It is used instead of repeating the entire element again. You might think of it as a pronoun. We don't repeat someone's name every time we refer to her; we use the words 'she' or 'her'.
+   &lt;code&gt;$(this)&lt;/code&gt;. &lt;b&gt;Note:&lt;/b&gt;  There are no quotes around the &lt;code&gt;this&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then there are some more cool selectors:
+&lt;table&gt;
+&lt;tr&gt;
+  &lt;td&gt;$('*')&lt;/td&gt;
+  &lt;td&gt;all html elements&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;$('p:first')&lt;/td&gt;
+  &lt;td&gt;FIRST p&lt;/td&gt;
+  &lt;td&gt;notice the &lt;code&gt;:&lt;/code&gt; colon&lt;/td&gt;
+  &lt;td&gt;$('element:last')&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;$('tr:even')&lt;/td&gt;
+  &lt;td&gt;the EVEN rows&lt;/td&gt;
+  &lt;td&gt;notice the &lt;code&gt;:&lt;/code&gt; colon&lt;/td&gt;
+  &lt;td&gt;$('element:odd')&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;$(':button')&lt;/td&gt;
+  &lt;td&gt;all &lt;button&gt; and related &lt;input&gt;&lt;/td&gt;
+  &lt;td&gt;notice the &lt;code&gt;:&lt;/code&gt; colon&lt;/td&gt;
+  &lt;td&gt;$(':checkbox'), $(':selected')&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;$('[href]')&lt;/td&gt;
+  &lt;td&gt;all elements with &lt;code&gt;href&lt;/code&gt; (links)&lt;/td&gt;
+  &lt;td&gt;notice the square brackets&lt;/td&gt;
+  &lt;td&gt;$("[href='value]")
+&lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+&lt;p&gt;For a complete list of selectors, see &lt;a href="http://www.w3schools.com/jquery/jquery_ref_selectors.asp"&gt;jquery from www.w3schools.com&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+
+&lt;h1&gt;The Events#&lt;/h1&gt;
+&lt;p&gt;jquery works really well with different 'events' that happen on a webpage. &lt;/p&gt;
+&lt;p&gt;Events are things like hovering over an element (&lt;code&gt;hover&lt;/code&gt;), clicking on an element (&lt;code&gt;click&lt;/code&gt;), pressing a key, (&lt;code&gt;keydown&lt;/code&gt;) and many others.  These 'events' on an element trigger an action.&lt;/p&gt;
+&lt;h1&gt;The syntax&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;element&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+  &lt;span class="c1"&gt;// action function details here&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Some examples: For all these, we will use the same function &lt;code&gt;alert('Hello')&lt;/code&gt;. This creates a pop-up with the word 'Hello'. &lt;b&gt;Notice&lt;/b&gt; the 2 semi colons.&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;click&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;
+      ```
+      $('button').click(function(){
+        alert('Hello');
+      });
+      ```
+    &lt;/td&gt;
+    &lt;td&gt; `dblclick`, `mousedown`&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;hover&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;
+      ```
+      $('hover').click(function(){
+        alert('Hello');
+      },
+      function(){
+        alert('Bye now!');
+        });
+      ```
+    &lt;/td&gt;
+    &lt;td&gt;
+    takes 2 functions
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Other common events:
+&lt;table&gt;
+&lt;tr&gt;
+  &lt;td&gt;click()&lt;/td&gt;
+  &lt;td&gt;when the element is clicked&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;dblclick()&lt;/td&gt;
+  &lt;td&gt;when the element is doubleclicked&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;mouseenter()&lt;/td&gt;
+  &lt;td&gt;when the mouse enters the element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;mouseleave()&lt;/td&gt;
+  &lt;td&gt;when the mouse leaves the element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;mousedown()&lt;/td&gt;
+  &lt;td&gt;when the mouse is pressed when over that element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;mouseup()&lt;/td&gt;
+  &lt;td&gt;when the mouse is released when over that element&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;hover()&lt;/td&gt;
+  &lt;td&gt;when the mouse enters the element, and then again when it leaves*&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;focus()&lt;/td&gt;
+  &lt;td&gt;when the (form field) element gets focus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;blur()&lt;/td&gt;
+  &lt;td&gt;when the (form field) element loses focus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+&lt;p&gt;/* hover() gets 2 functions - first for when mouse enters that element; second when mouse leaves.&lt;/p&gt;
+&lt;p&gt;And lastly, you can combine several events to the same element. with the &lt;code&gt;on&lt;/code&gt;.  Example
+```
+$("p").on({
+  mouseenter: function(){
+  $(this).css("background-color", "lightgray");
+  },
+  mouseleave: function() {
+  $(this).css("background-color", "lightblue");
+  },
+  click: function() {
+  $(this).css("background-color", "yellow");
+  }
+});&lt;/p&gt;</summary></entry><entry><title>Getting Started with Javascript</title><link href="http://www.deekras.com/getting-started-with-javascript.html" rel="alternate"></link><updated>2015-08-10T00:00:00+00:00</updated><author><name>Dee Kras</name></author><id>tag:www.deekras.com,2015-08-10:getting-started-with-javascript.html</id><summary type="html">&lt;h2&gt;Some resources for basic javascript&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.w3schools.com/jsref/dom_obj_event.asp"&gt;HTML Dom Events&lt;/a&gt;
+reread: (http://www.w3schools.com/js/js_performance.asp)&lt;/p&gt;
+&lt;p&gt;Sort Ascending&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a-b});
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Sort Descending&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b-a});
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The Compare Function: &lt;code&gt;function(a, b){return a-b}&lt;/code&gt;
+    The purpose of the compare function is to define an alternative sort order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nx"&gt;compare&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;should&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;negative&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;zero&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;or&lt;/span&gt; &lt;span class="nx"&gt;positive&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;depending&lt;/span&gt; &lt;span class="nx"&gt;on&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;arguments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;function(a, b){return a-b}&lt;/code&gt;
+When the sort() function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;p&gt;When comparing 40 and 100, the sort() method calls the compare function(40,100).&lt;/p&gt;
+&lt;p&gt;The function calculates 40-100, and returns -60 (a negative value).&lt;/p&gt;
+&lt;p&gt;The sort function will sort 40 as a value lower than 100.&lt;/p&gt;</summary></entry></feed>

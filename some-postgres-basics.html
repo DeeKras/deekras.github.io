@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Finding Longitude & Latitude based on IP - DeeKras.com</title>
+    <title>Some Postgres basics - DeeKras.com</title>
     <meta name="description" content="">
     <meta name="author" content="Dee Kras">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,9 +42,9 @@
 	      <a href="http://www.deekras.com/category/general.html ">General</a>
 	    <li >
 	      <a href="http://www.deekras.com/category/javascript.html ">javascript</a>
-	    <li >
-	      <a href="http://www.deekras.com/category/postgres.html ">postgres</a>
 	    <li  class="active" >
+	      <a href="http://www.deekras.com/category/postgres.html ">postgres</a>
+	    <li >
 	      <a href="http://www.deekras.com/category/python.html ">Python</a>
 	</ul>
       </div>
@@ -60,15 +60,15 @@
     <div class='article'>
       <div class="row-fluid">
            <div class="content-title span9">
-             <h1>Finding Longitude & Latitude based on IP</h1>
+             <h1>Some Postgres basics</h1>
            </div>
       </div>
     <div class="row-fluid">
       <div class="span2">
-<p>Fri 12 December 2014 </p>
+<p>Thu 13 August 2015 </p>
 
 <p style="text-align: left;">
-Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
+Filed under <a href="http://www.deekras.com/category/postgres.html">postgres</a>
 </p>
 <p style="text-align: left;">
 </p>
@@ -77,27 +77,16 @@ Filed under <a href="http://www.deekras.com/category/python.html">Python</a>
       </div>
       
       <div class="span8">
-	<h4>Once I had the IP, I needed to find the longitude &amp; latitude coordinates</h4>
-<p>On that <a href="http://www.deekras.com/my-first-python-project-and-what-i-learned.html">recent project</a> I was working on, I was looking for the local weather based on where the user is located. So first, <a href="http://www.deekras.com/get-the-public-ip-of-users-computer.html">I got the IP</a>. With that IP, I used <strong>pygeoip.GeoIP</strong> to find the longitude and latitude coordinates.  Later, I will use those coordinates to find the local weather.</p>
-<p>First, I downloaded the GeoIP data from <a href="https://pypi.python.org/pypi/pygeoip/">https://pypi.python.org/pypi/pygeoip/</a> and unzipped it. And saved the GeoLiteCity.dat on my local server. <code>'/path/GeoLiteCity.dat'</code>.</p>
-<p>I also had to <code>pip install pygeoip</code>.</p>
-<p>Here's the code:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">pygeoip</span>   
-
-<span class="n">geoip_data</span> <span class="o">=</span> <span class="n">pygeoip</span><span class="o">.</span><span class="n">GeoIP</span><span class="p">(</span><span class="s">&#39;/path/GeoLiteCity.dat&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">find_lat_lng</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">geoip_data</span><span class="o">.</span><span class="n">record_by_addr</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-        <span class="n">lat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;latitude&#39;</span><span class="p">]</span>
-        <span class="n">lng</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;longitude&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
-</pre></div>
-
-
-<p><code>data</code>:  In this case, I used the <strong>record_by_addr(addr)</strong> attribute since I had the addr, the IP. And I want the full record.<br />
-There are many other attributes you can use with this geoip data. Checkout more at: <a href="http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html">http://pygeoip.readthedocs.org/en/v0.3.2/api-reference.html</a></p>
-<p><code>data</code> is a dictionary. And I called the <code>latitude</code> and <code>longitude</code> keys of <code>data</code> to find the values of <code>lat</code> and <code>lng</code>.</p>
-<p>With the <code>lat</code> and <code>lng</code>, I will be able to get the weather for those coordinates. Using <strong>forecast_io</strong>. More on that next time.</p>
+	<h2>Some basic Postgres that I have used</h2>
+<blockquote>
+<p>psql Dbname
+Dbname =&gt; \dt -------------------------------&gt; See tables in the DB
+Dbname =&gt; \d+ tablename ---------------------&gt; See columns in specific table
+Dbname =&gt; ALTER TABLE tablename RENAME old_column_name TO new_column_name; ----&gt; Change column name
+Dbname =&gt; \quit -----------------------------&gt; To get back to commandline prompt
+Dbname =&gt; DROP TABLE tablename;  ------------&gt; Drop table
+python manage.py makemigrations appname ---&gt; New migration after deleting all migrations.!!Make sure to include the name of the app</p>
+</blockquote>
 	<hr />
       </div>
     </div>
